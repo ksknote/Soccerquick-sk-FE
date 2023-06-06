@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "key": 1,
+      "userId": "abc@naver.com",
+      "password": "1234"
+    },
+    {
+      "key": 2,
+      "userId": "aaa@naver.com",
+      "password": "1234"
+    }
+  ]
+}

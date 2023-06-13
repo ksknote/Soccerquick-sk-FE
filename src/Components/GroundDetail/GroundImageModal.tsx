@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { groundDataType } from '../../Pages/groundDetail';
+import { DomDataType } from '../../Pages/SearchPage';
 
 interface StadiumsProps {
-  stadiumsData: groundDataType['stadiums'];
+  stadiums: DomDataType['stadiums'];
   setShowImgModal: React.Dispatch<React.SetStateAction<boolean>>;
   ImgModalIndex: number;
 }
 
 const GroundImageModal: React.FC<StadiumsProps> = ({
-  stadiumsData,
+  stadiums,
   setShowImgModal,
   ImgModalIndex,
 }) => {
   return (
     <>
-      {stadiumsData && (
+      {stadiums && (
         <ImgModal>
           <ModalMask></ModalMask>
           <ImgModalContainer>
             <ModalHeader>
-              <h2>[{stadiumsData[ImgModalIndex].usage}] 전체 보기</h2>
+              <h2>[{stadiums[ImgModalIndex].name}] 전체 보기</h2>
               <button onClick={() => setShowImgModal(false)}>&times;</button>
             </ModalHeader>
             <Images>
-              {stadiumsData[ImgModalIndex].image.map((img) => (
-                <img src={img} />
+              {stadiums[ImgModalIndex].images.map((img) => (
+                <img src={img.image} />
               ))}
             </Images>
           </ImgModalContainer>

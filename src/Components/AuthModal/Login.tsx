@@ -1,4 +1,8 @@
 import { useState, FormEvent } from 'react';
+import { AUTH_ACTIONS } from '../../store/reducers/authSlice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import {
   Modal,
   ModalForm,
@@ -8,7 +12,7 @@ import {
 import axios from 'axios';
 import styled from 'styled-components';
 
-const postLoginUrl = 'http://localhost:8800/auth/login';
+const postLoginUrl = `${process.env.REACT_APP_API_URL}/auths/login`;
 
 // User type
 type UserProps = {
@@ -29,6 +33,8 @@ function Login({ handleIsLogin, setAuthModal }: LoginProps) {
     password: '',
   });
   const [loginError, setLoginError] = useState<string>('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -57,11 +63,28 @@ function Login({ handleIsLogin, setAuthModal }: LoginProps) {
 
   const checkUsers = (data: { user_id: string; password: string }) => {
     axios
-      .post(postLoginUrl, data)
+      .post(postLoginUrl, data, { withCredentials: true })
       .then((res) => {
-        console.log(res.data);
+        return res.data.data;
+      })
+      .then((userData) => {
+        const user = {
+          user_id: userData.user_id,
+          name: userData.name,
+          nickname: userData.nick_name,
+          profile: userData.profile,
+          role: userData.role,
+        };
+
+        dispatch(
+          AUTH_ACTIONS.login({
+            user,
+          })
+        );
         setLoginError('');
         setAuthModal(false);
+
+        navigate(window.location.pathname, { replace: true });
       })
       .catch((err) => {
         console.log(err);

@@ -11,9 +11,9 @@ export default function HeaderCategory() {
   const location = useLocation();
 
   const isHome = location.pathname === '/';
-  const isGroundPage = location.pathname === '/ground';
-  const isReviewPage = location.pathname === '/review';
-  const isTeampage = location.pathname === '/teampage';
+  const isGroundPage = location.pathname.includes('/ground');
+  const isReviewPage = location.pathname.includes('/review');
+  const isTeampage = location.pathname.includes('/teampage');
 
   return (
     <StyledHeaderCategory>
@@ -58,18 +58,24 @@ export default function HeaderCategory() {
 
 const StyledHeaderCategory = styled.div`
   width: 98.4rem;
-  padding: 0 2rem;
+  padding: 3rem 2rem;
   height: 3rem;
-  margin: 1.4rem auto;
+  margin: 1rem auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 `;
 
 const StyledCategoryText = styled.span<CategoryTextProps>`
-  padding-right: 1rem;
-  font-size: ${({ focused }) => (focused ? '1.8rem' : '1.5rem')};
-  color: ${({ focused }) => (focused ? 'black' : '#727f88')};
+  padding: 0 1.5rem;
+  font-size: ${({ focused }) => (focused ? '2.2rem' : '1.9rem')};
+  color: ${({ focused }) => (focused ? '#535353' : '#727f88')};
   font-weight: ${({ focused }) => (focused ? 'bold' : 'normal')};
   cursor: pointer;
+
+  &:hover {
+    font-size: ${({ focused }) => (focused ? '2.2rem' : '2.1rem')};
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e8e8e8;
+  }
 `;

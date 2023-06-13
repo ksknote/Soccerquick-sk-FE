@@ -1,81 +1,48 @@
 import React from 'react';
 import FilteringOptions from '../../../Components/Commons/FilteringOptions';
+import FindingMemberPageBoard from './FindingMemberPageBoard';
+import { StyledHeader } from '../Styles/ViewsStyle';
+import { DataProps, FindMemberFilter } from '../../../Types/TeamPageType';
 import axios from 'axios';
-import FindPageBoard from '../../../Components/TeamPage/FindPage/FindPageBoard';
 
-type Applicant = {
-  nickName: string;
-  position: string;
-  skill: string;
-  body: string;
-};
-
-type modalDataProps = {
-  area: string;
-  author: string;
-  body: string;
-  gender: string;
-  num: number; // 수정 필요함(어떻게 들어올 지 모름)
-  position?: string;
-  skill?: string;
-  status: string;
-  title: string;
-  gk_need?: number;
-  gk?: number;
-  player_need?: number;
-  player?: number;
-  allowRandom?: string;
-  applicant?: Applicant[];
-  [key: string]: string | number | undefined | Applicant[];
-};
-
-type FindingMemberProps = {
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setModalData: React.Dispatch<React.SetStateAction<modalDataProps>>;
-};
-type FindMemberFilter = {
-  status: string | null;
-  area: string | null;
-  allowRandom: string | null;
-  gender: string | null;
-};
-
-function FindingMember(props: FindingMemberProps) {
-  const { setShowModal, setModalData } = props;
+function FindingMember() {
   const [status, setStatus] = React.useState('');
   const [area, setArea] = React.useState('');
-  const [allowRandom, setAllowRandom] = React.useState('');
-  const [gender, setGender] = React.useState('');
 
   const [findMemberFilter, setFindMemberFilter] =
     React.useState<FindMemberFilter>({
       status: null,
       area: null,
-      allowRandom: null,
-      gender: null,
     });
 
   function handleReset() {
     setStatus('');
     setArea('');
-    setAllowRandom('');
-    setGender('');
   }
 
   //새로고침할때 팀모집 관련 데이터를 가져오고 정렬하는 부분
-  const [data, setData] = React.useState<any[]>([]); // <<<<<<<<<<< any 타입 정의를 해야되는데 좀 어려움
+  const [data, setData] = React.useState<DataProps[]>([]);
 
   React.useEffect(() => {
-    // axios
-    //   .get('gomao.com')
-    //   .then((res) => {
-    //     // 가져온 데이터가 있다면 data에 저장한다.
-    //     setData(res.data);
-    //   })
-    //   .catch((error) => {
-    //     // 가져온 데이터가 없다면 dummyData를 사용한다.
-    setData(dummydata_findingMember);
-    // });
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/groups`)
+      .then((res) => {
+        const formattedData = res.data.data.map((item: DataProps) => {
+          return {
+            ...item,
+            author: item.leader_name,
+            gk: item.gk_current_count,
+            gkNeed: item.gk_count,
+            player: item.player_current_count,
+            playerNeed: item.player_count,
+            area: item.location,
+          };
+        });
+        setData(formattedData);
+      })
+      .catch((error) => {
+        setData([]);
+      });
   }, []);
 
   // 필터링 조건을 갱신하는 부분
@@ -83,16 +50,16 @@ function FindingMember(props: FindingMemberProps) {
     const filter = {
       status: status === '모집상태' ? '' : status,
       area: area === '활동지역' ? '' : area,
-      allowRandom: allowRandom === '랜덤매칭' ? '' : allowRandom,
-      gender: gender === '성별' ? '' : gender,
     };
     setFindMemberFilter(filter);
-  }, [status, area, allowRandom, gender]);
+  }, [status, area]);
 
   // 필터링 된 데이터를 관리하는 상태
-  const [filteredData, setFilteredData] = React.useState(
-    dummydata_findingMember
-  );
+  const [filteredData, setFilteredData] = React.useState(data);
+  // 페이지네이션 구현 부분
+  const [currentPage, setCurrentPage] = React.useState(1); // 현재 페이지 상태
+  const [currentData, setCurrentData] = React.useState<DataProps[]>([]); // 초기 데이터
+  const [totalPage, setTotalPage] = React.useState(0);
 
   // 데이터를 필터링하는 부분, 상관없음일 경우 무조건 결과에 포함시킨다.
   React.useEffect(() => {
@@ -103,8 +70,24 @@ function FindingMember(props: FindingMemberProps) {
           return true;
         } else {
           if (
+            typeof item[key] === 'string' &&
+            typeof findMemberFilter[key as keyof FindMemberFilter] ===
+              'string' &&
+            (item[key] as string).includes(
+              findMemberFilter[key as keyof FindMemberFilter] as string
+            )
+          ) {
+            continue;
+          } else if (
+            typeof item[key] === 'number' &&
+            typeof findMemberFilter[key as keyof FindMemberFilter] ===
+              'number' &&
+            item[key] === findMemberFilter[key as keyof FindMemberFilter]
+          ) {
+            continue;
+          } else if (
             findMemberFilter[key as keyof FindMemberFilter] !== '' &&
-            findMemberFilter[key as keyof FindMemberFilter] !== item[key]
+            item[key] !== findMemberFilter[key as keyof FindMemberFilter]
           ) {
             return false;
           }
@@ -112,7 +95,9 @@ function FindingMember(props: FindingMemberProps) {
       }
       return true;
     });
-    setFilteredData(newData);
+    setFilteredData(newData.reverse()); // 최신 게시글이 위로 가게 정렬함
+    setCurrentData(newData.reverse().slice(0, 8)); // 첫 페이지 데이터를 미리 설정함
+    setTotalPage(Math.ceil(newData.length / 8)); // 총 페이지 버튼 갯수를 설정함
   }, [data, findMemberFilter]);
 
   // 드롭다운 리스트를 정하는 부분
@@ -127,164 +112,27 @@ function FindingMember(props: FindingMemberProps) {
       state: area,
       setState: setArea,
     },
-    {
-      option: FilteringOptions.findingMember.allowRandom,
-      state: allowRandom,
-      setState: setAllowRandom,
-    },
-    {
-      option: FilteringOptions.findingMember.gender,
-      state: gender,
-      setState: setGender,
-    },
-  ];
-
-  // 표에 출력할 리스트를 정하는 부분
-  const tableList = [
-    { title: '작성자', body: 'author', style: { width: '10%' } },
-    { title: '지역', body: 'area', style: { width: '10%' } },
-    { title: '모집인원(GK)', body: 'gk_need', style: { width: '8%' } },
-    { title: '모집인원(Player)', body: 'player_need', style: { width: '8%' } },
-    { title: '성별제한', body: 'gender', style: { width: '6%' } },
   ];
 
   return (
     <div style={{ margin: '1rem 1rem', padding: '1rem 0rem' }}>
-      <FindPageBoard
+      <StyledHeader>
+        <h1>팀원 모집・신청</h1>
+        <h3>싸커퀵에서 함께할 팀을 만들어보세요! 👋🏻</h3>
+      </StyledHeader>
+      <FindingMemberPageBoard
         dropdownList={dropdownList}
-        tableList={tableList}
         handleReset={handleReset}
-        setShowModal={setShowModal}
-        setModalData={setModalData}
+        // setShowModal={setShowModal}
         filteredData={filteredData}
-        data={data}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        currentData={currentData}
+        setCurrentData={setCurrentData}
+        totalPage={totalPage}
       />
     </div>
   );
 }
 
 export default FindingMember;
-
-// 더미 데이터
-const dummydata_findingMember = [
-  {
-    num: 1,
-    title: '팀구합니다',
-    author: 'ㄱㅁㅇ',
-    area: '서울',
-    status: '미완료',
-    gender: '남',
-    gk_need: 1,
-    gk: 1,
-    player_need: 4,
-    player: 3,
-    allowRandom: '허용',
-    body: `하하하하하하하하하하하하하하하하 
-    1234 <br />
-    하하하하하하하하하하하하하하하하하하하하하하`,
-    applicant: [
-      {
-        nickName: '고고마오',
-        position: 'gk',
-        skill: '세미프로',
-        body: '저 자신있습니다',
-      },
-      {
-        nickName: '고구마',
-        position: 'player',
-        skill: '세미프로',
-        body: '캐리해드림ㅎㅎ',
-      },
-    ],
-  },
-  {
-    num: 2,
-    title: '랏키퍼구합니다',
-    author: 'ㄱㅁㅇ2',
-    area: '서울',
-    status: '미완료',
-    gender: '남',
-    gk_need: 1,
-    gk: 1,
-    player_need: 4,
-    player: 3,
-    allowRandom: '허용',
-    body: 'ㄱㅁㅇ',
-    applicant: [],
-  },
-  {
-    num: 3,
-    title: '랏필드구합니다',
-    author: 'ㄱㅁㅇ3',
-    area: '서울',
-    status: '미완료',
-    gender: '남',
-    gk_need: 1,
-    gk: 1,
-    player_need: 4,
-    player: 3,
-    allowRandom: '비허용',
-    body: 'ㄱㅁㅇ',
-    applicant: [],
-  },
-  {
-    num: 4,
-    title: '다구했어요ㅎㅎ',
-    author: 'ㄱㅁㅇ4',
-    area: '서울',
-    status: '완료',
-    gender: '상관없음',
-    gk_need: 1,
-    gk: 1,
-    player_need: 4,
-    player: 3,
-    allowRandom: '허용',
-    body: 'ㄱㅁㅇ',
-    applicant: [],
-  },
-  {
-    num: 5,
-    title: '팀구합니다',
-    author: 'ㄱㅁㅇ',
-    area: '서울',
-    status: '미완료',
-    gender: '남',
-    gk_need: 1,
-    gk: 1,
-    player_need: 4,
-    player: 3,
-    allowRandom: '허용',
-    body: 'ㄱㅁㅇ',
-    applicant: [],
-  },
-  {
-    num: 6,
-    title: '팀구합니다',
-    author: 'ㄱㅁㅇ',
-    area: '서울',
-    status: '미완료',
-    gender: '남',
-    gk_need: 1,
-    gk: 1,
-    player_need: 4,
-    player: 3,
-    allowRandom: '허용',
-    body: 'ㄱㅁㅇ',
-    applicant: [],
-  },
-  {
-    num: 7,
-    title: '팀구합니다',
-    author: 'ㄱㅁㅇ',
-    area: '서울',
-    status: '미완료',
-    gender: '상관없음',
-    gk_need: 1,
-    gk: 1,
-    player_need: 4,
-    player: 3,
-    allowRandom: '허용',
-    body: 'ㄱㅁㅇ',
-    applicant: [],
-  },
-];

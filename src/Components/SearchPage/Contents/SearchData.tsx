@@ -1,30 +1,69 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Select from 'react-select';
 import SearchFilter from './SearchFilter';
-import { groundDataType } from '../../../Pages/SearchPage';
+import GroundListSkeleton from './groundListSkeleton';
+import MyPagination from '../../MyPage/MyPagination';
 import checkIcon from '../../../styles/icon/check.svg';
-
-import axios from 'axios';
+import { DomDataType } from '../../../Pages/SearchPage';
 
 type FindingGroundProps = {
-  showModal: boolean;
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-  modalData: any[];
-  setModalData: React.Dispatch<React.SetStateAction<any[]>>;
-  checkedArray: groundDataType[];
-  setCheckedArray: React.Dispatch<React.SetStateAction<groundDataType[]>>;
+  checkedArray: DomDataType[];
+  setCheckedArray: React.Dispatch<React.SetStateAction<DomDataType[]>>;
+  sortedDomData: DomDataType[];
+  setSortedDomData: React.Dispatch<React.SetStateAction<DomDataType[]>>;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+type ProvidedElementListType = {
+  [key: string]: string;
+};
+
+interface ItemType {
+  key: string;
+  value: string;
+  selected: boolean;
+}
+
+export const ProvidedElementList: ProvidedElementListType = {
+  parking: '주차 가능',
+  parking_free: '무료 주차',
+  bibs: '조끼 대여',
+  beverage: '음료 구비',
+  ball: '공 대여',
+  shower: '샤워실',
+  shoes: '풋살화 대여',
+  toilet: '남녀 구분 화장실',
+};
+
+// SoccerQuick/Frontend/src/Pages/SearchPage.tsx 75번째 줄에서 연결됨
 function FindingGround(props: FindingGroundProps) {
-  const setShowModal = props.setShowModal;
-  const setModalData = props.setModalData;
+  const navigate = useNavigate();
   const checkedArray = props.checkedArray;
   const setCheckedArray = props.setCheckedArray;
+  const sortedDomData = props.sortedDomData;
+  const isLoading = props.isLoading;
+  const setIsLoading = props.setIsLoading;
+
+  // Left Bar에서 설정한 필터링 옵션이 담기는 상태.
+  // SoccerQuick/Frontend/src/Components/SearchPage/Contents/SearchFilter.tsx Line12의 useEffect로 정의됨
+  const [filterOption, setFilterOption] = React.useState<ItemType[]>([]);
+
+  // 정렬 조건이 변할 때 페이지에 보여줄 데이터를 필터링 하는 부분
+  const [filteredData, setFilteredData] =
+    React.useState<DomDataType[]>(sortedDomData);
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const totalItemsCount = filteredData.length;
+  const lastIndexOfData = currentPage * itemsPerPage;
+  const firstIndexOfData = lastIndexOfData - itemsPerPage;
+  const currentData = filteredData.slice(firstIndexOfData, lastIndexOfData);
 
   const checkHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
-    value: groundDataType
+    value: DomDataType
   ) => {
     if (e.target.checked) {
       if (checkedArray.length >= 5) {
@@ -42,89 +81,102 @@ function FindingGround(props: FindingGroundProps) {
     }
   };
 
-  // Left Bar에서 설정한 필터링 옵션이 담기는 상태. get 요청 보낼 때 전달해주어야 함.
-  const [filterOption, setFilterOption] = React.useState<string[]>([]);
+  // 이곳에 필터링 함수 작성
+  useEffect(() => {
+    // 필터링 옵션의 각 필터옵션에 대하여
+    if (filterOption.length === 0) {
+      setFilteredData(sortedDomData);
+    } else {
+      const filteredDomdata = sortedDomData.filter((data) => {
+        for (let option of filterOption) {
+          if (!data[option.key]) {
+            return false;
+          }
+        }
+        return true;
+      });
+      setFilteredData(filteredDomdata);
+    }
+  }, [filterOption, sortedDomData]);
 
-  //새로고침할때 팀모집 관련 데이터를 가져오고 정렬하는 부분
-  const [data, setData] = React.useState<any[]>([]);
-  React.useEffect(() => {
-    // axios
-    //   .get('gomao.com')
-    //   .then((res) => {
-    //     // 가져온 데이터가 있다면 data에 저장한다.
-    //     setData(res.data);
-    //   })
-    //   .catch((error) => {
-    //     // 가져온 데이터가 없다면 dummyData를 사용한다.
-    setData(dummydata_filteredGround);
-    // });
-  }, []);
-
-  // DB에서 데이터를 가져오는 부분, 현재는 더미데이터를 불러오고 있음
-
-  // 정렬 조건이 변할 때 페이지에 보여줄 데이터를 필터링 하는 부분
-  const [filteredData, setFilteredData] = React.useState(
-    dummydata_filteredGround
-  );
+  const clickDomHandler = (domId: string) => {
+    navigate(`/ground/${domId}`);
+  };
 
   return (
     <SearchContainer style={{ width: '100%' }}>
-      <SearchFilter
-        filterOption={filterOption}
-        setFilterOption={setFilterOption}
-      />
+      <SearchFilter setFilterOption={setFilterOption} />
       <Searchpage>
         <SearchPageBody>
           <table>
             <thead>
               <StyledLabelTr>
-                <th></th>
-                <th>지역</th>
-                <th>경기장</th>
-                <th>상세조회</th>
+                {!isLoading ? (
+                  <>
+                    <th></th>
+                    <th>지역</th>
+                    <th>경기장</th>
+                    <th>상세조회</th>
+                  </>
+                ) : (
+                  <></>
+                )}
               </StyledLabelTr>
             </thead>
-            <tbody>
-              {filteredData.map((item, idx) => (
-                <StyledTr key={item.title + idx}>
-                  <StyledCheckboxTd>
-                    <input
-                      type="checkbox"
-                      id={item.title}
-                      checked={checkedArray.some(
-                        (data) => data.title === item.title
-                      )}
-                      onChange={(e) => checkHandler(e, item)}
-                    />
-                    <label htmlFor={item.title}></label>
-                  </StyledCheckboxTd>
-                  <StyledAddressTd>{item.address.shortAddress}</StyledAddressTd>
-                  <StyledMainTd>
-                    <p>{item.title}</p>
-                    <StyledTableCell>
-                      {item.provided.map((data, index) => (
-                        <StyledTable key={index} data={data}>
-                          {data}
-                        </StyledTable>
-                      ))}
-                    </StyledTableCell>
-                  </StyledMainTd>
 
-                  <td>
-                    <StyledButton
-                      onClick={() => {
-                        setShowModal(true);
-                        setModalData(data[idx]);
-                      }}
-                    >
-                      조회
-                    </StyledButton>
-                  </td>
-                </StyledTr>
-              ))}
-            </tbody>
+            {!isLoading ? (
+              <tbody>
+                {currentData.map((item, idx) => (
+                  <StyledTr key={item.title + idx}>
+                    <StyledCheckboxTd>
+                      <input
+                        type="checkbox"
+                        id={item.title}
+                        checked={checkedArray.some(
+                          (data) => data.title === item.title
+                        )}
+                        onChange={(e) => checkHandler(e, item)}
+                      />
+                      <label htmlFor={item.title}></label>
+                    </StyledCheckboxTd>
+                    <StyledAddressTd>{item.address.area}</StyledAddressTd>
+                    <StyledMainTd>
+                      <p onClick={(e) => clickDomHandler(item.dom_id)}>
+                        {item.title}
+                      </p>
+                      <StyledTableCell>
+                        {Object.keys(ProvidedElementList).map(
+                          (provided) =>
+                            item[provided] && (
+                              <StyledTable key={provided} data={provided}>
+                                {ProvidedElementList[provided]}
+                              </StyledTable>
+                            )
+                        )}
+                      </StyledTableCell>
+                    </StyledMainTd>
+
+                    <td>
+                      <StyledButton
+                        onClick={(e) => clickDomHandler(item.dom_id)}
+                      >
+                        조회
+                      </StyledButton>
+                    </td>
+                  </StyledTr>
+                ))}
+              </tbody>
+            ) : (
+              <GroundListSkeleton />
+            )}
           </table>
         </SearchPageBody>
+        <MyPagination
+          totalItemsCount={totalItemsCount ? totalItemsCount : 100}
+          itemsPerPage={itemsPerPage}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
       </Searchpage>
     </SearchContainer>
   );
@@ -134,19 +186,25 @@ export default FindingGround;
 
 const SearchContainer = styled.div`
   position: relative;
+  min-height: 55rem;
 `;
 
 const Searchpage = styled.div`
   display: flex;
   font-size: 1.7rem;
   width: 98.4rem;
-  margin: auto;
+  margin: 0 auto 7rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const SearchPageBody = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 3rem;
   table {
     width: 100%;
   }
@@ -190,6 +248,7 @@ const StyledTableCell = styled.div`
   font-weight: 400;
   color: #888888;
   line-height: 2rem;
+  overflow: hidden;
 `;
 
 const StyledTable = styled.div<{ data: string }>`
@@ -203,6 +262,8 @@ const StyledTable = styled.div<{ data: string }>`
   font-weight: 400;
   color: ${({ data }) => getColorBydata(data)};
   background-color: ${({ data }) => getBackgroundColorBydata(data)};
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const StyledTr = styled.tr`
@@ -246,6 +307,7 @@ const StyledMainTd = styled.td`
   padding-left: 4rem;
   p {
     font-size: 1.9rem;
+    cursor: pointer;
   }
 `;
 
@@ -260,57 +322,43 @@ const StyledButton = styled.button`
 `;
 
 const getColorBydata = (data: string) => {
-  if (data === '풋살화 대여') {
+  if (data === 'shoes') {
     return '#531dab';
-  } else if (data === '남녀 구분 화장실') {
+  } else if (data === 'toilet') {
     return '#096dd9';
-  } else if (data === '공 대여') {
+  } else if (data === 'ball') {
     return '#d4380d';
-  } else if (data === '조끼 대여') {
+  } else if (data === 'bibs') {
     return '#08979c';
-  } else if (data === '무료 주차') {
+  } else if (data === 'parking') {
     return '#c41d7f';
-  } else if (data === '샤워실') {
+  } else if (data === 'beverage') {
+    return '#5e7f0c';
+  } else if (data === 'shower') {
     return '#d46b08';
+  } else if (data === 'parking_free') {
+    return '#c41d7f';
   }
 };
 
 const getBackgroundColorBydata = (data: string) => {
-  if (data === '풋살화 대여') {
+  if (data === 'shoes') {
     return '#f9f0ff';
-  } else if (data === '남녀 구분 화장실') {
+  } else if (data === 'toilet') {
     return '#e6f7ff';
-  } else if (data === '공 대여') {
+  } else if (data === 'ball') {
     return '#fff2e8';
-  } else if (data === '조끼 대여') {
+  } else if (data === 'bibs') {
     return '#e6fffb';
-  } else if (data === '무료 주차') {
+  } else if (data === 'parking') {
     return '#fff0f6';
-  } else if (data === '샤워실') {
+  } else if (data === 'beverage') {
+    return '#f0fff3';
+  } else if (data === 'shower') {
+    return '#fff7e6';
+  } else if (data === 'parking_free') {
     return '#fff7e6';
   }
-};
-
-// Select 라이브러리를 사용하여 만든 드롭다운 박스의 스타일 지정
-const SelectCategory = styled(Select)`
-  width: 16rem;
-  font-size: 2rem;
-`;
-// Select 라이브러리에서 사용할 세부 스타일 속성
-const SelectStyles = {
-  control: (provided: any) => ({
-    ...provided,
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-  }),
-  option: (provided: any, state: any) => ({
-    ...provided,
-    backgroundColor: state.isSelected ? '#38D411' : 'white',
-    color: state.isSelected ? 'white' : 'black',
-    ':hover': {
-      backgroundColor: state.isSelected ? '#38D411' : '#96DF84',
-    },
-  }),
 };
 
 const dummydata_filteredGround = [

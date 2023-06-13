@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useState, useEffect, FormEvent } from 'react';
 import styled from 'styled-components';
 import {
@@ -11,8 +11,8 @@ import {
   ModalTerms,
 } from '../Commons/AuthComponents';
 
-const postSignupUrl = `${process.env.PUBLIC_URL}/auth/signup`; // signup api url
-const postIdCheckUrl = 'http://localhost:8800/auth/id'; // id-check api url
+const postSignupUrl = `${process.env.REACT_APP_API_URL}/auths/signup`; // signup api url
+const postIdCheckUrl = `${process.env.REACT_APP_API_URL}/auths/id`; // id-check api url
 
 // Signup type
 type SignupProps = {
@@ -20,28 +20,7 @@ type SignupProps = {
   setAuthModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-// Signup form type
-type SignupFormProps = {
-  user_id: string;
-  password: string;
-  name: string;
-  nick_name: string;
-  email: string;
-  phone_number: string;
-  gender: string;
-};
-
 function Signup({ handleIsLogin, setAuthModal }: SignupProps) {
-  const [formData, setFormData] = useState<SignupFormProps>({
-    user_id: '',
-    password: '',
-    name: '',
-    nick_name: '',
-    email: '',
-    phone_number: '',
-    gender: '',
-  });
-
   const [userId, setUserId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
@@ -71,39 +50,11 @@ function Signup({ handleIsLogin, setAuthModal }: SignupProps) {
     }
   }, [password, passwordConfirm]);
 
-  useEffect(() => {
-    if (userIdMsg.includes('사')) {
-      setCheckUserId(true);
-    } else {
-      setCheckUserId(false);
-    }
-  }, [userIdMsg]);
-
-  useEffect(() => {
-    axios
-      .post(postSignupUrl, formData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((response) => {
-        const data = response.data;
-        if (data.statusCode === 400) {
-          setResponseMsg(data.message);
-        } else {
-          alert(data.message);
-          setAuthModal(false);
-        }
-      })
-      .catch((error) => {
-        setResponseMsg(error.response.data.message);
-      });
-  }, [formData]);
-
   const handleUserIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setUserId(e.target.value);
     setUserIdMsg('');
+    setCheckUserId(false);
   };
 
   const handleUserIdCheck = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -112,9 +63,13 @@ function Signup({ handleIsLogin, setAuthModal }: SignupProps) {
       .post(`${postIdCheckUrl}`, { user_id: userId })
       .then((res) => res.data)
       .then((result) => {
+        setCheckUserId(true);
         setUserIdMsg(() => result.message);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setCheckUserId(false);
+        setUserIdMsg(err.response.data.message);
+      });
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -161,7 +116,7 @@ function Signup({ handleIsLogin, setAuthModal }: SignupProps) {
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!checkUserId) {
@@ -172,16 +127,35 @@ function Signup({ handleIsLogin, setAuthModal }: SignupProps) {
       return;
     }
 
-    setFormData((prev) => ({
-      ...prev,
-      user_id: userId,
-      password: password,
-      name: name,
-      nick_name: nickname,
-      email: email,
-      phone_number: phonenumber,
-      gender: gender,
-    }));
+    try {
+      const response = await axios.post(
+        postSignupUrl,
+        {
+          user_id: userId,
+          password: password,
+          name: name,
+          nick_name: nickname,
+          email: email,
+          phone_number: phonenumber,
+          gender: gender,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const data = response.data;
+      alert(data.message);
+      setAuthModal(false);
+      setResponseMsg('');
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setResponseMsg(error?.response?.data.message);
+      } else {
+        setResponseMsg('An error occurred');
+      }
+    }
   };
 
   return (

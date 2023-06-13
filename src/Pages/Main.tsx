@@ -1,14 +1,20 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../Components/Header';
 import HeaderCategory from '../Components/Commons/HeaderCategory';
 import Footer from '../Components/Footer';
+import MainSearch from '../Components/Search/MainSearch';
 import Avatar1 from '../styles/icon/avatar1.png';
 import Avatar2 from '../styles/icon/avatar2.png';
 import Avatar3 from '../styles/icon/avatar3.png';
 import Avatar4 from '../styles/icon/avatar4.png';
 
 export default function Main() {
+  const navigate = useNavigate();
+  const clickBtnHandler = (searchValue: string) => {
+    navigate('/ground', { state: { searchValue } });
+  };
   return (
     <>
       <Header />
@@ -21,26 +27,86 @@ export default function Main() {
               <p className="big-text">Play Football</p>
               <p className="small-text">언제나 당신이 원하는 곳에서!</p>
             </StyledImageText>
-            <StyledInputContainer>
-              <p className="input-header-text">가까운 매치를 찾아보세요.</p>
-              <div className="input-container">
-                <input
-                  placeholder="🔍︎ 어디에서 공 차끄야?"
-                  className="input-text"
-                />
-                <button className="find-match-button">매치 찾기</button>
-              </div>
-            </StyledInputContainer>
+            <MainSearch />
           </StyledImageContents>
         </StyledImageContainer>
         <StyledListContainer>
           <StyledFieldList>
-            <h1 className="field-list-header-text">🥅 경기장 리스트</h1>
+            <StyledListTitleContainer>
+              <h1 className="field-list-header-text">🥅 경기장 리스트</h1>
+              <span
+                className="viewAll"
+                onClick={() => {
+                  navigate('/ground');
+                }}
+              >
+                전체보기
+                <img src="/Images/viewAll.png" alt="viewAll" />
+              </span>
+            </StyledListTitleContainer>
             <div className="field-list">
               <div className="field-list-text">
                 <span className="field-list-text-title">🏙️ in 서울</span>
                 <span className="field-list-text-content">
                   서울에서 진행되는 매치 모아보기
+                </span>
+                <span>
+                  <img
+                    className="move-to-list-page"
+                    src="Images/cramp.png"
+                    alt="cramp"
+                    onClick={() => {
+                      clickBtnHandler('서울');
+                    }}
+                  />
+                </span>
+              </div>
+              <div className="field-list-text">
+                <span className="field-list-text-title">🛬 in 인천</span>
+                <span className="field-list-text-content">
+                  인천에서 진행되는 매치 모아보기
+                </span>
+                <span>
+                  <img
+                    className="move-to-list-page"
+                    src="Images/cramp.png"
+                    alt="cramp"
+                    onClick={() => {
+                      clickBtnHandler('인천');
+                    }}
+                  />
+                </span>
+              </div>
+              <div className="field-list-text">
+                <span className="field-list-text-title">👩🏻‍🔬 in 대전</span>
+                <span className="field-list-text-content">
+                  대전에서 진행되는 매치 모아보기
+                </span>
+                <span>
+                  <img
+                    className="move-to-list-page"
+                    src="Images/cramp.png"
+                    alt="cramp"
+                    onClick={() => {
+                      clickBtnHandler('대전');
+                    }}
+                  />
+                </span>
+              </div>
+              <div className="field-list-text">
+                <span className="field-list-text-title">🍎 in 대구</span>
+                <span className="field-list-text-content">
+                  대구에서 진행되는 매치 모아보기
+                </span>
+                <span>
+                  <img
+                    className="move-to-list-page"
+                    src="Images/cramp.png"
+                    alt="cramp"
+                    onClick={() => {
+                      clickBtnHandler('대구');
+                    }}
+                  />
                 </span>
               </div>
               <div className="field-list-text">
@@ -48,11 +114,15 @@ export default function Main() {
                 <span className="field-list-text-content">
                   부산에서 진행되는 매치 모아보기
                 </span>
-              </div>
-              <div className="field-list-text">
-                <span className="field-list-text-title">🏭 in 울산</span>
-                <span className="field-list-text-content">
-                  울산에서 진행되는 매치 모아보기
+                <span>
+                  <img
+                    className="move-to-list-page"
+                    src="Images/cramp.png"
+                    alt="cramp"
+                    onClick={() => {
+                      clickBtnHandler('부산');
+                    }}
+                  />
                 </span>
               </div>
               <div className="field-list-text">
@@ -60,23 +130,32 @@ export default function Main() {
                 <span className="field-list-text-content">
                   제주에서 진행되는 매치 모아보기
                 </span>
-              </div>
-              <div className="field-list-text">
-                <span className="field-list-text-title">🎋 in 담양</span>
-                <span className="field-list-text-content">
-                  담양에서 진행되는 매치 모아보기
-                </span>
-              </div>
-              <div className="field-list-text">
-                <span className="field-list-text-title">🍐 in 나주</span>
-                <span className="field-list-text-content">
-                  나주에서 진행되는 매치 모아보기
+                <span>
+                  <img
+                    className="move-to-list-page"
+                    src="Images/cramp.png"
+                    alt="cramp"
+                    onClick={() => {
+                      clickBtnHandler('제주');
+                    }}
+                  />
                 </span>
               </div>
             </div>
           </StyledFieldList>
           <StyledReviewList>
-            <h1 className="review-list-header-text">👀 싸커퀵 풋살 후기</h1>
+            <StyledListTitleContainer>
+              <h1 className="review-list-header-text">👀 싸커퀵 풋살 후기</h1>
+              <span
+                className="viewAll"
+                onClick={() => {
+                  navigate('/review');
+                }}
+              >
+                전체보기
+                <img src="/Images/viewAll.png" alt="viewAll" />
+              </span>
+            </StyledListTitleContainer>
             <div>
               <p className="review-list-subheader-text">
                 구장 후기가 궁금해! 플랫폼 후기도 궁금해!
@@ -180,55 +259,27 @@ const StyledImageText = styled.h1`
   }
 `;
 
-const StyledInputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  background-color: #e3eee1;
-  border-radius: 1rem;
-  opacity: 0.8;
-  padding: 2rem;
-  height: 15vh;
-  width: 50rem;
-
-  overflow: hidden;
-
-  .input-header-text {
-    font-size: 2rem;
-    font-weight: bold;
-  }
-
-  .input-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-
-  .input-text {
-    padding: 1rem;
-    font-size: 1.5rem;
-    border: none;
-    border-radius: 1rem;
-    background-color: white;
-    width: 80%;
-  }
-
-  .find-match-button {
-    padding: 1rem;
-    font-size: 1.2rem;
-    border-radius: 1rem;
-    background-color: #00980f;
-  }
-`;
-
 const StyledListContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 5vh 1rem 1rem 1rem;
   width: 98.4rem;
   margin: 1.4rem auto;
+`;
+
+const StyledListTitleContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .viewAll {
+    color: var(--color--green);
+    cursor: pointer;
+    > img {
+      margin-left: 1rem;
+    }
+  }
 `;
 
 const StyledFieldList = styled.div`
@@ -259,6 +310,10 @@ const StyledFieldList = styled.div`
 
   .field-list-text-content {
     font-size: 1.5rem;
+  }
+
+  .move-to-list-page {
+    cursor: pointer;
   }
 `;
 

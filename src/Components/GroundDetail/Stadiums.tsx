@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { groundDataType } from '../../Pages/groundDetail';
+import { DomDataType } from '../../Pages/SearchPage';
 import largeIcon from '../../styles/icon/large.svg';
 import groundIcon from '../../styles/icon/ground.svg';
 import flagIcon from '../../styles/icon/flag.svg';
 import grassIcon from '../../styles/icon/grass.svg';
+import logo from '../../styles/icon/exampleImg.svg';
 
 interface StadiumsProps {
-  stadiumsData: groundDataType['stadiums'];
+  stadiumsData: DomDataType['stadiums'];
   setShowImgModal: React.Dispatch<React.SetStateAction<boolean>>;
   setImgModalIndex: React.Dispatch<React.SetStateAction<number>>;
 }
@@ -17,49 +18,44 @@ const Stadiums: React.FC<StadiumsProps> = ({
   setShowImgModal,
   setImgModalIndex,
 }) => {
-  const splitStadiumDetail = (detail: string) => {
-    return detail.split('•');
-  };
-
   return (
     <div>
       {stadiumsData &&
-        stadiumsData.map((data, idx) => (
-          <Stadium key={data.usage}>
+        stadiumsData.map((stadium, idx) => (
+          <Stadium key={stadium._id}>
             <StadiumImage>
-              <GroundImage src={data.image[0]} alt="stadiumImg" />
-              <LargeIcon
-                onClick={() => {
-                  setShowImgModal(true);
-                  setImgModalIndex(idx);
-                }}
-              >
-                <img src={largeIcon} alt="largeIcon" />
-              </LargeIcon>
+              {stadium.images.length > 0 && stadium.images[0].image ? (
+                <>
+                  <GroundImage src={stadium.images[0].image} alt="stadiumImg" />
+                  <LargeIcon
+                    onClick={() => {
+                      setShowImgModal(true);
+                      setImgModalIndex(idx);
+                    }}
+                  >
+                    <img src={largeIcon} alt="largeIcon" />
+                  </LargeIcon>
+                </>
+              ) : (
+                <GroundImage src={logo} alt="stadiumImg" />
+              )}
             </StadiumImage>
             <StadiumDetail>
-              <h2>{data.usage}</h2>
+              <h2>{stadium.name}</h2>
               <StadiumDetailFacility>
                 <div>
                   <img src={groundIcon} alt="groundIcon" />
                   <div>
-                    {/* 규격: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; */}
-                    {splitStadiumDetail(data.facility)[0]}
+                    {stadium.size_y} x {stadium.size_x}
                   </div>
                 </div>
                 <div>
                   <img src={flagIcon} alt="flagIcon" />
-                  <div>
-                    {/* 장소: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; */}
-                    {splitStadiumDetail(data.facility)[1]}
-                  </div>
+                  <div>{stadium.inout_door_nm}</div>
                 </div>
                 <div>
                   <img src={grassIcon} alt="grassIcon" />
-                  <div>
-                    {/* 코트재질: &nbsp; */}
-                    {splitStadiumDetail(data.facility)[2]}
-                  </div>
+                  <div>{stadium.stadium_type_nm}</div>
                 </div>
               </StadiumDetailFacility>
             </StadiumDetail>

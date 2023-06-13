@@ -1,4 +1,4 @@
-import react, { useState } from 'react';
+import react from 'react';
 import styled from 'styled-components';
 
 type MyPageBarProps = {
@@ -24,7 +24,7 @@ function MyPageBar({ checkedBarItem, setCheckedBarItem }: MyPageBarProps) {
           selected={checkedBarItem === 2}
           onClick={() => handleClickBarItem(2)}
         >
-          내 글 검색
+          내 글 조회
         </StyledBarItem>
         <StyledBarItem
           selected={checkedBarItem === 3}
@@ -42,7 +42,7 @@ export default MyPageBar;
 const StyledBar = styled.div`
   width: 98.4rem;
   padding: 0 2rem;
-  height: 2rem;
+  height: 3.5rem;
   margin: 1.4rem auto;
 
   display: flex;
@@ -60,11 +60,17 @@ const StyledBar = styled.div`
 
 const StyledBarItemContainer = styled.div`
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
   width: 80%;
+  margin: 1rem 0;
+  height: 3rem;
+  cursor: pointer;
 `;
 
 const StyledBarItem = styled.div<{ selected: boolean }>`
-  margin: 0 1rem;
-  color: ${(props) => (props.selected ? '#282B33' : '#727f88')};
+  padding-right: 2rem;
+  font-size: ${(props) => (props.selected ? '2rem' : '1.9rem')};
+  color: ${(props) => (props.selected ? '#535353' : '#727f88')};
   font-weight: ${(props) => (props.selected ? 'bold' : 'normal')};
 `;

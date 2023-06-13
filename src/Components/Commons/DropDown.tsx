@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import chevronIcon from '../../styles/icon/chevron_down.svg';
 
 type Props = {
   list: string[];
@@ -21,7 +22,6 @@ function DropDown(props: Props) {
   const [click, setClick] = React.useState(false); // 드롭다운 on/off 여부를 판단하는 상태
   const selected = props.selected;
   const setSelected = props.setSelected;
-  //   const [selected, setSelected] = React.useState(''); // 선택된 값을 판단하는 상태
 
   // 드롭다운 영역 밖을 클릭하면 드롭다운이 닫히도록 하는 부분 //
   const dropdownRef = React.useRef<HTMLDivElement>(null);
@@ -62,16 +62,7 @@ function DropDown(props: Props) {
           {selected.length > 0 ? selected : list[0]}
         </div>
         <div>
-          <img
-            src="/dropdown.png"
-            style={{
-              flex: 1,
-              width: '5rem',
-              height: '3rem',
-              alignSelf: 'center',
-              paddingLeft: '0.9rem',
-            }}
-          />
+          <img src={chevronIcon} />
         </div>
       </DropdownButton>
       {click && (
@@ -97,11 +88,15 @@ function DropDown(props: Props) {
 export default DropDown;
 
 const DropdownWrapper = styled.div`
+  z-index: 998;
   position: relative;
   display: inline-block;
+  width: 16rem;
+  margin-right: 1rem;
 `;
 
 const DropdownButton = styled.button`
+  z-index: 999;
   background-color: #fff;
   display: flex;
   flex: 1;
@@ -110,13 +105,21 @@ const DropdownButton = styled.button`
   align-items: center;
   color: #333;
   padding-left: 2rem;
+  margin-right: 3rem;
   width: 100%;
   height: 100%;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 1rem;
   font-size: ${(props) =>
     props.style?.fontSize ? props.style.fontSize : '13px'};
   cursor: pointer;
+  img {
+    flex: 1;
+    width: 2rem;
+    height: 4rem;
+    align-self: center;
+    margin: 0 1rem;
+  }
 `;
 
 const DropdownMenu = styled.div`
@@ -128,11 +131,12 @@ const DropdownMenu = styled.div`
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   font-size: ${(props) =>
     props.style?.fontSize ? props.style.fontSize : '13px'};
-  z-index: 1;
+  z-index: 999;
 `;
 
 const DropdownItem = styled.button<DropdownItemProps>`
   display: block;
+  z-index: 999;
   padding: 9px 7px;
   text-decoration: none;
   width: 100%;

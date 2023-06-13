@@ -1,19 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import memberIcon from '../../../styles/icon/member.svg';
+import {
+  StyledWrapper,
+  StyledDiv,
+  StyledButton,
+  StyledImg,
+  StyledButtonText,
+} from '../Styles/ViewsStyle';
+import { FindPageProps } from '../../../Types/TeamPageType';
 
-type props = {
-  findingTeam: boolean;
-  findingMember: boolean;
-  setFindingMember: React.Dispatch<React.SetStateAction<boolean>>;
-  setFindingTeam: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-function FindPage(props: props) {
+function FindPage(props: FindPageProps) {
   const { setFindingMember, setFindingTeam } = props;
 
   return (
-    <div style={{ width: '100%' }}>
+    <StyledWrapper>
       <StyledDiv>
         <Link to="/teampage/team">
           <StyledButton
@@ -22,50 +23,39 @@ function FindPage(props: props) {
               setFindingTeam(false);
             }}
           >
-            <StyledImg
-              src="./Images/findingmember.png"
-              alt="팀원 구해요"
-              title="팀원 모집 사이트로 이동"
-            />
-            <div>팀원 구해요</div>
+            <StyledImg>
+              <img
+                src={memberIcon}
+                alt="팀원 구해요"
+                title="팀원 모집 사이트로 이동"
+              />
+            </StyledImg>
+
+            <StyledButtonText>팀원 구하기</StyledButtonText>
           </StyledButton>
         </Link>
-        <Link to="/teampage/player">
+        {/* 백엔드 API가 제공되지 않아서 현재 사용 불가능한 기능.*/}
+        {/* 관련 코드 파일들은 모두 삭제(백업)된 상태입니다. */}
+        {/* <Link to="/teampage/player">
           <StyledButton
             onClick={() => {
               setFindingMember(false);
               setFindingTeam(true);
             }}
           >
-            <StyledImg
-              src="./Images/findingteam.png"
-              alt="팀 구해요"
-              title="팀 구직 사이트로 이동"
-            />
-            <div>팀 구해요</div>
+            <StyledImg>
+              <img
+                src={teamIcon}
+                alt="팀 구해요"
+                title="팀 구직 사이트로 이동"
+              />
+            </StyledImg>
+            <StyledButtonText>팀 구하기</StyledButtonText>
           </StyledButton>
-        </Link>
+        </Link> */}
       </StyledDiv>
-    </div>
+    </StyledWrapper>
   );
 }
 
 export default FindPage;
-
-const StyledDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin: 8rem;
-`;
-
-const StyledButton = styled.button`
-  border-radius: 1px solid;
-  height: 30rem;
-  width: 40rem;
-`;
-
-const StyledImg = styled.img`
-  height: 30rem;
-  width: 40rem;
-`;

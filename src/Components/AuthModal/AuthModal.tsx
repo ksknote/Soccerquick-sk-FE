@@ -43,7 +43,7 @@ const ModalContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  z-index: 9999;
   ${(props) => css`
     @media (max-height: 750px) {
       overflow: auto;

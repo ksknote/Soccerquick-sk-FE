@@ -1,89 +1,130 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import styled from 'styled-components';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import SearchData from '../Components/SearchPage/Contents/SearchData';
-import SearchModal from '../Components/SearchPage/Layout/SearchModal';
 import HeaderCategory from '../Components/Commons/HeaderCategory';
 import GroundComparison from '../Components/SearchPage/Contents/GroundComparison';
 import ComparisonData from '../Components/SearchPage/Contents/ComparisonData';
+import FeildSearchInput from '../Components/Search/FieldSearch';
+import FieldMap from '../Components/SearchPage/Contents/FieldMap';
+import axios from 'axios';
 
-export interface groundDataType {
-  title: string;
-  image: string[];
-  address: {
-    shortAddress: string;
-    fullAddress: string;
-  };
-  stadiums: { usage: string; facility: string; image: string[] }[];
-  provided: string[];
-  nonProvided: string[];
-  reservation: {
-    [key: string]: string[];
-  };
-  url: string;
+export interface DomDataType {
+  [key: string]: string | number | boolean | [] | {};
+  address: { area: string; fullAddress: string };
+  ball: boolean;
+  beverage: boolean;
+  bibs: boolean;
+  dom_id: string;
+  lat: number;
+  lng: number;
+  parking: boolean;
+  parking_fee: string;
+  parking_free: boolean;
+  partnership: boolean;
+  shoes: boolean;
+  shower: boolean;
   source: string;
+  stadiums: {
+    id: number;
+    info: string;
+    inout_door: string;
+    inout_door_nm: string;
+    name: string;
+    size_x: number;
+    size_y: number;
+    stadium_type: string;
+    stadium_type_nm: string;
+    _id: string;
+    images: {
+      id: number;
+      image: string;
+    }[];
+  }[];
+  title: string;
+  toilet: boolean;
+  url: string;
+  usersFavorites: [];
+  wear: string;
+  _id: number;
 }
 
 function SearchPage() {
-  const [showModal, setShowModal] = React.useState<boolean>(false);
-  const [modalData, setModalData] = React.useState<any>([]);
   const [showComparisonModal, setShowComparisonModal] = useState(false);
-  const [checkedArray, setCheckedArray] = useState<groundDataType[]>([]);
+  const [checkedArray, setCheckedArray] = useState<DomDataType[]>([]);
   const [checkedInModal, setCheckedInModal] = useState<string[]>([]);
   const [showComparisonData, setShowComparisonData] = useState(false);
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const [totalDomData, setTotalDomData] = useState<DomDataType[]>([]);
+  const [sortedDomData, setSortedDomData] = useState<DomDataType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [seachParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    const searchValue = seachParams.get('q') || '서울';
+    setSearchKeyword(searchValue);
+  }, [seachParams]);
 
   useEffect(() => {
     if (checkedArray.length > 0) setShowComparisonModal(true);
     else setShowComparisonModal(false);
   }, [checkedArray]);
 
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/doms`, {
+        withCredentials: true,
+      })
+      .then((res: any) => {
+        setTotalDomData(res.data.data);
+      })
+      .catch((e: any) => console.log(e));
+  }, []);
   return (
     <>
       <Header />
-      <HeaderCategory />
-      <div style={{ justifyContent: 'center' }}>
+      <HeaderNavContainer>
+        <HeaderCategory />
+        <FeildSearchInput />
+      </HeaderNavContainer>
+      <StyledBody>
+        {searchKeyword && (
+          <FieldMap
+            searchKeyword={searchKeyword}
+            totalDomData={totalDomData}
+            setSortedDomData={setSortedDomData}
+          />
+        )}
+
         <div
           style={{
-            height: '25rem',
-            width: '98.4rem',
-            backgroundColor: 'beige',
-            margin: 'auto',
-          }}
-        >
-          지도 띄울 부분
-        </div>
-        <div
-          style={{
-            height: '100rem',
             width: '98.4rem',
             margin: 'auto',
           }}
         >
           <SearchData
-            showModal={showModal}
-            setShowModal={setShowModal}
-            modalData={modalData}
-            setModalData={setModalData}
             checkedArray={checkedArray}
             setCheckedArray={setCheckedArray}
+            sortedDomData={sortedDomData}
+            setSortedDomData={setSortedDomData}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
           />
-          {showModal && (
-            <SearchModal
-              showModal={showModal}
-              setShowModal={setShowModal}
-              modalData={modalData}
-              setModalData={setModalData}
-            />
-          )}
         </div>
-      </div>
+      </StyledBody>
       {showComparisonModal && (
         <GroundComparison
           checkedArray={checkedArray}
           setCheckedArray={setCheckedArray}
           checkedInModal={checkedInModal}
           setCheckedInModal={setCheckedInModal}
-          showComparisonData={showComparisonData}
           setShowComparisonData={setShowComparisonData}
         />
       )}
@@ -100,3 +141,16 @@ function SearchPage() {
 }
 
 export default SearchPage;
+
+const HeaderNavContainer = styled.div`
+  position: relative;
+  height: 8rem;
+  width: 98.4rem;
+  margin: 0 auto;
+`;
+
+const StyledBody = styled.div`
+  justify-content: center;
+  width: 98.4rem;
+  margin: auto;
+`;

@@ -3,28 +3,51 @@ import styled from 'styled-components';
 import axios from 'axios';
 import resetIcon from '../../../styles/icon/reset_green.svg';
 
-function SearchFilter(props: any) {
-  // 버튼의 상태를 관리할 변수
-  const [buttonStates, setButtonStates] = React.useState(
-    Array(items.length).fill(false)
-  );
+interface ItemType {
+  key: string;
+  value: string;
+  selected: boolean;
+}
 
-  // 선택된 버튼을 필터링 옵션에 추가하는 함수. state를 분리하지 않고 만들 수 있는지 생각 필요함.
+const items: ItemType[] = [
+  { key: 'shoes', value: '풋살화 대여', selected: false },
+  { key: 'toilet', value: '남녀 구분 화장실', selected: false },
+  { key: 'ball', value: '공 대여', selected: false },
+  { key: 'bibs', value: '조끼 대여', selected: false },
+  { key: 'parking_free', value: '무료 주차', selected: false },
+  { key: 'parking', value: '주차 가능', selected: false },
+  { key: 'shower', value: '샤워실', selected: false },
+  { key: 'beverage', value: '음료 구비', selected: false },
+];
+
+interface FilterProps {
+  setFilterOption: React.Dispatch<React.SetStateAction<ItemType[]>>;
+}
+
+function SearchFilter(props: FilterProps) {
+  const { setFilterOption } = props;
+
+  // 상태관리 개선
+  const [item, setItem] = React.useState(items);
+
   React.useEffect(() => {
-    const filter = [];
-    for (let idx in items) {
-      if (buttonStates[idx]) {
-        filter.push(items[idx]);
-      }
-    }
-    props.setFilterOption(filter);
-  }, [buttonStates]);
+    const filter = item.filter((item) => item.selected);
+    setFilterOption(filter);
+  }, [item]);
 
-  // 버튼의 클릭여부를 변동시킬 onclick함수
   const handleButtonClick = (index: number) => {
-    const newButtonStates = [...buttonStates];
-    newButtonStates[index] = !newButtonStates[index];
-    setButtonStates(newButtonStates);
+    setItem((prevItems) => {
+      const updatedItem = [...prevItems];
+      updatedItem[index].selected = !updatedItem[index].selected;
+      return updatedItem;
+    });
+  };
+  const handleReset = () => {
+    const resetItem = item.map((item) => ({
+      ...item,
+      selected: false,
+    }));
+    setItem(resetItem);
   };
 
   return (
@@ -35,20 +58,18 @@ function SearchFilter(props: any) {
           <p>❮</p>
         </StyledTitle>
         <StyledOptions>
-          {items.map((item, index) => (
+          {item.map((item, index) => (
             <StyledTable
               key={index}
-              data={item}
-              active={buttonStates[index]}
+              data={item.key} // item 의 원소가 string에서 object로 변경됨.
+              active={item.selected}
               onClick={() => handleButtonClick(index)}
             >
-              {item}
+              {item.value}
             </StyledTable>
           ))}
         </StyledOptions>
-        <ResetButton
-          onClick={() => setButtonStates(Array(items.length).fill(false))}
-        >
+        <ResetButton onClick={handleReset}>
           <img src={resetIcon} alt="resetIcon" />
           <p>초기화</p>
         </ResetButton>
@@ -58,15 +79,6 @@ function SearchFilter(props: any) {
 }
 
 export default SearchFilter;
-
-const items = [
-  '풋살화 대여',
-  '남녀 구분 화장실',
-  '공 대여',
-  '조끼 대여',
-  '무료 주차',
-  '샤워실',
-];
 
 // Left Bar
 const SearchPageOption = styled.div`
@@ -120,32 +132,40 @@ const StyledTable = styled.button<{ data: string; active: boolean }>`
 `;
 
 const getColorBydata = (data: string) => {
-  if (data === '풋살화 대여') {
+  if (data === 'shoes') {
     return '#531dab';
-  } else if (data === '남녀 구분 화장실') {
+  } else if (data === 'toilet') {
     return '#096dd9';
-  } else if (data === '공 대여') {
+  } else if (data === 'ball') {
     return '#d4380d';
-  } else if (data === '조끼 대여') {
+  } else if (data === 'bibs') {
     return '#08979c';
-  } else if (data === '무료 주차') {
+  } else if (data === 'parking_free') {
     return '#c41d7f';
-  } else if (data === '샤워실') {
+  } else if (data === 'shower') {
     return '#d46b08';
+  } else if (data === 'parking') {
+    return '#a442b8';
+  } else if (data === 'beverage') {
+    return '#5e7f0c';
   }
 };
 const getBackgroundColorBydata = (data: string) => {
-  if (data === '풋살화 대여') {
+  if (data === 'shoes') {
     return '#f9f0ff';
-  } else if (data === '남녀 구분 화장실') {
+  } else if (data === 'toilet') {
     return '#e6f7ff';
-  } else if (data === '공 대여') {
+  } else if (data === 'ball') {
     return '#fff2e8';
-  } else if (data === '조끼 대여') {
+  } else if (data === 'bibs') {
     return '#e6fffb';
-  } else if (data === '무료 주차') {
+  } else if (data === 'parking_free') {
     return '#fff0f6';
-  } else if (data === '샤워실') {
+  } else if (data === 'shower') {
+    return '#fff7e6';
+  } else if (data === 'parking') {
+    return '#fff7e6';
+  } else if (data === 'beverage') {
     return '#fff7e6';
   }
 };

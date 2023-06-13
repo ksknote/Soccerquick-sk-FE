@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { groundDataType } from '../../../Pages/SearchPage';
+import { DomDataType } from '../../../Pages/SearchPage';
 import styled from 'styled-components';
 import chevronIcon from '../../../styles/icon/chevron_down.svg';
 import checkIcon from '../../../styles/icon/check.svg';
 import deleteIcon from '../../../styles/icon/delete.svg';
+import logo from '../../../styles/icon/exampleImg.svg';
 
 interface GroundComparisonProps {
-  checkedArray: groundDataType[];
-  setCheckedArray: React.Dispatch<React.SetStateAction<groundDataType[]>>;
+  checkedArray: DomDataType[];
+  setCheckedArray: React.Dispatch<React.SetStateAction<DomDataType[]>>;
   checkedInModal: string[];
   setCheckedInModal: React.Dispatch<React.SetStateAction<string[]>>;
-  showComparisonData: boolean;
   setShowComparisonData: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -19,7 +19,6 @@ const GroundComparison: React.FC<GroundComparisonProps> = ({
   setCheckedArray,
   checkedInModal,
   setCheckedInModal,
-  showComparisonData,
   setShowComparisonData,
 }) => {
   const [showModalContent, setShowModalContent] = useState(true);
@@ -79,9 +78,16 @@ const GroundComparison: React.FC<GroundComparisonProps> = ({
             {checkedArray &&
               checkedArray.map((item, idx) => (
                 <StyledItemsLi key={item.title + idx}>
-                  <img src={item.image[0]} alt="" />
+                  {item.stadiums[0].images[0] ? (
+                    <img
+                      src={item.stadiums[0].images[0].image}
+                      alt="domImage"
+                    />
+                  ) : (
+                    <img src={logo} alt="logo" />
+                  )}
                   <StyledItemTitle>
-                    <p>{item.address.shortAddress}</p>
+                    <p>{item.address.area}</p>
                     <p>{item.title}</p>
                   </StyledItemTitle>
                   <StyledItemButtonBox>
@@ -119,7 +125,7 @@ const GroundComparison: React.FC<GroundComparisonProps> = ({
               </div>
             </StyledSideSelectBox>
             <StyledComparisonBtn onClick={() => comparisonBtnHandler()}>
-              상품 비교
+              구장 비교
             </StyledComparisonBtn>
           </StyledSideContainer>
         </StyledBody>
@@ -192,6 +198,15 @@ const StyledItemTitle = styled.div`
     font-weight: 600;
     font-size: 1.5rem;
     color: gray;
+    padding-bottom: 0.2rem;
+  }
+  p:last-child {
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 `;
 

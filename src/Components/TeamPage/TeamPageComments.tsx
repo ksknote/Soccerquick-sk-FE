@@ -1,12 +1,13 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { userSelector } from '../../store/selectors/authSelectors';
+import { userSelector } from '../../ReduxStore/modules/Auth/authSelectors';
 import ballIcon from '../../styles/icon/soccerball.svg';
 import checkIcon from '../../styles/icon/check_white.svg';
 import commentIcon from '../../styles/icon/comment.svg';
 import axios from 'axios';
 import { SubmitApplicant, CommentProps } from '../../Types/TeamPageType';
+import alertModal from '../Commons/alertModal';
 import {
   StyledCommentContainer,
   StyledCommentTitle,
@@ -16,10 +17,7 @@ import {
   StyledCommentDetailDiv,
   StyledGender,
   StyledPosition,
-  getColorByPosition,
   StyledLevel,
-  getColorBySkill,
-  getBackgroundColorBySkill,
   StyledContents,
   StyledCommentButtons,
 } from '../../Pages/TeamPage/Styles/ComponentStyle';
@@ -41,8 +39,9 @@ function Comment(props: CommentProps) {
   };
 
   // 멤버를 승인하는 핸들러
-  const acceptMember = (id: string) => {
-    const confirmed = window.confirm('정말로 수락하시겠습니까?');
+  const acceptMember = async (id: string) => {
+    const confirmed = await alertModal('정말로 수락하시겠습니까?', 'submit');
+
     if (confirmed) {
       const body = {
         user_id: id,
@@ -53,10 +52,9 @@ function Comment(props: CommentProps) {
           body,
           config
         )
-        .then((res) => {
-          console.log('멤버 수락 완료!: ', res.data);
-          alert('멤버 수락 완료!');
-          window.location.reload();
+        .then(async (res) => {
+          const confirm = await alertModal('멤버 수락 완료!', 'text');
+          if (confirm) window.location.reload();
         })
         .catch((e) => {
           console.error('뭔가 오류발생함 ㅎㅎㅜㅜ : ', e);
@@ -65,8 +63,9 @@ function Comment(props: CommentProps) {
   };
 
   // 멤버를 거절하는 핸들러
-  const rejectMember = (id: string) => {
-    const confirmed = window.confirm('거절하시겠습니까?');
+  const rejectMember = async (id: string) => {
+    const confirmed = await alertModal('거절하시겠습니까?', 'submit');
+
     if (confirmed) {
       const body = {
         user_id: id,
@@ -77,10 +76,9 @@ function Comment(props: CommentProps) {
           body,
           config
         )
-        .then((res) => {
-          console.log('멤버 거절 완료!: ', res.data);
-          alert('멤버 거절 완료!');
-          window.location.reload();
+        .then(async (res) => {
+          const confirm = await alertModal('멤버 거절 완료!', 'text');
+          if (confirm) window.location.reload();
         })
         .catch((e) => {
           console.error('뭔가 오류발생함 ㅎㅎㅜㅜ : ', e);

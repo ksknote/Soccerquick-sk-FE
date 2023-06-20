@@ -11,6 +11,7 @@ export type User = {
   nickname: string;
   role: string;
   profile: string;
+  applicant_status: string;
 };
 
 const initialState: AuthState = {

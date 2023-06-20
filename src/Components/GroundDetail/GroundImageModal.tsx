@@ -25,7 +25,7 @@ const GroundImageModal: React.FC<StadiumsProps> = ({
             </ModalHeader>
             <Images>
               {stadiums[ImgModalIndex].images.map((img) => (
-                <img src={img.image} />
+                <img src={img.image} key={img.id} />
               ))}
             </Images>
           </ImgModalContainer>

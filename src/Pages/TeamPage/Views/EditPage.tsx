@@ -5,11 +5,14 @@ import { RootState } from '../../../ReduxStore/store';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import FindingMembers from '../../../Components/TeamPage/FindingMembers';
+import alertModal from '../../../Components/Commons/alertModal';
 import axios from 'axios';
 import {
   StyledContainer,
   StyledBox,
+  StyledTitleBox,
   StyledTitle,
+  StyledTitleInputText,
   StyledDiv,
   StyledInputText,
   StyledButton,
@@ -72,11 +75,11 @@ function EditPage() {
           config
         )
         .then((res) => {
-          console.log('수정 요청 성공 : ', res.data);
-          alert('글 수정이 완료되었습니다.');
+          alertModal('글 수정이 완료되었습니다.', 'success');
           navigate(`/teampage/team/${url}`);
         })
         .catch((e) => {
+          console.log(e);
           console.error('글 수정 실패 : ', e);
         });
     } else if (category === '팀 구해요') {
@@ -87,11 +90,7 @@ function EditPage() {
         position: position,
         contents: body,
       };
-      console.log('자기어필 페이지는 아직 미구현');
     }
-
-    // 정상 출력되는지 테스트용 콘솔
-    console.log(postData);
   };
 
   // 입력값을 검사하는 validator - 오류를 조금 더 상세하게 출력하는 것이 효과가 있을까?
@@ -159,35 +158,82 @@ function EditPage() {
       },
     };
   }, []);
+  console.log(data);
 
   return (
     <>
       <StyledContainer style={{ marginTop: '3rem' }}>
-        <StyledBox>
-          <StyledDiv
-            style={{ width: '20rem', height: '5rem', fontSize: '1.9rem' }}
+        <StyledBox
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <div
+            style={{
+              width: '98.4rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              padding: '0.5rem 0',
+            }}
           >
-            카테고리 : {category}
-          </StyledDiv>
-          <StyledTitle>활동지역</StyledTitle>
-          <StyledInputText
-            defaultValue={data.location}
-            onChange={(e) => {
-              setArea(e.target.value);
+            <StyledTitle>카테고리</StyledTitle>
+            <StyledInputText
+              onChange={(e) => {
+                setArea(e.target.value);
+              }}
+              value={category}
+              style={{
+                cursor: 'pointer',
+                border: 'none',
+                borderBottom: '0.3rem solid #bbdbb9',
+                paddingBottom: '0.4rem',
+              }}
+            />
+
+            <StyledTitle style={{ marginLeft: '4rem' }}>작성자</StyledTitle>
+            <StyledInputText
+              onChange={(e) => {
+                setArea(e.target.value);
+              }}
+              value={data.author}
+              style={{
+                cursor: 'pointer',
+                border: 'none',
+                borderBottom: '0.3rem solid #bbdbb9',
+                paddingBottom: '0.4rem',
+              }}
+            />
+          </div>
+          <div
+            style={{
+              width: '98.4rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              padding: '0.5rem 0',
             }}
-          />
-          <StyledTitle>제목</StyledTitle>
-          <StyledInputText
-            defaultValue={title}
-            style={{ textAlign: 'left', width: '32rem' }}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          />
-          <StyledTitle style={{ marginLeft: '4rem' }}>작성자</StyledTitle>
-          <StyledDiv style={{ border: '1px solid #eee' }}>ㄱㅁㅇ</StyledDiv>
+          >
+            <StyledTitle>활동지역</StyledTitle>
+            <StyledInputText
+              defaultValue={data.location}
+              onChange={(e) => {
+                setArea(e.target.value);
+              }}
+            />
+          </div>
         </StyledBox>
       </StyledContainer>
+      <StyledTitleBox style={{ paddingTop: '1rem' }}>
+        <StyledTitle style={{ width: '8rem' }}>제목</StyledTitle>
+        <StyledTitleInputText
+          defaultValue={title}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+        />
+      </StyledTitleBox>
 
       <StyledContainer>
         {category === '팀원 구해요' && (
@@ -215,6 +261,14 @@ function EditPage() {
         </StyledBox>
         <StyledBox style={{ justifyContent: 'center' }}>
           <StyledButton
+            color="white"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            취소하기
+          </StyledButton>
+          <StyledButton
             onClick={() => {
               try {
                 const validationResult = submitValidator();
@@ -222,18 +276,11 @@ function EditPage() {
                   handlePatchRequest();
                 }
               } catch (error) {
-                alert(error);
+                error && alertModal('입력값을 확인해주세요.', 'warning');
               }
             }}
           >
             수정하기
-          </StyledButton>
-          <StyledButton
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            취소하기
           </StyledButton>
         </StyledBox>
       </StyledContainer>

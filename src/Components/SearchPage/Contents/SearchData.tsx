@@ -6,10 +6,13 @@ import GroundListSkeleton from './groundListSkeleton';
 import MyPagination from '../../MyPage/MyPagination';
 import checkIcon from '../../../styles/icon/check.svg';
 import { DomDataType } from '../../../Pages/SearchPage';
+import alertModal from '../../Commons/alertModal';
+// import { checkHandler } from './GroundComparison';
 
 type FindingGroundProps = {
   checkedArray: DomDataType[];
   setCheckedArray: React.Dispatch<React.SetStateAction<DomDataType[]>>;
+  setCheckedInModal: React.Dispatch<React.SetStateAction<string[]>>;
   sortedDomData: DomDataType[];
   setSortedDomData: React.Dispatch<React.SetStateAction<DomDataType[]>>;
   isLoading: boolean;
@@ -42,6 +45,7 @@ function FindingGround(props: FindingGroundProps) {
   const navigate = useNavigate();
   const checkedArray = props.checkedArray;
   const setCheckedArray = props.setCheckedArray;
+  const setCheckedInModal = props.setCheckedInModal;
   const sortedDomData = props.sortedDomData;
   const isLoading = props.isLoading;
   const setIsLoading = props.setIsLoading;
@@ -70,14 +74,16 @@ function FindingGround(props: FindingGroundProps) {
         setCheckedArray((prev) =>
           prev.filter((item) => item.title !== value.title)
         );
-        alert('구장 비교는 최대 5개까지 가능합니다.');
+        alertModal('구장 비교는 최대 5개까지 가능합니다.', 'warning');
       } else {
         setCheckedArray((prev) => [...prev, value]);
+        setCheckedInModal((prev) => [...prev, value.title]);
       }
     } else {
       setCheckedArray((prev) =>
         prev.filter((item) => item.title !== value.title)
       );
+      setCheckedInModal((prev) => prev.filter((item) => item !== value.title));
     }
   };
 
@@ -170,6 +176,7 @@ function FindingGround(props: FindingGroundProps) {
               <GroundListSkeleton />
             )}
           </table>
+          <div style={{ height: '100%', width: '100%' }}> </div>
         </SearchPageBody>
         <MyPagination
           totalItemsCount={totalItemsCount ? totalItemsCount : 100}
@@ -193,6 +200,7 @@ const Searchpage = styled.div`
   display: flex;
   font-size: 1.7rem;
   width: 98.4rem;
+
   margin: 0 auto 7rem auto;
   display: flex;
   justify-content: center;
@@ -204,7 +212,9 @@ const SearchPageBody = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  min-height: 100rem;
   margin-bottom: 3rem;
+  flex-direction: column;
   table {
     width: 100%;
   }
@@ -221,7 +231,6 @@ const SearchPageBody = styled.div`
 const StyledLabelTr = styled.tr`
   height: 6rem;
   padding-bottom: 1rem;
-  /* border-bottom: 1px solid #d5d5d5ae; */
   background-color: #fafafa;
   border-bottom: 1px solid #d5d5d5ae;
   box-shadow: 0px 5px 5px -5px #cbc9c9d5;
@@ -240,25 +249,24 @@ const StyledLabelTr = styled.tr`
 
 const StyledTableCell = styled.div`
   display: inline-block;
-  height: 2rem;
   padding: 0;
+  height: 3rem;
+
   margin: 1.2rem 1rem 0rem 0;
   border-radius: 0.4rem;
-  font-size: 1.5rem;
   font-weight: 400;
   color: #888888;
-  line-height: 2rem;
+  line-height: 3rem;
   overflow: hidden;
 `;
 
 const StyledTable = styled.div<{ data: string }>`
   display: inline;
-  height: 4rem;
-  padding: 0.2rem 1rem 0.3rem 1rem;
+  padding: 0.1rem 1rem 0.1rem 1rem;
   margin-right: 1.2rem;
   border: 0.1rem solid #eeeeee;
   border-radius: 2rem;
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-weight: 400;
   color: ${({ data }) => getColorBydata(data)};
   background-color: ${({ data }) => getBackgroundColorBydata(data)};
@@ -297,14 +305,16 @@ const StyledCheckboxTd = styled.td`
 `;
 
 const StyledAddressTd = styled.td`
+  width: 13%;
   font-size: 1.6rem;
   font-weight: 500;
   text-align: center;
-  padding-left: 1rem;
+  padding-left: 0.2rem;
 `;
 
 const StyledMainTd = styled.td`
   padding-left: 4rem;
+  width: 69%;
   p {
     font-size: 1.9rem;
     cursor: pointer;

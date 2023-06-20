@@ -1,0 +1,37 @@
+.swal2-html-container {
+  font-size: 1.9rem !important;
+}
+.swal2-popup {
+  padding: 2rem 0 !important;
+}
+
+.swal2-styled {
+  font-size: 1.6rem !important;
+}
+
+.swal2-confirm {
+  border: 0.2rem solid var(--color--green) !important;
+  background-color: var(--color--green) !important;
+}
+.swal2-cancel {
+  background-color: white !important;
+  color: green !important;
+  border: 0.2rem solid rgba(110, 168, 107, 0.665) !important;
+}
+
+.swal2-toast {
+  padding: 2rem 2rem !important;
+}
+
+.swal2-container {
+  padding-top: 4rem !important;
+}
+.swal2-popup {
+  width: 50rem !important;
+}
+.swal2-modal {
+  width: 40rem !important;
+}
+.swal2-timer-progress-bar {
+  background: rgb(137, 230, 137);
+}

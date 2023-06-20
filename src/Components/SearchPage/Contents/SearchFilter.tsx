@@ -124,7 +124,7 @@ const StyledTable = styled.button<{ data: string; active: boolean }>`
   border: ${({ active, data }) =>
     active ? `0.2rem solid ${getColorBydata(data)}` : '0.1rem solid #EEEEEE'};
   border-radius: 2rem;
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-weight: 500;
   color: ${({ data }) => getColorBydata(data)};
   background-color: ${({ active, data }) =>

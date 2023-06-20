@@ -3,6 +3,7 @@ import DropDown from '../Commons/DropDown';
 import FILTERING_OPTIONS from '../Commons/FilteringOptions';
 import axios from 'axios';
 import { SumbitModalProps } from '../../Types/TeamPageType';
+import alertModal from '../Commons/alertModal';
 import {
   Modal,
   ModalPage,
@@ -38,7 +39,10 @@ function DetailModal(props: SumbitModalProps) {
       validator.push('메모');
     }
     if (validator.length > 0) {
-      alert(`[${validator.join(', ')}] 가 잘 입력되었는지 확인해주세요.`);
+      alertModal(
+        `[${validator.join(', ')}] 가 잘 입력되었는지 확인해주세요.`,
+        'text'
+      );
     } else {
       const data = {
         position: position,
@@ -51,15 +55,22 @@ function DetailModal(props: SumbitModalProps) {
           data,
           config
         )
-        .then((res) => {
-          console.log('신청 성공 : ', res.data);
-          alert('가입 신청에 성공하였습니다.');
-          setShowModal(false);
-          window.location.reload();
+        .then(async (res) => {
+          const confirm = await alertModal(
+            '가입 신청에 성공하였습니다.',
+            'text'
+          );
+          if (confirm) {
+            setShowModal(false);
+            window.location.reload();
+          }
         })
         .catch((e) => {
           console.error('신청 실패 : ', e);
-          alert(`가입 신청에 실패했습니다. ${e}.`);
+          alertModal(
+            `가입 신청에 실패했습니다. ${e.response.data.message}.`,
+            'error'
+          );
         });
     }
   }

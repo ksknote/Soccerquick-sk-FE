@@ -15,7 +15,6 @@ const GroundDetailCarousel: React.FC<{ stadiums: DomDataType['stadiums'] }> = ({
   useEffect(() => {
     if (stadiums[0].images.length > 7) {
       const newStadiums = stadiums[0].images.slice(0, 7);
-      console.log(newStadiums);
       setStadiumImages(newStadiums);
     }
   }, []);

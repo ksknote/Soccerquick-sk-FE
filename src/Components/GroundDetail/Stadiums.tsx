@@ -25,17 +25,17 @@ const Stadiums: React.FC<StadiumsProps> = ({
           <Stadium key={stadium._id}>
             <StadiumImage>
               {stadium.images.length > 0 && stadium.images[0].image ? (
-                <>
+                <div
+                  onClick={() => {
+                    setShowImgModal(true);
+                    setImgModalIndex(idx);
+                  }}
+                >
                   <GroundImage src={stadium.images[0].image} alt="stadiumImg" />
-                  <LargeIcon
-                    onClick={() => {
-                      setShowImgModal(true);
-                      setImgModalIndex(idx);
-                    }}
-                  >
+                  <LargeIcon>
                     <img src={largeIcon} alt="largeIcon" />
                   </LargeIcon>
-                </>
+                </div>
               ) : (
                 <GroundImage src={logo} alt="stadiumImg" />
               )}
@@ -79,6 +79,7 @@ const Stadium = styled.div`
 
 const StadiumImage = styled.div`
   position: relative;
+  cursor: pointer;
 `;
 
 const GroundImage = styled.img`

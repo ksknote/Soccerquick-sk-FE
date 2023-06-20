@@ -34,6 +34,66 @@ const GroundListSkeleton = () => {
 
         <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
       </StyledSkeletonTr>
+      <StyledSkeletonTr>
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+        <StyledSkeletonTd>
+          <div className="shimmer"></div>
+          <div className="shimmer"></div>
+        </StyledSkeletonTd>
+
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+      </StyledSkeletonTr>
+      <StyledSkeletonTr>
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+        <StyledSkeletonTd>
+          <div className="shimmer"></div>
+          <div className="shimmer"></div>
+        </StyledSkeletonTd>
+
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+      </StyledSkeletonTr>
+      <StyledSkeletonTr>
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+        <StyledSkeletonTd>
+          <div className="shimmer"></div>
+          <div className="shimmer"></div>
+        </StyledSkeletonTd>
+
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+      </StyledSkeletonTr>
+      <StyledSkeletonTr>
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+        <StyledSkeletonTd>
+          <div className="shimmer"></div>
+          <div className="shimmer"></div>
+        </StyledSkeletonTd>
+
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+      </StyledSkeletonTr>
+      <StyledSkeletonTr>
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+        <StyledSkeletonTd>
+          <div className="shimmer"></div>
+          <div className="shimmer"></div>
+        </StyledSkeletonTd>
+
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+      </StyledSkeletonTr>
+      <StyledSkeletonTr>
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+        <StyledSkeletonTd>
+          <div className="shimmer"></div>
+          <div className="shimmer"></div>
+        </StyledSkeletonTd>
+
+        <StyledSkeletonTd className="shimmer"></StyledSkeletonTd>
+      </StyledSkeletonTr>
     </tbody>
   );
 };

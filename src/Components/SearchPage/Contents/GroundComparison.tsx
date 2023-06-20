@@ -5,6 +5,7 @@ import chevronIcon from '../../../styles/icon/chevron_down.svg';
 import checkIcon from '../../../styles/icon/check.svg';
 import deleteIcon from '../../../styles/icon/delete.svg';
 import logo from '../../../styles/icon/exampleImg.svg';
+import alertModal from '../../Commons/alertModal';
 
 interface GroundComparisonProps {
   checkedArray: DomDataType[];
@@ -49,17 +50,17 @@ const GroundComparison: React.FC<GroundComparisonProps> = ({
     if (checkedInModal.length > 1) {
       setShowComparisonData(true);
     } else {
-      alert('비교할 구장을 2개 이상 선택해주세요.');
+      alertModal('비교할 구장을 2개 이상 선택해주세요.', 'warning');
     }
   };
 
-  useEffect(() => {
+  const checkAllHandler = () => {
     if (isAllChecked) {
       setCheckedInModal(() => checkedArray.map((item) => item.title));
     } else {
       setCheckedInModal([]);
     }
-  }, [isAllChecked]);
+  };
 
   return (
     <StyledContainer>
@@ -114,10 +115,20 @@ const GroundComparison: React.FC<GroundComparisonProps> = ({
                   type="checkbox"
                   id="selectAll"
                   checked={isAllChecked}
-                  onChange={() => setIsAllChecked(!isAllChecked)}
+                  onChange={() => {
+                    setIsAllChecked(!isAllChecked);
+                    checkAllHandler();
+                  }}
                 />
                 <label htmlFor="selectAll"></label>
-                <p onClick={() => setIsAllChecked(!isAllChecked)}>전체 선택</p>
+                <p
+                  onClick={() => {
+                    setIsAllChecked(!isAllChecked);
+                    checkAllHandler();
+                  }}
+                >
+                  전체 선택
+                </p>
               </div>
               <div onClick={() => deleteSelectedItemHandler()}>
                 <img src={deleteIcon} alt="deleteIcon" />

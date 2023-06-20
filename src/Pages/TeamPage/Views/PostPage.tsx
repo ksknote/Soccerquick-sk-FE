@@ -7,11 +7,14 @@ import 'react-quill/dist/quill.snow.css';
 import {
   StyledContainer,
   StyledBox,
+  StyledTitleBox,
   StyledTitle,
+  StyledTitleInputText,
   StyledInputText,
   StyledButton,
 } from '../Styles/PostsStyle';
 import SubmitFindingMembers from '../../../Components/TeamPage/FindingMembers';
+import alertModal from '../../../Components/Commons/alertModal';
 import axios from 'axios';
 
 function SubmitPage() {
@@ -61,8 +64,7 @@ function SubmitPage() {
       axios
         .post(`${process.env.REACT_APP_API_URL}/groups`, data, config)
         .then((res) => {
-          console.log('POST 요청 성공 : ', res.data);
-          alert('팀원 모집글이 등록되었습니다.');
+          alertModal('팀원 모집글이 등록되었습니다.', 'success');
           navigate('/teampage/team');
         })
         .catch((e) => {
@@ -77,11 +79,7 @@ function SubmitPage() {
         position: position,
         contents: content,
       };
-      console.log('자기어필 페이지는 아직 미구현');
     }
-
-    // 정상 출력되는지 테스트용 콘솔
-    console.log(data);
   };
 
   // 입력값을 검사하는 validator - 오류를 조금 더 상세하게 출력하는 것이 효과가 있을까?
@@ -174,11 +172,14 @@ function SubmitPage() {
       >
         <StyledBox
           style={{
+            width: '98.4rem',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
           }}
         >
+          <StyledTitle>카테고리</StyledTitle>
+
           <DropDown
             list={FilteringOptions.submit.category}
             selected={boardCategory}
@@ -191,15 +192,18 @@ function SubmitPage() {
               setArea(e.target.value);
             }}
           />
-          <StyledTitle>제목</StyledTitle>
-          <StyledInputText
-            style={{ textAlign: 'left', width: '32rem' }}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          />
         </StyledBox>
       </StyledContainer>
+
+      <StyledTitleBox>
+        <StyledTitle style={{ width: '8rem' }}>제목</StyledTitle>
+        <StyledTitleInputText
+          style={{ textAlign: 'left' }}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+        />
+      </StyledTitleBox>
 
       <StyledContainer>
         {boardCategory === '팀원 구해요' && (
@@ -222,28 +226,29 @@ function SubmitPage() {
             value={content}
             onChange={handleEditorChange}
             modules={quillModules}
-            style={{ width: '100rem', height: '45rem' }}
+            style={{ width: '98.4rem', height: '45rem', padding: '0 2rem' }}
           />
         </StyledBox>
         <StyledBox style={{ justifyContent: 'center' }}>
+          <StyledButton
+            color="white"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            취소하기
+          </StyledButton>
           <StyledButton
             onClick={() => {
               const validationResult = submitValidator();
               if (validationResult === '통과') {
                 handlePostRequest();
               } else {
-                alert(validationResult);
+                validationResult && alertModal(validationResult, 'warning');
               }
             }}
           >
             작성하기
-          </StyledButton>
-          <StyledButton
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            취소하기
           </StyledButton>
         </StyledBox>
       </StyledContainer>

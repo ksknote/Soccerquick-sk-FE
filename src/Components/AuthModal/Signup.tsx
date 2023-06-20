@@ -10,6 +10,7 @@ import {
   ModalSelectBox,
   ModalTerms,
 } from '../Commons/AuthComponents';
+import alertModal from '../Commons/alertModal';
 
 const postSignupUrl = `${process.env.REACT_APP_API_URL}/auths/signup`; // signup api url
 const postIdCheckUrl = `${process.env.REACT_APP_API_URL}/auths/id`; // id-check api url
@@ -55,6 +56,7 @@ function Signup({ handleIsLogin, setAuthModal }: SignupProps) {
     setUserId(e.target.value);
     setUserIdMsg('');
     setCheckUserId(false);
+    setResponseMsg('');
   };
 
   const handleUserIdCheck = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -75,36 +77,43 @@ function Signup({ handleIsLogin, setAuthModal }: SignupProps) {
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setPassword(e.target.value);
+    setResponseMsg('');
   };
 
   const handlePasswordCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setPasswordConfirm(e.target.value);
+    setResponseMsg('');
   };
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setName(e.target.value);
+    setResponseMsg('');
   };
 
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setNickname(e.target.value);
+    setResponseMsg('');
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setEmail(e.target.value);
+    setResponseMsg('');
   };
 
   const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setPhonenumber(e.target.value);
+    setResponseMsg('');
   };
 
   const handleGenderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();
     setGender(e.target.value);
+    setResponseMsg('');
   };
 
   const handleTermCheck = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -114,6 +123,7 @@ function Signup({ handleIsLogin, setAuthModal }: SignupProps) {
     } else {
       setTermCheck(true);
     }
+    setResponseMsg('');
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -146,7 +156,7 @@ function Signup({ handleIsLogin, setAuthModal }: SignupProps) {
         }
       );
       const data = response.data;
-      alert(data.message);
+      alertModal(data.message, 'text');
       setAuthModal(false);
       setResponseMsg('');
     } catch (error) {
@@ -243,11 +253,12 @@ function Signup({ handleIsLogin, setAuthModal }: SignupProps) {
         <ModalTerms onClick={handleTermCheck} term={termCheck}>
           싸커퀵 서비스 이용 약관 및 개인 정보 수집 및 이용에 동의합니다.
         </ModalTerms>
+
         <RegisterText>
           회원가입 시 <span>매치 찜하기</span> 기능과{' '}
-          <span>싸커퀵 커뮤니티</span>를 이용할 수 있어요.
+          <span>싸커퀵 커뮤니티</span>를 이용할 수 있어요.{' '}
         </RegisterText>
-        <ModalSubmitButton>회원가입</ModalSubmitButton>
+        <ModalSubmitButton term={termCheck}>회원가입</ModalSubmitButton>
       </ModalForm>
     </Modal>
   );
@@ -296,6 +307,7 @@ const RegisterText = styled.div`
 `;
 
 const ResponseText = styled.div`
+  height: 2rem;
   color: red;
   font-style: normal;
   font-weight: 400;

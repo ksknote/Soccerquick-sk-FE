@@ -133,7 +133,7 @@ export const StyledInfoInput = styled.input`
   border: none;
   font-size: 1.6rem;
   border-right: 1px solid #e5e5e5;
-}
+  /* } */
 `;
 
 export const StyledButton = styled.button`

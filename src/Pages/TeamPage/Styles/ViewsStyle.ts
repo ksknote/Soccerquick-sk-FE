@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // MainPage
 export const MainPageBody = styled.div`
   width: 98.5rem;
-  min-height: 55rem;
+  min-height: 90rem;
   margin: 0 auto 15rem auto;
 `;
 
@@ -65,7 +65,8 @@ export const StyledButtonText = styled.div`
 // FindingMember
 
 export const StyledHeader = styled.div`
-  padding-left: 1rem;
+  padding: 0 0 3rem 1rem;
+
   h1 {
     font-size: 3rem;
     margin: 0;
@@ -96,8 +97,8 @@ export const StyledTotalNumber = styled.p`
 `;
 
 export const TeamPageBody = styled.div`
-  display: flex;
   justify-content: space-between;
+  height: 70rem;
   width: 100%;
   table {
     width: 100%;
@@ -148,7 +149,7 @@ export const StyledResetButton = styled.button`
 
   border: 1px solid #ddd;
   border-radius: 1rem;
-  font-size: 1.9rem;
+  font-size: 1.6rem;
   img {
     width: 2.4rem;
     margin-right: 0.5rem;
@@ -249,10 +250,10 @@ export const StyledWriteButton = styled.button`
 
 export const PageSelect = styled.div`
   clear: both;
-  margin-top: 11rem;
+  margin-top: 9rem;
   justify-content: center;
   display: flex;
-  border-top: 1px solid #ddd;
+  font-size: 1.8rem;
 `;
 
 export const PageButton = styled.button<{

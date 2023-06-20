@@ -45,9 +45,9 @@ export default FeildSearch;
 const FeildSearchBar = styled.div`
   position: absolute;
   right: 0;
-  top: -1.3rem;
+  top: -0.7rem;
   width: 35rem;
-  height: 5rem;
+  height: 4.4rem;
   background-color: white;
   margin: 1.5rem;
   padding: 0.8rem;
@@ -61,7 +61,11 @@ const FeildSearchBar = styled.div`
     border: none;
     background: none;
     width: 85%;
-    padding: 0.2rem 0 0 1rem;
+    padding: 0 0 0 1rem;
     line-height: 2.8rem;
+  }
+  img {
+    padding-top: 0.2rem;
+    cursor: pointer;
   }
 `;

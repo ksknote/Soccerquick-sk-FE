@@ -2,20 +2,23 @@ import styled from 'styled-components';
 
 // Page 부분
 export const AdminContainer = styled.div`
-  margin-top: 5rem;
+  position: relative;
+  margin: auto;
   font-size: 3rem;
-  height: 82vh;
+  display: flex;
+  justify-content: center;
 `;
 
 export const BodyContainer = styled.div`
   height: fit-content;
+  justify-content: center;
 `;
 
 export const BodyLeftBar = styled.div`
   display: flex;
   float: left;
   width: 25rem;
-  height: 75rem;
+  height: 70rem;
   flex-direction: column;
   align-items: center;
   border-right: 1px solid #bbb;
@@ -24,8 +27,9 @@ export const BodyLeftBar = styled.div`
 
 export const BodyMain = styled.div`
   background-color: rgb(245, 245, 245);
-  width: 159rem;
-  height: 100rem;
+  width: 131rem;
+  height: 72rem;
+  /* margin-left: 3rem; */
 `;
 
 export const MainButton = styled.button<{ state: string }>`
@@ -76,12 +80,14 @@ export const UserManageContainerTable = styled.div`
   display: grid;
   margin-top: 2rem;
   padding-left: 3rem;
-  width: 105rem;
+  width: 94rem;
   font-size: 2rem;
   table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
   }
+
   tr {
     border-bottom: 1px solid #000;
     justify-content: space-around;
@@ -91,7 +97,14 @@ export const UserManageContainerTable = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
+    white-space: nowrap;
   }
+`;
+
+export const StyledTd = styled.td`
+  /* white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const StyledTr = styled.tr`
@@ -117,6 +130,7 @@ export const PageSelect = styled.div`
   background-color: rgb(245, 245, 245);
 `;
 
+// 페이지네이션 컴포넌트를 사용하면서 사용하지 않게 된 부분
 export const PageButton = styled.button<{
   selected: number;
   currentPage: number;
@@ -206,23 +220,41 @@ export const DetailButton = styled.button<{ data: string }>`
   margin: 1rem 2rem;
   padding: 0.4rem 2rem;
   border-radius: 1rem;
+  &:hover {
+    background-color: #ddd;
+  }
 `;
 
 export const ManagementButtonContainer = styled.div`
   display: flex;
   position: absolute;
-  width: 47.6rem;
+  width: 55.6rem;
   justify-content: center;
   z-index: 997;
 `;
 
-export const ManagementButton = styled.button<{ data: string }>`
+export const LevelUpButton = styled.button<{ data: string }>`
+  font-size: 1.3rem;
   margin: 1rem 2rem;
   padding: 0.4rem 2rem;
   border-radius: 1rem;
+  &:hover {
+    background-color: skyblue;
+  }
+`;
+
+export const RestrictButton = styled.button<{ data: string }>`
+  font-size: 1.3rem;
+  margin: 1rem 2rem;
+  padding: 0.4rem 2rem;
+  border-radius: 1rem;
+  &:hover {
+    background-color: rgb(255, 79, 79);
+  }
 `;
 
 export const ReturnButton = styled.button`
-  margin: 1rem 2rem;
-  padding: 0rem 1.4rem;
+  background-color: white;
+  margin: 1rem 1rem;
+  padding: 0rem 1rem;
 `;

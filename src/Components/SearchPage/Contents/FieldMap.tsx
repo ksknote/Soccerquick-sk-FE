@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ResetIcon from '../../../styles/icon/reset_white.svg';
 import CustomMapMarker from './CustomMapMarker';
 import { DomDataType } from '../../../Pages/SearchPage';
+import alertModal from '../../Commons/alertModal';
 
 interface FieldMapType {
   searchKeyword: string;
@@ -33,9 +34,9 @@ const FieldMap: React.FC<FieldMapType> = ({
         function (status, res) {
           if (res.v2.addresses.length === 0) {
             if (!searchKeyword) {
-              return alert('검색어를 입력해주세요.');
+              return alertModal('검색어를 입력해주세요.', 'warning');
             } else {
-              return alert('검색어를 다시 입력해주세요.');
+              return alertModal('검색어를 입력해주세요.', 'warning');
             }
           } else {
             const resAddress = res.v2.addresses[0];

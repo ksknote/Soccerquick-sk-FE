@@ -103,8 +103,13 @@ export function ModalInput({
 }
 
 // ModalSubmitButton
-export function ModalSubmitButton(props: { children: string }) {
-  return <StyledButton type="submit">{props.children}</StyledButton>;
+export function ModalSubmitButton(props: any) {
+  const { children, term } = props;
+  return (
+    <StyledSubmitButton type="submit" disabled={!term} term={term}>
+      {children}
+    </StyledSubmitButton>
+  );
 }
 
 // ModalButton props type
@@ -300,11 +305,20 @@ const StyledInput = styled.input<{ radius?: string }>`
   }
 `;
 
-// ModalSubmitButton, ModalButton
+//  ModalButton
 const StyledButton = styled.button`
   width: 100%;
   height: 45px;
   background: #09cf00;
+  border-radius: 8px;
+  color: #fff;
+  margin-top: 20px;
+`;
+//ModalSubmitButton,
+const StyledSubmitButton = styled.button<{ term: boolean }>`
+  width: 100%;
+  height: 45px;
+  background: ${({ term }) => (term ? '#09cf00' : 'lightgray')};
   border-radius: 8px;
   color: #fff;
   margin-top: 20px;

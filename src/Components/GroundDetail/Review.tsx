@@ -3,10 +3,11 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import LikeButton from '../Commons/LikeButton';
+import alertModal from '../Commons/alertModal';
 import {
   isLogInSelector,
   userSelector,
-} from '../../store/selectors/authSelectors';
+} from '../../ReduxStore/modules/Auth/authSelectors';
 
 interface ReviewProps {
   dom_id: string;
@@ -18,6 +19,7 @@ interface reviewData {
   user_icon?: string;
   review_id?: string;
   contents?: string;
+  createdAt?: string;
   likedreviews: string[];
 }
 
@@ -36,13 +38,12 @@ export default function Review(props: ReviewProps) {
   const userName = userData?.name || ''; // 빈 문자열로 대체
   const domId = props.dom_id;
 
-  // url 주소 수정 필요
   useEffect(() => {}, [reviewData]);
 
   function handleEditReview(index: number, reviewId: string | undefined) {
     if (isReviewEditable) {
       if (editReview === '') {
-        return alert('내용을 입력해주세요!');
+        return alertModal('내용을 입력해주세요!', 'warning');
       }
 
       axios
@@ -64,7 +65,7 @@ export default function Review(props: ReviewProps) {
         })
         .catch((error) => {
           console.error(error);
-          alert('수정에 실패하였습니다.');
+          alertModal('수정에 실패하였습니다.', 'error');
         });
     } else {
       setEditReview(reviewData[index].contents || '');
@@ -72,8 +73,11 @@ export default function Review(props: ReviewProps) {
     }
   }
 
-  function handleDeleteReview(index: number, reviewId: string | undefined) {
-    const confirmed = window.confirm('삭제하시겠습니까?');
+  async function handleDeleteReview(
+    index: number,
+    reviewId: string | undefined
+  ) {
+    const confirmed = await alertModal('삭제하시겠습니까?', 'submit');
 
     confirmed &&
       axios
@@ -92,10 +96,10 @@ export default function Review(props: ReviewProps) {
 
   function handleWriteReview() {
     if (!isLogin) {
-      return alert('로그인이 필요한 서비스입니다.');
+      return alertModal('로그인이 필요한 서비스입니다.', 'warning');
     }
     if (review === '') {
-      return alert('내용을 입력해주세요!');
+      return alertModal('내용을 입력해주세요!', 'warning');
     }
 
     // 작성한 리뷰가 이미 존재하는지 검사
@@ -103,7 +107,7 @@ export default function Review(props: ReviewProps) {
       (item) => item.user_name === userName
     );
     if (existingReview) {
-      return alert('1인당 1개의 리뷰만 작성 가능합니다.');
+      return alertModal('1개의 리뷰만 작성 가능합니다.', 'warning');
     }
 
     // 작성한 리뷰를 서버에 등록
@@ -130,27 +134,42 @@ export default function Review(props: ReviewProps) {
 
   return (
     <StyledReviewContainer>
-      <h2>📄 리뷰 목록</h2>
+      <div className="review-header">
+        <h2>📄 리뷰 목록</h2>
+        <span>좋아요 순</span>
+      </div>
       {reviewData.map((item, index) => (
         <StyledReviews key={index}>
-          <div className="review-header">
+          <div className="review-contents-header">
             <span className="user-info">
               <span>
                 <img className="user-icon" src={item.user_icon} alt="avatar" />
               </span>
-              <span className="user-name">{item.user_name}</span>
+              <span className="user-name">
+                <p>{item.user_name}</p>
+                <p className="review-time">
+                  {item.createdAt &&
+                    new Date(item.createdAt).toLocaleDateString('ko-KR', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                </p>
+              </span>
             </span>
             <span className="likes">
               <LikeButton
                 likedreviews={item.likedreviews}
                 reviewId={item.review_id}
+                isLogin={isLogin}
               />
             </span>
           </div>
           <div className="review-content">
             {item.user_name === userName && isReviewEditable ? (
-              <input
-                className="review"
+              <textarea
+                className="review-edit-textarea"
+                placeholder="수정 내용을 입력하세요"
                 value={editReview}
                 onChange={(e) => {
                   setEditReview(e.target.value);
@@ -184,6 +203,7 @@ export default function Review(props: ReviewProps) {
       <StyledWriteReview>
         <div className="textarea-container">
           <textarea
+            className="write-review-textarea"
             placeholder="리뷰 내용을 입력하세요"
             value={review}
             onChange={(e) => {
@@ -192,7 +212,7 @@ export default function Review(props: ReviewProps) {
           />
         </div>
         <div className="button-container">
-          <button className="review-btn" onClick={handleWriteReview}>
+          <button className="write-review-button" onClick={handleWriteReview}>
             작성 완료
           </button>
         </div>
@@ -205,10 +225,26 @@ const StyledReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  > h2 {
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin: 0.6rem 0;
+  .review-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    > h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 0.6rem 0;
+    }
+
+    > span {
+      padding: 1rem;
+      font-size: 1.4rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 `;
 
@@ -221,19 +257,34 @@ const StyledReviews = styled.div`
   filter: drop-shadow(0 0 3px #dddddd);
   border-radius: 10px;
 
-  .review-header {
+  .review-contents-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
 
   .user-info {
-    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 2rem;
   }
 
   .user-icon {
-    width: 3rem;
+    width: 4rem;
     height: auto;
+    margin-right: 1rem;
+    border-radius: 5rem;
+  }
+
+  .user-name {
+    font-size: 1.7rem;
+    font-weight: 700;
+  }
+
+  .review-time {
+    font-size: 1rem;
+    font-weight: 400;
   }
 
   .review-content {
@@ -241,28 +292,62 @@ const StyledReviews = styled.div`
     flex-direction: row;
     padding-left: 1rem;
     margin-bottom: 1rem;
+    font-size: 1.7rem;
+  }
+
+  .review-edit-textarea {
+    width: 100%;
+    height: 8rem;
+    padding: 1rem;
+    border: none;
+    resize: none;
+    font-size: 1.7rem;
+
+    :focus {
+      border: 1.5px solid #dddddd;
+      border-radius: 1rem;
+      box-shadow: 1px 1px 10px #efefef;
+      outline: none;
+    }
   }
 
   .review-content-buttons {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-  }
+    margin: 1rem;
 
-  .review-edit {
-    margin-right: 1rem;
-    font-size: 1rem;
-  }
+    .review-edit {
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+      margin-right: 1rem;
+      border: 0.5px solid #cfcfcf;
+      border-radius: 5px;
+      background-color: white;
 
-  .review-delete {
-    font-size: 1rem;
+      &:hover {
+        background-color: #e7e7e7;
+      }
+    }
+
+    .review-delete {
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+      border: 0.5px solid #cfcfcf;
+      border-radius: 5px;
+      background-color: white;
+
+      &:hover {
+        background-color: #eeeeee;
+      }
+    }
   }
 `;
 
 const StyledWriteReview = styled.div`
   display: flex;
   flex-direction: column;
-  height: 25rem;
+  height: 20rem;
   padding: 2rem;
   margin-top: 2rem;
   background-color: white;
@@ -270,36 +355,44 @@ const StyledWriteReview = styled.div`
   border-radius: 10px;
 
   .textarea-container {
-    position: relative;
-    flex: 1; /* textarea가 컨테이너에 꽉 차도록 설정 */
+    display: flex;
+    justify-content: center;
+    flex: 1;
   }
 
-  textarea {
+  .write-review-textarea {
     width: 100%;
-    height: 80%;
+    height: 70%;
     border: none;
     resize: none; /* 크기 조정 비활성화 */
+    padding: 1rem;
+    font-size: 1.7rem;
+
+    :focus {
+      border: 1.5px solid #dddddd;
+      border-radius: 1rem;
+      box-shadow: 1px 1px 10px #efefef;
+      outline: none;
+    }
   }
 
   .button-container {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+  }
 
-    .add-img-btn {
-      margin-right: 1rem;
+  .write-review-button {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    border: 0.5px solid #cfcfcf;
+    border-radius: 5px;
+    background-color: white;
+    color: #09cf00;
+
+    &:hover {
+      background-color: #09cf00;
+      color: white;
     }
-  }
-
-  .image-container {
-    max-width: 20%;
-    max-height: 10rem; /* 원하는 높이로 조정 */
-    overflow: hidden;
-    margin-top: 1rem; /* 이미지와 textarea 사이에 간격 추가 */
-  }
-
-  .selected-image {
-    width: 100%;
-    height: auto;
   }
 `;

@@ -279,12 +279,20 @@ export const StyledTitle = styled.div`
   align-items: center;
   margin: 0rem 2rem;
   font-size: 1.9rem;
+  font-weight: 500;
+`;
+export const StyledSmallTitle = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0rem 2rem;
+  font-size: 1.7rem;
 `;
 
 export const StyledInputNumber = styled.input`
   display: flex;
   padding-left: 1rem;
-  width: 6rem;
+  width: 8rem;
   height: 4rem;
   text-align: center;
+  border: 0.1rem solid #b2b2b2;
 `;

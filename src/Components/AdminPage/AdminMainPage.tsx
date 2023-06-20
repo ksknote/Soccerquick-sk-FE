@@ -5,7 +5,6 @@ function AdminMain() {
     <div
       style={{
         display: 'flex',
-        height: '50vh',
         justifyContent: 'center',
         alignItems: 'center',
       }}

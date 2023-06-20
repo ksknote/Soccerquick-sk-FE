@@ -22,18 +22,18 @@ const MainSearch = () => {
 
   return (
     <StyledInputContainer>
-      <p className="input-header-text">가까운 매치를 찾아보세요.</p>
+      <p className="input-header-text">가까운 경기장을 찾아보세요!</p>
 
       <div className="input-container">
         <input
-          placeholder="🔍︎ 어디에서 공 차끄야?"
+          placeholder="🔍︎ 지역이나 도로명 주소를 검색하세요"
           className="input-text"
           value={searchValue}
           onChange={(e) => searchHandler(e)}
           onKeyDown={(e) => pressEnterHandler(e)}
         />
         <button className="find-match-button" onClick={() => clickBtnHandler()}>
-          매치 찾기
+          경기장 찾기
         </button>
       </div>
     </StyledInputContainer>
@@ -48,7 +48,7 @@ const StyledInputContainer = styled.div`
   justify-content: space-around;
   background-color: #e3eee1;
   border-radius: 1rem;
-  opacity: 0.8;
+  opacity: 0.9;
   padding: 2rem;
   height: 15vh;
   width: 50rem;
@@ -81,6 +81,7 @@ const StyledInputContainer = styled.div`
     padding: 1rem;
     font-size: 1.2rem;
     border-radius: 1rem;
-    background-color: #00980f;
+    background-color: #00850d;
+    color: white;
   }
 `;

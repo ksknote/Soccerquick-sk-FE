@@ -9,98 +9,45 @@ import 'slick-carousel/slick/slick-theme.css';
 import HeaderCategory from '../../Components/Commons/HeaderCategory';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
-import ReviewDetailPage from './ReviewDetailPage';
-import WriteReviewPage from './WriteReviewPage';
-import Avatar1 from '../../styles/icon/avatar1.png';
-import Avatar2 from '../../styles/icon/avatar2.png';
-import Avatar3 from '../../styles/icon/avatar3.png';
-import Avatar4 from '../../styles/icon/avatar4.png';
+import resetIcon from '../../styles/icon/reset_black.svg';
+import sliderImg1 from '../../styles/icon/review_slider1.png';
+import sliderImg2 from '../../styles/icon/review_slider2.png';
+import sliderImg3 from '../../styles/icon/review_slider3.png';
 import Magnifier from '../../styles/icon/magnifier.png';
-
-const AVATARS = [Avatar1, Avatar2, Avatar3, Avatar4, Avatar3];
 
 const config = {
   withCredentials: true,
 };
 
-const REVIEW_LIST_DUMMY_DATA = [
-  {
-    userIcon: '최도원',
-    reviewTitle: '이번 매치 OOO 매니저님 너무 친절하셨어요! 또 뵙고 싶네요~',
-    reviewContent:
-      '우아ㅗ아ㅗ아왕롼ㅇ뢈ㅇ라양야야야얌나야냥냐얀랸얄ㄴ야ㅑㄹㅇ냐 뀨뀨ㅜㄴㅁ우ㅏㄴㅇㅁㄴㅇ먄럄뉾ㄴㄹㄴ뮮ㄴㄹㄴ뮮뉴ㅠㄻ뉴 ㅠㅁㄴ라윰닒ㄴ율ㄴㅇㄻㅁㅁㅇㄹㅇㄴㄹㄴㅇㄹ',
-    author: '최도원',
-    area: '수원',
-    stadium: '수원 HM파크',
-    like: 7,
-  },
-  {
-    userIcon: '안동현',
-    reviewTitle: '오우 쉣! 여기 너무 별로야!',
-    author: '안동현',
-    area: '서울',
-    stadium: '수원 HM파크',
-    like: 77,
-  },
-  {
-    userIcon: '최도원',
-    reviewTitle: '매니저님 체고~ 나도 체고~',
-    author: '김승섭',
-    area: '수원',
-    stadium: '수원 HM파크',
-    like: 20,
-  },
-  {
-    userIcon: '최도원',
-    reviewTitle: '안양 왕감자, 권성경이올시다',
-    author: '권성경',
-    area: '안양',
-    stadium: '수원 HM파크',
-    like: 20,
-  },
-  {
-    userIcon: '최도원',
-    reviewTitle: '경기도 광주 OO매니저님 체고~',
-    author: '신성민',
-    area: '서울',
-    stadium: '수원 HM파크',
-    like: 777,
-  },
-];
-
-const filterList: { [key: string]: string[] } = {
-  지역: ['구장'],
-  서울: ['구장', '서울 HM파크', '수원 HM파크'],
-  수원: ['구장', '수원 HM파크', '수원 HM파크'],
-  안양: ['구장', '안양 HM파크', '수원 HM파크'],
-  광주: ['구장', '광주 HM파크', '수원 HM파크'],
-  부산: ['구장', '부산 HM파크', '수원 HM파크'],
-};
-
-const areaList = Object.keys(filterList);
-const stadiumList = Object.values(filterList);
+interface ReviewList {
+  contents: string;
+  ground_id: string;
+  user_icon: string;
+  user_name: string;
+  likedreviews: string[];
+  area?: string;
+  stadium?: string;
+}
 
 export default function ReviewPage() {
-  const [reviewList, setReviewList] = useState(REVIEW_LIST_DUMMY_DATA);
-  const [filteredReviewList, setFilteredReviewList] = useState(
-    REVIEW_LIST_DUMMY_DATA
-  );
-  const [searchedReviewList, setSearchedReviewList] = useState(
-    REVIEW_LIST_DUMMY_DATA
-  );
-  const [filteredReviewListBySearch, setFilteredReviewListBySearch] = useState(
-    REVIEW_LIST_DUMMY_DATA
-  );
+  const [reviewList, setReviewList] = useState<ReviewList[]>([]);
+  const [filteredReviewList, setFilteredReviewList] =
+    useState<ReviewList[]>(reviewList);
+  const [filteredReviewListBySearch, setFilteredReviewListBySearch] =
+    useState<ReviewList[]>(reviewList);
+
   const [findReview, setFindReview] = useState({
     area: '',
     stadium: '',
   });
   const [areaFilterView, setAreaFilterView] = useState(false);
   const [stadiumFilterView, setStadiumFilterView] = useState(false);
-  const [area, setArea] = useState('지역');
-  const [stadium, setStadium] = useState('구장');
+  const [filterList, setFilterList] = useState<{ [key: string]: string[] }>({});
+  const [areaList, setAreaList] = useState<string[]>([]);
+  const [area, setArea] = useState<string>('지역');
+  const [stadium, setStadium] = useState<string>('구장');
   const [searchInput, setSearchInput] = useState('');
-  const [clicked, setClicked] = useState(Array(reviewList.length).fill(false));
+
   const navigate = useNavigate();
 
   let settings = {
@@ -122,13 +69,43 @@ export default function ReviewPage() {
   }, [area, stadium]);
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/reviews`, config)
-      .then((res) => {
-        if (res.status === 200) {
+    axios.get(`${process.env.REACT_APP_API_URL}/doms`, config).then((res) => {
+      const areaData: string[] = [];
+      const stadiumData: string[] = [];
+      const allReviews: ReviewList[] = [];
+
+      res.data.data.forEach((v: any, i: number) => {
+        if (v.reviews.length !== 0) {
+          const reviewsWithLocation = v.reviews.map((review: object) => ({
+            ...review,
+            area: v.title.split(' ')[0],
+            stadium: v.title,
+          }));
+          allReviews.push(...reviewsWithLocation);
         }
+        areaData.push(v.title.split(' ')[0]);
+        stadiumData.push(v.title);
       });
-  });
+
+      setReviewList(allReviews);
+      setFilteredReviewList(allReviews);
+
+      const areaSet = new Set(areaData);
+      setAreaList(Array.from(areaSet));
+
+      const newFilterList: { [key: string]: any[] } = {};
+      areaSet.forEach((v: string) => {
+        newFilterList[v] = [];
+      });
+
+      areaSet.forEach((area: string) => {
+        stadiumData.map((stadium: string) => {
+          stadium.includes(area) && newFilterList[area].push(stadium);
+        });
+      });
+      setFilterList(newFilterList);
+    });
+  }, []);
 
   useEffect(() => {
     const foundReviewList = reviewList.filter((v) => {
@@ -145,11 +122,18 @@ export default function ReviewPage() {
     setFilteredReviewList(foundReviewList);
   }, [findReview]);
 
+  function handleFilterReset() {
+    setArea('지역');
+    setStadium('구장');
+  }
+
   function handleSearch(input: string) {
     setSearchInput(input);
     setFilteredReviewListBySearch(
       filteredReviewList.filter(
-        (v) => v.area.includes(input) || v.stadium.includes(input)
+        (v) =>
+          (v.area && v.area.includes(input)) ||
+          (v.stadium && v.stadium.includes(input))
       )
     );
   }
@@ -159,24 +143,8 @@ export default function ReviewPage() {
     setStadiumFilterView(false);
   }
 
-  function handleReviewTitleClick(index: number) {
-    navigate(`/review/detail/${index}`, { state: reviewList[index] });
-  }
-
-  function handleLikeButtonClick(index: number) {
-    setReviewList((prevList) => {
-      const updatedList = [...prevList];
-      const updatedItem = { ...updatedList[index] };
-      if (clicked[index]) updatedItem.like -= 1;
-      else updatedItem.like += 1;
-      updatedList[index] = updatedItem;
-
-      const updatedClicked = [...clicked];
-      updatedClicked[index] = !clicked[index];
-      setClicked(updatedClicked);
-
-      return updatedList;
-    });
+  function handleReviewTitleClick(ground_id: string) {
+    navigate(`/ground/${ground_id}`);
   }
 
   function handleScrollToTop() {
@@ -191,8 +159,6 @@ export default function ReviewPage() {
       <Header />
       <HeaderCategory />
       <Routes>
-        <Route path="/write" element={<WriteReviewPage />} />
-        <Route path="/detail/:index" element={<ReviewDetailPage />} />
         <Route
           path="/"
           element={
@@ -201,16 +167,13 @@ export default function ReviewPage() {
                 <StyledImage>
                   <Slider {...settings}>
                     <StyledImage>
-                      <img src="Images/reviewMainImg.png" alt="reviewMainImg" />
+                      <img src={sliderImg2} alt="reviewMainImg" />
                     </StyledImage>
                     <StyledImage>
-                      <img src="Images/footy.png" alt="footy" />
+                      <img src={sliderImg3} alt="footy" />
                     </StyledImage>
                     <StyledImage>
-                      <img src="Images/reviewImg3.jpg" alt="reviewImg3" />
-                    </StyledImage>
-                    <StyledImage>
-                      <img src="Images/reviewImg4.jpg" alt="reviewImg4" />
+                      <img src={sliderImg1} alt="reviewImg3" />
                     </StyledImage>
                   </Slider>
                 </StyledImage>
@@ -223,6 +186,7 @@ export default function ReviewPage() {
                       onClick={(e) => e.stopPropagation()}
                     >
                       <p
+                        className="area"
                         onClick={() => {
                           if (stadiumFilterView) {
                             setStadiumFilterView(false);
@@ -234,57 +198,74 @@ export default function ReviewPage() {
                       >
                         {area}
                       </p>
-                      {areaFilterView &&
-                        areaList.map((item, index) => (
-                          <li
-                            className="area"
-                            key={index}
-                            onClick={() => {
-                              setArea(item);
-                              setAreaFilterView(false);
-                            }}
-                          >
-                            {item}
-                          </li>
-                        ))}
                     </ul>
+                    {areaFilterView && (
+                      <div className="modal-background">
+                        <div className="area-list-modal">
+                          {areaList.map((item, index) => (
+                            <li
+                              className="area-list"
+                              key={index}
+                              onClick={() => {
+                                setArea(item);
+                                setAreaFilterView(false);
+                              }}
+                            >
+                              {item}
+                            </li>
+                          ))}
+                        </div>
+                      </div>
+                    )}
 
                     <ul
                       className="stadiumFilter"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <p
+                        className="stadium"
                         onClick={() => {
-                          if (areaFilterView) {
-                            setAreaFilterView(false);
-                            setStadiumFilterView(!stadiumFilterView);
-                          } else {
-                            setStadiumFilterView(!stadiumFilterView);
+                          if (area !== '지역') {
+                            if (areaFilterView) {
+                              setAreaFilterView(false);
+                              setStadiumFilterView(!stadiumFilterView);
+                            } else {
+                              setStadiumFilterView(!stadiumFilterView);
+                            }
                           }
                         }}
                       >
                         {stadium}
                       </p>
-                      {stadiumFilterView &&
-                        filterList[area].map((item, index) => (
-                          <li
-                            className="stadium"
-                            key={index}
-                            onClick={() => {
-                              area === '지역'
-                                ? setStadium('구장')
-                                : setStadium(item);
-                              setStadiumFilterView(false);
-                            }}
-                          >
-                            {item}
-                          </li>
-                        ))}
                     </ul>
+
+                    {stadiumFilterView && (
+                      <div className="modal-background">
+                        <div className="stadium-list-modal">
+                          {filterList[area] &&
+                            filterList[area].map((item, index) => (
+                              <li
+                                className="stadium-list"
+                                key={index}
+                                onClick={() => {
+                                  area === '지역'
+                                    ? setStadium('구장')
+                                    : setStadium(item);
+                                  setStadiumFilterView(false);
+                                }}
+                              >
+                                {item}
+                              </li>
+                            ))}
+                        </div>{' '}
+                      </div>
+                    )}
+                    <span className="filter-reset" onClick={handleFilterReset}>
+                      <img src={resetIcon} alt="reset" title="초기화" />
+                    </span>
                   </div>
 
                   <div className="search">
-                    <img src={Magnifier} alt="magnifier" />
                     <input
                       className="search-input"
                       value={searchInput}
@@ -293,55 +274,58 @@ export default function ReviewPage() {
                       }}
                       placeholder="지역 혹은 구장으로 검색"
                     />
+                    <img src={Magnifier} alt="magnifier" />
                   </div>
                 </StyledReviewHeader>
                 <StyledListTitle>
-                  <p>🥅 리뷰 리스트</p>
+                  <p>🥅&nbsp;</p>
+                  <p className="review-list-title"> 리뷰 리스트</p>
                 </StyledListTitle>
                 <StyledReviewListHeader>
                   <span></span>
-                  <span></span>
+                  <span>리뷰</span>
                   <span>작성자</span>
                   <span>지역</span>
                   <span>구장</span>
                   <span>좋아요</span>
                 </StyledReviewListHeader>
-                {searchInput.length === 0
+                {filteredReviewList.length > 0 && searchInput.length === 0
                   ? filteredReviewList.map((item, index) => (
                       <StyledReviewList key={index}>
                         <span className="review-user-icon">
-                          {<img src={AVATARS[index]} alt="userIcon" />}
+                          <img src={item.user_icon} alt="user-icon" />
                         </span>
                         <span
                           className="review-title"
-                          onClick={() => handleReviewTitleClick(index)}
+                          onClick={() => handleReviewTitleClick(item.ground_id)}
                         >
-                          {item.reviewTitle}
+                          {item.contents}
                         </span>
-                        <span className="review-author">{item.author}</span>
+                        <span className="review-author">{item.user_name}</span>
                         <span className="review-area">{item.area}</span>
                         <span className="review-stadium">{item.stadium}</span>
                         <span className="review-like-count">
-                          🧡 {item.like}
+                          🧡 {item.likedreviews.length}
                         </span>
                       </StyledReviewList>
                     ))
-                  : filteredReviewListBySearch.map((item, index) => (
+                  : reviewList.length > 0 &&
+                    filteredReviewListBySearch.map((item, index) => (
                       <StyledReviewList key={index}>
                         <span className="review-user-icon">
-                          {<img src={AVATARS[index]} alt="userIcon" />}
+                          <img src={item.user_icon} alt="user-icon" />
                         </span>
                         <span
                           className="review-title"
-                          onClick={() => handleReviewTitleClick(index)}
+                          onClick={() => handleReviewTitleClick(item.ground_id)}
                         >
-                          {item.reviewTitle}
+                          {item.contents}
                         </span>
-                        <span className="review-author">{item.author}</span>
+                        <span className="review-author">{item.user_name}</span>
                         <span className="review-area">{item.area}</span>
                         <span className="review-stadium">{item.stadium}</span>
                         <span className="review-like-count">
-                          🧡 {item.like}
+                          🧡 {item.likedreviews.length}
                         </span>
                       </StyledReviewList>
                     ))}
@@ -364,7 +348,7 @@ const StyledBody = styled.div`
   display: flex;
   flex-direction: column;
   width: 98.4rem;
-  margin: 0 auto; /* 좌우 여백 자동 조정 */
+  margin: 0 auto;
 `;
 
 const StyledCarousel = styled.div`
@@ -389,43 +373,139 @@ const StyledReviewHeader = styled.div`
   .filter {
     display: flex;
     flex-direction: row;
+    align-items: center;
     position: relative;
     font-size: 1.8rem;
     font-weight: 500;
     z-index: 2;
 
     .areaFilter {
-      position: absolute;
-      padding: 1rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       border: 1px solid #e0e0e0;
-      border-radius: 2rem;
+      border-radius: 1.5rem;
       box-shadow: 2px 2px #e0e0e0;
       background-color: white;
-      left: 0;
+      overflow: hidden;
+      cursor: pointer;
+      margin-right: 1rem;
+    }
+
+    .area {
+      padding: 1rem 2.5rem;
+      &:hover {
+        background-color: #e0e0e0;
+      }
+    }
+
+    .area-list {
+      width: 100%;
+      padding: 1rem 0;
+      display: flex;
+      justify-content: center;
+
+      &:hover {
+        background-color: #e0e0e0;
+      }
+    }
+
+    .modal-background {
+      position: fixed;
+      z-index: 998;
+      left: 0px;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .area-list-modal {
+      position: fixed;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      place-items: center;
+      background-color: white;
+      box-shadow: 2px 2px 3rem #929292;
+      border-radius: 1.5rem;
+      z-index: 999;
+      width: 30%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid #ededed;
+      padding: 2rem 0;
     }
 
     .stadiumFilter {
-      position: absolute;
-      padding: 1rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       border: 1px solid #e0e0e0;
-      border-radius: 2rem;
+      border-radius: 1.5rem;
       box-shadow: 2px 2px #e0e0e0;
       background-color: white;
-      left: 10rem;
+      overflow: hidden;
+      cursor: pointer;
+      margin-right: 1rem;
+    }
+
+    .stadium {
+      padding: 1rem 2.5rem;
+      &:hover {
+        background-color: #e0e0e0;
+      }
     }
   }
 
-  .area {
+  .stadium-list {
+    width: 100%;
     padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+
     &:hover {
-      background-color: #dedede;
+      cursor: pointer;
+      background-color: #e0e0e0;
     }
   }
 
-  .stadium {
-    padding: 1rem 0;
+  .stadium-list-modal {
+    position: fixed;
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: center;
+    background-color: white;
+    box-shadow: 2px 2px 3rem #929292;
+    border-radius: 1.5rem;
+    z-index: 999;
+    width: 30%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #ededed;
+    padding: 2rem 0;
+  }
+
+  .filter-reset {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+    margin-right: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 1.5rem;
+    box-shadow: 2px 2px #e0e0e0;
+    background-color: white;
+    overflow: hidden;
+
     &:hover {
-      background-color: #dedede;
+      cursor: pointer;
+      background-color: #e0e0e0;
+    }
+
+    > img {
+      width: 2.4rem;
     }
   }
 
@@ -434,24 +514,32 @@ const StyledReviewHeader = styled.div`
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
+
+    > img {
+      margin-left: 1rem;
+    }
   }
 
   .search-input {
     width: 65%;
     font-size: 1.8rem;
     padding: 1rem;
-    margin-left: 1rem;
     border: 1px solid #bebebe;
-    border-radius: 5rem;
+    border-radius: 1.5rem;
     box-shadow: 2px 2px #cccccc;
   }
 `;
 
 const StyledListTitle = styled.div`
-  padding: 3rem 0 2rem 0;
+  display: flex;
+  flex-direction: row;
+  padding: 2rem 0 3rem 0;
   > p {
     font-size: 2.5rem;
     font-weight: bold;
+  }
+
+  .review-list-title {
     text-decoration: underline;
     text-underline-position: under;
   }
@@ -481,7 +569,13 @@ const StyledReviewList = styled.div`
   }
 
   .review-user-icon {
+    font-weight: bold;
     padding: 1rem;
+    border: none;
+
+    > img {
+      border-radius: 5rem;
+    }
   }
 
   .review-title {

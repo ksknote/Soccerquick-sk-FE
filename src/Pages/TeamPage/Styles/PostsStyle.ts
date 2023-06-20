@@ -12,11 +12,26 @@ export const StyledBox = styled.div`
   display: flex;
   margin-top: 0rem;
 `;
+
+export const StyledTitleBox = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 1.5rem 2rem 0 0;
+`;
+
 export const StyledTitle = styled.div`
   display: flex;
   align-items: center;
   margin: 0rem 2rem;
   font-size: 1.9rem;
+  font-weight: 500;
+`;
+
+export const StyledTitleInputText = styled.input`
+  height: 4.5rem;
+  padding-left: 1rem;
+  width: 100%;
+  border: 0.1rem solid #b2b2b2;
 `;
 
 export const StyledDiv = styled.div`
@@ -28,14 +43,24 @@ export const StyledDiv = styled.div`
 export const StyledInputText = styled.input`
   display: flex;
   padding-left: 1rem;
-  width: 9rem;
-  height: 4rem;
-  text-align: center;
+  width: 20rem;
+  height: 4.5rem;
+  text-align: start;
   align-items: center;
+  border: 0.1rem solid #b2b2b2;
 `;
 
-export const StyledButton = styled.button`
-  margin: 6rem 3rem 0rem 3rem;
+export const StyledButton = styled.button<{ color?: string }>`
+  width: 12rem;
+  height: 4.7rem;
+  font-weight: 500;
+  margin: 6rem 1rem 0rem 1rem;
+  border-radius: 1rem;
+  background: ${({ color }) =>
+    color === 'white' ? 'white' : 'var(--color--green)'};
+  color: ${({ color }) => (color === 'white' ? 'green' : 'white')};
+  border: ${({ color }) =>
+    color === 'white' && '0.2rem solid rgb(191 211 186)'};
 `;
 
 // 여기까지 EditPage, PostPage Style
@@ -189,6 +214,7 @@ export const StyledAuthorButtonContainer = styled.div`
   display: flex;
   height: 3rem;
   justify-content: flex-end;
+  align-items: center;
   button {
     color: gray;
     background-color: white;

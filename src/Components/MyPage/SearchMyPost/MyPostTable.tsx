@@ -1,44 +1,26 @@
 import react, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { ReviewPost } from './SearchMyReviewPost';
-import { GroupPost } from './SearchMyTeamPost';
-import { MyApplicationGroupPost } from './SearchMyApplicationPost';
 import MyPagination from '../MyPagination';
 
 type MyPostTableProps = {
   title?: string;
   properties?: string[];
-  reviewData?: Array<ReviewPost>;
-  groupData?: Array<GroupPost>;
-  applyTeamData?: Array<MyApplicationGroupPost>;
+  data?: Array<string[] | null>;
 };
 
-function MyPostTable({
-  title,
-  properties,
-  reviewData,
-  groupData,
-  applyTeamData,
-}: MyPostTableProps) {
+function MyPostTable({ title, properties, data }: MyPostTableProps) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState(4);
-  const totalItemsCount =
-    (reviewData && reviewData.length) ||
-    (groupData && groupData.length) ||
-    (applyTeamData && applyTeamData.length);
+  const totalItemsCount = data ? data?.length : 0;
 
   // get current data
   const lastIndexOfData = currentPage * itemsPerPage;
   const firstIndexOfData = lastIndexOfData - itemsPerPage;
-  const currentReviewData =
-    reviewData && reviewData.slice(firstIndexOfData, lastIndexOfData);
-  const currentGroupData =
-    groupData && groupData.slice(firstIndexOfData, lastIndexOfData);
-  const currentApplyTeamData =
-    applyTeamData && applyTeamData.slice(firstIndexOfData, lastIndexOfData);
+  const currentData = data?.slice(firstIndexOfData, lastIndexOfData);
 
   const navigate = useNavigate();
+
   return (
     <TableContainer>
       <StyledTitleDiv>
@@ -48,99 +30,67 @@ function MyPostTable({
       <table>
         <thead>
           <StyledTitleTr key={title}>
-            {''}
-            {properties && properties.map((property) => <th>{property}</th>)}
+            {properties &&
+              properties.map((property, idx) => <th key={idx}>{property}</th>)}
             <th></th>
           </StyledTitleTr>
         </thead>
         <tbody>
-          {currentGroupData?.map((item: GroupPost, idx: number) => {
-            return (
-              <StyledItemTr key={`review-${idx}`}>
-                <td>{item.leader_name}</td>
-                <td>
-                  <StyledLongSpan>{item.title}</StyledLongSpan>
-                  <span style={{ color: 'red' }}>
-                    [{item.applicant.length}]
-                  </span>
-                </td>
-                <td>{item.location}</td>
-                <td>{item.status}</td>
-                <td
-                  style={{ color: 'blue' }}
-                >{`${item.player_current_count}/${item.player_count}`}</td>
-                <td
-                  style={{ color: 'red' }}
-                >{`${item.gk_current_count}/${item.gk_count}`}</td>
-                <td>
-                  <StyledButton
-                    onClick={() => {
-                      navigate(`/teampage/team/${item.group_id}`);
-                    }}
-                  >
-                    조회
-                  </StyledButton>
-                </td>
-              </StyledItemTr>
-            );
-          })}
-          {currentApplyTeamData?.map((item, idx) => {
-            return (
-              <StyledItemTr key={`review-${idx}`}>
-                <td>{item.leader_name}</td>
-                <td>
-                  <StyledLongSpan>{item.title}</StyledLongSpan>
-                  <span style={{ color: 'red' }}>
-                    [{item.applicant?.length}]
-                  </span>
-                </td>
-                <td>{item.location}</td>
-                <td>{item.status}</td>
-                <td
-                  style={{ color: 'blue' }}
-                >{`${item.player_current_count}/${item.player_count}`}</td>
-                <td
-                  style={{ color: 'red' }}
-                >{`${item.gk_current_count}/${item.gk_count}`}</td>
-                <td>
-                  <StyledButton
-                    onClick={() => {
-                      navigate(`/teampage/team/${item.group_id}`);
-                    }}
-                  >
-                    조회
-                  </StyledButton>
-                </td>
-              </StyledItemTr>
-            );
-          })}
-          {currentReviewData?.map((item, idx) => {
-            return (
-              <StyledItemTr key={`review-${idx}`}>
-                <td>{item.name}</td>
-                <td>
-                  {' '}
-                  <StyledLongSpan>{item.comment}</StyledLongSpan>
-                </td>
-                <td>{item.dom_id}</td>
-                <td style={{ fontWeight: 'bold' }}>{item.rating}</td>
-                <td>{item.userslikes.length}</td>
-                <td>
-                  <StyledButton
-                    onClick={() => {
-                      navigate(`/review/detail/${item.review_id}`);
-                    }}
-                  >
-                    조회
-                  </StyledButton>
-                </td>
-              </StyledItemTr>
-            );
-          })}
+          {currentData && currentData?.length > 0 ? (
+            currentData.map((item, idx) => {
+              return (
+                <StyledItemTr key={`data-${idx}`}>
+                  {item &&
+                    item.map((value, index) => {
+                      if (index === 0) {
+                        return null;
+                      } else if (index === 2) {
+                        return (
+                          <td key={`td-${idx}`}>
+                            <StyledLongSpan>{value}</StyledLongSpan>
+                            <span style={{ color: 'red' }}>{item[3]}</span>
+                          </td>
+                        );
+                      } else if (index === 3) {
+                        return null;
+                      } else if (index === item.length - 1) {
+                        return item[0] === 'teamPage' ? (
+                          <td key={`item-${index}`}>
+                            <StyledButton
+                              onClick={() => {
+                                navigate(`/teampage/team/${value}`);
+                              }}
+                            >
+                              조회
+                            </StyledButton>
+                          </td>
+                        ) : (
+                          <td key={`item-${index}`}>
+                            <StyledButton
+                              onClick={() => {
+                                navigate(`/ground/${value}`);
+                              }}
+                            >
+                              조회
+                            </StyledButton>
+                          </td>
+                        );
+                      } else {
+                        return <td key={`item-${index}`}>{value}</td>;
+                      }
+                    })}
+                </StyledItemTr>
+              );
+            })
+          ) : (
+            <StyledNoItemTr>
+              <td>{'조회된 글이 없습니다.'}</td>
+            </StyledNoItemTr>
+          )}
         </tbody>
       </table>
       <MyPagination
-        totalItemsCount={totalItemsCount ? totalItemsCount : 100}
+        totalItemsCount={totalItemsCount ? totalItemsCount : 1}
         itemsPerPage={itemsPerPage}
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
@@ -160,6 +110,8 @@ const TableContainer = styled.div`
 
   & > table {
     width: 100%;
+    height: 39rem;
+    background-color: #fdfdfd;
   }
 `;
 
@@ -194,7 +146,6 @@ const StyledTitleTr = styled.tr`
   & > th:nth-child(2) {
     flex: 4;
     text-align: start;
-    padding-left: 1rem;
   }
 
   & > th:first-child {
@@ -210,10 +161,15 @@ const StyledItemTr = styled.tr`
   height: 8rem;
   border-bottom: 1px solid rgb(238, 238, 238);
   padding: 0 3rem;
+  background-color: #fff;
 
   & > td {
     flex: 2;
     text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 25rem;
   }
 
   & > td:nth-child(2) {
@@ -244,4 +200,16 @@ const StyledButton = styled.button`
   color: white;
   font-size: 1.4rem;
   font-weight: 500;
+
+  &:hover {
+    background-color: #1bbd1b;
+  }
+`;
+
+const StyledNoItemTr = styled.tr`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: #fff;
 `;

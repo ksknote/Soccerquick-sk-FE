@@ -58,8 +58,13 @@ function FindingMember() {
   const [filteredData, setFilteredData] = React.useState(data);
   // 페이지네이션 구현 부분
   const [currentPage, setCurrentPage] = React.useState(1); // 현재 페이지 상태
-  const [currentData, setCurrentData] = React.useState<DataProps[]>([]); // 초기 데이터
+  // const [currentData, setCurrentData] = React.useState<DataProps[]>([]); // 초기 데이터
   const [totalPage, setTotalPage] = React.useState(0);
+
+  const [itemsPerPage, setItemsPerPage] = React.useState(8);
+  const lastIndexOfData = currentPage * itemsPerPage;
+  const firstIndexOfData = lastIndexOfData - itemsPerPage;
+  const currentData = filteredData.slice(firstIndexOfData, lastIndexOfData);
 
   // 데이터를 필터링하는 부분, 상관없음일 경우 무조건 결과에 포함시킨다.
   React.useEffect(() => {
@@ -96,7 +101,7 @@ function FindingMember() {
       return true;
     });
     setFilteredData(newData.reverse()); // 최신 게시글이 위로 가게 정렬함
-    setCurrentData(newData.reverse().slice(0, 8)); // 첫 페이지 데이터를 미리 설정함
+    // setCurrentData(newData.reverse().slice(0, 8)); // 첫 페이지 데이터를 미리 설정함
     setTotalPage(Math.ceil(newData.length / 8)); // 총 페이지 버튼 갯수를 설정함
   }, [data, findMemberFilter]);
 
@@ -123,12 +128,11 @@ function FindingMember() {
       <FindingMemberPageBoard
         dropdownList={dropdownList}
         handleReset={handleReset}
-        // setShowModal={setShowModal}
         filteredData={filteredData}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         currentData={currentData}
-        setCurrentData={setCurrentData}
+        // setCurrentData={setCurrentData}
         totalPage={totalPage}
       />
     </div>

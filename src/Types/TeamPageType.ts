@@ -72,7 +72,7 @@ export interface BoardProps {
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   currentData: DataProps[];
-  setCurrentData: React.Dispatch<React.SetStateAction<DataProps[]>>;
+  // setCurrentData: React.Dispatch<React.SetStateAction<DataProps[]>>;
   totalPage: number;
 }
 
@@ -114,4 +114,18 @@ export interface SubmitApplicant {
 export interface CommentProps {
   data: SubmitApplicant[];
   user: string;
+}
+
+export interface Accept {
+  name: string;
+  position: string;
+  level: string;
+  contents: string;
+}
+
+export interface AcceptedModalProps {
+  setAcceptModal: React.Dispatch<React.SetStateAction<boolean>>;
+  accept: Accept[];
+  total: number;
+  now: number;
 }

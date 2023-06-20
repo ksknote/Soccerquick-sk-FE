@@ -49,6 +49,7 @@ export interface DomDataType {
   usersFavorites: [];
   wear: string;
   _id: number;
+  reviews: [];
 }
 
 function SearchPage() {
@@ -112,6 +113,7 @@ function SearchPage() {
           <SearchData
             checkedArray={checkedArray}
             setCheckedArray={setCheckedArray}
+            setCheckedInModal={setCheckedInModal}
             sortedDomData={sortedDomData}
             setSortedDomData={setSortedDomData}
             isLoading={isLoading}

@@ -10,17 +10,20 @@ import { ProvidedElementList } from '../Components/SearchPage/Contents/SearchDat
 import GroundDetailCarousel from '../Components/GroundDetail/groundDetailCarousel';
 import Stadiums from '../Components/GroundDetail/Stadiums';
 import GroundImageModal from '../Components/GroundDetail/GroundImageModal';
+import ShareModal from '../Components/GroundDetail/ShareModal';
 import OneMarkerMap from '../Components/GroundDetail/OneMarkerMap';
 import ScrollToTarget from '../Components/scrollToTarget';
 import Review from '../Components/GroundDetail/Review';
 import starIcon from '../styles/icon/star.svg';
 import starFilledIcon from '../styles/icon/star_filled.svg';
 import homeIcon from '../styles/icon/home.svg';
+import alertModal from '../Components/Commons/alertModal';
 
 const GroundDetail = () => {
   const [groundData, setGroundData] = useState<DomDataType>();
   const [reviewData, setReviewData] = useState<[]>([]);
   const [showImgModal, setShowImgModal] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
   const [ImgModalIndex, setImgModalIndex] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
   const { dom_id } = useParams();
@@ -48,7 +51,7 @@ const GroundDetail = () => {
           setIsFavorite(true);
         }
       })
-      .catch((e: any) => console.log(e));
+      .catch((e) => {});
   }, []);
 
   const clickFavoriteHandler = () => {
@@ -60,14 +63,14 @@ const GroundDetail = () => {
           config
         )
         .then((res: any) => {
-          alert(res.data.message);
+          alertModal(res.data.message, 'success');
           setIsFavorite(true);
         })
         .catch((e: any) => {
           if (e.response.data.statusCode === 401) {
-            alert('로그인 후 이용해주세요.');
+            alertModal('로그인 후 이용해주세요.', 'warning');
           } else {
-            alert(e.response.data.message);
+            alertModal(e.response.data.message, 'warning');
           }
         });
     } else {
@@ -78,21 +81,32 @@ const GroundDetail = () => {
         })
         .catch((e: any) => {
           if (e.response.data.statusCode === 401) {
-            alert('로그인 후 이용해주세요.');
+            alertModal('로그인 후 이용해주세요.', 'warning');
           } else {
-            alert(e.response.data.message);
+            alertModal(e.response.data.message, 'warning');
           }
         });
     }
   };
 
   const clipUrl = () => {
-    if (groundData)
-      window.navigator.clipboard
-        .writeText(groundData.address.fullAddress)
-        .then(() => {
-          alert('주소가 복사되었습니다.');
-        });
+    // window.navigator.clipboard
+    //   .writeText(
+    //     `http://kdt-sw-4-team02.elicecoding.com/ground/${groundData.dom_id}`
+    //   )
+    //   .then(() => {
+    //     alertModal('링크가 복사되었습니다.', 'success');
+    //   });
+    var textarea = document.createElement('textarea');
+
+    document.body.appendChild(textarea);
+    textarea.value = `http://kdt-sw-4-team02.elicecoding.com/ground/${groundData?.address.fullAddress}`;
+    textarea.select();
+    document.execCommand('copy');
+
+    document.body.removeChild(textarea);
+
+    alertModal('주소가 복사되었습니다.', 'success');
   };
 
   return (
@@ -131,6 +145,7 @@ const GroundDetail = () => {
                 )}
                 찜
               </button>
+              <button onClick={() => setShowShareModal(true)}>공유하기</button>
             </GroundDetailHeaderBtn>
           </GroundDetailHeader>
           <Source>
@@ -206,6 +221,12 @@ const GroundDetail = () => {
           ImgModalIndex={ImgModalIndex}
         />
       )}
+      {showShareModal && groundData && (
+        <ShareModal
+          setShowShareModal={setShowShareModal}
+          groundData={groundData}
+        />
+      )}
     </>
   );
 };
@@ -261,13 +282,24 @@ const GroundDetailHeaderBtn = styled.div`
     width: 20rem;
     height: 5rem;
     color: white;
+    font-weight: 500;
     background: #09cf00;
-    border: 1px solid #09cf00;
-    box-shadow: 0px 0px 4px 2px rgba(55, 53, 47, 0.4);
     border-radius: 4px;
-    :last-child {
+    :hover {
+      background: #1bbd1b;
+    }
+    :not(:first-child) {
       width: 8rem;
       margin-left: 1.3rem;
+    }
+    :last-child {
+      width: 12rem;
+      background: white;
+      color: #0d9c05;
+      border: 0.2rem solid #bacdae;
+      :hover {
+        background: #f0f0f08e;
+      }
     }
     > a {
       color: white;

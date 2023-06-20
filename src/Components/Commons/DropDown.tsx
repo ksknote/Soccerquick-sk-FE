@@ -109,9 +109,8 @@ const DropdownButton = styled.button`
   width: 100%;
   height: 100%;
   border: 1px solid #ddd;
-  border-radius: 1rem;
   font-size: ${(props) =>
-    props.style?.fontSize ? props.style.fontSize : '13px'};
+    props.style?.fontSize ? props.style.fontSize : ' 1.6rem'};
   cursor: pointer;
   img {
     flex: 1;
@@ -143,6 +142,9 @@ const DropdownItem = styled.button<DropdownItemProps>`
   color: ${(props) => (props.picked ? '#fff' : '#333')};
   border: none;
   background: none;
+  font-size: 1.5rem;
+  text-align: start;
+  padding-left: 3.5rem;
   cursor: pointer;
   background-color: ${(props) => (props.picked ? 'rgb(2,208,0)' : '#fff')};
   &:hover {

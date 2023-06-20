@@ -9,9 +9,11 @@ const OneMarkerMap: React.FC<{ address: string }> = ({ address }) => {
 
   useEffect(() => {
     naver.maps.Service.geocode({ query: address }, function (status, res) {
+      if (res.v2.addresses.length === 0) return;
       const resAddress = res.v2.addresses[0];
       const x = Number(resAddress.x);
       const y = Number(resAddress.y);
+
       setAddressX(x);
       setAddressY(y);
     });

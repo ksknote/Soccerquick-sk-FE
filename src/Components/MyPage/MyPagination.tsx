@@ -1,6 +1,6 @@
-import react, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 
 type MyPaginationProps = {
   totalItemsCount: number; // 총 데이터 수
@@ -23,12 +23,17 @@ function MyPagination({
       ? Math.floor(currentPage / pageGroup) * pageGroup + 1
       : Math.floor((currentPage - 1) / pageGroup) * pageGroup + 1;
   const lastIndexOfPage = Math.ceil(currentPage / pageGroup) * pageGroup;
-
   const pageNumbers = [];
 
+  // 현 url 체크
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const isGround =
+    currentPath.includes('ground') || currentPath.includes('teampage');
+
   useEffect(() => {
-    const urlCurrentPage = (Number(searchParams.get('start')) + 10) / 10;
-    console.log(urlCurrentPage);
+    const urlCurrentPage =
+      (Number(searchParams.get('start')) + itemsPerPage) / itemsPerPage;
     setCurrentPage(urlCurrentPage);
   }, [searchParams]);
 
@@ -39,15 +44,24 @@ function MyPagination({
     pageNumbers.push(i);
   }
 
+  const handleSearchParams = (number: number) => {
+    const updatedSearchParams = new URLSearchParams(searchParams);
+    updatedSearchParams.set('start', `${number}`);
+    setSearchParams(updatedSearchParams);
+  };
+
   const handlePrevClick = () => {
     setCurrentPage((prev) => {
       if (prev - 1 > 0) {
-        searchParams.set('start', `${(prev - 2) * 10}`);
-        setSearchParams(searchParams);
+        if (isGround) {
+          handleSearchParams((prev - 2) * itemsPerPage);
+        }
         return prev - 1;
       } else {
-        searchParams.set('start', `0`);
-        setSearchParams(searchParams);
+        if (isGround) {
+          handleSearchParams(0);
+        }
+
         return 1;
       }
     });
@@ -56,13 +70,15 @@ function MyPagination({
   const handleNextClick = () => {
     setCurrentPage((prev) => {
       if (prev + 1 < pages) {
-        searchParams.set('start', `${prev * 10}`);
-        setSearchParams(searchParams);
+        if (isGround) {
+          handleSearchParams(prev * itemsPerPage);
+        }
 
         return prev + 1;
       } else {
-        searchParams.set('start', `${(pages - 1) * 10}`);
-        setSearchParams(searchParams);
+        if (isGround) {
+          handleSearchParams((pages - 1) * itemsPerPage);
+        }
 
         return pages;
       }
@@ -71,8 +87,9 @@ function MyPagination({
 
   const handlePageNumberClick = (number: number) => {
     setCurrentPage(number);
-    searchParams.set('start', `${(number - 1) * 10}`);
-    setSearchParams(searchParams);
+    if (isGround) {
+      handleSearchParams((number - 1) * itemsPerPage);
+    }
   };
 
   return (
@@ -81,8 +98,9 @@ function MyPagination({
         <StyledLi
           onClick={() => {
             setCurrentPage(1);
-            searchParams.set('start', '0');
-            setSearchParams(searchParams);
+            if (isGround) {
+              handleSearchParams(0);
+            }
           }}
         >
           {'<<'}
@@ -111,8 +129,9 @@ function MyPagination({
         <StyledLi
           onClick={() => {
             setCurrentPage(pages);
-            searchParams.set('start', `${(Number(pages) - 1) * 10}`);
-            setSearchParams(searchParams);
+            if (isGround) {
+              handleSearchParams((pages - 1) * itemsPerPage);
+            }
           }}
         >
           {'>>'}
@@ -135,7 +154,7 @@ const StyledLi = styled.li`
   align-items: center;
   margin: 0 0.3rem;
   cursor: pointer;
-  width: 2rem;
+  width: 3rem;
   height: 2rem;
   color: grey;
 `;

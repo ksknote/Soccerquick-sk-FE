@@ -1,41 +1,21 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import MypageIcon from '../styles/icon/mypage.svg';
 import SoccerquickLogo from '../styles/icon/soccerquick-logo.png';
-import MoreIcon from '../styles/icon/more.svg';
 import AuthModal from './AuthModal/AuthModal';
 import { MyPageMenu } from './Commons/MyPageMenu';
 import { useSelector } from 'react-redux';
-import { isLogInSelector } from '../store/selectors/authSelectors';
+import { isLogInSelector } from '../ReduxStore/modules/Auth/authSelectors';
 
 const Header = () => {
   const [authModal, setAuthModal] = useState<boolean>(false);
-  const [myPageMenu, setMyPageMenu] = useState<boolean>(false);
-  const myPageMenuRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const isLogin = useSelector(isLogInSelector);
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
 
   const handleLoginModal = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     setAuthModal((prev) => !prev);
-    setMyPageMenu((prev) => !prev);
-  };
-
-  const handleClickOutside = (e: MouseEvent) => {
-    if (
-      myPageMenuRef.current &&
-      !myPageMenuRef.current.contains(e.target as Node)
-    ) {
-      setMyPageMenu(false);
-    }
   };
 
   return (
@@ -67,12 +47,12 @@ export default Header;
 const HeaderContainer = styled.div`
   width: 98.4rem;
   padding: 0 2rem;
-  height: 6rem;
+  height: 7rem;
   margin: 1.4rem auto;
 
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
 `;
 
 const LogoMain = styled.div`
@@ -101,24 +81,21 @@ const HeaderMyPage = styled.div``;
 const HeaderLoginButton = styled.div`
   display: flex;
   position: relative;
-  width: 10rem;
-  padding: 1rem;
-  margin: 0.3rem 2rem 0 2rem;
-  border-radius: 2.5rem;
-  border: 1px solid #e5e5e5;
-  & > div {
-    text-align: center;
-    margin-top: 0.1rem;
-    width: 100%;
-  }
-`;
-
-const HeaderMyPageButton = styled.div`
-  display: flex;
-  position: relative;
-  padding: 0.5rem;
-  margin: 0.3rem 2rem 0 2rem;
+  width: 12rem;
+  padding: 0.7rem 0rem 0.7rem 1.5rem;
+  margin: 0.3rem 0;
   border-radius: 2.5rem;
   border: 1px solid #e5e5e5;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  & > div {
+    text-align: center;
+    margin-top: 0.2rem;
+    padding-left: 1.5rem;
+    font-size: 1.4rem;
+  }
+
+  &:hover {
+    background-color: #e5e5e5;
+  }
 `;

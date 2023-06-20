@@ -4,6 +4,7 @@ import Header from '../../Components/Header';
 import { Routes, Route } from 'react-router-dom';
 import FindPage from './Views/SelectCategory';
 import { MainPageBody } from './Styles/ViewsStyle';
+import { Container } from '../../styles/Common/CommonStyle';
 import FindingMember from './Views/FindingMember';
 import ViewPage from './Views/ViewPage';
 import SubmitPage from './Views/PostPage';
@@ -15,28 +16,32 @@ function TeamPage() {
 
   return (
     <>
-      <Header />
-      <HeaderCategory />
-      <MainPageBody>
-        <Routes>
-          <Route path="/submit" element={<SubmitPage />} />
-          <Route path="/edit/:id" element={<EditPage />} />
-          <Route path="/team" element={<FindingMember />} />
-          <Route path="/team/:id" element={<ViewPage />} />
-          <Route
-            path="/"
-            element={
-              <FindPage
-                findingTeam={findingTeam}
-                findingMember={findingMember}
-                setFindingTeam={setFindingTeam}
-                setFindingMember={setFindingMember}
+      <Container>
+        <Header />
+        <div>
+          <HeaderCategory />
+          <MainPageBody>
+            <Routes>
+              <Route path="/submit" element={<SubmitPage />} />
+              <Route path="/edit/*" element={<EditPage />} />
+              <Route path="/team" element={<FindingMember />} />
+              <Route path="/team/*" element={<ViewPage />} />
+              <Route
+                path="/"
+                element={
+                  <FindPage
+                    findingTeam={findingTeam}
+                    findingMember={findingMember}
+                    setFindingTeam={setFindingTeam}
+                    setFindingMember={setFindingMember}
+                  />
+                }
               />
-            }
-          />
-        </Routes>
-      </MainPageBody>
-      <Footer />
+            </Routes>
+          </MainPageBody>
+        </div>
+        <Footer />
+      </Container>
     </>
   );
 }

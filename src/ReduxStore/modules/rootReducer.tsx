@@ -1,7 +1,6 @@
-import React from 'react';
 import { combineReducers } from 'redux';
 import fetchDataReducer from './TeamPage/reducer';
-import authSlice from '../../store/reducers/authSlice';
+import authSlice from './Auth/authSlice';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 

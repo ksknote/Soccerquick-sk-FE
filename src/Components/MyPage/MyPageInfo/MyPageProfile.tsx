@@ -1,6 +1,6 @@
 import react from 'react';
 import styled from 'styled-components';
-
+import alertModal from '../../Commons/alertModal';
 import { FormDataType } from '../../../Pages/MyPage';
 
 type MyProfileProps = {
@@ -26,7 +26,7 @@ function MyProfile({
     if (file) {
       setSelectedImage(file);
     } else {
-      alert('이미지를 선택해주세요.');
+      alertModal('이미지를 선택해주세요.', 'warning');
     }
   };
 
@@ -73,8 +73,14 @@ const StyledProfileContainer = styled.div`
   align-self: start;
   width: 25rem;
   height: 64%;
-
   border-radius: 16px;
+
+  @media (max-width: 768px) {
+    align-self: center;
+    flex-direction: row;
+    width: 60rem;
+    padding-top: 2.5rem;
+  }
 `;
 
 const StyledProfileTop = styled.div`
@@ -88,6 +94,13 @@ const StyledProfileTop = styled.div`
   background-color: #fdfdfd;
   border-bottom: 1px solid rgb(247 247 247);
   border-radius: 16px 16px 0 0;
+
+  @media (max-width: 768px) {
+    width: 50%;
+    height: 100%;
+    margin: 0;
+    border-radius: 16px 0 0 16px;
+  }
 `;
 const StyledProfileBottom = styled.div`
   display: flex;
@@ -100,6 +113,12 @@ const StyledProfileBottom = styled.div`
   border-radius: 0 0 16px 16px;
   & > div:nth-child(2) {
     margin-bottom: 2.5rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 50%;
+    height: 100%;
+    border-radius: 0 16px 16px 0;
   }
 `;
 
@@ -123,7 +142,7 @@ const StyledProfileImg = styled.input`
 
 const StyledInputLabel = styled.label`
   width: 8rem;
-  height: 3rem;
+  height: 2.4rem;
   border: 1px solid #727f88;
   padding: 0.3rem;
   border-radius: 0.8rem;
@@ -131,6 +150,7 @@ const StyledInputLabel = styled.label`
   background-color: rgb(249, 249, 249);
   cursor: pointer;
   font-size: 5px;
+  text-align: center;
 
   &:hover {
     color: rgb(249, 249, 249);

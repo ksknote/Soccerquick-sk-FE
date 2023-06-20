@@ -7,13 +7,18 @@ import { useSelector } from 'react-redux';
 import {
   isLogInSelector,
   userSelector,
-} from '../../../store/selectors/authSelectors';
+} from '../../../ReduxStore/modules/Auth/authSelectors';
 import { DomDataType } from '../../../Pages/SearchPage';
 import { ProvidedElementList } from '../../SearchPage/Contents/SearchData';
 import MyPagination from '../MyPagination';
 
-function MyFavoriteGroundList() {
-  const user = useSelector(userSelector);
+type MyFavoriteGroundListProps = {
+  favoritePlaygrounds: Array<string>;
+};
+
+function MyFavoriteGroundList({
+  favoritePlaygrounds,
+}: MyFavoriteGroundListProps) {
   const isLogIn = useSelector(isLogInSelector);
   const [filteredData, setFilteredData] = useState<DomDataType[]>([]);
 
@@ -32,42 +37,34 @@ function MyFavoriteGroundList() {
   }, [isLogIn]);
 
   const getDomData = async () => {
-    const domInfo = await axios
-      .get(`${process.env.REACT_APP_API_URL}/doms`, { withCredentials: true })
-      .then((res) => res.data.data)
-      .catch((err) => console.log(err));
-
-    // const filteredDomInfo = domInfo.reduce(
-    //   (acc: Array<DomDataType>, group: DomDataType) => {
-    //     const filteredUsersFavorites = group.usersFavorites?.filter(
-    //       (type) => type === user?.name
-    //     );
-
-    //     if (filteredUsersFavorites && filteredUsersFavorites.length > 0) {
-    //       const filteredGroup: DomDataType = {
-    //         ...group,
-    //         // usersFavorites: filteredUsersFavorites,
-    //       };
-    //       return [...acc, filteredGroup];
-    //     }
-    //     return acc;
-    //   },
-    //   []
-    // );
-    // setFilteredData(filteredDomInfo);
-
-    setFilteredData(domInfo);
+    const domarray: Array<DomDataType> = [];
+    for (let i = 0; i < favoritePlaygrounds.length; i++) {
+      await axios
+        .get(
+          `${process.env.REACT_APP_API_URL}/doms/${favoritePlaygrounds[i]}`,
+          {
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          if (!domarray.includes(res.data.data)) {
+            domarray.push(res.data.data);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+    setFilteredData(domarray);
   };
 
   const navigate = useNavigate();
 
   return (
     <Searchpage>
-      <StyledTitleDiv>
-        즐겨찾는 경기장
-        <span> ( 총 {totalItemsCount} )</span>
-      </StyledTitleDiv>
       <SearchPageBody>
+        <StyledTitleDiv>
+          즐겨찾는 경기장
+          <span> ( 총 {totalItemsCount} )</span>
+        </StyledTitleDiv>
         <table>
           <thead>
             <StyledLabelTr>
@@ -78,42 +75,51 @@ function MyFavoriteGroundList() {
             </StyledLabelTr>
           </thead>
           <tbody>
-            {currentData.map((item, idx) => (
-              <StyledTr key={item.title + idx}>
-                <StyledCheckboxTd>
-                  <label htmlFor={item.title}></label>
-                </StyledCheckboxTd>
-                <StyledAddressTd>{item.address.area}</StyledAddressTd>
-                <StyledMainTd>
-                  <p>{item.title}</p>
-                  <StyledTableCell>
-                    {Object.keys(ProvidedElementList).map(
-                      (provided) =>
-                        item[provided] && (
-                          <StyledTable key={provided} data={provided}>
-                            {ProvidedElementList[provided]}
-                          </StyledTable>
-                        )
-                    )}
-                  </StyledTableCell>
-                </StyledMainTd>
+            {currentData.length > 0 ? (
+              currentData.map((item, idx) => (
+                <StyledTr key={item.title + idx}>
+                  <StyledCheckboxTd>
+                    <label htmlFor={item.title}></label>
+                  </StyledCheckboxTd>
+                  <StyledAddressTd>{item.address.area}</StyledAddressTd>
+                  <StyledMainTd>
+                    <p>{item.title}</p>
+                    <StyledTableCell>
+                      {Object.keys(ProvidedElementList).map(
+                        (provided) =>
+                          item[provided] && (
+                            <StyledTable key={provided} data={provided}>
+                              {ProvidedElementList[provided]}
+                            </StyledTable>
+                          )
+                      )}
+                    </StyledTableCell>
+                  </StyledMainTd>
 
-                <td>
-                  <StyledButton
-                    onClick={() => {
-                      navigate(`/ground/${item.dom_id}`);
-                    }}
-                  >
-                    조회
-                  </StyledButton>
-                </td>
+                  <td>
+                    <StyledButton
+                      onClick={() => {
+                        navigate(`/ground/${item.dom_id}`);
+                      }}
+                    >
+                      조회
+                    </StyledButton>
+                  </td>
+                </StyledTr>
+              ))
+            ) : (
+              <StyledTr>
+                <td></td>
+                <td></td>
+                <StyledMessageTd>즐겨찾는 구장이 없습니다</StyledMessageTd>
+                <td></td>
               </StyledTr>
-            ))}
+            )}
           </tbody>
         </table>
       </SearchPageBody>
       <MyPagination
-        totalItemsCount={totalItemsCount ? totalItemsCount : 100}
+        totalItemsCount={totalItemsCount ? totalItemsCount : 1}
         itemsPerPage={itemsPerPage}
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
@@ -166,16 +172,18 @@ const getBackgroundColorBydata = (data: string) => {
 
 const Searchpage = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
   flex-direction: column;
   font-size: 1.7rem;
   width: 98.4rem;
+  min-height: 100rem;
   margin-top: 2rem;
 `;
 
 const SearchPageBody = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   width: 100%;
   margin-bottom: 2rem;
@@ -198,6 +206,7 @@ const StyledTitleDiv = styled.div`
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  padding-left: 4rem;
 
   > span {
     padding-left: 1rem;
@@ -221,7 +230,7 @@ const StyledLabelTr = styled.tr`
       padding-left: 4.5rem;
     }
     :nth-child(4) {
-      padding-right: 3rem;
+      padding-right: 5rem;
     }
   }
 `;
@@ -252,11 +261,12 @@ const StyledTable = styled.div<{ data: string }>`
 `;
 
 const StyledTr = styled.tr`
-  height: 10rem;
+  height: 13rem;
   margin: 1rem 1rem;
   padding: 2rem 1rem;
   font-size: 1.6rem;
   border-bottom: 0.1rem solid #dddddd;
+  background-color: #fff;
 `;
 
 const StyledCheckboxTd = styled.td`
@@ -289,7 +299,8 @@ const StyledAddressTd = styled.td`
 `;
 
 const StyledMainTd = styled.td`
-  padding-left: 5rem;
+  padding-left: 6rem;
+  max-width: 48rem;
   p {
     font-size: 1.9rem;
   }
@@ -304,4 +315,12 @@ const StyledButton = styled.button`
   font-size: 1.4rem;
   font-weight: 500;
   margin-right: 3rem;
+
+  &:hover {
+    background-color: #1bbd1b;
+  }
+`;
+
+const StyledMessageTd = styled.td`
+  text-align: center;
 `;

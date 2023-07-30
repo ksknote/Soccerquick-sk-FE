@@ -58,17 +58,20 @@ export default function HeaderCategory() {
 
 const StyledHeaderCategory = styled.div`
   max-width: 120rem;
-  padding: 3rem 2rem;
+  padding: 0 2rem;
   height: 3rem;
-  margin: 1rem auto;
+  margin: auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  @media (min-width: 1024px) {
+    padding: 3rem 2rem;
+  }
 `;
 
 const StyledCategoryText = styled.span<CategoryTextProps>`
-  padding: 0 1.5rem;
-  font-size: ${({ focused }) => (focused ? '2.2rem' : '1.9rem')};
+  padding: 0 1rem;
+  font-size: ${({ focused }) => (focused ? '1.9rem' : '1.6rem')};
   color: ${({ focused }) => (focused ? '#535353' : '#727f88')};
   font-weight: ${({ focused }) => (focused ? 'bold' : 'normal')};
   cursor: pointer;
@@ -77,5 +80,9 @@ const StyledCategoryText = styled.span<CategoryTextProps>`
     font-size: ${({ focused }) => (focused ? '2.2rem' : '2.1rem')};
     padding-bottom: 0.5rem;
     border-bottom: 2px solid #e8e8e8;
+  }
+  @media (min-width: 1024px) {
+    padding: 0 1.5rem;
+    font-size: ${({ focused }) => (focused ? '2.2rem' : '1.9rem')};
   }
 `;

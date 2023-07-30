@@ -7,7 +7,6 @@ import AuthModal from './AuthModal/AuthModal';
 import { MyPageMenu } from './Commons/MyPageMenu';
 import { useSelector } from 'react-redux';
 import { isLogInSelector } from '../ReduxStore/modules/Auth/authSelectors';
-import Hamburger from './Header/Hamburger';
 
 const Header = () => {
   const [authModal, setAuthModal] = useState<boolean>(false);
@@ -37,7 +36,6 @@ const Header = () => {
             </HeaderLoginButton>
           )}
         </HeaderMyPage>
-        <Hamburger />
       </HeaderMenu>
       {authModal && <AuthModal setAuthModal={setAuthModal} />}
     </HeaderContainer>

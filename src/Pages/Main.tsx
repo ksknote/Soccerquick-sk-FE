@@ -56,7 +56,7 @@ export default function Main() {
                     clickBtnHandler('서울');
                   }}
                 >
-                  서울에서 진행되는 매치 모아보기
+                  서울 풋살 경기장 모아보기
                 </span>
                 <span>
                   <img
@@ -74,7 +74,7 @@ export default function Main() {
                     clickBtnHandler('인천');
                   }}
                 >
-                  인천에서 진행되는 매치 모아보기
+                  인천 풋살 경기장 모아보기
                 </span>
                 <span>
                   <img
@@ -92,7 +92,7 @@ export default function Main() {
                     clickBtnHandler('대전');
                   }}
                 >
-                  대전에서 진행되는 매치 모아보기
+                  대전 풋살 경기장 모아보기
                 </span>
                 <span>
                   <img
@@ -110,7 +110,7 @@ export default function Main() {
                     clickBtnHandler('대구');
                   }}
                 >
-                  대구에서 진행되는 매치 모아보기
+                  대구 풋살 경기장 모아보기
                 </span>
                 <span>
                   <img
@@ -128,7 +128,7 @@ export default function Main() {
                     clickBtnHandler('부산');
                   }}
                 >
-                  부산에서 진행되는 매치 모아보기
+                  부산 풋살 경기장 모아보기
                 </span>
                 <span>
                   <img
@@ -146,7 +146,7 @@ export default function Main() {
                     clickBtnHandler('제주');
                   }}
                 >
-                  제주에서 진행되는 매치 모아보기
+                  제주 풋살 경기장 모아보기
                 </span>
                 <span>
                   <img
@@ -231,34 +231,45 @@ const StyledMainContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 120rem;
-  margin: 2rem auto 5rem auto; /* 좌우 여백 자동 조정 */
+  margin: 1.5rem auto; /* 좌우 여백 자동 조정 */
 `;
 
 const StyledImageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #f2f5f7;
-  justify-content: center;
-  align-items: center;
-  height: 45rem; /* 화면 높이의 특정 비율로 설정 */
-  position: relative;
+  width: 100%;
+  height: 10rem;
+  padding: 0 1rem;
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    background-color: #f2f5f7;
+    justify-content: center;
+    align-items: center;
+    height: 45rem; /* 화면 높이의 특정 비율로 설정 */
+    position: relative;
+  }
 `;
 
 const StyledImage = styled.img`
-  width: 100%;
-  height: 45rem;
-  position: absolute;
-  top: 0;
+  display: none;
+  @media (min-width: 768px) {
+    display: block;
+    width: 100%;
+    height: 45rem;
+    position: absolute;
+    top: 0;
+  }
 `;
 
 const StyledImageContents = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  position: absolute;
-  top: 25%;
-  left: 5%;
-  width: 40%;
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: absolute;
+    top: 25%;
+    left: 5%;
+    width: 40%;
+  }
 `;
 
 const StyledImageText = styled.h1`
@@ -274,12 +285,16 @@ const StyledImageText = styled.h1`
     font-weight: lighter;
     margin-bottom: 2rem;
   }
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const StyledListContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 3rem 1rem 1rem 1rem;
+  width: 100%;
   max-width: 120rem;
   margin: 1.4rem auto;
 `;
@@ -325,6 +340,11 @@ const StyledFieldList = styled.div`
     text-decoration: underline;
     text-underline-position: under;
     padding: 1rem;
+    font-size: 1.8rem;
+
+    @media (min-width: 1024px) {
+      font-size: 2.2rem;
+    }
   }
 
   .field-list {
@@ -353,6 +373,9 @@ const StyledFieldList = styled.div`
 
   .field-list-text-content {
     font-size: 1.5rem;
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 
   .move-to-list-page {
@@ -367,29 +390,43 @@ const StyledReviewList = styled.div`
   .review-list-header-text {
     text-decoration: underline;
     text-underline-position: under;
+    font-size: 1.8rem;
+
+    @media (min-width: 1024px) {
+      font-size: 2.2rem;
+    }
   }
 
   .review-list-subheader-text {
-    font-size: 1.8rem;
     font-weight: 600;
+    font-size: 1.6rem;
+    @media (min-width: 1024px) {
+      font-size: 1.8rem;
+    }
   }
 
   .review-list-sub-subheader-text {
-    padding: 1rem 0;
+    padding: 0.5rem 0 2rem 0;
     font-size: 1.2rem;
     color: #7a7a7a;
   }
 
   .review-list-examples {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 2rem 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    @media (min-width: 1024px) {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      padding: 2rem 0;
+    }
   }
 
   .review-list-example {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin: 1rem;
     > span > img {
       width: 7rem;
     }

@@ -51,21 +51,31 @@ const StyledInputContainer = styled.div`
   opacity: 0.9;
   padding: 2rem;
   height: 15vh;
-  width: 50rem;
-
+  width: 100%;
   overflow: hidden;
 
+  @media (min-width: 768px) {
+    width: 50rem;
+  }
+
   .input-header-text {
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #131313;
+    padding-bottom: 0.8rem;
+    @media (min-width: 1024px) {
+      font-size: 2rem;
+    }
   }
 
   .input-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
     width: 100%;
+    @media (min-width: 500px) {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 
   .input-text {
@@ -74,14 +84,21 @@ const StyledInputContainer = styled.div`
     border: none;
     border-radius: 1rem;
     background-color: white;
-    width: 80%;
+    width: 100%;
+    @media (min-width: 500px) {
+      width: 80%;
+    }
   }
 
   .find-match-button {
-    padding: 1rem;
-    font-size: 1.2rem;
-    border-radius: 1rem;
-    background-color: #00850d;
-    color: white;
+    display: none;
+    @media (min-width: 500px) {
+      display: inline-block;
+      padding: 1rem;
+      font-size: 1.2rem;
+      border-radius: 1rem;
+      background-color: #00850d;
+      color: white;
+    }
   }
 `;

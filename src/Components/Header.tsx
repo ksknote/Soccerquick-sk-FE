@@ -57,10 +57,13 @@ const HeaderContainer = styled.div`
 
 const LogoMain = styled.div`
   img {
-    width: 13rem;
-    height: 6rem;
+    width: 9rem;
     vertical-align: middle;
     cursor: pointer;
+    @media (min-width: 1024px) {
+      width: 13rem;
+      height: 6rem;
+    }
   }
 `;
 

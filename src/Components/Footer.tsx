@@ -14,16 +14,14 @@ const Footer = () => {
         </StyledFooterList>
         <StyledFooterList>
           <li>싸커퀵</li>
-          <li>서울특별시 감자구 고구마동</li>
+          <li>경기도 감자구 고구마동</li>
         </StyledFooterList>
         <StyledFooterList>
           <li>대표 메일 contact@soccerquick.com</li>
-          <li>마케팅 제안 marketing@soccerquick.com</li>
         </StyledFooterList>
         <StyledFooterList>
-          <li>주식회사 고구마컴퍼니</li>
+          <li>주식회사 싸커퀵컴퍼니</li>
           <li>사업자번호 123-456789-0</li>
-          <li>대표 고구마</li>
         </StyledFooterList>
         <StyledCopyright>
           Copyright <b>SOCCERQUICK</b> All rights reserved.
@@ -37,25 +35,28 @@ export default Footer;
 
 const FooterContainer = styled.div`
   width: 100%;
-  height: 36rem;
+  height: 26rem;
   background-color: #2a2a2a;
+  @media (min-width: 784px) {
+    height: 32rem;
+  }
 `;
 
 const FooterContent = styled.div`
-  /* display: flex;
-justify-content: center;
-flex-direction: column; */
   gap: 0.8rem;
   max-width: 120rem;
-  /* max-width:120rem;
-  max-width: 102.4rem; */
   margin: 0 auto;
-  padding: 5rem 2rem;
+  padding: 3rem 2rem;
   color: white;
+  font-size: 1rem;
   font-weight: 300;
 
   p:not(:first-child):not(:last-child) {
     margin-bottom: 2.2rem;
+  }
+  @media (min-width: 784px) {
+    font-size: 1.3rem;
+    padding: 5rem 2rem;
   }
 `;
 
@@ -72,16 +73,15 @@ const FooterTitle = styled.p`
 
 const StyledFooterList = styled.ul`
   display: flex;
-  line-height: 2.5rem;
+  line-height: 2rem;
+  @media (min-width: 784px) {
+    line-height: 2.5rem;
+  }
 
   li {
     :not(:last-child):after {
-      content: '';
-      float: right;
-      width: 0.5px;
-      height: 1.2rem;
-      background-color: #fff;
-      margin: 0.95rem 1rem 0 1rem;
+      content: '|';
+      margin: 0 0.7rem;
     }
   }
 `;

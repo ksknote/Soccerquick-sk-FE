@@ -368,7 +368,10 @@ const StyledFieldList = styled.div`
   }
 
   .field-list-text-title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    @media (min-width: 1024px) {
+      font-size: 1.8rem;
+    }
   }
 
   .field-list-text-content {
@@ -415,7 +418,7 @@ const StyledReviewList = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
-    @media (min-width: 1024px) {
+    @media (min-width: 784px) {
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr;
       padding: 2rem 0;
@@ -444,7 +447,10 @@ const StyledReviewList = styled.div`
     border-radius: 3rem;
     padding: 3rem;
     margin: 0 3rem;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     background-color: #eeeeee;
+    @media (min-width: 1024px) {
+      font-size: 1.5rem;
+    }
   }
 `;

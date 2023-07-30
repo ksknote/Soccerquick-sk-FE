@@ -30,7 +30,7 @@ function FindingMembers(props: FindingMemberProps) {
       >
         <div
           style={{
-            width: '98.4rem',
+            width: '120rem',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'flex-start',
@@ -60,7 +60,7 @@ function FindingMembers(props: FindingMemberProps) {
 
         <div
           style={{
-            width: '98.4rem',
+            width: '120rem',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'flex-start',

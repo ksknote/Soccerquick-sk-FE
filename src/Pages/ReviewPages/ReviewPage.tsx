@@ -347,7 +347,7 @@ export default function ReviewPage() {
 const StyledBody = styled.div`
   display: flex;
   flex-direction: column;
-  width: 98.4rem;
+  max-width: 120rem;
   margin: 0 auto;
 `;
 

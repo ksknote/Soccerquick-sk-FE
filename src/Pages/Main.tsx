@@ -230,7 +230,7 @@ export default function Main() {
 const StyledMainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 98.4rem;
+  max-width: 120rem;
   margin: 2rem auto 5rem auto; /* 좌우 여백 자동 조정 */
 `;
 
@@ -280,7 +280,7 @@ const StyledListContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 3rem 1rem 1rem 1rem;
-  width: 98.4rem;
+  max-width: 120rem;
   margin: 1.4rem auto;
 `;
 

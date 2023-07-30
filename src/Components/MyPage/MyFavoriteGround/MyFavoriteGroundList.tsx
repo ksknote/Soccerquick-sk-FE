@@ -176,7 +176,7 @@ const Searchpage = styled.div`
   justify-content: space-between;
   flex-direction: column;
   font-size: 1.7rem;
-  width: 98.4rem;
+  max-width: 120rem;
   min-height: 100rem;
   margin-top: 2rem;
 `;

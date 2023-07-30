@@ -16,32 +16,28 @@ function TeamPage() {
 
   return (
     <>
-      <Container>
-        <Header />
-        <div>
-          <HeaderCategory />
-          <MainPageBody>
-            <Routes>
-              <Route path="/submit" element={<SubmitPage />} />
-              <Route path="/edit/*" element={<EditPage />} />
-              <Route path="/team" element={<FindingMember />} />
-              <Route path="/team/*" element={<ViewPage />} />
-              <Route
-                path="/"
-                element={
-                  <FindPage
-                    findingTeam={findingTeam}
-                    findingMember={findingMember}
-                    setFindingTeam={setFindingTeam}
-                    setFindingMember={setFindingMember}
-                  />
-                }
+      <Header />
+      <HeaderCategory />
+      <MainPageBody>
+        <Routes>
+          <Route path="/submit" element={<SubmitPage />} />
+          <Route path="/edit/*" element={<EditPage />} />
+          <Route path="/team" element={<FindingMember />} />
+          <Route path="/team/*" element={<ViewPage />} />
+          <Route
+            path="/"
+            element={
+              <FindPage
+                findingTeam={findingTeam}
+                findingMember={findingMember}
+                setFindingTeam={setFindingTeam}
+                setFindingMember={setFindingMember}
               />
-            </Routes>
-          </MainPageBody>
-        </div>
-        <Footer />
-      </Container>
+            }
+          />
+        </Routes>
+      </MainPageBody>
+      <Footer />
     </>
   );
 }

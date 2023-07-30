@@ -171,7 +171,7 @@ function EditPage() {
         >
           <div
             style={{
-              width: '98.4rem',
+              width: '120rem',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'flex-start',
@@ -208,7 +208,7 @@ function EditPage() {
           </div>
           <div
             style={{
-              width: '98.4rem',
+              width: '120rem',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'flex-start',

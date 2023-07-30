@@ -147,7 +147,7 @@ const GroundComparison: React.FC<GroundComparisonProps> = ({
 export default GroundComparison;
 
 const StyledContainer = styled.div`
-  width: 98.4rem;
+  max-width: 120rem;
   position: fixed;
   bottom: 0;
   margin: 0 auto;

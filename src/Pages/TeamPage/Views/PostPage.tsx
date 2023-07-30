@@ -172,7 +172,7 @@ function SubmitPage() {
       >
         <StyledBox
           style={{
-            width: '98.4rem',
+            width: '120rem',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'flex-start',
@@ -226,7 +226,7 @@ function SubmitPage() {
             value={content}
             onChange={handleEditorChange}
             modules={quillModules}
-            style={{ width: '98.4rem', height: '45rem', padding: '0 2rem' }}
+            style={{ width: '120rem', height: '45rem', padding: '0 2rem' }}
           />
         </StyledBox>
         <StyledBox style={{ justifyContent: 'center' }}>

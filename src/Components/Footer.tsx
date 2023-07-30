@@ -36,14 +36,19 @@ const Footer = () => {
 export default Footer;
 
 const FooterContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 36rem;
   background-color: #2a2a2a;
 `;
 
 const FooterContent = styled.div`
-  width: 98.4rem;
-  max-width: 102.4rem;
+  /* display: flex;
+justify-content: center;
+flex-direction: column; */
+  gap: 0.8rem;
+  max-width: 120rem;
+  /* max-width:120rem;
+  max-width: 102.4rem; */
   margin: 0 auto;
   padding: 5rem 2rem;
   color: white;

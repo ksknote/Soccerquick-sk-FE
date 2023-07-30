@@ -103,23 +103,15 @@ function SearchPage() {
             setSortedDomData={setSortedDomData}
           />
         )}
-
-        <div
-          style={{
-            width: '98.4rem',
-            margin: 'auto',
-          }}
-        >
-          <SearchData
-            checkedArray={checkedArray}
-            setCheckedArray={setCheckedArray}
-            setCheckedInModal={setCheckedInModal}
-            sortedDomData={sortedDomData}
-            setSortedDomData={setSortedDomData}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-          />
-        </div>
+        <SearchData
+          checkedArray={checkedArray}
+          setCheckedArray={setCheckedArray}
+          setCheckedInModal={setCheckedInModal}
+          sortedDomData={sortedDomData}
+          setSortedDomData={setSortedDomData}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+        />
       </StyledBody>
       {showComparisonModal && (
         <GroundComparison
@@ -147,12 +139,12 @@ export default SearchPage;
 const HeaderNavContainer = styled.div`
   position: relative;
   height: 8rem;
-  width: 98.4rem;
+  max-width: 120rem;
   margin: 0 auto;
 `;
 
 const StyledBody = styled.div`
   justify-content: center;
-  width: 98.4rem;
+  max-width: 120rem;
   margin: auto;
 `;

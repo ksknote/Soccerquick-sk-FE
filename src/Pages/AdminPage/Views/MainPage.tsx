@@ -31,48 +31,46 @@ function AdminPage() {
     }
   }, [userData]);
   return (
-    <Container>
+    <>
       <Header />
-      <div>
-        <AdminContainer>
-          <BodyContainer>
-            <BodyLeftBar>
-              <Link to="/admin">
-                <MainButton
-                  style={{ width: '14rem', height: '4rem' }}
-                  onClick={() => {
-                    setMainButton(true);
-                    setUserButton(false);
-                  }}
-                  state={mainButton ? 'true' : 'false'}
-                >
-                  🔒관리자 메인
-                </MainButton>
-              </Link>
-              <Link to="/admin/user">
-                <UserButton
-                  style={{ width: '14rem', height: '4rem' }}
-                  onClick={() => {
-                    setMainButton(false);
-                    setUserButton(true);
-                  }}
-                  state={userButton ? 'true' : 'false'}
-                >
-                  🔨유저 관리
-                </UserButton>
-              </Link>
-            </BodyLeftBar>
-            <BodyMain>
-              <Routes>
-                <Route path="/user" element={<AdminUserManager />} />
-                <Route path="/" element={<AdminMainPage />} />
-              </Routes>
-            </BodyMain>
-          </BodyContainer>
-        </AdminContainer>
-      </div>
+      <AdminContainer>
+        <BodyContainer>
+          <BodyLeftBar>
+            <Link to="/admin">
+              <MainButton
+                style={{ width: '14rem', height: '4rem' }}
+                onClick={() => {
+                  setMainButton(true);
+                  setUserButton(false);
+                }}
+                state={mainButton ? 'true' : 'false'}
+              >
+                🔒관리자 메인
+              </MainButton>
+            </Link>
+            <Link to="/admin/user">
+              <UserButton
+                style={{ width: '14rem', height: '4rem' }}
+                onClick={() => {
+                  setMainButton(false);
+                  setUserButton(true);
+                }}
+                state={userButton ? 'true' : 'false'}
+              >
+                🔨유저 관리
+              </UserButton>
+            </Link>
+          </BodyLeftBar>
+          <BodyMain>
+            <Routes>
+              <Route path="/user" element={<AdminUserManager />} />
+              <Route path="/" element={<AdminMainPage />} />
+            </Routes>
+          </BodyMain>
+        </BodyContainer>
+      </AdminContainer>
       <Footer />
-    </Container>
+    </>
   );
 }
 

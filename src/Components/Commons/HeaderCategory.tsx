@@ -57,7 +57,7 @@ export default function HeaderCategory() {
 }
 
 const StyledHeaderCategory = styled.div`
-  width: 98.4rem;
+  max-width: 120rem;
   padding: 3rem 2rem;
   height: 3rem;
   margin: 1rem auto;

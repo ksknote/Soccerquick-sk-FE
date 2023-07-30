@@ -40,7 +40,7 @@ function MyPageBar({ checkedBarItem, setCheckedBarItem }: MyPageBarProps) {
 export default MyPageBar;
 
 const StyledBar = styled.div`
-  width: 98.4rem;
+  max-width: 120rem;
   padding: 0 2rem;
   height: 3.5rem;
   margin: 1.4rem auto;

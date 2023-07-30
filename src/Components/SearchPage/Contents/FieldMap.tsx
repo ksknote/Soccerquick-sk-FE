@@ -193,7 +193,7 @@ const StyledMapContainer = styled.div`
 `;
 
 const StyledMap = styled.div`
-  width: 98.4rem;
+  max-width: 120rem;
   height: 47rem;
   margin: 0 auto;
 `;

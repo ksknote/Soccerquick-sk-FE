@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 // MainPage
 export const MainPageBody = styled.div`
-  width: 98.5rem;
+  width: 100%;
+  max-width: 120rem;
   min-height: 90rem;
   margin: 0 auto 15rem auto;
 `;
@@ -10,7 +11,7 @@ export const MainPageBody = styled.div`
 // SelectCategory
 
 export const StyledWrapper = styled.div`
-  width: 98.4rem;
+  max-width: 120rem;
   border-top: 0.2rem solid #c9c9c97c;
   box-shadow: 0px -5px 5px -5px #c9c9c97c;
 `;
@@ -20,7 +21,6 @@ export const StyledDiv = styled.div`
   align-items: center;
   justify-content: space-around;
   margin: 16rem auto;
-  width: 70rem;
 `;
 
 export const StyledButton = styled.button`
@@ -83,7 +83,7 @@ export const StyledHeader = styled.div`
 
 export const Teampage = styled.div`
   display: flex;
-  width: 98.4rem;
+  max-width: 120rem;
   justify-content: space-between;
   font-size: 1.7rem;
 `;

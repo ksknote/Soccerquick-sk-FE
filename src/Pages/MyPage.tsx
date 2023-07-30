@@ -136,7 +136,7 @@ const MyPageInfoContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 98.4rem;
+  max-width: 120rem;
   height: 85rem;
   padding: 0 2rem;
   margin: 2rem auto;
@@ -154,7 +154,7 @@ const MyPageContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: space-evenly;
-  width: 98.4rem;
+  max-width: 120rem;
   padding: 0 2rem;
   margin: 2rem auto;
   position: relative;

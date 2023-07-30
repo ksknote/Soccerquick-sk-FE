@@ -30,7 +30,7 @@ html {
 }
 
 /* 반응형  */
-@media all and (max-width: 1400px) {
+/* @media all and (max-width: 1400px) {
   html {
     font-size: 46.5%;
   }
@@ -86,4 +86,4 @@ html {
   html {
     font-size: 128.5%;
   }
-}
+} */

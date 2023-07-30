@@ -115,7 +115,7 @@ function FindingGround(props: FindingGroundProps) {
       <Searchpage>
         <SearchPageBody>
           <table>
-            <thead>
+            <StyledThead>
               <StyledLabelTr>
                 {!isLoading ? (
                   <>
@@ -128,7 +128,7 @@ function FindingGround(props: FindingGroundProps) {
                   <></>
                 )}
               </StyledLabelTr>
-            </thead>
+            </StyledThead>
 
             {!isLoading ? (
               <tbody>
@@ -147,6 +147,7 @@ function FindingGround(props: FindingGroundProps) {
                     </StyledCheckboxTd>
                     <StyledAddressTd>{item.address.area}</StyledAddressTd>
                     <StyledMainTd>
+                      <StyledAddress>{item.address.area}</StyledAddress>
                       <p onClick={(e) => clickDomHandler(item.dom_id)}>
                         {item.title}
                       </p>
@@ -228,15 +229,20 @@ const SearchPageBody = styled.div`
   }
 `;
 
+const StyledThead = styled.thead`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
 const StyledLabelTr = styled.tr`
   height: 6rem;
   padding-bottom: 1rem;
   background-color: #fafafa;
   border-bottom: 1px solid #d5d5d5ae;
   box-shadow: 0px 5px 5px -5px #cbc9c9d5;
+  font-size: 1.5rem;
   th {
-    font-size: 1.8rem;
-    font-weight: 500;
     :last-child {
       padding-right: 2rem;
     }
@@ -245,41 +251,52 @@ const StyledLabelTr = styled.tr`
       padding-left: 4.5rem;
     }
   }
+  @media (min-width: 1024px) {
+    font-size: 1.8rem;
+  }
 `;
 
 const StyledTableCell = styled.div`
   display: inline-block;
-  padding: 0;
   height: 3rem;
-
-  margin: 1.2rem 1rem 0rem 0;
+  padding-top: 0.5rem;
   border-radius: 0.4rem;
   font-weight: 400;
   color: #888888;
   line-height: 3rem;
   overflow: hidden;
+  @media (min-width: 1024px) {
+    padding: 0;
+    margin: 1.2rem 1rem 0rem 0;
+  }
 `;
 
 const StyledTable = styled.div<{ data: string }>`
   display: inline;
   padding: 0.1rem 1rem 0.1rem 1rem;
-  margin-right: 1.2rem;
+  margin-right: 0.5rem;
   border: 0.1rem solid #eeeeee;
   border-radius: 2rem;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   font-weight: 400;
   color: ${({ data }) => getColorBydata(data)};
   background-color: ${({ data }) => getBackgroundColorBydata(data)};
   text-overflow: ellipsis;
   white-space: nowrap;
+  @media (min-width: 1024px) {
+    font-size: 1.4rem;
+    margin-right: 1.2rem;
+  }
 `;
 
 const StyledTr = styled.tr`
-  height: 10rem;
-  margin: 1rem 1rem;
+  height: 11rem;
   padding: 2rem 1rem;
   font-size: 1.6rem;
   border-bottom: 0.1rem solid #dddddd;
+  @media (min-width: 1024px) {
+    height: 10rem;
+  }
 `;
 
 const StyledCheckboxTd = styled.td`
@@ -294,6 +311,12 @@ const StyledCheckboxTd = styled.td`
       border: 0.15rem solid var(--color--darkgreen);
       border-radius: 0.5rem;
       cursor: pointer;
+      @media (max-width: 768px) {
+        width: 1.6rem;
+        height: 1.6rem;
+        border: 0.1rem solid var(--color--darkgreen);
+        border-radius: 0.3rem;
+      }
     }
     :checked + label {
       background-image: url(${checkIcon});
@@ -302,33 +325,63 @@ const StyledCheckboxTd = styled.td`
       background-repeat: no-repeat;
     }
   }
+  @media (max-width: 768px) {
+    width: 1rem;
+    padding-left: 1.5rem;
+  }
 `;
 
 const StyledAddressTd = styled.td`
-  width: 13%;
-  font-size: 1.6rem;
-  font-weight: 500;
-  text-align: center;
-  padding-left: 0.2rem;
+  display: none;
+  @media (min-width: 768px) {
+    display: table-cell;
+    width: 13%;
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-align: center;
+    padding-left: 0.2rem;
+  }
 `;
 
 const StyledMainTd = styled.td`
-  padding-left: 4rem;
-  width: 69%;
+  width: 100%;
+  padding-left: 1.5rem;
+  font-size: 1.6rem;
   p {
-    font-size: 1.9rem;
     cursor: pointer;
+  }
+  @media (min-width: 768px) {
+    padding-left: 1rem;
+    width: 69%;
+  }
+  @media (min-width: 1024px) {
+    font-size: 1.9rem;
+  }
+`;
+
+const StyledAddress = styled.div`
+  font-size: 1.3rem;
+  color: #696767;
+  font-weight: 500;
+  padding-bottom: 0.5rem;
+  @media (min-width: 768px) {
+    display: none;
   }
 `;
 
 const StyledButton = styled.button`
-  width: 10rem;
-  height: 3.8rem;
-  border-radius: 0.7rem;
-  background-color: var(--color--green);
-  color: white;
-  font-size: 1.4rem;
-  font-weight: 500;
+  display: none;
+  @media (min-width: 768px) {
+    display: table-cell;
+    width: 10rem;
+    height: 3.8rem;
+    border-radius: 0.7rem;
+    background-color: var(--color--green);
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-right: 2rem;
+  }
 `;
 
 const getColorBydata = (data: string) => {
@@ -370,261 +423,3 @@ const getBackgroundColorBydata = (data: string) => {
     return '#fff7e6';
   }
 };
-
-const dummydata_filteredGround = [
-  {
-    title: '고양 싸커스토리 축구클럽 운정점',
-    image: [
-      'https://plab-football.s3.amazonaws.com/media/gy_storywj_out_half.jpg',
-      'https://plab-football.s3.amazonaws.com/media/gy_storywj_out_goal.jpg',
-      'https://plab-football.s3.amazonaws.com/media/gy_storywj_out_corner.jpg',
-    ],
-    address: {
-      shortAddress: '경기 / 고양시',
-      fullAddress: '경기도 고양시 일산서구 덕이로 310-2',
-    },
-    stadiums: [
-      {
-        usage: '다목적 구장',
-        facility: '90x50m •실외 •인조잔디',
-        image: [
-          'https://plab-football.s3.amazonaws.com/media/KakaoTalk_Photo_2023-01-30-16-09-56_001.jpeg',
-          'https://plab-football.s3.amazonaws.com/media/KakaoTalk_Photo_2023-01-30-16-09-56_003.jpeg',
-        ],
-      },
-      {
-        usage: '축구장',
-        facility: '100x64m •실외 •인조잔디',
-        image: [
-          'https://plab-football.s3.amazonaws.com/media/KakaoTalk_Photo_2023-01-30-16-09-16_001.jpeg',
-          'https://plab-football.s3.amazonaws.com/media/KakaoTalk_Photo_2023-01-30-16-09-16_002.jpeg',
-        ],
-      },
-      {
-        usage: '풋살장 (다목적 구장)',
-        facility: '20x40m •실외 •인조잔디',
-        image: [
-          'https://plab-football.s3.amazonaws.com/media/%EA%B3%A4%EC%A7%80%EC%95%94_%ED%8C%80%EC%97%85%EC%BA%A0%ED%8D%BC%EC%8A%A4_%ED%92%8B%EC%82%B4%EC%9E%A5.jpg',
-          'https://plab-football.s3.amazonaws.com/media/%EA%B3%A4%EC%A7%80%EC%95%94_%ED%8C%80%EC%97%85%EC%BA%A0%ED%8D%BC%EC%8A%A4_%ED%92%8B%EC%82%B4%EC%9E%A53.jpg',
-          'https://plab-football.s3.amazonaws.com/media/%EA%B3%A4%EC%A7%80%EC%95%94_%ED%8C%80%EC%97%85%EC%BA%A0%ED%8D%BC%EC%8A%A4_%ED%92%8B%EC%82%B4%EC%9E%A52.jpg',
-        ],
-      },
-    ],
-
-    provided: ['풋살화 대여', '남녀 구분 화장실', '공 대여', '조끼 대여'],
-    nonProvided: ['무료 주차', '샤워실'],
-    reservation: {
-      일반: [
-        '7일 전 취소 시 100% 환불',
-        '5일 전 취소 시 80% 환불',
-        '3일 전 취소 시 50% 환불',
-        '2일 전 ~ 예약 당일 환불 불가',
-        '캐시는 규정에 따라 자동 환급되며 잔액 환불 희망 시 나의 충전 내역에서 신청바랍니다',
-      ],
-      천재지변: [
-        '당일 천재지변으로 인해 구장 이용이 불가한 경우 100% 환불',
-        '적용기준: 호우경보, 대설경보, 태풍주의보, 태풍경보',
-      ],
-      '우천시 변경 기준': [
-        '시간 당 5mm 이상 시 날짜 변경 가능',
-        '기준: 당일 이용 2시간 전 기상청 날씨누리 해당 주소지 기준',
-        '단순 변심에 의한 날짜 변경은 불가',
-      ],
-    },
-    url: 'https://www.plabfootball.com/stadium/3415/info/',
-    source: '(주)플랩',
-  },
-  {
-    title: '고마오클럽',
-    image: [
-      'https://plab-football.s3.amazonaws.com/media/gy_storywj_out_half.jpg',
-      'https://plab-football.s3.amazonaws.com/media/gy_storywj_out_goal.jpg',
-      'https://plab-football.s3.amazonaws.com/media/gy_storywj_out_corner.jpg',
-    ],
-    address: {
-      shortAddress: '경기 / 수원시',
-      fullAddress: '경기도 수원시 장안구 만석로29 712동 1604호',
-    },
-    stadiums: [
-      {
-        usage: '다목적 구장',
-        facility: '90x50m •실외 •인조잔디',
-        image: [
-          'https://plab-football.s3.amazonaws.com/media/KakaoTalk_Photo_2023-01-30-16-09-56_001.jpeg',
-          'https://plab-football.s3.amazonaws.com/media/KakaoTalk_Photo_2023-01-30-16-09-56_003.jpeg',
-        ],
-      },
-      {
-        usage: '축구장',
-        facility: '100x64m •실외 •인조잔디',
-        image: [
-          'https://plab-football.s3.amazonaws.com/media/KakaoTalk_Photo_2023-01-30-16-09-16_001.jpeg',
-          'https://plab-football.s3.amazonaws.com/media/KakaoTalk_Photo_2023-01-30-16-09-16_002.jpeg',
-        ],
-      },
-      {
-        usage: '풋살장 (다목적 구장)',
-        facility: '20x40m •실외 •인조잔디',
-        image: [
-          'https://plab-football.s3.amazonaws.com/media/%EA%B3%A4%EC%A7%80%EC%95%94_%ED%8C%80%EC%97%85%EC%BA%A0%ED%8D%BC%EC%8A%A4_%ED%92%8B%EC%82%B4%EC%9E%A5.jpg',
-          'https://plab-football.s3.amazonaws.com/media/%EA%B3%A4%EC%A7%80%EC%95%94_%ED%8C%80%EC%97%85%EC%BA%A0%ED%8D%BC%EC%8A%A4_%ED%92%8B%EC%82%B4%EC%9E%A53.jpg',
-          'https://plab-football.s3.amazonaws.com/media/%EA%B3%A4%EC%A7%80%EC%95%94_%ED%8C%80%EC%97%85%EC%BA%A0%ED%8D%BC%EC%8A%A4_%ED%92%8B%EC%82%B4%EC%9E%A52.jpg',
-        ],
-      },
-    ],
-
-    provided: ['풋살화 대여', '남녀 구분 화장실', '공 대여', '조끼 대여'],
-    nonProvided: ['무료 주차', '샤워실'],
-    reservation: {
-      일반: [
-        '7일 전 취소 시 100% 환불',
-        '5일 전 취소 시 80% 환불',
-        '3일 전 취소 시 50% 환불',
-        '2일 전 ~ 예약 당일 환불 불가',
-        '캐시는 규정에 따라 자동 환급되며 잔액 환불 희망 시 나의 충전 내역에서 신청바랍니다',
-      ],
-      천재지변: [
-        '당일 천재지변으로 인해 구장 이용이 불가한 경우 100% 환불',
-        '적용기준: 호우경보, 대설경보, 태풍주의보, 태풍경보',
-      ],
-      '우천시 변경 기준': [
-        '시간 당 5mm 이상 시 날짜 변경 가능',
-        '기준: 당일 이용 2시간 전 기상청 날씨누리 해당 주소지 기준',
-        '단순 변심에 의한 날짜 변경은 불가',
-      ],
-    },
-    url: 'https://www.plabfootball.com/stadium/3415/info/',
-    source: '(주)플랩',
-  },
-  {
-    title: '감자클럽',
-    image: [
-      'https://plab-football.s3.amazonaws.com/media/gy_storywj_out_half.jpg',
-      'https://plab-football.s3.amazonaws.com/media/gy_storywj_out_goal.jpg',
-      'https://plab-football.s3.amazonaws.com/media/gy_storywj_out_corner.jpg',
-    ],
-    address: {
-      shortAddress: '경기 / 수원시',
-      fullAddress: '경기도 수원시 장안구 만석로29 712동 1604호',
-    },
-    stadiums: [
-      {
-        usage: '다목적 구장',
-        facility: '90x50m •실외 •인조잔디',
-        image: [
-          'https://plab-football.s3.amazonaws.com/media/KakaoTalk_Photo_2023-01-30-16-09-56_001.jpeg',
-          'https://plab-football.s3.amazonaws.com/media/KakaoTalk_Photo_2023-01-30-16-09-56_003.jpeg',
-        ],
-      },
-      {
-        usage: '축구장',
-        facility: '100x64m •실외 •인조잔디',
-        image: [
-          'https://plab-football.s3.amazonaws.com/media/KakaoTalk_Photo_2023-01-30-16-09-16_001.jpeg',
-          'https://plab-football.s3.amazonaws.com/media/KakaoTalk_Photo_2023-01-30-16-09-16_002.jpeg',
-        ],
-      },
-      {
-        usage: '풋살장 (다목적 구장)',
-        facility: '20x40m •실외 •인조잔디',
-        image: [
-          'https://plab-football.s3.amazonaws.com/media/%EA%B3%A4%EC%A7%80%EC%95%94_%ED%8C%80%EC%97%85%EC%BA%A0%ED%8D%BC%EC%8A%A4_%ED%92%8B%EC%82%B4%EC%9E%A5.jpg',
-          'https://plab-football.s3.amazonaws.com/media/%EA%B3%A4%EC%A7%80%EC%95%94_%ED%8C%80%EC%97%85%EC%BA%A0%ED%8D%BC%EC%8A%A4_%ED%92%8B%EC%82%B4%EC%9E%A53.jpg',
-          'https://plab-football.s3.amazonaws.com/media/%EA%B3%A4%EC%A7%80%EC%95%94_%ED%8C%80%EC%97%85%EC%BA%A0%ED%8D%BC%EC%8A%A4_%ED%92%8B%EC%82%B4%EC%9E%A52.jpg',
-        ],
-      },
-    ],
-
-    provided: ['풋살화 대여', '공 대여'],
-    nonProvided: ['무료 주차', '샤워실', '조끼 대여', '남녀 구분 화장실'],
-    reservation: {
-      일반: [
-        '7일 전 취소 시 100% 환불',
-        '5일 전 취소 시 80% 환불',
-        '3일 전 취소 시 50% 환불',
-        '2일 전 ~ 예약 당일 환불 불가',
-        '캐시는 규정에 따라 자동 환급되며 잔액 환불 희망 시 나의 충전 내역에서 신청바랍니다',
-      ],
-      천재지변: [
-        '당일 천재지변으로 인해 구장 이용이 불가한 경우 100% 환불',
-        '적용기준: 호우경보, 대설경보, 태풍주의보, 태풍경보',
-      ],
-      '우천시 변경 기준': [
-        '시간 당 5mm 이상 시 날짜 변경 가능',
-        '기준: 당일 이용 2시간 전 기상청 날씨누리 해당 주소지 기준',
-        '단순 변심에 의한 날짜 변경은 불가',
-      ],
-    },
-    url: 'https://www.plabfootball.com/stadium/3415/info/',
-    source: '(주)플랩',
-  },
-  {
-    title: '고구마클럽',
-    image: [
-      'https://plab-football.s3.amazonaws.com/media/gy_storywj_out_half.jpg',
-      'https://plab-football.s3.amazonaws.com/media/gy_storywj_out_goal.jpg',
-      'https://plab-football.s3.amazonaws.com/media/gy_storywj_out_corner.jpg',
-    ],
-    address: {
-      shortAddress: '경기 / 수원시',
-      fullAddress: '경기도 수원시 장안구 만석로29 712동 1604호',
-    },
-    stadiums: [
-      {
-        usage: '다목적 구장',
-        facility: '90x50m •실외 •인조잔디',
-        image: [
-          'https://plab-football.s3.amazonaws.com/media/KakaoTalk_Photo_2023-01-30-16-09-56_001.jpeg',
-          'https://plab-football.s3.amazonaws.com/media/KakaoTalk_Photo_2023-01-30-16-09-56_003.jpeg',
-        ],
-      },
-      {
-        usage: '축구장',
-        facility: '100x64m •실외 •인조잔디',
-        image: [
-          'https://plab-football.s3.amazonaws.com/media/KakaoTalk_Photo_2023-01-30-16-09-16_001.jpeg',
-          'https://plab-football.s3.amazonaws.com/media/KakaoTalk_Photo_2023-01-30-16-09-16_002.jpeg',
-        ],
-      },
-      {
-        usage: '풋살장 (다목적 구장)',
-        facility: '20x40m •실외 •인조잔디',
-        image: [
-          'https://plab-football.s3.amazonaws.com/media/%EA%B3%A4%EC%A7%80%EC%95%94_%ED%8C%80%EC%97%85%EC%BA%A0%ED%8D%BC%EC%8A%A4_%ED%92%8B%EC%82%B4%EC%9E%A5.jpg',
-          'https://plab-football.s3.amazonaws.com/media/%EA%B3%A4%EC%A7%80%EC%95%94_%ED%8C%80%EC%97%85%EC%BA%A0%ED%8D%BC%EC%8A%A4_%ED%92%8B%EC%82%B4%EC%9E%A53.jpg',
-          'https://plab-football.s3.amazonaws.com/media/%EA%B3%A4%EC%A7%80%EC%95%94_%ED%8C%80%EC%97%85%EC%BA%A0%ED%8D%BC%EC%8A%A4_%ED%92%8B%EC%82%B4%EC%9E%A52.jpg',
-        ],
-      },
-    ],
-
-    provided: [
-      '풋살화 대여',
-      '공 대여',
-      '무료 주차',
-      '샤워실',
-      '조끼 대여',
-      '남녀 구분 화장실',
-    ],
-    nonProvided: [],
-    reservation: {
-      일반: [
-        '7일 전 취소 시 100% 환불',
-        '5일 전 취소 시 80% 환불',
-        '3일 전 취소 시 50% 환불',
-        '2일 전 ~ 예약 당일 환불 불가',
-        '캐시는 규정에 따라 자동 환급되며 잔액 환불 희망 시 나의 충전 내역에서 신청바랍니다',
-      ],
-      천재지변: [
-        '당일 천재지변으로 인해 구장 이용이 불가한 경우 100% 환불',
-        '적용기준: 호우경보, 대설경보, 태풍주의보, 태풍경보',
-      ],
-      '우천시 변경 기준': [
-        '시간 당 5mm 이상 시 날짜 변경 가능',
-        '기준: 당일 이용 2시간 전 기상청 날씨누리 해당 주소지 기준',
-        '단순 변심에 의한 날짜 변경은 불가',
-      ],
-    },
-    url: 'https://www.plabfootball.com/stadium/3415/info/',
-    source: '(주)플랩',
-  },
-];

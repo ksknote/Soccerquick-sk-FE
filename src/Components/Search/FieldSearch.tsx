@@ -43,29 +43,40 @@ const FeildSearch = () => {
 export default FeildSearch;
 
 const FeildSearchBar = styled.div`
-  position: absolute;
-  right: 0;
-  top: -0.7rem;
-  width: 35rem;
-  height: 4.4rem;
-  background-color: white;
-  margin: 1.5rem;
-  padding: 0.8rem;
-  display: inline-block;
-  border-radius: 0.6rem;
-  filter: drop-shadow(0 0 0.2rem grey);
+  display: none;
+  @media (min-width: 768px) {
+    position: absolute;
+    right: 1.5rem;
+    top: -0.5rem;
+    width: 35rem;
+    background-color: white;
+    padding: 0.8rem;
+    display: inline-block;
+    border-radius: 0.6rem;
+    filter: drop-shadow(0 0 0.2rem grey);
 
-  input {
-    color: #3e5463;
-    font-size: 1.7rem;
-    border: none;
-    background: none;
-    width: 85%;
-    padding: 0 0 0 1rem;
-    line-height: 2.8rem;
+    input {
+      color: #3e5463;
+      border: none;
+      background: none;
+      width: 85%;
+      padding: 0 0 0 1rem;
+    }
+    img {
+      height: 100%;
+      padding-top: 0.2rem;
+      cursor: pointer;
+    }
   }
-  img {
-    padding-top: 0.2rem;
-    cursor: pointer;
+  @media (min-width: 768px) and (max-width: 1024px) {
+    font-size: 1.5rem;
+    height: 4rem;
+    line-height: 2rem;
+  }
+  @media (min-width: 1024px) {
+    font-size: 2rem;
+    height: 4.4rem;
+    line-height: 2.2rem;
+    margin: 1.5rem;
   }
 `;

@@ -25,7 +25,7 @@ const FieldMap: React.FC<FieldMapType> = ({
   const [AddressX, setAddressX] = useState<number>(0);
   const [AddressY, setAddressY] = useState<number>(0);
   const createMarkerList: naver.maps.Marker[] = [];
-
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   //검색 키워드에 따라 해당 위치의 위경도 상태 저장!!
   useEffect(() => {
     if (searchKeyword) {
@@ -49,6 +49,18 @@ const FieldMap: React.FC<FieldMapType> = ({
       );
     }
   }, [searchKeyword]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   //중심이 될 위경도 값 바탕으로 맵 생성하고 마커 생성 함수 호출 !!
   useEffect(() => {
@@ -91,7 +103,7 @@ const FieldMap: React.FC<FieldMapType> = ({
 
         clickable: true,
         icon: {
-          content: CustomMapMarker({ title: name }),
+          content: CustomMapMarker({ title: name, windowWidth: viewportWidth }),
           size: new naver.maps.Size(38, 58),
           anchor: new naver.maps.Point(19, 58),
         },

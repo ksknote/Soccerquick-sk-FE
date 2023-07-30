@@ -65,17 +65,23 @@ export const StyledButtonText = styled.div`
 // FindingMember
 
 export const StyledHeader = styled.div`
-  padding: 0 0 3rem 1rem;
-
+  padding-left: 1rem;
   h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     margin: 0;
+    @media (min-width: 1024px) {
+      font-size: 3rem;
+      padding: 0 0 3rem 1rem;
+    }
   }
   h3 {
-    font-size: 1.9rem;
+    font-size: 1.4rem;
     font-weight: 500;
     color: #9da7ae;
     margin: 1rem 0 2rem 0;
+    @media (min-width: 1024px) {
+      font-size: 1.9rem;
+    }
   }
 `;
 
@@ -92,8 +98,11 @@ export const StyledTotalNumber = styled.p`
   display: flex;
   align-items: center;
   padding-left: 1rem;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: #5e5d5d;
+  @media (min-width: 1024px) {
+    font-size: 1.8rem;
+  }
 `;
 
 export const TeamPageBody = styled.div`
@@ -142,17 +151,27 @@ export const StyledResetButton = styled.button`
   background-color: #fff;
   display: flex;
   justify-content: space-between;
-
   align-items: center;
   color: #333;
-  padding: 0 1.8rem;
-
   border: 1px solid #ddd;
   border-radius: 1rem;
   font-size: 1.6rem;
+  @media (min-width: 1024px) {
+    padding: 0 1.8rem;
+  }
+
   img {
-    width: 2.4rem;
-    margin-right: 0.5rem;
+    width: 2rem;
+    @media (min-width: 1024px) {
+      width: 2.4rem;
+      margin-right: 0.5rem;
+    }
+  }
+  p {
+    display: none;
+    @media (min-width: 1024px) {
+      display: inline-block;
+    }
   }
 `;
 

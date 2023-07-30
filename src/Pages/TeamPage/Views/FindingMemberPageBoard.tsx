@@ -32,13 +32,8 @@ function FindinMemberPageBoard(props: BoardProps) {
     currentPage,
     setCurrentPage,
     currentData,
-    // setCurrentData,
     totalPage,
   } = props;
-
-  // React.useEffect(() => {
-  //   setCurrentData(filteredData.slice((currentPage - 1) * 8, currentPage * 8));
-  // }, [currentPage]);
 
   // 포지션 체크하는 부분
   const checkPosition = (
@@ -108,7 +103,7 @@ function FindinMemberPageBoard(props: BoardProps) {
           ))}
           <StyledResetButton onClick={handleReset}>
             <img src={resetIcon} alt="" />
-            초기화
+            <p>초기화</p>
           </StyledResetButton>
         </TeamPageOption>
       </Teampage>

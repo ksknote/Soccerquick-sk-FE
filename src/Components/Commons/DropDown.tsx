@@ -91,8 +91,11 @@ const DropdownWrapper = styled.div`
   z-index: 998;
   position: relative;
   display: inline-block;
-  width: 16rem;
+  width: 11rem;
   margin-right: 1rem;
+  @media (min-width: 1024px) {
+    width: 16rem;
+  }
 `;
 
 const DropdownButton = styled.button`
@@ -109,15 +112,22 @@ const DropdownButton = styled.button`
   width: 100%;
   height: 100%;
   border: 1px solid #ddd;
-  font-size: ${(props) =>
-    props.style?.fontSize ? props.style.fontSize : ' 1.6rem'};
+  font-size: 1.3rem;
   cursor: pointer;
   img {
     flex: 1;
-    width: 2rem;
-    height: 4rem;
+    width: 1.3rem;
+    height: 3rem;
     align-self: center;
     margin: 0 1rem;
+    @media (min-width: 1024px) {
+      width: 2rem;
+      height: 4rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    font-size: ${(props) =>
+      props.style?.fontSize ? props.style.fontSize : ' 1.6rem'};
   }
 `;
 
@@ -136,18 +146,23 @@ const DropdownMenu = styled.div`
 const DropdownItem = styled.button<DropdownItemProps>`
   display: block;
   z-index: 999;
-  padding: 9px 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
   text-decoration: none;
   width: 100%;
   color: ${(props) => (props.picked ? '#fff' : '#333')};
   border: none;
   background: none;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   text-align: start;
-  padding-left: 3.5rem;
   cursor: pointer;
   background-color: ${(props) => (props.picked ? 'rgb(2,208,0)' : '#fff')};
   &:hover {
     background-color: ${(props) => !props.picked && '#dedede;'};
+  }
+  @media (min-width: 1024px) {
+    font-size: 1.5rem;
   }
 `;

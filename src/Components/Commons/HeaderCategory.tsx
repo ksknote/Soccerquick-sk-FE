@@ -57,13 +57,17 @@ export default function HeaderCategory() {
 }
 
 const StyledHeaderCategory = styled.div`
-  max-width: 120rem;
-  padding: 0 2rem;
-  height: 3rem;
-  margin: auto;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  display: none;
+  @media (min-width: 768px) {
+    max-width: 120rem;
+    padding: 0 2rem;
+    height: 3rem;
+    margin: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
   @media (min-width: 1024px) {
     padding: 3rem 2rem;
   }

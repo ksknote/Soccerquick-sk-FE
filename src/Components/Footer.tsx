@@ -34,11 +34,13 @@ const Footer = () => {
 export default Footer;
 
 const FooterContainer = styled.div`
+  display: none;
   width: 100%;
   height: 26rem;
   background-color: #2a2a2a;
   @media (min-width: 784px) {
     height: 32rem;
+    display: block;
   }
 `;
 

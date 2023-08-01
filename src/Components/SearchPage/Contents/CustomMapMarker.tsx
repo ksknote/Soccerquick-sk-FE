@@ -25,7 +25,6 @@ const CustomMapMarker = ({
     '<span style="position: absolute; border-style: solid; border-width: 1.2rem 1rem 0 1rem; border-color: var(--color--darkgreen) transparent; display: block; width: 0; z-index: 0; top: 5.05rem; left: 1.4rem;"></span>',
     '</div>',
   ];
-  console.log(windowWidth);
   if (windowWidth < 768) return mobileContentArray.join('');
 
   return contentArray.join('');

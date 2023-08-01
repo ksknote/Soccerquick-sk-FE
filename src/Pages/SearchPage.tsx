@@ -137,10 +137,14 @@ function SearchPage() {
 export default SearchPage;
 
 const HeaderNavContainer = styled.div`
-  position: relative;
-  height: 8rem;
-  max-width: 120rem;
-  margin: 0 auto;
+  height: 0;
+
+  @media (min-width: 768px) {
+    height: 8rem;
+    position: relative;
+    max-width: 120rem;
+    margin: 0 auto;
+  }
 `;
 
 const StyledBody = styled.div`

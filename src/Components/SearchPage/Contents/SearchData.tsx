@@ -52,18 +52,21 @@ function FindingGround(props: FindingGroundProps) {
 
   // Left Bar에서 설정한 필터링 옵션이 담기는 상태.
   // SoccerQuick/Frontend/src/Components/SearchPage/Contents/SearchFilter.tsx Line12의 useEffect로 정의됨
-  const [filterOption, setFilterOption] = React.useState<ItemType[]>([]);
+  const [filterOption, setFilterOption] = useState<ItemType[]>([]);
 
   // 정렬 조건이 변할 때 페이지에 보여줄 데이터를 필터링 하는 부분
   const [filteredData, setFilteredData] =
-    React.useState<DomDataType[]>(sortedDomData);
+    useState<DomDataType[]>(sortedDomData);
 
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const totalItemsCount = filteredData.length;
   const lastIndexOfData = currentPage * itemsPerPage;
   const firstIndexOfData = lastIndexOfData - itemsPerPage;
-  const currentData = filteredData.slice(firstIndexOfData, lastIndexOfData);
+  const currentData = isMobile
+    ? filteredData
+    : filteredData.slice(firstIndexOfData, lastIndexOfData);
 
   const checkHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -104,6 +107,14 @@ function FindingGround(props: FindingGroundProps) {
       setFilteredData(filteredDomdata);
     }
   }, [filterOption, sortedDomData]);
+
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, []);
 
   const clickDomHandler = (domId: string) => {
     navigate(`/ground/${domId}`);
@@ -179,12 +190,14 @@ function FindingGround(props: FindingGroundProps) {
           </table>
           <div style={{ height: '100%', width: '100%' }}> </div>
         </SearchPageBody>
-        <MyPagination
-          totalItemsCount={totalItemsCount ? totalItemsCount : 100}
-          itemsPerPage={itemsPerPage}
-          setCurrentPage={setCurrentPage}
-          currentPage={currentPage}
-        />
+        {isMobile || (
+          <MyPagination
+            totalItemsCount={totalItemsCount ? totalItemsCount : 100}
+            itemsPerPage={itemsPerPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
+        )}
       </Searchpage>
     </SearchContainer>
   );
@@ -195,6 +208,9 @@ export default FindingGround;
 const SearchContainer = styled.div`
   position: relative;
   min-height: 55rem;
+  @media (max-width: 768px) {
+    position: absolute;
+  }
 `;
 
 const Searchpage = styled.div`

@@ -11,6 +11,7 @@ import SearchPage from './Pages/SearchPage';
 import GroundDetail from './Pages/groundDetail';
 import Admin from './Pages/AdminPage/Views/MainPage';
 import { MyPage } from './Pages/MyPage';
+import MobileCategory from './Components/Commons/MobileCategory';
 // Redux 공부를 위한 추가 Store
 import { store, persistor } from './ReduxStore/store';
 
@@ -19,6 +20,7 @@ function App() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
+          <MobileCategory />
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/ground" element={<SearchPage />} />

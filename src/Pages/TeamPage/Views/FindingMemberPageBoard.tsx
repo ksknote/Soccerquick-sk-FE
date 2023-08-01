@@ -193,6 +193,15 @@ function FindinMemberPageBoard(props: BoardProps) {
           currentPage={currentPage}
         />
       </PageSelect>
+      {/* <div>
+        {filteredData.length > 0 ? (
+          currentData.map((item, idx) => <div>
+            
+          </div>)
+        ) : (
+          <div>검색 결과가 없습니다.</div>
+        )}
+      </div> */}
     </div>
   );
 }

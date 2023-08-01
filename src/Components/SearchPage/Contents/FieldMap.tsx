@@ -212,28 +212,36 @@ const StyledMap = styled.div`
 const StyledButton = styled.div`
   position: absolute;
   display: table;
-  padding: 1rem 0.8rem;
+  padding: 0.7rem 0.2rem;
   table-layout: auto;
   border-radius: 2.3rem;
   background-color: var(--color--darkgreen);
   z-index: 10;
-  bottom: 4rem;
+  bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
+  @media (min-width: 768px) {
+    padding: 1rem 0.8rem;
+    bottom: 4rem;
+  }
 `;
 
 const StyledButtonIcon = styled.div`
   display: table-cell;
   display: inline-block;
-  width: 2.7rem;
-  height: 2.7rem;
-  padding-top: 0.2rem;
+  width: 2rem;
+  height: 2em;
   margin-left: 0.7rem;
+  @media (min-width: 768px) {
+    width: 2.7rem;
+    height: 2.7rem;
+    padding-top: 0.2rem;
+  }
 `;
 
 const StyledButtonContent = styled.div`
   max-width: 17rem;
-  height: 3rem;
+  /* height: 2rem; */
   padding: 0 1.5rem 0 0.8rem;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -242,8 +250,13 @@ const StyledButtonContent = styled.div`
   vertical-align: middle;
   cursor: pointer;
   color: white;
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   letter-spacing: -0.04rem;
   font-weight: 600;
-  line-height: 3rem;
+  line-height: 2rem;
+  @media (min-width: 768px) {
+    height: 3rem;
+    font-size: 1.7rem;
+    line-height: 3rem;
+  }
 `;

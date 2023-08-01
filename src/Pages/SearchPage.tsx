@@ -90,7 +90,9 @@ function SearchPage() {
   }, []);
   return (
     <>
-      <Header />
+      <HeaderContainer>
+        <Header />
+      </HeaderContainer>
       <HeaderNavContainer>
         <HeaderCategory />
         <FeildSearchInput />
@@ -135,6 +137,11 @@ function SearchPage() {
 }
 
 export default SearchPage;
+const HeaderContainer = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
 
 const HeaderNavContainer = styled.div`
   height: 0;

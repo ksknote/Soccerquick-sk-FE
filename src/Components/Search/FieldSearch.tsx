@@ -70,7 +70,7 @@ const FeildSearchBar = styled.div`
 
   @media (max-width: 767.9px) {
     width: 97%;
-    top: 10.5rem;
+    top: 1rem;
     left: 50%;
     transform: translateX(-50%);
   }

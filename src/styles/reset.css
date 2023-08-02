@@ -146,12 +146,25 @@ input {
 }
 
 input::-ms-clear,
-input::-ms-reveal{
-	display:none;width:0;height:0;
+input::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
 }
 input::-webkit-search-decoration,
 input::-webkit-search-cancel-button,
 input::-webkit-search-results-button,
-input::-webkit-search-results-decoration{
-	display:none;
+input::-webkit-search-results-decoration {
+  display: none;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #fff inset;
+  -webkit-text-fill-color: #000;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
 }

@@ -2,6 +2,7 @@ import { useState, FormEvent } from 'react';
 import { AUTH_ACTIONS } from '../../ReduxStore/modules/Auth/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
+import alertModal from '../Commons/alertModal';
 
 import {
   Modal,
@@ -23,11 +24,10 @@ type UserProps = {
 // Login  props type
 type LoginProps = {
   handleIsLogin: (e: React.MouseEvent<HTMLDivElement>) => void;
-  setAuthModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 // Login
-function Login({ handleIsLogin, setAuthModal }: LoginProps) {
+function Login({ handleIsLogin }: LoginProps) {
   const [formData, setFormData] = useState<UserProps>({
     userId: '',
     password: '',
@@ -86,9 +86,8 @@ function Login({ handleIsLogin, setAuthModal }: LoginProps) {
           })
         );
         setLoginError('');
-        setAuthModal(false);
-
-        navigate(currentPath, { replace: true });
+        navigate('/');
+        alertModal('로그인 되었습니다.', 'success');
       })
       .catch((err) => {
         setLoginError('존재하지 않는 계정입니다.');
@@ -96,7 +95,7 @@ function Login({ handleIsLogin, setAuthModal }: LoginProps) {
   };
 
   return (
-    <Modal onClick={handleIsLogin} setAuthModal={setAuthModal}>
+    <Modal onClick={handleIsLogin}>
       <ModalForm onSubmit={handleSubmit}>
         <ModalInput
           text="아이디"

@@ -11,6 +11,7 @@ import {
   ModalTerms,
 } from '../Commons/AuthComponents';
 import alertModal from '../Commons/alertModal';
+import { useNavigate } from 'react-router-dom';
 
 const postSignupUrl = `${process.env.REACT_APP_API_URL}/auths/signup`; // signup api url
 const postIdCheckUrl = `${process.env.REACT_APP_API_URL}/auths/id`; // id-check api url
@@ -18,10 +19,10 @@ const postIdCheckUrl = `${process.env.REACT_APP_API_URL}/auths/id`; // id-check 
 // Signup type
 type SignupProps = {
   handleIsLogin: (e: React.MouseEvent<HTMLDivElement>) => void;
-  setAuthModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function Signup({ handleIsLogin, setAuthModal }: SignupProps) {
+function Signup({ handleIsLogin }: SignupProps) {
+  const navigate = useNavigate();
   const [userId, setUserId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
@@ -67,10 +68,12 @@ function Signup({ handleIsLogin, setAuthModal }: SignupProps) {
       .then((result) => {
         setCheckUserId(true);
         setUserIdMsg(() => result.message);
+        alertModal(result.message, 'success');
       })
       .catch((err) => {
         setCheckUserId(false);
         setUserIdMsg(err.response.data.message);
+        alertModal(err.response.data.message, 'error');
       });
   };
 
@@ -156,8 +159,8 @@ function Signup({ handleIsLogin, setAuthModal }: SignupProps) {
         }
       );
       const data = response.data;
+      navigate('/');
       alertModal(data.message, 'text');
-      setAuthModal(false);
       setResponseMsg('');
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -169,7 +172,7 @@ function Signup({ handleIsLogin, setAuthModal }: SignupProps) {
   };
 
   return (
-    <Modal long register onClick={handleIsLogin} setAuthModal={setAuthModal}>
+    <Modal long register onClick={handleIsLogin}>
       <ModalForm onSubmit={handleSubmit}>
         <ModalFormTop>
           <EmailCheck>
@@ -180,7 +183,6 @@ function Signup({ handleIsLogin, setAuthModal }: SignupProps) {
               placeholder="아이디"
               value={userId}
               onChange={handleUserIdChange}
-              message={userIdMsg}
               check={checkUserId}
             />
             <ModalButton onClick={handleUserIdCheck}>
@@ -269,16 +271,18 @@ export default Signup;
 // styled-components
 const ModalFormTop = styled.div`
   margin-bottom: 10px;
+  width: 100%;
 `;
 
 const ModalFormBottom = styled.div`
   margin-top: 10px;
+  width: 100%;
 `;
 
 const EmailCheck = styled.div`
   display: flex;
   flex-direction: columns;
-  width: 380px;
+  width: 100%;
 
   & input {
     flex: 3;
@@ -288,8 +292,13 @@ const EmailCheck = styled.div`
     flex: 1;
     margin: 0;
     align-self: flex-end;
-    min-width: 90px;
+    min-width: 70px;
+    font-size: 12px;
     border-radius: 0px 8px 0px 0px;
+    @media (min-width: 768px) {
+      min-width: 90px;
+      font-size: 13px;
+    }
   }
 `;
 

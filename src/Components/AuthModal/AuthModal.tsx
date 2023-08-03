@@ -21,12 +21,12 @@ function AuthModal({ setAuthModal }: AuthModalProps) {
 
   return (
     <ModalContainer>
-      {isLogin && (
+      {/* {isLogin && (
         <Login handleIsLogin={handleIsLogin} setAuthModal={setAuthModal} />
       )}
       {!isLogin && (
         <Signup handleIsLogin={handleIsLogin} setAuthModal={setAuthModal} />
-      )}
+      )} */}
     </ModalContainer>
   );
 }

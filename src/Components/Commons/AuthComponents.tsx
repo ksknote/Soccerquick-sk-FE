@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Modal
 export function Modal(props: {
@@ -7,17 +8,19 @@ export function Modal(props: {
   long?: boolean;
   register?: boolean;
   onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
-  setAuthModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const navigate = useNavigate();
   const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    props.setAuthModal(false);
   };
 
   return (
     <ModalBox long={props.long}>
-      <ExitButton onClick={handleOnClick}>✖</ExitButton>
-      <Logo src="/Images/soccerquick.png" alt="logo" />
+      <Logo
+        src="/Images/soccerquick.png"
+        alt="logo"
+        onClick={() => navigate('/')}
+      />
       {props.children}
       <BottomLine />
       <ModalTextBox>
@@ -181,27 +184,13 @@ export function ModalTerms(props: {
 // styled-components
 // Modal
 const ModalBox = styled.div<{ long?: boolean }>`
-  position: fixed;
-  width: 480px;
-  height: ${(props) => (props.long ? '750px' : '450px')};
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-
+  width: 90%;
+  max-width: 50rem;
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  background: #fdfdfd;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-
-  ${(props) => css`
-    @media (max-height: 750px) {
-      position: absolute;
-    }
-  `}
 `;
 
 const ExitButton = styled.button`
@@ -218,9 +207,8 @@ const Logo = styled.img`
 `;
 
 const BottomLine = styled.div`
-  width: 380px;
-  height: 0px;
-  border: 1px solid #e3e5e8;
+  width: 70%;
+  border: 0.5px solid #e3e5e8;
   margin-top: 25px;
 `;
 
@@ -231,13 +219,12 @@ const ModalTextBox = styled.div`
   margin: 15px 0;
 
   font-weight: 400;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 17px;
   color: #898f9c;
 
   & > div {
     font-weight: 400;
-    font-size: 14px;
     line-height: 17px;
     text-decoration: underline;
     margin-left: 10px;
@@ -246,10 +233,14 @@ const ModalTextBox = styled.div`
   & > div:hover {
     cursor: pointer;
   }
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 // ModalForm
 const StyledForm = styled.form`
+  width: 70%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -258,16 +249,15 @@ const StyledForm = styled.form`
 
 // ModalInput
 const InputBox = styled.div<{ check?: boolean; text?: string }>`
-  postition: absolute;
+  position: relative;
   display: flex;
   flex-direction: column;
-  width: 380px;
+  width: 100%;
   height: ${(props) => (props.text ? '60px' : '45px')};
   margin-top: ${(props) => (props.text ? '20px' : '0')};
   & > span {
-    position: fixed;
-    left: auto;
-    right: 150px;
+    position: absolute;
+    right: 1rem;
     margin-top: 15px;
     color: ${(props) => (props.check ? 'blue' : 'red')};
   }

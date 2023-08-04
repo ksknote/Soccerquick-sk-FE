@@ -60,8 +60,8 @@ const ModalMask = styled.div`
 
 const ImgModalContainer = styled.div`
   background-color: white;
-  width: 70rem;
-  height: 70rem;
+  width: 80%;
+  height: 60rem;
   z-index: 999;
   display: flex;
   flex-direction: column;
@@ -72,24 +72,40 @@ const ImgModalContainer = styled.div`
   left: 0;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  padding: 2rem 4rem 4rem 4rem;
+  padding: 1rem 2rem 2.5rem 2rem;
   margin: auto auto;
+  @media (min-width: 768px) {
+    width: 60rem;
+    height: 70rem;
+  }
+  @media (min-width: 1024px) {
+    width: 70rem;
+    height: 70rem;
+    padding: 2rem 4rem 4rem 4rem;
+  }
 `;
 
 const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 5rem;
+  height: 3.5rem;
   margin-bottom: 1rem;
-  font-size: 1.4rem;
+  font-size: 1rem;
   button {
     border: none;
     background-color: transparent;
-    font-size: 3rem;
+    font-size: 2rem;
     cursor: pointer;
     :focus {
       outline: none;
+    }
+  }
+  @media (min-width: 1024px) {
+    font-size: 1.4rem;
+    height: 5rem;
+    button {
+      font-size: 3rem;
     }
   }
 `;

@@ -48,18 +48,32 @@ const GroundDetailCarousel: React.FC<{ stadiums: DomDataType['stadiums'] }> = ({
 export default GroundDetailCarousel;
 
 const Wrap = styled.div`
-  padding-bottom: 70px;
+  padding-bottom: 75px;
   overflow: hidden;
-
+  @media (min-width: 768px) {
+    margin-bottom: 4rem;
+  }
   .slick-dots {
     bottom: -8.5rem;
     text-align: start;
   }
 
   .slick-dots li {
-    width: 12rem;
-    height: 7rem;
-    margin: 0 0.4rem;
+    width: 6rem;
+    height: 8rem;
+    margin: 0 0.2rem;
+    @media (min-width: 768px) and (max-width: 1024px) {
+      width: 10rem;
+      height: 7rem;
+      :not(:first-child) {
+        margin-left: 2.5rem;
+      }
+    }
+    @media (min-width: 1024px) {
+      width: 12rem;
+      height: 7rem;
+      margin: 0 0.4rem;
+    }
   }
   .slick-dots li.slick-active {
     filter: brightness(0.5);
@@ -67,22 +81,38 @@ const Wrap = styled.div`
 `;
 
 const ImageItems = styled.div`
-  width: 98.5rem;
-  height: 55rem;
+  width: 100%;
+  height: 20rem;
+  @media (min-width: 768px) {
+    height: 40rem;
+  }
+  @media (min-width: 1024px) {
+    height: 55rem;
+  }
 `;
 
 const Img = styled.img`
-  width: 98.5rem;
-  height: 55rem;
+  width: 100%;
+  height: 20rem;
+  @media (min-width: 768px) {
+    height: 40rem;
+  }
+  @media (min-width: 1024px) {
+    height: 55rem;
+  }
 `;
 
 const PagingImg = styled.div`
   display: block;
-  width: 12rem;
-  height: 7rem;
+  width: 6rem;
+  height: 3.5rem;
   img {
     display: inline-block;
     width: 100%;
     height: 100%;
+  }
+  @media (min-width: 768px) {
+    width: 12rem;
+    height: 7rem;
   }
 `;

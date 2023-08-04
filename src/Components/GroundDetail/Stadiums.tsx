@@ -68,32 +68,53 @@ const Stadiums: React.FC<StadiumsProps> = ({
 export default Stadiums;
 
 const Stadium = styled.div`
-  height: 15rem;
-  display: flex;
-  align-items: center;
+  width: 100%;
+  height: 9rem;
+  display: grid;
+  grid-template-columns: 12rem 1fr;
   margin-top: 3rem;
+  padding: 1rem;
   background-color: white;
   filter: drop-shadow(0 0 3px #dddddd);
   border-radius: 10px;
+  @media (min-width: 768px) {
+    height: 13rem;
+    grid-template-columns: 20rem 1fr;
+  }
+  @media (min-width: 1024px) {
+    height: 15rem;
+    grid-template-columns: 25rem 1fr;
+  }
 `;
 
 const StadiumImage = styled.div`
   position: relative;
   cursor: pointer;
+  margin: auto;
 `;
 
 const GroundImage = styled.img`
-  width: 19rem;
-  height: 12rem;
-  margin: 0 10rem 0 1rem;
-  border-radius: 1rem;
+  width: 10rem;
+  height: 7rem;
+  margin-right: 2rem;
+  border-radius: 0.5rem;
+
+  @media (min-width: 768px) {
+    width: 16rem;
+    height: 11rem;
+    border-radius: 1rem;
+  }
+  @media (min-width: 1024px) {
+    width: 19rem;
+    height: 12rem;
+  }
 `;
 const LargeIcon = styled.div`
   position: absolute;
-  right: 11rem;
-  bottom: 1rem;
-  width: 3.8rem;
-  height: 3.8rem;
+  right: 2.7rem;
+  bottom: 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -101,46 +122,99 @@ const LargeIcon = styled.div`
   border-radius: 1.3rem;
   cursor: pointer;
   img {
-    width: 2.8rem;
-    height: 2.8rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    right: 3rem;
+    bottom: 0.5rem;
+    width: 3.8rem;
+    height: 3.8rem;
+    img {
+      width: 2.8rem;
+      height: 2.8rem;
+    }
   }
 `;
 
 const StadiumDetail = styled.div`
-  display: flex;
-  /* flex-direction: column; */
-  justify-content: space-between;
-  width: 58%;
-  div {
-    display: flex;
-    /* flex-direction: column; */
-  }
+  height: 100%;
+  display: grid;
+  grid-template-rows: 3rem 1fr;
+  grid-template-columns: 1fr;
+
   h2 {
-    font-size: 2rem;
+    font-size: 1.2rem;
     font-weight: 500;
     margin: 0;
     display: flex;
     align-items: center;
+    padding-left: 1rem;
+  }
+  @media (min-width: 768px) {
+    height: auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 25rem;
+    grid-template-rows: 1fr;
+
+    h2 {
+      font-size: 1.6rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 30rem;
+
+    h2 {
+      font-size: 2rem;
+    }
   }
 `;
 
 const StadiumDetailFacility = styled.div`
   display: flex;
-  width: 48%;
   justify-content: space-between;
+  padding: 1rem 2rem 0 2rem;
+  border-top: 0.1rem solid #e6e6e6;
+
   div {
-    font-size: 1.6rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 500;
     color: #646464;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
 
     img {
-      width: 4rem;
-      height: 4rem;
-      margin: 0 0.02rem 0.5rem 0;
+      width: 1.7rem;
+      height: 1.7rem;
+    }
+  }
+  @media (min-width: 768px) {
+    width: 100%;
+    justify-content: space-around;
+    padding: 0;
+    border: none;
+    div {
+      font-size: 1.3rem;
+
+      img {
+        width: 3rem;
+        height: 3rem;
+        margin: 0 0.02rem 0.5rem 0;
+      }
+    }
+  }
+  @media (min-width: 1024px) {
+    div {
+      font-size: 1.6rem;
+      font-weight: 600;
+
+      img {
+        width: 4rem;
+        height: 4rem;
+      }
     }
   }
 `;

@@ -234,7 +234,8 @@ const GroundDetail = () => {
 export default GroundDetail;
 
 const GroundDetailContainer = styled.div`
-  width: 98.5rem;
+  width: 100%;
+  max-width: 120rem;
   margin: 0 auto;
   padding: 0 2rem;
 `;
@@ -250,27 +251,53 @@ const GroundDetailHeaderContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 3rem auto;
+  margin: 2rem auto 3rem auto;
   > p {
-    font-size: 1.7rem;
+    font-size: 1.4rem;
     font-weight: 600;
   }
   > h2 {
-    font-size: 2.8rem;
+    font-size: 1.8rem;
     font-weight: 400;
     margin: 0.5rem auto;
+  }
+  @media (min-width: 768px) and (max-width: 1023.9) {
+    margin: 3rem auto;
+
+    > p {
+      font-size: 1.5rem;
+    }
+    > h2 {
+      font-size: 2.2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    > p {
+      font-size: 1.7rem;
+    }
+    > h2 {
+      font-size: 2.8rem;
+    }
   }
 `;
 
 const HeaderAddress = styled.div`
   display: flex;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   cursor: pointer;
   p {
     color: #727f88;
     text-decoration: underline;
     :nth-child(2) {
-      margin: auto 1rem auto 2rem;
+      margin: auto 0.5rem auto 1rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    font-size: 1.5rem;
+    p {
+      :nth-child(2) {
+        margin: auto 1rem auto 2rem;
+      }
     }
   }
 `;
@@ -279,9 +306,10 @@ const GroundDetailHeaderBtn = styled.div`
   display: flex;
   justify-content: space-between;
   button {
-    width: 20rem;
-    height: 5rem;
+    width: 12.5rem;
+    height: 3.7rem;
     color: white;
+    font-size: 1.2rem;
     font-weight: 500;
     background: #09cf00;
     border-radius: 4px;
@@ -289,11 +317,11 @@ const GroundDetailHeaderBtn = styled.div`
       background: #1bbd1b;
     }
     :not(:first-child) {
-      width: 8rem;
-      margin-left: 1.3rem;
+      width: 6rem;
+      margin-left: 0.7rem;
     }
     :last-child {
-      width: 12rem;
+      width: 8rem;
       background: white;
       color: #0d9c05;
       border: 0.2rem solid #bacdae;
@@ -305,44 +333,80 @@ const GroundDetailHeaderBtn = styled.div`
       color: white;
     }
     img {
-      width: 2rem;
+      width: 1.5rem;
       vertical-align: middle;
-      margin: 0 0.8rem 0.4rem 0;
+      margin: 0 0.5rem 0.4rem 0;
+    }
+    @media (min-width: 1024px) {
+      width: 20rem;
+      height: 5rem;
+      font-size: 1.3rem;
+      :not(:first-child) {
+        width: 8rem;
+        margin-left: 1.3rem;
+      }
+      :last-child {
+        width: 12rem;
+      }
+      img {
+        width: 2rem;
+        margin: 0 0.8rem 0.4rem 0;
+      }
     }
   }
 `;
 
 const Source = styled.div`
   margin: auto;
-  width: 90rem;
-  height: 8rem;
+  width: 100%;
+  height: 6rem;
   background-color: #f7f7f7;
   border-radius: 1rem;
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 500;
   text-align: center;
-  line-height: 7.5rem;
+  line-height: 6rem;
   span {
     color: #09cf00;
+  }
+  @media (min-width: 1024px) {
+    width: 100%;
+    height: 8rem;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 7.5rem;
   }
 `;
 
 const ContentsBox = styled.div`
   box-sizing: border-box;
   border-bottom: 16px solid #f8fafb;
-  padding: 3rem;
+  margin: 3rem auto;
+  @media (min-width: 1024px) {
+    margin: 3rem;
+  }
 `;
 
 const ContentsTitle = styled.div`
   > h2 {
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin: 0.6rem 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0.4rem 0;
   }
   > p {
-    font-size: 1.4rem;
-    font-weight: 350;
+    font-size: 1.2rem;
+    font-weight: 400;
     color: #8a8a8a;
+  }
+  @media (min-width: 1024px) {
+    > h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 0.6rem 0;
+    }
+    > p {
+      font-size: 1.4rem;
+    }
   }
 `;
 

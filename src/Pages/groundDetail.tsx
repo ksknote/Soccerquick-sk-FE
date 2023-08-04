@@ -411,40 +411,58 @@ const ContentsTitle = styled.div`
 `;
 
 const ProvidedItems = styled.div`
-  > ul li {
-    display: inline;
-    height: 4rem;
-    padding: 0.7rem 1.7rem;
-    margin-right: 1.2rem;
-    border: 0.1rem solid #eeeeee;
-    border-radius: 2rem;
-    font-size: 1.5rem;
-    font-weight: 500;
-    :nth-child(3n + 1) {
-      color: #7a6fce;
-      background-color: #f3f1ff;
-    }
-    :nth-child(3n + 2) {
-      color: #98212b;
-      background: #f7f7f7;
-    }
-    :nth-child(3n) {
-      color: #009e5c;
-      background: #f2fff1;
+  > ul {
+    width: 100%;
+    li {
+      display: inline;
+      height: 4rem;
+      line-height: 4rem;
+      padding: 0.4rem 1rem;
+      margin-right: 1.2rem;
+      border: 0.1rem solid #eeeeee;
+      border-radius: 2rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+
+      :nth-child(3n + 1) {
+        color: #7a6fce;
+        background-color: #f3f1ff;
+      }
+      :nth-child(3n + 2) {
+        color: #98212b;
+        background: #f7f7f7;
+      }
+      :nth-child(3n) {
+        color: #009e5c;
+        background: #f2fff1;
+      }
     }
   }
   > p {
     display: inline-block;
     height: 2.7rem;
-    padding: 0.3rem 0.8rem;
-    margin: 3rem 0 2.6rem 0;
+    padding: 0rem 0.8rem;
+    margin: 2rem 0 0.5rem 0;
     background: #fafafa;
     border-radius: 0.4rem;
-
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 400;
     color: #888888;
-    line-height: 2rem;
+  }
+  @media (min-width: 768px) {
+    > ul li {
+      height: 4rem;
+      padding: 0.7rem 1.7rem;
+      margin-right: 1.2rem;
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+    > p {
+      height: 2.7rem;
+      padding: 0.3rem 0.8rem;
+      margin: 3rem 0 2.6rem 0;
+      font-size: 1.5rem;
+    }
   }
 `;
 
@@ -458,12 +476,18 @@ const NonProvidedItems = styled.ul`
 
 const GroundAddressDetail = styled.div`
   display: flex;
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   p:nth-child(2) {
     margin-left: 2rem;
     color: #727f88;
     font-weight: 500;
     text-decoration: underline;
     cursor: pointer;
+  }
+  @media (min-width: 1024px) {
+    font-size: 1.7rem;
+    p:nth-child(2) {
+      margin-left: 2rem;
+    }
   }
 `;

@@ -48,6 +48,9 @@ const OneMarkerMap: React.FC<{ address: string }> = ({ address }) => {
 export default OneMarkerMap;
 
 const Map = styled.div`
-  height: 30rem;
+  height: 20rem;
   margin: 2rem 0;
+  @media (min-width: 768px) {
+    height: 30rem;
+  }
 `;

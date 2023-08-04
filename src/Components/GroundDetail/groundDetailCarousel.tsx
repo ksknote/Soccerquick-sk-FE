@@ -48,9 +48,11 @@ const GroundDetailCarousel: React.FC<{ stadiums: DomDataType['stadiums'] }> = ({
 export default GroundDetailCarousel;
 
 const Wrap = styled.div`
-  padding-bottom: 75px;
+  padding-bottom: 5rem;
   overflow: hidden;
   @media (min-width: 768px) {
+    padding-bottom: 7.5rem;
+
     margin-bottom: 4rem;
   }
   .slick-dots {

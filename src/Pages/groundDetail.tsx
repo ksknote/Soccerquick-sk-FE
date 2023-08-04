@@ -114,7 +114,7 @@ const GroundDetail = () => {
     <>
       <Header />
       <HeaderCategory />
-      <MobileHeader title="경기장 리스트" />
+      <MobileHeader title={groundData ? groundData.title : '풋살 경기장'} />
       {groundData && (
         <GroundDetailContainer>
           <div className="slider">
@@ -241,7 +241,7 @@ const GroundDetailContainer = styled.div`
   margin: 0 auto 7rem auto;
   padding: 0 2rem;
   @media (min-width: 768px) {
-    margin: 0 auto;
+    margin: 2rem auto;
   }
 `;
 

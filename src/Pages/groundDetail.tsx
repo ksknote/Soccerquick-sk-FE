@@ -18,6 +18,7 @@ import starIcon from '../styles/icon/star.svg';
 import starFilledIcon from '../styles/icon/star_filled.svg';
 import homeIcon from '../styles/icon/home.svg';
 import alertModal from '../Components/Commons/alertModal';
+import MobileHeader from '../Components/MobileHeader';
 
 const GroundDetail = () => {
   const [groundData, setGroundData] = useState<DomDataType>();
@@ -113,6 +114,7 @@ const GroundDetail = () => {
     <>
       <Header />
       <HeaderCategory />
+      <MobileHeader title="경기장 리스트" />
       {groundData && (
         <GroundDetailContainer>
           <div className="slider">
@@ -236,8 +238,11 @@ export default GroundDetail;
 const GroundDetailContainer = styled.div`
   width: 100%;
   max-width: 120rem;
-  margin: 0 auto;
+  margin: 0 auto 7rem auto;
   padding: 0 2rem;
+  @media (min-width: 768px) {
+    margin: 0 auto;
+  }
 `;
 
 const GroundDetailHeader = styled.div`
@@ -381,9 +386,10 @@ const Source = styled.div`
 const ContentsBox = styled.div`
   box-sizing: border-box;
   border-bottom: 16px solid #f8fafb;
-  margin: 3rem auto;
+  padding: 3rem 0;
   @media (min-width: 1024px) {
     margin: 3rem;
+    padding: 2rem 0 5rem 0;
   }
 `;
 
@@ -441,11 +447,10 @@ const ProvidedItems = styled.div`
   > p {
     display: inline-block;
     height: 2.7rem;
-    padding: 0rem 0.8rem;
     margin: 2rem 0 0.5rem 0;
     background: #fafafa;
     border-radius: 0.4rem;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 400;
     color: #888888;
   }

@@ -232,17 +232,26 @@ const StyledReviewContainer = styled.div`
     align-items: center;
 
     > h2 {
-      font-size: 2.2rem;
-      font-weight: 700;
+      font-size: 1.6rem;
+      font-weight: 600;
       margin: 0.6rem 0;
     }
 
     > span {
       padding: 1rem;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
 
       &:hover {
         cursor: pointer;
+      }
+    }
+    @media (min-width: 1024px) {
+      > h2 {
+        font-size: 2.2rem;
+        font-weight: 700;
+      }
+      > span {
+        font-size: 1.4rem;
       }
     }
   }
@@ -252,7 +261,7 @@ const StyledReviews = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  margin: 2rem 0;
+  margin: 1rem 0;
   background-color: white;
   filter: drop-shadow(0 0 3px #dddddd);
   border-radius: 10px;
@@ -278,21 +287,20 @@ const StyledReviews = styled.div`
   }
 
   .user-name {
-    font-size: 1.7rem;
-    font-weight: 700;
+    font-size: 1.4rem;
+    font-weight: 500;
   }
 
   .review-time {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 400;
   }
 
   .review-content {
     display: flex;
     flex-direction: row;
-    padding-left: 1rem;
     margin-bottom: 1rem;
-    font-size: 1.7rem;
+    font-size: 1.3rem;
   }
 
   .review-edit-textarea {
@@ -342,14 +350,28 @@ const StyledReviews = styled.div`
       }
     }
   }
+  @media (min-width: 1024px) {
+    margin: 2rem 0;
+
+    .user-name {
+      font-size: 1.7rem;
+    }
+
+    .review-time {
+      font-size: 1.3rem;
+    }
+    .review-content {
+      font-size: 1.7rem;
+    }
+  }
 `;
 
 const StyledWriteReview = styled.div`
   display: flex;
   flex-direction: column;
-  height: 20rem;
+  height: 15rem;
   padding: 2rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
   background-color: white;
   filter: drop-shadow(0 0 3px #dddddd);
   border-radius: 10px;
@@ -366,12 +388,9 @@ const StyledWriteReview = styled.div`
     border: none;
     resize: none; /* 크기 조정 비활성화 */
     padding: 1rem;
-    font-size: 1.7rem;
+    font-size: 1.3rem;
 
     :focus {
-      border: 1.5px solid #dddddd;
-      border-radius: 1rem;
-      box-shadow: 1px 1px 10px #efefef;
       outline: none;
     }
   }
@@ -383,8 +402,8 @@ const StyledWriteReview = styled.div`
   }
 
   .write-review-button {
-    font-size: 1.5rem;
-    padding: 1rem 2rem;
+    font-size: 1.3rem;
+    padding: 0.7rem 1.3rem;
     border: 0.5px solid #cfcfcf;
     border-radius: 5px;
     background-color: white;
@@ -393,6 +412,20 @@ const StyledWriteReview = styled.div`
     &:hover {
       background-color: #09cf00;
       color: white;
+    }
+  }
+  @media (min-width: 1024px) {
+    height: 20rem;
+    margin-top: 2rem;
+    .write-review-textarea {
+      height: 70%;
+      padding: 1rem;
+      font-size: 1.7rem;
+    }
+    .write-review-button {
+      font-size: 1.5rem;
+      padding: 1rem 2rem;
+      border-radius: 5px;
     }
   }
 `;

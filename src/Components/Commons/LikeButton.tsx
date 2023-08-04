@@ -86,7 +86,7 @@ export default function LikeButton(props: LikeButtonProps) {
 
 const StyledLikeBtn = styled.button<{ isClicked: boolean }>`
   background-color: transparent;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 
   ${(props) =>
     props.isClicked &&
@@ -108,5 +108,11 @@ const StyledLikeBtn = styled.button<{ isClicked: boolean }>`
 
   &:hover {
     font-size: calc(1.5rem * 1.2);
+  }
+  @media (min-width: 1024px) {
+    font-size: 1.5rem;
+    &:hover {
+      font-size: calc(1.3rem * 1.2);
+    }
   }
 `;

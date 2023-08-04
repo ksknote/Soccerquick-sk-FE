@@ -57,7 +57,7 @@ function MyPageCheckPassword({
       <StyledShortInfoBox>
         <StyledMarginTopTitle>내 정보 확인</StyledMarginTopTitle>
         <StyledMarginBottomInputBox>
-          <label>비밀번호 확인</label>
+          <label>비밀번호</label>
           <StyledInfoInput
             name="password"
             type="password"
@@ -89,4 +89,5 @@ const StyledMarginTopTitle = styled(StyledTitle)`
 
 const StyledMarginBottomInputBox = styled(StyledInputBox)`
   height: 6rem;
+  width: 90%;
 `;

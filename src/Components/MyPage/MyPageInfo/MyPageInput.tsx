@@ -71,7 +71,6 @@ export function MyPageInput({
 
   return (
     <StyledInputBox>
-      {' '}
       <label>{title}</label>
       <StyledInfoInput
         name={name}
@@ -80,9 +79,7 @@ export function MyPageInput({
         onChange={handleChange}
         disabled={isDisabled}
       />
-      {noButton ? (
-        ''
-      ) : (
+      {!noButton && (
         <>
           {isDisabled ? (
             <StyledButton onClick={handleChangeButton}>수정</StyledButton>
@@ -102,20 +99,22 @@ export function MyPageInput({
 }
 
 export const StyledInputBox = styled.div`
-  display: flex;
+  width: 100%;
+  display: grid;
   justify-content: stretch;
   align-items: center;
-  height: 100%;
-  width: 50rem;
   background-color: #f9f9f9;
+  grid-template-columns: 8rem 1fr 6rem;
+  font-size: 1.2rem;
+  border-bottom: 0.4rem solid white;
 
   & > label {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 10rem;
-    height: 5.5rem;
-    font-weight: bold;
+    justify-content: start;
+    height: 5rem;
+    padding-left: 1.2rem;
+    font-weight: 500;
     background-color: #f9f9f9;
     border-right: 1px solid #e5e5e5;
   }
@@ -123,22 +122,38 @@ export const StyledInputBox = styled.div`
   & > button {
     justify-self: stretch;
   }
+
+  @media (min-width: 372px) {
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    width: 90%;
+    font-size: 1.3rem;
+    grid-template-columns: 11.5rem 1fr 10rem;
+
+    & > label {
+      height: 5rem;
+    }
+  }
 `;
 
 export const StyledInfoInput = styled.input`
-  width: 30rem;
-  height: 5.5rem;
+  height: 5rem;
   padding-left: 15px;
   outline: none;
   border: none;
-  font-size: 1.6rem;
   border-right: 1px solid #e5e5e5;
-  /* } */
+  @media (min-width: 768px) {
+    font-size: 1.4rem;
+    height: 5.5rem;
+  }
 `;
 
 export const StyledButton = styled.button`
-  width: 10rem;
-  height: 5.5rem;
-  font-size: 1rem;
+  height: 5rem;
   background-color: #f9f9f9;
+  @media (min-width: 768px) {
+    height: 5.5rem;
+  }
 `;

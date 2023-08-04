@@ -1,4 +1,4 @@
-import { GroupPost } from './SearchMyPost/SearchMyTeamPost';
+import { GroupPost } from '../../Pages/MyPage';
 import { DomReviewType, ReviewPost } from './SearchMyPost/SearchMyReviewPost';
 
 export const changeGroupObjectToArray = (item: GroupPost): Array<string> => {

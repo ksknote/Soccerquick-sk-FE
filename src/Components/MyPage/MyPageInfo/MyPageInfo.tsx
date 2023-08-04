@@ -177,10 +177,10 @@ export function MyPageInfo({
 
   return (
     <StyledInfoContainer>
-      {' '}
       <StyledInfoBox>
-        {' '}
-        <StyledTitle>내 정보</StyledTitle>
+        <StyledTitle>
+          <p>내 정보</p>
+        </StyledTitle>
         <StyledInfoForm onSubmit={handleSubmit}>
           <MyPageInput
             title="아이디"
@@ -218,19 +218,19 @@ export function MyPageInfo({
             value={userData.gender}
             noButton
           />
+          <StyledErrorDiv>{errorMsg.formMsg}</StyledErrorDiv>
           <div>
-            {' '}
             <StyledSubmitButton>변경</StyledSubmitButton>
             <StyledRedSubmitButton onClick={handleWithDrawalClick}>
               회원 탈퇴
             </StyledRedSubmitButton>
           </div>
         </StyledInfoForm>
-        <StyledErrorDiv>{errorMsg.formMsg}</StyledErrorDiv>
       </StyledInfoBox>
       <StyledInfoBox>
-        {' '}
-        <StyledTitle>비밀번호 변경</StyledTitle>
+        <StyledTitle>
+          <p>비밀번호 변경</p>
+        </StyledTitle>
         <StyledShortInfoForm onSubmit={handleSubmit}>
           <MyPageInput
             title="새 비밀번호"
@@ -246,9 +246,9 @@ export function MyPageInfo({
             value={passwordForm.newPasswordConfirm}
             setPasswordForm={setPasswordForm}
           />
+          <StyledErrorDiv>{errorMsg.passwordFormMsg}</StyledErrorDiv>
           <StyledSubmitButton>변경</StyledSubmitButton>
         </StyledShortInfoForm>
-        <StyledErrorDiv>{errorMsg.passwordFormMsg}</StyledErrorDiv>
       </StyledInfoBox>
     </StyledInfoContainer>
   );
@@ -257,57 +257,71 @@ export function MyPageInfo({
 export const StyledInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
-
-  & > div:last-child {
-    height: 43rem;
-    margin-bottom: 2.5rem;
+  filter: drop-shadow(0 0 0.3rem #d3d3d3);
+  margin-bottom: 2.5rem;
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 
 export const StyledInfoBox = styled.div`
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 60rem;
   background: rgb(253, 253, 253);
   border-radius: 16px;
   margin-top: 2.5rem;
-  & > div:last-child {
-    margin-bottom: 1rem;
+  padding: 1rem 1rem 2rem 1rem;
+
+  align-self: center;
+  @media (min-width: 768px) {
+    width: 60rem;
+    padding: 2rem;
   }
 `;
 
 export const StyledTitle = styled.div`
   align-self: flex-start;
-  font-size: 2.5rem;
+  font-size: 1.7rem;
   font-weight: bold;
-  margin: 2rem 0 2rem 5rem;
-  width: 50rem;
+  padding-bottom: 2rem;
+  margin: 2rem auto;
+  width: 90%;
   border-bottom: 3px solid #e5e5e5;
+  @media (min-width: 768px) {
+    width: 50rem;
+    font-size: 2rem;
+    p {
+      margin-left: 1rem;
+    }
+  }
 `;
 
 const StyledInfoForm = styled.form`
+  width: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin-top: 1rem;
-  height: 70%;
-
   & > div:last-child {
     height: 100%;
     align-self: end;
+  }
+  @media (min-width: 768px) {
+    width: 100%;
   }
 `;
 
 const StyledSubmitButton = styled.button`
   align-self: end;
   width: 8rem;
+  height: 3rem;
   margin: 1.5rem 1rem 0 0;
-  font-size: 1rem;
+  font-size: 1.2rem;
   background-color: #09cf00;
   color: #fff;
   border-radius: 0.5rem;
@@ -317,6 +331,10 @@ const StyledSubmitButton = styled.button`
     background-color: #1bbd1b;
     color: #fff;
     border: 1px solid #1bbd1b;
+  }
+  @media (min-width: 768px) {
+    height: 4rem;
+    font-size: 1.3rem;
   }
 `;
 
@@ -335,8 +353,12 @@ const StyledErrorDiv = styled.div`
   color: red;
   padding-top: 1rem;
   height: 3rem;
+  font-size: 1.3rem;
+  @media (min-width: 768px) {
+    font-size: 1.3rem;
+  }
 `;
 
 const StyledShortInfoForm = styled(StyledInfoForm)`
-  height: 14rem;
+  /* height: 14rem; */
 `;

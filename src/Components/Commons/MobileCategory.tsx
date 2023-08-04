@@ -5,16 +5,21 @@ import reviewIcon from '../../styles/icon/mobileCateogry/reviewIcon.svg';
 import homeIcon from '../../styles/icon/mobileCateogry/homeIcon.svg';
 import fieldIcon from '../../styles/icon/mobileCateogry/fieldIcon.svg';
 import teamIcon from '../../styles/icon/mobileCateogry/teamIcon.svg';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { isLogInSelector } from '../../ReduxStore/modules/Auth/authSelectors';
 
 function MobileCategory() {
   const navigate = useNavigate();
-  const location = useLocation();
+  const isLogin = useSelector(isLogInSelector);
 
-  const isHome = location.pathname === '/';
-  const isGroundPage = location.pathname.includes('/ground');
-  const isReviewPage = location.pathname.includes('/review');
-  const isTeampage = location.pathname.includes('/teampage');
+  const handleUserTab = () => {
+    if (isLogin) {
+      navigate('/mypage');
+    } else {
+      navigate('/auth');
+    }
+  };
 
   return (
     <Container>
@@ -51,7 +56,7 @@ function MobileCategory() {
         <Label>리뷰</Label>
       </Tab>
       <Tab>
-        <Icon src={userIcon} alt="user" />
+        <Icon src={userIcon} alt="user" onClick={() => handleUserTab()} />
         <Label>My</Label>
       </Tab>
     </Container>

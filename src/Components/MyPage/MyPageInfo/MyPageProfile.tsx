@@ -66,35 +66,36 @@ function MyProfile({
 export default MyProfile;
 
 const StyledProfileContainer = styled.div`
+  width: 25rem;
+  height: 50rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   align-self: start;
-  width: 25rem;
-  height: 64%;
   border-radius: 16px;
 
   @media (max-width: 768px) {
+    width: 100%;
+    height: 30rem;
     align-self: center;
     flex-direction: row;
-    width: 60rem;
     padding-top: 2.5rem;
   }
 `;
 
 const StyledProfileTop = styled.div`
+  width: 100%;
+  height: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 50%;
-  margin: 0.3rem;
+  margin-top: 2.5rem;
   background-color: #fdfdfd;
   border-bottom: 1px solid rgb(247 247 247);
   border-radius: 16px 16px 0 0;
-
+  filter: drop-shadow(0 0 0.3rem #d3d3d3);
   @media (max-width: 768px) {
     width: 50%;
     height: 100%;
@@ -111,6 +112,8 @@ const StyledProfileBottom = styled.div`
   height: 40%;
   background-color: #fdfdfd;
   border-radius: 0 0 16px 16px;
+  filter: drop-shadow(0 0 0.3rem #d3d3d3);
+
   & > div:nth-child(2) {
     margin-bottom: 2.5rem;
   }

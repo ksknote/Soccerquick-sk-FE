@@ -1,5 +1,8 @@
 .swal2-html-container {
-  font-size: 1.9rem !important;
+  font-size: 1.4rem !important;
+  @media (min-width: 768px) {
+    font-size: 1.9rem !important;
+  }
 }
 .swal2-popup {
   padding: 2rem 0 !important;

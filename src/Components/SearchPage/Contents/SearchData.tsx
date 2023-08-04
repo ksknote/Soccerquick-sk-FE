@@ -371,7 +371,7 @@ const StyledMainTd = styled.td`
     width: 69%;
   }
   @media (min-width: 1024px) {
-    font-size: 1.9rem;
+    font-size: 1.8rem;
   }
 `;
 

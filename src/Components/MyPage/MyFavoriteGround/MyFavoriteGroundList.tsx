@@ -11,6 +11,8 @@ import {
 import { DomDataType } from '../../../Pages/SearchPage';
 import { ProvidedElementList } from '../../SearchPage/Contents/SearchData';
 import MyPagination from '../MyPagination';
+import MobileHeader from '../../MobileHeader';
+import chevronIcon from '../../../styles/icon/chevron_grey.svg';
 
 type MyFavoriteGroundListProps = {
   favoritePlaygrounds: Array<string>;
@@ -59,72 +61,72 @@ function MyFavoriteGroundList({
   const navigate = useNavigate();
 
   return (
-    <Searchpage>
-      <SearchPageBody>
-        <StyledTitleDiv>
-          즐겨찾는 경기장
-          <span> ( 총 {totalItemsCount} )</span>
-        </StyledTitleDiv>
-        <table>
-          <thead>
-            <StyledLabelTr>
-              <th></th>
-              <th>지역</th>
-              <th>경기장</th>
-              <th>상세조회</th>
-            </StyledLabelTr>
-          </thead>
-          <tbody>
-            {currentData.length > 0 ? (
-              currentData.map((item, idx) => (
-                <StyledTr key={item.title + idx}>
-                  <StyledCheckboxTd>
-                    <label htmlFor={item.title}></label>
-                  </StyledCheckboxTd>
-                  <StyledAddressTd>{item.address.area}</StyledAddressTd>
-                  <StyledMainTd>
-                    <p>{item.title}</p>
-                    <StyledTableCell>
-                      {Object.keys(ProvidedElementList).map(
-                        (provided) =>
-                          item[provided] && (
-                            <StyledTable key={provided} data={provided}>
-                              {ProvidedElementList[provided]}
-                            </StyledTable>
-                          )
-                      )}
-                    </StyledTableCell>
-                  </StyledMainTd>
+    <Wrapper>
+      <MobileHeader title="즐겨찾는 경기장" />
+      <Searchpage>
+        <SearchPageBody>
+          <StyledTitleDiv>
+            즐겨찾는 경기장
+            <span> ( 총 {totalItemsCount} 건 )</span>
+          </StyledTitleDiv>
+          <StyledTableContainer>
+            <StyledThead>
+              <StyledLabelTr>
+                <th>지역</th>
+                <th>경기장</th>
+                <th>상세조회</th>
+              </StyledLabelTr>
+            </StyledThead>
+            <tbody>
+              {currentData.length > 0 ? (
+                currentData.map((item, idx) => (
+                  <StyledTr key={item.title + idx}>
+                    <StyledAddressTd>{item.address.area}</StyledAddressTd>
+                    <StyledMainTd>
+                      <StyledAddress>{item.address.area}</StyledAddress>
 
-                  <td>
-                    <StyledButton
-                      onClick={() => {
-                        navigate(`/ground/${item.dom_id}`);
-                      }}
-                    >
-                      조회
-                    </StyledButton>
-                  </td>
+                      <p>{item.title}</p>
+                      <StyledTableCell>
+                        {Object.keys(ProvidedElementList).map(
+                          (provided) =>
+                            item[provided] && (
+                              <StyledTable key={provided} data={provided}>
+                                {ProvidedElementList[provided]}
+                              </StyledTable>
+                            )
+                        )}
+                      </StyledTableCell>
+                    </StyledMainTd>
+
+                    <td align="center" valign="middle">
+                      <StyledButton
+                        onClick={() => {
+                          navigate(`/ground/${item.dom_id}`);
+                        }}
+                      >
+                        조회
+                      </StyledButton>
+                    </td>
+                  </StyledTr>
+                ))
+              ) : (
+                <StyledTr>
+                  {/* <td></td> */}
+                  <StyledMessageTd>즐겨찾는 구장이 없습니다</StyledMessageTd>
+                  {/* <td></td> */}
                 </StyledTr>
-              ))
-            ) : (
-              <StyledTr>
-                <td></td>
-                <td></td>
-                <StyledMessageTd>즐겨찾는 구장이 없습니다</StyledMessageTd>
-                <td></td>
-              </StyledTr>
-            )}
-          </tbody>
-        </table>
-      </SearchPageBody>
-      <MyPagination
-        totalItemsCount={totalItemsCount ? totalItemsCount : 1}
-        itemsPerPage={itemsPerPage}
-        setCurrentPage={setCurrentPage}
-        currentPage={currentPage}
-      />
-    </Searchpage>
+              )}
+            </tbody>
+          </StyledTableContainer>
+        </SearchPageBody>
+        <MyPagination
+          totalItemsCount={totalItemsCount ? totalItemsCount : 1}
+          itemsPerPage={itemsPerPage}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
+      </Searchpage>
+    </Wrapper>
   );
 }
 
@@ -170,15 +172,28 @@ const getBackgroundColorBydata = (data: string) => {
   }
 };
 
+const Wrapper = styled.div`
+  width: 100%;
+  max-width: 120rem;
+  min-height: 100vh;
+  height: 100%;
+  @media (max-width: 768px) {
+    margin: 0 auto 8rem auto;
+  }
+`;
+
 const Searchpage = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
   font-size: 1.7rem;
-  max-width: 120rem;
-  min-height: 100rem;
-  margin-top: 2rem;
+  padding: 0 3rem 1rem 3rem;
+  @media (min-width: 768px) {
+    margin: 2rem auto;
+  }
 `;
 
 const SearchPageBody = styled.div`
@@ -206,24 +221,37 @@ const StyledTitleDiv = styled.div`
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  padding-left: 4rem;
 
   > span {
     padding-left: 1rem;
     align-self: flex-end;
-    font-size: 0.5rem;
+    font-size: 1.5rem;
+    line-height: 3rem;
     color: grey;
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const StyledTableContainer = styled.table`
+  margin: 2rem 0;
+`;
+
+const StyledThead = styled.thead`
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
 const StyledLabelTr = styled.tr`
-  height: 6rem;
+  height: 5rem;
   padding-bottom: 1rem;
   background-color: #fafafa;
   border-bottom: 1px solid #d5d5d5ae;
   box-shadow: 0px 5px 5px -5px #cbc9c9d5;
   th {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 500;
     :nth-child(2) {
       text-align: start;
@@ -233,91 +261,115 @@ const StyledLabelTr = styled.tr`
       padding-right: 5rem;
     }
   }
+  @media (min-width: 1024px) {
+    font-size: 1.8rem;
+  }
 `;
 
 const StyledTableCell = styled.div`
   display: inline-block;
-  height: 2rem;
+  height: 3rem;
   padding: 0;
-  margin: 1.2rem 1rem 0rem 0;
+  padding-top: 0.5rem;
   border-radius: 0.4rem;
   font-size: 1.5rem;
   font-weight: 400;
   color: #888888;
-  line-height: 2rem;
+  line-height: 3rem;
+  overflow: hidden;
+
+  @media (min-width: 1024px) {
+    padding: 0;
+    margin: 1.2rem 1rem 0rem 0;
+  }
 `;
 
 const StyledTable = styled.div<{ data: string }>`
   display: inline;
   height: 4rem;
-  padding: 0.2rem 1rem 0.3rem 1rem;
-  margin-right: 1.2rem;
+  padding: 0.1rem 1rem 0.1rem 1rem;
+  margin-right: 0.5rem;
   border: 0.1rem solid #eeeeee;
   border-radius: 2rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 400;
   color: ${({ data }) => getColorBydata(data)};
   background-color: ${({ data }) => getBackgroundColorBydata(data)};
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @media (min-width: 1024px) {
+    font-size: 1.4rem;
+    margin-right: 1.2rem;
+  }
 `;
 
 const StyledTr = styled.tr`
-  height: 13rem;
+  height: 11rem;
   margin: 1rem 1rem;
   padding: 2rem 1rem;
   font-size: 1.6rem;
   border-bottom: 0.1rem solid #dddddd;
   background-color: #fff;
-`;
-
-const StyledCheckboxTd = styled.td`
-  padding-left: 3rem;
-  input {
-    display: none;
-
-    + label {
-      display: inline-block;
-      width: 2rem;
-      height: 2rem;
-      border: 0.15rem solid var(--color--darkgreen);
-      border-radius: 0.5rem;
-      cursor: pointer;
-    }
-    :checked + label {
-      background-image: url(${checkIcon});
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
+  @media (min-width: 1024px) {
+    height: 12rem;
   }
 `;
 
 const StyledAddressTd = styled.td`
-  font-size: 1.6rem;
-  font-weight: 500;
-  text-align: center;
-  padding-left: 1rem;
+  display: none;
+  @media (min-width: 768px) {
+    display: table-cell;
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-align: center;
+    padding-left: 1rem;
+  }
+  @media (min-width: 1024px) {
+    font-size: 1.6rem;
+  }
 `;
 
 const StyledMainTd = styled.td`
-  padding-left: 6rem;
   max-width: 48rem;
+  font-size: 1.6rem;
   p {
-    font-size: 1.9rem;
+    cursor: pointer;
+  }
+  @media (min-width: 768px) {
+    padding-left: 4rem;
+    max-width: 48rem;
+  }
+  @media (min-width: 1024px) {
+    font-size: 1.8rem;
+  }
+`;
+
+const StyledAddress = styled.div`
+  font-size: 1.3rem;
+  color: #696767;
+  font-weight: 500;
+  padding-bottom: 0.5rem;
+  @media (min-width: 768px) {
+    display: none;
   }
 `;
 
 const StyledButton = styled.button`
-  width: 10rem;
+  width: 7rem;
   height: 3.8rem;
   border-radius: 0.7rem;
   background-color: var(--color--green);
   color: white;
   font-size: 1.4rem;
   font-weight: 500;
-  margin-right: 3rem;
 
   &:hover {
     background-color: #1bbd1b;
+  }
+  @media (min-width: 768px) {
+    width: 10rem;
+    height: 3.8rem;
   }
 `;
 

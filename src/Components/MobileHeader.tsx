@@ -1,11 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import chevron from '../styles/icon/chevron_green.svg';
+
+import chevron from '../styles/icon/chevron_grey.svg';
 function MobileHeader({ title }: { title: string }) {
+  const navigate = useNavigate();
   return (
     <Title>
-      <img src={chevron} alt="chevron" />
-      <span>{title}</span>
+      <img src={chevron} alt="chevron" onClick={() => navigate(-1)} />
+      <p>{title}</p>
+      <div></div>
     </Title>
   );
 }
@@ -14,16 +18,20 @@ export default MobileHeader;
 
 const Title = styled.div`
   padding: 1.5rem 2rem;
-  display: flex;
-  aline-items: center;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr 2.5rem;
+  border-bottom: 0.15rem solid #dfdfdf;
   img {
-    width: 0.8rem;
+    display: flex;
+    align-items: center;
+    width: 2rem;
+    padding-top: 0.2rem;
   }
-  span {
-    padding-left: 0.6rem;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: rgb(113, 193, 113);
+  p {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #585858;
+    text-align: center;
   }
   @media (min-width: 768px) {
     display: none;

@@ -4,8 +4,12 @@ import styled from 'styled-components';
 export const MainPageBody = styled.div`
   width: 100%;
   max-width: 120rem;
-  min-height: 90rem;
-  margin: 0 auto 15rem auto;
+  height: 100%;
+  min-height: 100vh;
+  margin: auto;
+  @media (max-width: 768px) {
+    padding-bottom: 8rem;
+  }
 `;
 
 // SelectCategory
@@ -71,7 +75,6 @@ export const StyledHeader = styled.div`
     margin: 0;
     @media (min-width: 1024px) {
       font-size: 3rem;
-      padding: 0 0 3rem 1rem;
     }
   }
   h3 {
@@ -80,7 +83,8 @@ export const StyledHeader = styled.div`
     color: #9da7ae;
     margin: 1rem 0 2rem 0;
     @media (min-width: 1024px) {
-      font-size: 1.9rem;
+      font-size: 1.8rem;
+      margin: 1rem 0 3rem 0;
     }
   }
 `;
@@ -95,8 +99,8 @@ export const Teampage = styled.div`
 `;
 
 export const StyledTotalNumber = styled.p`
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
   padding-left: 1rem;
   font-size: 1.5rem;
   color: #5e5d5d;
@@ -107,7 +111,6 @@ export const StyledTotalNumber = styled.p`
 
 export const TeamPageBody = styled.div`
   justify-content: space-between;
-  height: 70rem;
   width: 100%;
   table {
     width: 100%;
@@ -258,13 +261,20 @@ export const TeamPageFooter = styled.div`
 `;
 
 export const StyledWriteButton = styled.button`
-  width: 13rem;
-  height: 5rem;
+  width: 10rem;
+  height: 4rem;
   border-radius: 0.8rem;
   background-color: var(--color--green);
   color: white;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   font-weight: 600;
+  margin-left: 1rem;
+  @media (min-width: 1024px) {
+    font-size: 1.7rem;
+
+    width: 12rem;
+    height: 5rem;
+  }
 `;
 
 export const PageSelect = styled.div`
@@ -298,4 +308,119 @@ export const PageButton = styled.button<{
   &.selected {
     font-weight: bold;
   }
+`;
+
+//TeamList
+
+export const OptionContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+`;
+
+export const TeamRecruitContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-row-gap: 2rem;
+  grid-column-gap: 3rem;
+  margin-top: 1.5rem;
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 3rem;
+  }
+`;
+
+export const TeamRecruitLi = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 16rem;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  gap: 1.5rem;
+  background: white;
+  filter: drop-shadow(rgb(211, 211, 211) 0px 0px 0.3rem);
+  border-radius: 2rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+  @media (min-width: 1024px) {
+    height: 17rem;
+    font-size: 1.5rem;
+  }
+`;
+
+export const ContentHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const Status = styled.span<{ status: string }>`
+  width: fit-content;
+  padding: 0.2rem 1rem 0.3rem 1rem;
+  border: 0.1rem solid #eeeeee;
+  border-radius: 2rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: ${({ status }) => (status === '모집중' ? 'green' : 'gray')};
+  background-color: ${({ status }) =>
+    status === '모집중' ? '#e6ffeb' : '#eeeeee'};
+  @media (min-width: 1024px) {
+    font-size: 1.4rem;
+  }
+`;
+
+export const ContentTitle = styled.div`
+  display: flex;
+  font-size: 1.6rem;
+  span {
+    color: #6e6e6e;
+    font-weight: 500;
+    :after {
+      content: '|';
+      font-weight: 300;
+      color: #b1b1b1;
+      margin: 0 0.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    font-size: 1.8rem;
+  }
+`;
+
+export const Position = styled.div`
+  p {
+    width: fit-content;
+    padding: 0.1rem 0.5rem;
+    /* border: 0.1rem solid #eeeeee;
+    border-radius: 0.7rem; */
+    font-weight: 400;
+    color: #3f3f3f;
+    :first-child {
+      margin-bottom: 0.2rem;
+      :before {
+        content: '|';
+        color: #2f7fe8;
+        font-weight: 800;
+        margin-right: 0.5rem;
+      }
+      span {
+        color: #2f7fe8;
+      }
+    }
+    :last-child {
+      :before {
+        content: '|';
+        color: #e8452f;
+        font-weight: 800;
+        margin-right: 0.5rem;
+      }
+      span {
+        color: #e8452f;
+      }
+    }
+  }
+`;
+
+export const Author = styled.div`
+  color: #616161;
 `;

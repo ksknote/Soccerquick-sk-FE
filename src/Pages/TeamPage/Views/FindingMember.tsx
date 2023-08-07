@@ -4,6 +4,7 @@ import FindingMemberPageBoard from './FindingMemberPageBoard';
 import { StyledHeader } from '../Styles/ViewsStyle';
 import { DataProps, FindMemberFilter } from '../../../Types/TeamPageType';
 import axios from 'axios';
+import TeamList from './TeamList';
 
 function FindingMember() {
   const [status, setStatus] = React.useState('');
@@ -125,7 +126,7 @@ function FindingMember() {
         <h1>팀원 모집・신청</h1>
         <h3>싸커퀵에서 함께할 팀을 만들어보세요! 👋🏻</h3>
       </StyledHeader>
-      <FindingMemberPageBoard
+      <TeamList
         dropdownList={dropdownList}
         handleReset={handleReset}
         filteredData={filteredData}

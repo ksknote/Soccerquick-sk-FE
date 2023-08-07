@@ -65,6 +65,10 @@ function MyFavoriteGroundList({
       <MobileHeader title="즐겨찾는 경기장" />
       <Searchpage>
         <SearchPageBody>
+          <StyledBoardTitle onClick={() => navigate(-1)}>
+            <img src={chevronIcon} alt="" />
+            <span>마이페이지</span>
+          </StyledBoardTitle>
           <StyledTitleDiv>
             즐겨찾는 경기장
             <span> ( 총 {totalItemsCount} 건 )</span>
@@ -177,8 +181,9 @@ const Wrapper = styled.div`
   max-width: 120rem;
   min-height: 100vh;
   height: 100%;
+  margin: auto;
   @media (max-width: 768px) {
-    margin: 0 auto 8rem auto;
+    padding-bottom: 8rem;
   }
 `;
 
@@ -201,7 +206,8 @@ const SearchPageBody = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
+
   table {
     width: 100%;
   }
@@ -212,6 +218,25 @@ const SearchPageBody = styled.div`
   td {
     justify-content: center;
     align-items: center;
+  }
+  @media (min-width: 768px) {
+    margin-bottom: 2rem;
+  }
+`;
+
+const StyledBoardTitle = styled.div`
+  display: none;
+  @media (min-width: 768px) {
+    display: flex;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: grey;
+    padding-bottom: 0.3rem;
+    cursor: pointer;
+    img {
+      width: 1.3rem;
+      margin-right: 0.3rem;
+    }
   }
 `;
 
@@ -235,7 +260,9 @@ const StyledTitleDiv = styled.div`
 `;
 
 const StyledTableContainer = styled.table`
-  margin: 2rem 0;
+  @media (min-width: 768px) {
+    margin: 2rem 0;
+  }
 `;
 
 const StyledThead = styled.thead`

@@ -17,7 +17,7 @@ const StyledBody = styled.div`
   min-height: 10rem;
   white-space: pre-wrap;
   font-size: 1.3rem;
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     padding: 2rem 0;
     font-size: 2rem;
     min-height: 20rem;

@@ -120,6 +120,7 @@ export interface Accept {
   name: string;
   position: string;
   level: string;
+  gender: string;
   contents: string;
 }
 

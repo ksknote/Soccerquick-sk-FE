@@ -9,6 +9,7 @@ import {
   ModalPage,
   DetailPage,
   StyledHeader,
+  StyledOption,
   StyledSubTitle,
   StyledBlock,
   StyledInput,
@@ -80,17 +81,18 @@ function DetailModal(props: SumbitModalProps) {
     <>
       <Modal>
         <ModalPage>
-          <StyledExitButton>
-            <button
+          <StyledHeader>
+            <h2>팀 신청하기</h2>
+            <StyledExitButton
               onClick={() => {
                 setShowModal(false);
               }}
             >
               ×
-            </button>
-          </StyledExitButton>
+            </StyledExitButton>
+          </StyledHeader>
           <DetailPage>
-            <StyledHeader>
+            <StyledOption>
               <DropDown
                 list={FILTERING_OPTIONS.findingTeam.position}
                 selected={position}
@@ -102,7 +104,7 @@ function DetailModal(props: SumbitModalProps) {
                 selected={skill}
                 setSelected={setSkill}
               />
-            </StyledHeader>
+            </StyledOption>
             <StyledSubTitle>
               <StyledBlock>
                 <StyledSpan>메모</StyledSpan>

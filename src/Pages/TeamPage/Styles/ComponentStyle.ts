@@ -40,7 +40,7 @@ export const StyledAuthorDiv = styled.div<{ gender?: string }>`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding-bottom: 1rem;
+  /* padding-bottom: 1rem; */
   p {
     font-size: 1.3rem;
     padding-left: 1rem;
@@ -64,9 +64,9 @@ export const StyledImgDiv = styled.div`
   }
 `;
 
-export const StyledCommentDetailDiv = styled.div`
+export const StyledDetailDiv = styled.div`
   font-size: 1.3rem;
-  padding-top: 0.7rem;
+  padding: 0.7rem 0;
   > div {
     display: flex;
     justify-content: flex-start;
@@ -78,9 +78,10 @@ export const StyledCommentDetailDiv = styled.div`
     padding: 0 0.8rem;
     border-radius: 0.5rem;
     margin-right: 0.7rem;
+    line-height: 2.5rem;
   }
   @media (min-width: 1024px) {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     padding: 0.7rem 0;
     span {
       margin-right: 1rem;
@@ -158,24 +159,35 @@ export const StyledCommentButtons = styled.div`
   justify-content: flex-end;
 
   button {
-    width: 11rem;
-    height: 4.5rem;
+    width: 6rem;
+    height: 3.2rem;
     border-radius: 0.7rem;
     background-color: var(--color--green);
     color: white;
-    font-size: 1.7rem;
+    font-size: 1.2rem;
     font-weight: 600;
     img {
-      width: 2rem;
+      width: 1.5rem;
       vertical-align: middle;
       padding: 0 0.3rem 0.2rem 0;
     }
 
     :first-child {
-      margin-right: 1rem;
+      margin-right: 0.7rem;
       background-color: white;
       color: #787878;
       filter: drop-shadow(0 0 0.1rem grey);
+    }
+    @media (min-width: 1024px) {
+      width: 11rem;
+      height: 4.5rem;
+      font-size: 1.7rem;
+      img {
+        width: 2rem;
+      }
+      :first-child {
+        margin-right: 1rem;
+      }
     }
   }
 `;
@@ -202,29 +214,36 @@ export const ModalPage = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  height: 28rem;
+  height: 100%;
   background-color: rgba(255, 255, 255);
   border-radius: 2rem;
   z-index: 501;
   padding: 2rem;
   @media (min-width: 768px) {
     width: 70rem;
+    height: 32rem;
   }
   @media (min-width: 1024px) {
-    height: 30rem;
   }
 `;
 
-export const StyledExitButton = styled.div`
+export const StyledHeader = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-end;
-  button {
-    background: none;
-    font-size: 1.7rem;
-    @media (min-width: 768px) {
-      font-size: 2rem;
-    }
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin: 0;
+  }
+`;
+
+export const StyledExitButton = styled.button`
+  background: none;
+  font-size: 1.7rem;
+  @media (min-width: 768px) {
+    font-size: 2rem;
   }
 `;
 
@@ -249,11 +268,11 @@ export const DetailPage = styled.div`
   }
 `;
 
-export const StyledHeader = styled.div`
+export const StyledOption = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #dddddd;
 `;
 
 export const StyledSubTitle = styled.div`

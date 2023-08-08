@@ -14,7 +14,7 @@ import {
   CommentLiContainer,
   StyledAuthorDiv,
   StyledImgDiv,
-  StyledCommentDetailDiv,
+  StyledDetailDiv,
   StyledGender,
   StyledPosition,
   StyledLevel,
@@ -102,7 +102,7 @@ function Comment(props: CommentProps) {
               <p>{applicant.name}</p>
             </StyledAuthorDiv>
             <StyledContents>{applicant.contents}</StyledContents>
-            <StyledCommentDetailDiv>
+            <StyledDetailDiv>
               <StyledGender gender={applicant.gender}>
                 #{applicant.gender}
               </StyledGender>
@@ -115,7 +115,7 @@ function Comment(props: CommentProps) {
               <StyledLevel level={applicant.level}>
                 #{applicant.level}
               </StyledLevel>
-            </StyledCommentDetailDiv>
+            </StyledDetailDiv>
             {userData?.name === user && (
               <StyledCommentButtons>
                 <button onClick={() => rejectMember(applicant.id)}>거절</button>

@@ -298,6 +298,9 @@ export const StyledAuthorButtonContainer = styled.div`
     color: lightgray;
   }
   @media (min-width: 1024px) {
+    button {
+      font-size: 1.7rem;
+    }
     margin: 2rem auto;
   }
 `;

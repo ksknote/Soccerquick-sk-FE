@@ -2,17 +2,23 @@ import React from 'react';
 import {
   Modal,
   ModalPage,
-  DetailPage,
   StyledHeader,
+  StyledExitButton,
+  StyledOption,
+  StyledAuthorDiv,
+  StyledGender,
   StyledPosition,
   StyledLevel,
   StyledImgDiv,
+  StyledDetailDiv,
 } from '../../Pages/TeamPage/Styles/ComponentStyle';
 import {
   StyledGridDiv,
   StyledAcceptedMember,
+  StyledMemberHeader,
   StyledNameDiv,
   StyledBody,
+  StyledContent,
   StyledViewButton,
 } from '../../Pages/TeamPage/Styles/AcceptStyle';
 import { AcceptedModalProps } from '../../Types/TeamPageType';
@@ -26,12 +32,14 @@ function Accepted(props: AcceptedModalProps) {
   const acceptGridData = [...accept];
   const anonymous = {
     name: '비회원 팀원입니다.',
+    gender: '',
     position: '',
     level: '',
     contents: '',
   };
   const notyet = {
     name: '모집 중...',
+    gender: '',
     position: '',
     level: '',
     contents: '',
@@ -57,85 +65,74 @@ function Accepted(props: AcceptedModalProps) {
   return (
     <>
       <Modal>
-        <ModalPage style={{ width: '70rem', height: '70rem' }}>
-          <button
-            style={{
-              position: 'absolute',
-              top: '10px',
-              right: '10px',
-            }}
-            onClick={() => {
-              setAcceptModal(false);
-            }}
-          >
-            X
-          </button>
-          <DetailPage>
-            <StyledHeader style={{ justifyContent: 'flex-start' }}>
-              <div>참여자 명단</div>
-              <div style={{ display: 'flex' }}>
-                <StyledViewButton
-                  isClick={wideView}
-                  onClick={() => {
-                    setWideView(true);
-                    setGridView(false);
-                  }}
-                >
-                  크게 보기
-                </StyledViewButton>
-                <StyledViewButton
-                  isClick={gridView}
-                  onClick={() => {
-                    setWideView(false);
-                    setGridView(true);
-                  }}
-                >
-                  모아 보기
-                </StyledViewButton>
-              </div>
-            </StyledHeader>
-          </DetailPage>
+        <ModalPage style={{ height: '45rem' }}>
+          <StyledHeader>
+            <h2>참여자 명단</h2>
+            <StyledExitButton
+              onClick={() => {
+                setAcceptModal(false);
+              }}
+            >
+              ×
+            </StyledExitButton>
+          </StyledHeader>
+          <StyledOption>
+            <StyledViewButton
+              isClick={wideView}
+              onClick={() => {
+                setWideView(true);
+                setGridView(false);
+              }}
+            >
+              크게 보기
+            </StyledViewButton>
+            <StyledViewButton
+              isClick={gridView}
+              onClick={() => {
+                setWideView(false);
+                setGridView(true);
+              }}
+            >
+              모아 보기
+            </StyledViewButton>
+          </StyledOption>
           <StyledBody>
             <StyledGridDiv column={grid[0]} row={grid[1]}>
-              {acceptGridData.map((item, index) => (
+              {acceptGridData.map((applicant, index) => (
                 <StyledAcceptedMember key={index} row={grid[0]}>
-                  {item.name !== '비회원 팀원입니다.' &&
-                  item.name !== '모집 중...' ? (
+                  {applicant.name !== '비회원 팀원입니다.' &&
+                  applicant.name !== '모집 중...' ? (
                     <>
-                      <StyledNameDiv name={item.name}>
-                        <StyledImgDiv>
-                          <img src={ballIcon} alt="BallIcon" />
-                        </StyledImgDiv>
-                        {item.name}
-                      </StyledNameDiv>
-                      <span style={{ display: 'flex', alignItems: 'center' }}>
-                        <StyledLevel
-                          style={{ margin: '0rem 0.7rem' }}
-                          level={item.level}
-                        >
-                          #{item.level}
-                        </StyledLevel>
-                        <StyledPosition
-                          style={{ margin: '0rem 0.7rem' }}
-                          position={item.position}
-                        >
-                          #{item.position === '필드플레이어' ? 'player' : 'GK'}
-                        </StyledPosition>
-                        {grid[0] === 1 && (
-                          <span
-                            style={{
-                              marginLeft: '2rem',
-                              width: '17rem',
-                              overflow: 'hidden',
-                            }}
-                          >
-                            {item.contents}
-                          </span>
-                        )}
-                      </span>
+                      <StyledMemberHeader row={grid[0]}>
+                        <StyledAuthorDiv gender={applicant.gender}>
+                          <StyledImgDiv>
+                            <img src={ballIcon} alt="BallIcon" />
+                          </StyledImgDiv>
+                          <p>{applicant.name}</p>
+                        </StyledAuthorDiv>
+                        <StyledDetailDiv>
+                          <StyledGender gender={applicant.gender}>
+                            #{applicant.gender}
+                          </StyledGender>
+                          <StyledLevel level={applicant.level}>
+                            #{applicant.level}
+                          </StyledLevel>
+                          <StyledPosition position={applicant.position}>
+                            #
+                            {applicant.position === '필드플레이어'
+                              ? 'player'
+                              : 'GK'}
+                          </StyledPosition>
+                        </StyledDetailDiv>
+                      </StyledMemberHeader>
+                      {grid[0] === 1 && (
+                        <StyledContent>{applicant.contents}</StyledContent>
+                      )}
                     </>
                   ) : (
-                    <StyledNameDiv name={item.name}>{item.name}</StyledNameDiv>
+                    <StyledNameDiv name={applicant.name}>
+                      {applicant.name}
+                    </StyledNameDiv>
                   )}
                 </StyledAcceptedMember>
               ))}

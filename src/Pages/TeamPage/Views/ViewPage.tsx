@@ -13,6 +13,7 @@ import {
   StyledBoardName,
   StyledAuthorDiv,
   StyledImgDiv,
+  StyledSubTitle,
   StyledDetailDiv,
   StyledDetailLabel,
   StyledDetailLocationLi,
@@ -20,6 +21,7 @@ import {
   StyledPosition,
   StyledPositionIcon,
   StyledPositionName,
+  StyledPositionDetails,
   StyledPositionDetail,
   StyledBody,
   StyledAuthorButtonContainer,
@@ -126,7 +128,7 @@ function DetailPage() {
               </StyledAuthorDiv>
             </StyledHeader>
             <StyledDetailDiv>
-              <h3>모집 정보</h3>
+              <StyledSubTitle>모집 정보</StyledSubTitle>
               <StyledDetailLocationLi>
                 <StyledDetailLabel>활동 지역</StyledDetailLabel>
                 <p>{data.area}</p>
@@ -146,16 +148,18 @@ function DetailPage() {
                           : '마감되었어요.'}
                       </div>
                     </StyledPositionName>
-                    <StyledPositionDetail>
-                      <p>
-                        현재<span>{data.player}</span>명
-                      </p>
-                    </StyledPositionDetail>
-                    <StyledPositionDetail>
-                      <p>
-                        총<span> {data.playerNeed}</span>명 모집 예정
-                      </p>
-                    </StyledPositionDetail>
+                    <StyledPositionDetails>
+                      <StyledPositionDetail>
+                        <p>
+                          현재<span>{data.player}</span>명 모집 완료
+                        </p>
+                      </StyledPositionDetail>
+                      <StyledPositionDetail>
+                        <p>
+                          총<span> {data.playerNeed}</span>명 모집 예정
+                        </p>
+                      </StyledPositionDetail>
+                    </StyledPositionDetails>
                   </StyledPosition>
                   <StyledPosition>
                     <StyledPositionIcon color="green">
@@ -169,22 +173,24 @@ function DetailPage() {
                           : '마감되었어요.'}
                       </div>
                     </StyledPositionName>
-                    <StyledPositionDetail color="green">
-                      <p>
-                        현재<span>{data.gk}</span>명
-                      </p>
-                    </StyledPositionDetail>
-                    <StyledPositionDetail color="green">
-                      <p>
-                        총<span> {data.gkNeed}</span>명 모집 예정
-                      </p>
-                    </StyledPositionDetail>
+                    <StyledPositionDetails>
+                      <StyledPositionDetail color="green">
+                        <p>
+                          현재<span>{data.gk}</span>명 모집 완료
+                        </p>
+                      </StyledPositionDetail>
+                      <StyledPositionDetail color="green">
+                        <p>
+                          총<span> {data.gkNeed}</span>명 모집 예정
+                        </p>
+                      </StyledPositionDetail>
+                    </StyledPositionDetails>
                   </StyledPosition>
                 </StyledPositionContainer>
               </div>
             </StyledDetailDiv>
             <StyledBody>
-              <h3>상세 내용</h3>
+              <StyledSubTitle>상세 내용</StyledSubTitle>
               <div>
                 <HtmlParser data={data.contents} />
               </div>

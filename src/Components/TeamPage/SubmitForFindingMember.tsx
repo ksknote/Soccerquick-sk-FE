@@ -15,6 +15,7 @@ import {
   StyledSpan,
   StyledButtonContainer,
   StyledButton,
+  StyledExitButton,
 } from '../../Pages/TeamPage/Styles/ComponentStyle';
 
 function DetailModal(props: SumbitModalProps) {
@@ -79,42 +80,33 @@ function DetailModal(props: SumbitModalProps) {
     <>
       <Modal>
         <ModalPage>
-          <button
-            style={{
-              position: 'absolute',
-              top: '10px',
-              right: '10px',
-            }}
-            onClick={() => {
-              setShowModal(false);
-            }}
-          >
-            X
-          </button>
+          <StyledExitButton>
+            <button
+              onClick={() => {
+                setShowModal(false);
+              }}
+            >
+              ×
+            </button>
+          </StyledExitButton>
           <DetailPage>
             <StyledHeader>
-              <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                <StyledBlock>
-                  <DropDown
-                    list={FILTERING_OPTIONS.findingTeam.position}
-                    selected={position}
-                    setSelected={setPosition}
-                  />
-                </StyledBlock>
-                <StyledBlock>
-                  <DropDown
-                    list={FILTERING_OPTIONS.findingTeam.skill}
-                    selected={skill}
-                    setSelected={setSkill}
-                  />
-                </StyledBlock>
-              </div>
+              <DropDown
+                list={FILTERING_OPTIONS.findingTeam.position}
+                selected={position}
+                setSelected={setPosition}
+              />
+
+              <DropDown
+                list={FILTERING_OPTIONS.findingTeam.skill}
+                selected={skill}
+                setSelected={setSkill}
+              />
             </StyledHeader>
             <StyledSubTitle>
               <StyledBlock>
                 <StyledSpan>메모</StyledSpan>
                 <StyledInput
-                  style={{ width: '53rem' }}
                   onChange={(e) => {
                     setMemo(e.target.value);
                   }}
@@ -123,7 +115,6 @@ function DetailModal(props: SumbitModalProps) {
             </StyledSubTitle>
           </DetailPage>
           <StyledButtonContainer>
-            <StyledButton onClick={SubmitButton}>제출</StyledButton>
             <StyledButton
               onClick={() => {
                 setShowModal(false);
@@ -131,6 +122,7 @@ function DetailModal(props: SumbitModalProps) {
             >
               취소
             </StyledButton>
+            <StyledButton onClick={SubmitButton}>제출</StyledButton>
           </StyledButtonContainer>
         </ModalPage>
       </Modal>

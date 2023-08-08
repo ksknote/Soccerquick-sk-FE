@@ -13,9 +13,13 @@ function Parser(props: any) {
 export default Parser;
 
 const StyledBody = styled.div`
-  padding: 2rem 0;
   width: 100%;
-  min-height: 20rem;
+  min-height: 10rem;
   white-space: pre-wrap;
-  font-size: 2rem;
+  font-size: 1.3rem;
+  @media (min-width: 768px) {
+    padding: 2rem 0;
+    font-size: 2rem;
+    min-height: 20rem;
+  }
 `;

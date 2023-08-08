@@ -169,23 +169,42 @@ export const Modal = styled.div`
 export const ModalPage = styled.div`
   position: fixed;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 70rem;
-  height: 26rem;
+  width: 90%;
+  height: 28rem;
   background-color: rgba(255, 255, 255);
+  border-radius: 2rem;
   z-index: 501;
+  padding: 2rem;
+  @media (min-width: 768px) {
+    width: 70rem;
+  }
+  @media (min-width: 1024px) {
+    height: 30rem;
+  }
+`;
+
+export const StyledExitButton = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  button {
+    background: none;
+    font-size: 1.7rem;
+    @media (min-width: 768px) {
+      font-size: 2rem;
+    }
+  }
 `;
 
 export const DetailPage = styled.div`
-  z-index: 900;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background-color: beige;
-  width: 90%;
   font-size: 2.3rem;
-
   table {
     width: 100%;
   }
@@ -202,70 +221,58 @@ export const DetailPage = styled.div`
 `;
 
 export const StyledHeader = styled.div`
-  z-index: 901;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  position: absolute;
-  top: 0;
-  margin-top: 2rem;
   padding-bottom: 1rem;
-  width: 90%;
   border-bottom: 1px solid #dddddd;
 `;
 
 export const StyledSubTitle = styled.div`
-  z-index: 500;
   font-size: 1.8rem;
-  position: absolute;
-  top: 0;
-  margin-top: 12.5rem;
 `;
 
-export const StyledBlock = styled.div`
-  z-index: 500;
-  display: block;
-  align-items: center;
-  border-radius: 2rem;
-  margin: 0.7rem;
-  padding: 1rem 1rem;
-`;
+export const StyledBlock = styled.div``;
 
 export const StyledInput = styled.input`
-  z-index: 901;
-  width: 8rem;
+  width: 100%;
+  height: 100%;
+  min-height: 7rem;
   padding: 0.5rem 1.3rem;
+  border: 0.1rem solid lightgray;
 `;
 
-export const StyledSpan = styled.span`
-  z-index: 10;
-  display: inline-flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  margin-top: 0.6rem;
-  width: 6rem;
+export const StyledSpan = styled.div`
+  margin: 1rem 0;
+  font-size: 1.4rem;
+  @media (min-width: 768px) {
+    font-size: 1.6rem;
+  }
 `;
 
 export const StyledButtonContainer = styled.div`
-  z-index: 899;
   display: flex;
   font-size: 1.8rem;
   justify-content: center;
-  position: absolute;
-  top: 0;
-  margin-left: 44rem;
-  margin-top: 20rem;
-  width: 90%;
-  border-radius: 1rem;
+  width: 100%;
 `;
 
 export const StyledButton = styled.button`
-  z-index: 899;
-  margin: 0rem 1.5rem;
-  height: 4rem;
+  width: 8rem;
+  height: 3.5rem;
+  margin: 0rem 0.5rem;
   padding: 0rem 2rem;
-  border-radius: 2rem;
+  border-radius: 1rem;
+  color: white;
+  background: var(--color--green);
+  :first-child {
+    background: white;
+    color: var(--color--green);
+    border: 0.1rem solid lightgray;
+  }
+  @media (min-width: 1024px) {
+    height: 4rem;
+    font-size: 1.6rem;
+  }
 `;
 
 // FindingMembers

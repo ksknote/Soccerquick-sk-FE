@@ -91,7 +91,7 @@ const DropdownWrapper = styled.div`
   z-index: 998;
   position: relative;
   display: inline-block;
-  width: 11rem;
+  width: 12rem;
   margin-right: 1rem;
   @media (min-width: 1024px) {
     width: 16rem;
@@ -107,7 +107,6 @@ const DropdownButton = styled.button`
   overflow: hidden;
   align-items: center;
   color: #333;
-  padding-left: 2rem;
   margin-right: 3rem;
   width: 100%;
   height: 100%;

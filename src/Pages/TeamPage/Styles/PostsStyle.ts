@@ -70,41 +70,61 @@ export const StyledButton = styled.button<{ color?: string }>`
 export const StyledWrap = styled.div`
 width: 100%
   max-width: 120rem;
-  margin: 3rem auto;
+  @media (min-width: 768px) {
+    margin: 3rem auto;
+  }
 `;
 
 export const StyledPost = styled.div`
   width: 100%;
-  border: 0.2rem solid lightgray;
+  border: 0.1rem solid lightgray;
   border-radius: 2rem;
-
-  padding: 2.5rem;
+  padding: 1.5rem;
+  @media (min-width: 768px) {
+    padding: 2.5rem;
+    border: 0.2rem solid lightgray;
+  }
 `;
 
 export const StyledHeader = styled.div<{ status: string }>`
-  border-bottom: 0.2rem solid lightgray;
+  border-bottom: 0.15rem solid lightgray;
   h1 {
-    font-size: 2.5em;
+    font-size: 1.8em;
     font-weight: 600;
+    margin: 0.5rem 0 1rem 0;
     span {
       color: ${({ status }) =>
         status === '모집중' ? 'var(--color--green)' : 'gray'};
+    }
+  }
+  @media (min-width: 768px) {
+    border-bottom: 0.2rem solid lightgray;
+
+    h1 {
+      font-size: 2.5em;
+      margin: 1.3rem 0;
     }
   }
 `;
 
 export const StyledBoardName = styled.div`
   color: #71c171;
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   font-weight: 600;
   padding: 0.3rem 0;
   display: inline-block;
   cursor: pointer;
   img {
-    width: 0.8rem;
+    width: 0.6rem;
     vertical-align: middle;
     padding: 0 0 0.3rem 0;
     margin-right: 0.3rem;
+  }
+  @media (min-width: 768px) {
+    font-size: 1.7rem;
+    img {
+      width: 0.8rem;
+    }
   }
 `;
 
@@ -112,43 +132,70 @@ export const StyledAuthorDiv = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
   p {
-    font-size: 1.8rem;
-    padding-left: 1rem;
+    font-size: 1.3rem;
+    padding-left: 0.5rem;
+  }
+  @media (min-width: 768px) {
+    padding-bottom: 2rem;
+    p {
+      font-size: 1.8rem;
+      padding-left: 1rem;
+    }
   }
 `;
 
 export const StyledImgDiv = styled.div`
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 100%;
-  border: 0.2rem solid lightgray;
+  border: 0.1rem solid lightgray;
+  @media (min-width: 768px) {
+    width: 4rem;
+    height: 4rem;
+  }
 `;
 
 export const StyledDetailDiv = styled.div`
-  font-size: 2rem;
+  font-size: 1.4rem;
+  padding: 1rem 0;
 
-  padding: 2rem 0;
-  h3 {
+  @media (min-width: 768px) {
+    font-size: 2rem;
+    padding: 2rem 0;
+  }
+`;
+
+export const StyledSubTitle = styled.h3`
+  font-size: 1.6rem;
+  @media (min-width: 768px) {
     font-size: 2.2rem;
   }
 `;
 
 export const StyledDetailLabel = styled.div`
   color: gray;
-  padding-right: 2rem;
+  padding-right: 1rem;
+  @media (min-width: 768px) {
+    padding-right: 2rem;
+  }
 `;
 
 export const StyledDetailLocationLi = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding-bottom: 1.3rem;
+  padding-bottom: 0.7rem;
+  @media (min-width: 768px) {
+    padding-bottom: 1.3rem;
+  }
 `;
 
 export const StyledPositionContainer = styled.div`
-  padding-top: 1rem;
+  @media (min-width: 768px) {
+    padding-top: 1rem;
+  }
 `;
 
 export const StyledPosition = styled.div`
@@ -159,60 +206,88 @@ export const StyledPosition = styled.div`
   border-radius: 2rem;
   background: white;
   margin: 1.5rem 0;
-  div:nth-child(2) {
+  /* div:nth-child(2) {
     width: 40%;
-  }
+  } */
 `;
 
 export const StyledPositionIcon = styled.div<{ color?: string }>`
-  width: 8rem;
-  height: 8rem;
+  width: 5rem;
+  height: 6rem;
   background: ${({ color }) =>
     color === 'green' ? 'var(--color--green)' : 'orange'};
   border-top-left-radius: 2rem;
   border-bottom-left-radius: 2rem;
   img {
-    width: 5.6rem;
+    width: 3.5rem;
     margin: ${({ color }) =>
-      color === 'green' ? '1rem 0 0 0.7rem' : '0.4rem 0 0 0.7rem'};
+      color === 'green' ? '1rem 0 0 0.7rem' : '0.7rem 0 0 0.7rem'};
+  }
+  @media (min-width: 768px) {
+    width: 8rem;
+    height: 8rem;
+    img {
+      width: 5.6rem;
+      margin: ${({ color }) =>
+        color === 'green' ? '1rem 0 0 0.7rem' : '0.4rem 0 0 0.7rem'};
+    }
   }
 `;
 
 export const StyledPositionName = styled.div`
-  font-size: 2rem;
+  width: 30%;
   font-weight: 500;
   color: #5e5c5c;
   div:last-child {
-    font-size: 1.6rem;
     color: #ff5500;
+    font-size: 1.2rem;
     font-weight: 500;
+  }
+  @media (min-width: 768px) {
+    font-size: 2rem;
+    div:last-child {
+      font-size: 1.6rem;
+    }
+  }
+`;
+
+export const StyledPositionDetails = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-around;
   }
 `;
 
 export const StyledPositionDetail = styled.div<{ color?: string }>`
-  p {
-    font-size: 1.8rem;
-    span {
-      font-size: 3rem;
-      font-weight: 500;
-      color: ${({ color }) => (color === 'green' ? '#00ac00' : 'orange')};
-      vertical-align: sub;
-      padding: 0 0.4rem;
+  font-size: 1.2rem;
+  padding-right: 1rem;
+  line-height: 2.2rem;
+  span {
+    font-size: 1.7rem;
+    font-weight: 500;
+    line-height: 2.2rem;
+    color: ${({ color }) => (color === 'green' ? '#00ac00' : 'orange')};
+    padding: 0 0.4rem;
+  }
+  @media (min-width: 768px) {
+    p {
+      font-size: 1.8rem;
+      span {
+        font-size: 3rem;
+        padding: 0 0.4rem;
+      }
     }
   }
-  padding-right: 5rem;
 `;
 
-export const StyledBody = styled.div`
-  min-height: 20rem;
-  padding: 2rem 0;
-  h3 {
-    font-size: 2.2rem;
-  }
-`;
+export const StyledBody = styled.div``;
 
 export const StyledAuthorButtonContainer = styled.div`
-  margin: 2rem auto;
+  margin: 1rem auto 0 auto;
   display: flex;
   height: 3rem;
   justify-content: flex-end;
@@ -226,6 +301,9 @@ export const StyledAuthorButtonContainer = styled.div`
     padding-right: 1.5rem;
     color: lightgray;
   }
+  @media (min-width: 768px) {
+    margin: 2rem auto;
+  }
 `;
 
 export const StyledCommentsDiv = styled.div`
@@ -235,21 +313,30 @@ export const StyledCommentsDiv = styled.div`
 export const StyledFooter = styled.div`
   display: flex;
   justify-content: center;
-  margin: 3rem;
+  margin: 2rem;
   button {
-    width: 11rem;
-    height: 4.5rem;
+    width: 8rem;
+    height: 3.7rem;
     border-radius: 0.7rem;
     background-color: var(--color--green);
     color: white;
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     font-weight: 600;
 
     :first-child {
       margin-right: 1rem;
       background-color: white;
       color: #787878;
-      filter: drop-shadow(0 0 0.2rem grey);
+      border: 0.15rem solid lightgray;
+    }
+  }
+  @media (min-width: 768px) {
+    margin: 3rem;
+
+    button {
+      width: 11rem;
+      height: 4.5rem;
+      font-size: 1.7rem;
     }
   }
 `;

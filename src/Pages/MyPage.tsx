@@ -75,8 +75,8 @@ export function MyPage() {
   const [favoritePlaygounds, setFavoritePlaygrounds] = useState<string[]>([]);
   const navigate = useNavigate();
 
-  const filteredRegistedTeamPosts = groupList
-    .reduce((acc: Array<GroupPost>, group: GroupPost) => {
+  const filteredRegistedTeamPosts = groupList.reduce(
+    (acc: Array<GroupPost>, group: GroupPost) => {
       const filteredApplicants = group.applicant?.filter(
         (applicant) => applicant.name === user?.name
       );
@@ -104,8 +104,9 @@ export function MyPage() {
       }
 
       return acc;
-    }, [])
-    .map((item: GroupPost) => changeMyApplicantObjectToArray(item));
+    },
+    []
+  );
 
   useEffect(() => {
     if (isLogIn) {

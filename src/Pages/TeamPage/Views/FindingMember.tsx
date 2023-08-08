@@ -121,7 +121,7 @@ function FindingMember() {
   ];
 
   return (
-    <div style={{ margin: '1rem 1rem', padding: '1rem 0rem' }}>
+    <div>
       <StyledHeader>
         <h1>팀원 모집・신청</h1>
         <h3>싸커퀵에서 함께할 팀을 만들어보세요! 👋🏻</h3>

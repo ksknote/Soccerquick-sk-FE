@@ -22,6 +22,7 @@ import { BoardProps } from '../../../Types/TeamPageType';
 import { useSelector } from 'react-redux';
 import { isLogInSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
 import MyPagination from '../../../Components/MyPage/MyPagination';
+import EmptyBox from '../../../Components/Commons/EmptyBox';
 
 // 포지션 체크하는 부분
 export const checkPosition = (
@@ -143,7 +144,7 @@ function TeamList(props: BoardProps) {
               </Link>
             ))
           ) : (
-            <div>검색결과가 없습니다.</div>
+            <EmptyBox content="검색결과가 없습니다." />
           )}
         </TeamRecruitContainer>
       </TeamPageBody>

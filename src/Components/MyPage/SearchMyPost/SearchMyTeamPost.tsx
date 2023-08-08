@@ -1,4 +1,5 @@
 import react, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import MobileHeader from '../../MobileHeader';
 import {
@@ -16,7 +17,7 @@ import {
 import { GroupPost } from '../../../Pages/MyPage';
 import { checkPosition } from '../../../Pages/TeamPage/Views/TeamList';
 import MyPageHeader from '../MyPageHeader';
-
+import EmptyBox from '../../Commons/EmptyBox';
 function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
   return (
     <Wrapper>
@@ -27,9 +28,9 @@ function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
       <MobileHeader title="내 팀 모집 글" />
       <BodyContainer>
         <TeamPageBody>
-          <TeamRecruitContainer>
-            {filteredItems.length > 0 ? (
-              filteredItems.map((item, idx) => (
+          {filteredItems.length > 0 ? (
+            filteredItems.map((item, idx) => (
+              <TeamRecruitContainer>
                 <Link to={`./${item.group_id}`} state={{ data: item }}>
                   <TeamRecruitLi>
                     <ContentHeader>
@@ -50,11 +51,11 @@ function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
                     </Position>
                   </TeamRecruitLi>
                 </Link>
-              ))
-            ) : (
-              <div>검색결과가 없습니다.</div>
-            )}
-          </TeamRecruitContainer>
+              </TeamRecruitContainer>
+            ))
+          ) : (
+            <EmptyBox content="검색결과가 없습니다." />
+          )}
         </TeamPageBody>
       </BodyContainer>
     </Wrapper>

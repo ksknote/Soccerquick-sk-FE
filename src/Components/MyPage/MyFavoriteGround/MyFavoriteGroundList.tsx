@@ -9,7 +9,8 @@ import { ProvidedElementList } from '../../SearchPage/Contents/SearchData';
 import MyPagination from '../MyPagination';
 import MobileHeader from '../../MobileHeader';
 import MyPageHeader from '../MyPageHeader';
-
+import EmptyBox from '../../Commons/EmptyBox';
+import { Wrapper } from '../../../Pages/TeamPage/Styles/ViewsStyle';
 type MyFavoriteGroundListProps = {
   favoritePlaygrounds: Array<string>;
 };
@@ -58,24 +59,24 @@ function MyFavoriteGroundList({
 
   return (
     <Wrapper>
+      <MyPageHeader
+        title="즐겨찾는 경기장"
+        totalItemsCount={filteredData.length}
+      />
       <MobileHeader title="즐겨찾는 경기장" />
       <Searchpage>
         <SearchPageBody>
-          <MyPageHeader
-            title="즐겨찾는 경기장"
-            totalItemsCount={filteredData.length}
-          />
-          <StyledTableContainer>
-            <StyledThead>
-              <StyledLabelTr>
-                <th>지역</th>
-                <th>경기장</th>
-                <th>상세조회</th>
-              </StyledLabelTr>
-            </StyledThead>
-            <tbody>
-              {currentData.length > 0 ? (
-                currentData.map((item, idx) => (
+          {currentData.length > 0 ? (
+            <StyledTableContainer>
+              <StyledThead>
+                <StyledLabelTr>
+                  <th>지역</th>
+                  <th>경기장</th>
+                  <th>상세조회</th>
+                </StyledLabelTr>
+              </StyledThead>
+              <tbody>
+                {currentData.map((item, idx) => (
                   <StyledTr key={item.title + idx}>
                     <StyledAddressTd>{item.address.area}</StyledAddressTd>
                     <StyledMainTd>
@@ -104,23 +105,19 @@ function MyFavoriteGroundList({
                       </StyledButton>
                     </td>
                   </StyledTr>
-                ))
-              ) : (
-                <StyledTr>
-                  {/* <td></td> */}
-                  <StyledMessageTd>즐겨찾는 구장이 없습니다</StyledMessageTd>
-                  {/* <td></td> */}
-                </StyledTr>
-              )}
-            </tbody>
-          </StyledTableContainer>
+                ))}
+              </tbody>
+            </StyledTableContainer>
+          ) : (
+            <EmptyBox content="즐겨찾는 구장이 없습니다." />
+          )}
         </SearchPageBody>
-        <MyPagination
+        {/* <MyPagination
           totalItemsCount={totalItemsCount ? totalItemsCount : 1}
           itemsPerPage={itemsPerPage}
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}
-        />
+        /> */}
       </Searchpage>
     </Wrapper>
   );
@@ -168,17 +165,6 @@ const getBackgroundColorBydata = (data: string) => {
   }
 };
 
-const Wrapper = styled.div`
-  width: 100%;
-  max-width: 120rem;
-  min-height: 100vh;
-  height: 100%;
-  margin: auto;
-  @media (max-width: 768px) {
-    padding-bottom: 8rem;
-  }
-`;
-
 const Searchpage = styled.div`
   width: 100%;
   height: 100%;
@@ -187,7 +173,7 @@ const Searchpage = styled.div`
   justify-content: space-between;
   flex-direction: column;
   font-size: 1.7rem;
-  padding: 0 3rem 1rem 3rem;
+  padding: 1rem;
   @media (min-width: 768px) {
     margin: 2rem auto;
   }
@@ -199,7 +185,6 @@ const SearchPageBody = styled.div`
   justify-content: space-between;
   width: 100%;
   margin-bottom: 0.5rem;
-
   table {
     width: 100%;
   }
@@ -317,6 +302,7 @@ const StyledAddressTd = styled.td`
 const StyledMainTd = styled.td`
   max-width: 48rem;
   font-size: 1.6rem;
+  padding-left: 1rem;
   p {
     cursor: pointer;
   }

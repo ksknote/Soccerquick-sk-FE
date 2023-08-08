@@ -68,9 +68,10 @@ export function MyPage() {
   const isLogIn = useSelector(isLogInSelector);
   const [groupList, setGroupList] = useState<GroupPost[]>([]);
   const user = useSelector(userSelector);
-  const filteredMyTeamPosts = groupList
-    .filter((item: GroupPost) => item.leader_name === user?.name)
-    .map((item: GroupPost) => changeGroupObjectToArray(item));
+  const filteredMyTeamPosts = groupList.filter(
+    (item: GroupPost) => item.leader_name === user?.name
+  );
+  // .map((item: GroupPost) => changeGroupObjectToArray(item));
   const [favoritePlaygounds, setFavoritePlaygrounds] = useState<string[]>([]);
   const navigate = useNavigate();
 
@@ -188,19 +189,3 @@ export function MyPage() {
     </>
   );
 }
-
-const MyPageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: space-evenly;
-  max-width: 120rem;
-  padding: 0 2rem;
-  margin: 2rem auto;
-  position: relative;
-  background-color: #fff;
-
-  & > div {
-    margin: 5rem 0;
-  }
-`;

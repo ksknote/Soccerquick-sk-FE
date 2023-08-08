@@ -1,19 +1,63 @@
 import react, { useState, useEffect } from 'react';
-import MyPostTable from './MyPostTable';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { userSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
-import { changeGroupObjectToArray } from '../changeObjectToArray';
+import { Link } from 'react-router-dom';
+import MobileHeader from '../../MobileHeader';
+import {
+  Wrapper,
+  BodyContainer,
+  TeamPageBody,
+  TeamRecruitContainer,
+  TeamRecruitLi,
+  ContentHeader,
+  Status,
+  ContentTitle,
+  Position,
+  Author,
+} from '../../../Pages/TeamPage/Styles/ViewsStyle';
+import { GroupPost } from '../../../Pages/MyPage';
+import { checkPosition } from '../../../Pages/TeamPage/Views/TeamList';
+import MyPageHeader from '../MyPageHeader';
 
-function SearchMyTeamPost({ filteredItems }: { filteredItems: string[][] }) {
-  const properties = ['작성자', '제목', '지역', '모집 상태', 'Player', 'GK'];
-
+function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
   return (
-    <MyPostTable
-      title="내 팀 모집 글"
-      properties={properties}
-      data={filteredItems}
-    />
+    <Wrapper>
+      <MyPageHeader
+        title="내 팀 모집 글"
+        totalItemsCount={filteredItems.length}
+      />
+      <MobileHeader title="내 팀 모집 글" />
+      <BodyContainer>
+        <TeamPageBody>
+          <TeamRecruitContainer>
+            {filteredItems.length > 0 ? (
+              filteredItems.map((item, idx) => (
+                <Link to={`./${item.group_id}`} state={{ data: item }}>
+                  <TeamRecruitLi>
+                    <ContentHeader>
+                      <Status status={item.status}>{item.status}</Status>
+                      <Author>모집자: {item.leader_name}</Author>
+                    </ContentHeader>
+                    <ContentTitle>
+                      <span>{item.location}</span>
+                      <p>{item.title}</p>
+                    </ContentTitle>
+                    <Position>
+                      {checkPosition(
+                        item.gk_current_count,
+                        item.gk_count,
+                        item.player_current_count,
+                        item.player_count
+                      )}
+                    </Position>
+                  </TeamRecruitLi>
+                </Link>
+              ))
+            ) : (
+              <div>검색결과가 없습니다.</div>
+            )}
+          </TeamRecruitContainer>
+        </TeamPageBody>
+      </BodyContainer>
+    </Wrapper>
   );
 }
 

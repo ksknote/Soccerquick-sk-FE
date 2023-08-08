@@ -1,18 +1,14 @@
 import react, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import checkIcon from '../../../styles/icon/check.svg';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {
-  isLogInSelector,
-  userSelector,
-} from '../../../ReduxStore/modules/Auth/authSelectors';
+import { isLogInSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
 import { DomDataType } from '../../../Pages/SearchPage';
 import { ProvidedElementList } from '../../SearchPage/Contents/SearchData';
 import MyPagination from '../MyPagination';
 import MobileHeader from '../../MobileHeader';
-import chevronIcon from '../../../styles/icon/chevron_grey.svg';
+import MyPageHeader from '../MyPageHeader';
 
 type MyFavoriteGroundListProps = {
   favoritePlaygrounds: Array<string>;
@@ -65,14 +61,10 @@ function MyFavoriteGroundList({
       <MobileHeader title="즐겨찾는 경기장" />
       <Searchpage>
         <SearchPageBody>
-          <StyledBoardTitle onClick={() => navigate(-1)}>
-            <img src={chevronIcon} alt="" />
-            <span>마이페이지</span>
-          </StyledBoardTitle>
-          <StyledTitleDiv>
-            즐겨찾는 경기장
-            <span> ( 총 {totalItemsCount} 건 )</span>
-          </StyledTitleDiv>
+          <MyPageHeader
+            title="즐겨찾는 경기장"
+            totalItemsCount={filteredData.length}
+          />
           <StyledTableContainer>
             <StyledThead>
               <StyledLabelTr>
@@ -221,41 +213,6 @@ const SearchPageBody = styled.div`
   }
   @media (min-width: 768px) {
     margin-bottom: 2rem;
-  }
-`;
-
-const StyledBoardTitle = styled.div`
-  display: none;
-  @media (min-width: 768px) {
-    display: flex;
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: grey;
-    padding-bottom: 0.3rem;
-    cursor: pointer;
-    img {
-      width: 1.3rem;
-      margin-right: 0.3rem;
-    }
-  }
-`;
-
-const StyledTitleDiv = styled.div`
-  display: flex;
-  width: 90%;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-
-  > span {
-    padding-left: 1rem;
-    align-self: flex-end;
-    font-size: 1.5rem;
-    line-height: 3rem;
-    color: grey;
-  }
-  @media (max-width: 768px) {
-    display: none;
   }
 `;
 

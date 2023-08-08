@@ -8,22 +8,31 @@ export const StyledCommentContainer = styled.div`
 `;
 
 export const StyledCommentTitle = styled.h2`
-  font-size: 2.2rem;
-  padding: 1rem 0;
+  font-size: 1.6rem;
   img {
-    width: 4.3rem;
+    width: 3rem;
     vertical-align: middle;
     margin-right: 0.4rem;
+  }
+  @media (min-width: 1024px) {
+    font-size: 2.2rem;
+    padding: 1rem 0;
+    img {
+      width: 4.3rem;
+    }
   }
 `;
 
 export const CommentLiContainer = styled.div`
-  padding: 2rem;
+  padding: 1.5rem;
   background-color: white;
   border-radius: 2rem;
   filter: drop-shadow(0 0 0.2rem #c6c6c6);
   :not(first-child) {
     margin-top: 2rem;
+  }
+  @media (min-width: 1024px) {
+    padding: 2rem;
   }
 `;
 
@@ -33,21 +42,31 @@ export const StyledAuthorDiv = styled.div<{ gender?: string }>`
   align-items: center;
   padding-bottom: 1rem;
   p {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     padding-left: 1rem;
+  }
+  @media (min-width: 1024px) {
+    p {
+      font-size: 1.8rem;
+      padding-left: 1rem;
+    }
   }
 `;
 
 export const StyledImgDiv = styled.div`
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 100%;
-  border: 0.2rem solid lightgray;
+  border: 0.1rem solid lightgray;
+  @media (min-width: 1024px) {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
 `;
 
 export const StyledCommentDetailDiv = styled.div`
-  font-size: 1.7rem;
-  padding: 0.7rem 0;
+  font-size: 1.3rem;
+  padding-top: 0.7rem;
   > div {
     display: flex;
     justify-content: flex-start;
@@ -58,7 +77,14 @@ export const StyledCommentDetailDiv = styled.div`
     font-weight: 400;
     padding: 0 0.8rem;
     border-radius: 0.5rem;
-    margin-right: 1rem;
+    margin-right: 0.7rem;
+  }
+  @media (min-width: 1024px) {
+    font-size: 1.7rem;
+    padding: 0.7rem 0;
+    span {
+      margin-right: 1rem;
+    }
   }
 `;
 
@@ -120,8 +146,11 @@ export const getBackgroundColorBySkill = (data: string) => {
 };
 
 export const StyledContents = styled.div`
-  font-size: 2rem;
+  font-size: 1.3rem;
   padding: 1rem 0;
+  @media (min-width: 1024px) {
+    font-size: 2rem;
+  }
 `;
 
 export const StyledCommentButtons = styled.div`

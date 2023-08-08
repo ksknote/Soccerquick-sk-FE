@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
 // MainPage
-export const MainPageBody = styled.div`
+export const Wrapper = styled.div`
   width: 100%;
   max-width: 120rem;
   height: 100%;
   min-height: 100vh;
   margin: auto;
-  @media (max-width: 768px) {
-    padding-bottom: 8rem;
+  padding-bottom: 8rem;
+
+  @media (min-width: 768px) {
+    padding: 2rem 3rem 1rem 3rem;
   }
 `;
 
@@ -423,4 +425,8 @@ export const Position = styled.div`
 
 export const Author = styled.div`
   color: #616161;
+`;
+
+export const BodyContainer = styled.div`
+  padding: 1rem;
 `;

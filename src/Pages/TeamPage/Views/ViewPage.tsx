@@ -61,6 +61,13 @@ function DetailPage() {
     dispatch(fetchData(url));
   }, [dispatch, url]);
 
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    withCredentials: true,
+  };
+
   useEffect(() => {
     axios
       .get(
@@ -75,12 +82,6 @@ function DetailPage() {
       });
   }, []);
 
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    withCredentials: true,
-  };
   // 삭제 요청을 보내는 버튼
   const deletePostHandler = async () => {
     const confirmed = await alertModal('정말로 삭제하시겠습니까?', 'submit');
@@ -97,6 +98,8 @@ function DetailPage() {
         });
     }
   };
+
+  console.log(data);
   return (
     <StyledWrap>
       {!data ? (

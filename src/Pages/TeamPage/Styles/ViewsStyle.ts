@@ -377,6 +377,7 @@ export const RecruitStatus = styled(Status)<{ status: string }>`
 export const ContentTitle = styled.div`
   display: flex;
   font-size: 1.6rem;
+  padding: 1rem 0;
   span {
     color: #6e6e6e;
     font-weight: 500;
@@ -433,6 +434,19 @@ export const Author = styled.div`
 
 export const BodyContainer = styled.div`
   padding: 1rem;
+`;
+
+export const TeamMemberList = styled.button`
+  height: 4rem;
+  background: white;
+  border: 0.13rem solid var(--color--green);
+  border-radius: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: green;
+  @media (min-width: 1024px) {
+    font-size: 1.5rem;
+  }
 `;
 
 //SearchMyApplicationPost

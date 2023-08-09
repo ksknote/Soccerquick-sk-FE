@@ -214,14 +214,12 @@ export const ModalPage = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  height: 30rem;
   background-color: rgba(255, 255, 255);
   border-radius: 2rem;
   z-index: 501;
   padding: 2rem;
   @media (min-width: 768px) {
     width: 70rem;
-    height: 32rem;
   }
   @media (min-width: 1024px) {
   }
@@ -277,6 +275,16 @@ export const StyledOption = styled.div`
 
 export const StyledSubTitle = styled.div`
   font-size: 1.8rem;
+`;
+
+export const StyledDescription = styled.p`
+  font-size: 1.2rem;
+  color: #51a451;
+  padding: 1.5rem 0;
+  text-align: center;
+  @media (min-width: 1024px) {
+    font-size: 1.4rem;
+  }
 `;
 
 export const StyledBlock = styled.div``;

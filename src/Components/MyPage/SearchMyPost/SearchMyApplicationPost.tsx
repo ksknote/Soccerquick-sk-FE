@@ -1,5 +1,5 @@
 import react from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { checkPosition } from '../../../Pages/TeamPage/Views/TeamList';
 import { GroupPost } from '../../../Pages/MyPage';
 import MyPageHeader from '../MyPageHeader';
@@ -26,6 +26,7 @@ function SearchMyApplicationPost({
 }: {
   filteredItems: GroupPost[];
 }) {
+  const navigate = useNavigate();
   const handleCopy = async (phoneNumber: string) => {
     try {
       await navigator.clipboard.writeText(phoneNumber);
@@ -44,44 +45,46 @@ function SearchMyApplicationPost({
         <TeamPageBody>
           <TeamRecruitContainer>
             {filteredItems.length > 0 ? (
-              filteredItems.map((item, idx) => (
-                <TeamRecruitLi key={item.group_id}>
-                  <Link to={`./${item.group_id}`} state={{ data: item }}>
-                    <ContentHeader>
-                      <StatusContainer>
-                        <RecruitStatus status={item.status}>
-                          {item.status}
-                        </RecruitStatus>
-                        <AcceptStatus status={item.accept.length}>
-                          {item.accept.length === 1 ? '수락됨' : '신청 중'}
-                        </AcceptStatus>
-                      </StatusContainer>
-                      <Author>모집자: {item.leader_name}</Author>
-                    </ContentHeader>
-                    <ContentTitle>
-                      <span>{item.location}</span>
-                      {item.title}
-                    </ContentTitle>
-                    <Position>
-                      {checkPosition(
-                        item.gk_current_count,
-                        item.gk_count,
-                        item.player_current_count,
-                        item.player_count
-                      )}
-                    </Position>
-                  </Link>
-                  {item.accept.length === 1 ? (
+              filteredItems.map((team, idx) => (
+                <TeamRecruitLi key={team.group_id}>
+                  <ContentHeader>
+                    <StatusContainer>
+                      <RecruitStatus status={team.status}>
+                        {team.status}
+                      </RecruitStatus>
+                      <AcceptStatus status={team.accept.length}>
+                        {team.accept.length === 1 ? '수락됨' : '신청 중'}
+                      </AcceptStatus>
+                    </StatusContainer>
+                    <Author>모집자: {team.leader_name}</Author>
+                  </ContentHeader>
+                  <ContentTitle
+                    onClick={() =>
+                      navigate(`./${team.group_id}`, { state: { data: team } })
+                    }
+                  >
+                    <span>{team.location}</span>
+                    {team.title}
+                  </ContentTitle>
+                  <Position>
+                    {checkPosition(
+                      team.gk_current_count,
+                      team.gk_count,
+                      team.player_current_count,
+                      team.player_count
+                    )}
+                  </Position>
+                  {team.accept.length === 1 ? (
                     <AcceptedDespcription>
                       ⚽ 팀에 합류되었습니다! ⚽ <br />
                       <br />
                       아직 팀 리더에게 연락이 오지 않았다면, 아래 연락처로
-                      메시지를 보내보세요. <br />팀 리더 {item.leader_name}님의
+                      메시지를 보내보세요. <br />팀 리더 {team.leader_name}님의
                       연락처는{' '}
                       <span
-                        onClick={() => handleCopy(item.leader_phone_number)}
+                        onClick={() => handleCopy(team.leader_phone_number)}
                       >
-                        {item.leader_phone_number}
+                        {team.leader_phone_number}
                       </span>
                       입니다.
                       <br />

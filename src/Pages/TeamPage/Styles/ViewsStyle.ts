@@ -386,7 +386,6 @@ export const RecruitStatus = styled(Status)<{ status: string }>`
 export const ContentTitle = styled.div`
   display: flex;
   font-size: 1.6rem;
-  padding: 1rem 0;
   span {
     color: #6e6e6e;
     font-weight: 500;

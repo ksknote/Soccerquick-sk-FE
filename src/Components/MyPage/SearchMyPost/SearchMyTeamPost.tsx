@@ -1,6 +1,5 @@
 import react, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../../ReduxStore/store';
 import { fetchData } from '../../../ReduxStore/modules/TeamPage/actions';
@@ -28,7 +27,7 @@ function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
   const [acceptModal, setAcceptModal] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const data = useSelector((state: RootState) => state.data.data);
-
+  const navigate = useNavigate();
   const handleTeamDetailClick = (groupId: string) => {
     dispatch(fetchData(groupId));
 
@@ -47,26 +46,28 @@ function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
             {filteredItems.length > 0 ? (
               filteredItems.map((team, idx) => (
                 <TeamRecruitLi key={team.group_id}>
-                  <Link to={`./${team.group_id}`} state={{ data: team }}>
-                    <ContentHeader>
-                      <RecruitStatus status={team.status}>
-                        {team.status}
-                      </RecruitStatus>
-                      <Author>모집자: {team.leader_name}</Author>
-                    </ContentHeader>
-                    <ContentTitle>
-                      <span>{team.location}</span>
-                      <p>{team.title}</p>
-                    </ContentTitle>
-                    <Position>
-                      {checkPosition(
-                        team.gk_current_count,
-                        team.gk_count,
-                        team.player_current_count,
-                        team.player_count
-                      )}
-                    </Position>
-                  </Link>
+                  <ContentHeader>
+                    <RecruitStatus status={team.status}>
+                      {team.status}
+                    </RecruitStatus>
+                    <Author>모집자: {team.leader_name}</Author>
+                  </ContentHeader>
+                  <ContentTitle
+                    onClick={() =>
+                      navigate(`./${team.group_id}`, { state: { data: team } })
+                    }
+                  >
+                    <span>{team.location}</span>
+                    <p>{team.title}</p>
+                  </ContentTitle>
+                  <Position>
+                    {checkPosition(
+                      team.gk_current_count,
+                      team.gk_count,
+                      team.player_current_count,
+                      team.player_count
+                    )}
+                  </Position>
                   <TeamMemberList
                     onClick={() => handleTeamDetailClick(team.group_id)}
                   >

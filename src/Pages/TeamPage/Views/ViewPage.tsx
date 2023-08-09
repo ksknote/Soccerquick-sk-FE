@@ -110,7 +110,7 @@ function DetailPage() {
             <StyledHeader status={data.status}>
               <StyledBoardName
                 onClick={() => {
-                  navigate(`/teampage/team`);
+                  navigate(`/teampage`);
                 }}
               >
                 <div>
@@ -234,7 +234,7 @@ function DetailPage() {
             <StyledFooter>
               <button
                 onClick={() => {
-                  navigate(`/teampage/team`);
+                  navigate(`/teampage`);
                 }}
               >
                 목록으로

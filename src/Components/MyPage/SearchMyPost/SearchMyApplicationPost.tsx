@@ -17,6 +17,7 @@ import {
   ContentTitle,
   Position,
   Author,
+  AcceptedDespcription,
 } from '../../../Pages/TeamPage/Styles/ViewsStyle';
 import EmptyBox from '../../Commons/EmptyBox';
 
@@ -25,18 +26,27 @@ function SearchMyApplicationPost({
 }: {
   filteredItems: GroupPost[];
 }) {
-  console.log(filteredItems);
+  const handleCopy = async (phoneNumber: string) => {
+    try {
+      await navigator.clipboard.writeText(phoneNumber);
+
+      alert('복사 성공!');
+    } catch (error) {
+      alert('복사 실패!');
+    }
+  };
+
   return (
     <Wrapper>
       <MyPageHeader title="신청한 팀" totalItemsCount={filteredItems.length} />
       <MobileHeader title="신청한 팀" />
       <BodyContainer>
         <TeamPageBody>
-          {filteredItems.length > 0 ? (
-            filteredItems.map((item, idx) => (
-              <TeamRecruitContainer key={item.group_id}>
-                <Link to={`./${item.group_id}`} state={{ data: item }}>
-                  <TeamRecruitLi>
+          <TeamRecruitContainer>
+            {filteredItems.length > 0 ? (
+              filteredItems.map((item, idx) => (
+                <TeamRecruitLi key={item.group_id}>
+                  <Link to={`./${item.group_id}`} state={{ data: item }}>
                     <ContentHeader>
                       <StatusContainer>
                         <RecruitStatus status={item.status}>
@@ -60,13 +70,34 @@ function SearchMyApplicationPost({
                         item.player_count
                       )}
                     </Position>
-                  </TeamRecruitLi>
-                </Link>
-              </TeamRecruitContainer>
-            ))
-          ) : (
-            <EmptyBox content="검색결과가 없습니다." />
-          )}
+                  </Link>
+                  {item.accept.length === 1 ? (
+                    <AcceptedDespcription>
+                      ⚽ 팀에 합류되었습니다! ⚽ <br />
+                      <br />
+                      아직 팀 리더에게 연락이 오지 않았다면, 아래 연락처로
+                      메시지를 보내보세요. <br />팀 리더 {item.leader_name}님의
+                      연락처는{' '}
+                      <span
+                        onClick={() => handleCopy(item.leader_phone_number)}
+                      >
+                        {item.leader_phone_number}
+                      </span>
+                      입니다.
+                      <br />
+                      연락 시 매너를 꼭 지켜주세요 😇
+                    </AcceptedDespcription>
+                  ) : (
+                    <AcceptedDespcription>
+                      수락 대기 중입니다.
+                    </AcceptedDespcription>
+                  )}
+                </TeamRecruitLi>
+              ))
+            ) : (
+              <EmptyBox content="검색결과가 없습니다." />
+            )}
+          </TeamRecruitContainer>
         </TeamPageBody>
       </BodyContainer>
     </Wrapper>

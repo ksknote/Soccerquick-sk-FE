@@ -43,10 +43,10 @@ function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
       <MobileHeader title="내 팀 모집 글" />
       <BodyContainer>
         <TeamPageBody>
-          {filteredItems.length > 0 ? (
-            filteredItems.map((team, idx) => (
-              <TeamRecruitContainer key={team.group_id}>
-                <TeamRecruitLi>
+          <TeamRecruitContainer>
+            {filteredItems.length > 0 ? (
+              filteredItems.map((team, idx) => (
+                <TeamRecruitLi key={team.group_id}>
                   <Link to={`./${team.group_id}`} state={{ data: team }}>
                     <ContentHeader>
                       <RecruitStatus status={team.status}>
@@ -74,11 +74,11 @@ function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
                     {team.player_current_count + team.gk_current_count}명)
                   </TeamMemberList>
                 </TeamRecruitLi>
-              </TeamRecruitContainer>
-            ))
-          ) : (
-            <EmptyBox content="검색결과가 없습니다." />
-          )}
+              ))
+            ) : (
+              <EmptyBox content="검색결과가 없습니다." />
+            )}
+          </TeamRecruitContainer>
         </TeamPageBody>
       </BodyContainer>
       {acceptModal && (

@@ -469,3 +469,18 @@ export const AcceptStatus = styled(Status)<{ status: number }>`
   color: ${({ status }) => (status === 1 ? 'green' : 'gray')};
   background-color: white;
 `;
+
+export const AcceptedDespcription = styled.div`
+  background: #f6f6f6;
+  font-size: 1.1rem;
+  color: #403a3a;
+  padding: 1rem;
+  border-radius: 1rem;
+  span {
+    color: green;
+    text-decoration: underline;
+  }
+  @media (min-width: 768px) {
+    font-size: 1.2rem;
+  }
+`;

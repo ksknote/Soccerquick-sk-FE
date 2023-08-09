@@ -38,6 +38,7 @@ type Accept = {
 export type GroupPost = {
   group_id: string;
   leader_name: string;
+  leader_phone_number: string;
   title: string;
   location: string;
   status: string;

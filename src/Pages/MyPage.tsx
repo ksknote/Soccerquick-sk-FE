@@ -1,7 +1,6 @@
 import react, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router';
 import axios from 'axios';
-import styled from 'styled-components';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import MyFavoriteGroundList from '../Components/MyPage/MyFavoriteGround/MyFavoriteGroundList';
@@ -14,10 +13,6 @@ import alertModal from '../Components/Commons/alertModal';
 import MyPageHome from '../Components/MyPage/MyPageHome';
 import MyPageProfileLayout from '../Components/MyPage/MyPageInfo/MyPageProfileLayout';
 import { userSelector } from '../ReduxStore/modules/Auth/authSelectors';
-import {
-  changeGroupObjectToArray,
-  changeMyApplicantObjectToArray,
-} from '../Components/MyPage/changeObjectToArray';
 
 export type FormDataType = {
   user_id: string;
@@ -72,7 +67,6 @@ export function MyPage() {
     (item: GroupPost) => item.leader_name === user?.name
   );
   // .map((item: GroupPost) => changeGroupObjectToArray(item));
-  const [favoritePlaygounds, setFavoritePlaygrounds] = useState<string[]>([]);
   const navigate = useNavigate();
 
   const filteredRegistedTeamPosts = groupList.reduce(
@@ -111,23 +105,20 @@ export function MyPage() {
   useEffect(() => {
     if (isLogIn) {
       getUserData();
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/groups`, {
+          withCredentials: true,
+        })
+        .then((res) => res.data.data)
+        .then((result) => {
+          setGroupList(result);
+        })
+        .catch((err) => console.log(err));
     } else {
       alertModal('마이페이지는 로그인 후 사용해 주세요', 'warning');
       navigate('/');
     }
   }, [isLogIn]);
-
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/groups`, {
-        withCredentials: true,
-      })
-      .then((res) => res.data.data)
-      .then((result) => {
-        setGroupList(result);
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
   const getUserData = async () => {
     const userInfo = await axios
@@ -139,7 +130,6 @@ export function MyPage() {
       })
       .catch((err) => console.log(err));
     setFormData((prev) => userInfo);
-    setFavoritePlaygrounds(userInfo.favoritePlaygrounds);
   };
 
   return (
@@ -165,12 +155,7 @@ export function MyPage() {
             />
           }
         />
-        <Route
-          path="/favorite"
-          element={
-            <MyFavoriteGroundList favoritePlaygrounds={favoritePlaygounds} />
-          }
-        />
+        <Route path="/favorite" element={<MyFavoriteGroundList />} />
         <Route
           path="/myTeamPost"
           element={<SearchMyTeamPost filteredItems={filteredMyTeamPosts} />}
@@ -185,7 +170,6 @@ export function MyPage() {
         />
         <Route path="/myReviewPost" element={<SearchMyReviewPost />} />
       </Routes>
-
       <Footer />
     </>
   );

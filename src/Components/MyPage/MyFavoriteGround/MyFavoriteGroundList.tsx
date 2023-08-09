@@ -11,14 +11,22 @@ import MobileHeader from '../../MobileHeader';
 import MyPageHeader from '../MyPageHeader';
 import EmptyBox from '../../Commons/EmptyBox';
 import { Wrapper } from '../../../Pages/TeamPage/Styles/ViewsStyle';
-type MyFavoriteGroundListProps = {
-  favoritePlaygrounds: Array<string>;
-};
+import alertModal from '../../../Components/Commons/alertModal';
+import { FormDataType } from '../../../Pages/MyPage';
 
-function MyFavoriteGroundList({
-  favoritePlaygrounds,
-}: MyFavoriteGroundListProps) {
+function MyFavoriteGroundList() {
   const isLogIn = useSelector(isLogInSelector);
+  const [formData, setFormData] = useState<FormDataType>({
+    user_id: '',
+    name: '',
+    nick_name: '',
+    profile: '',
+    email: '',
+    phone_number: '',
+    gender: '',
+    favoritePlaygrounds: [],
+  });
+  const [favoritePlaygrounds, setFavoritePlaygrounds] = useState<string[]>([]);
   const [filteredData, setFilteredData] = useState<DomDataType[]>([]);
 
   // pagination
@@ -31,9 +39,29 @@ function MyFavoriteGroundList({
 
   useEffect(() => {
     if (isLogIn) {
-      getDomData();
+      getUserData();
+    } else {
+      alertModal('마이페이지는 로그인 후 사용해 주세요', 'warning');
+      navigate('/');
     }
   }, [isLogIn]);
+
+  const getUserData = async () => {
+    const userInfo = await axios
+      .get(`${process.env.REACT_APP_API_URL}/users/`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        return res.data.data;
+      })
+      .catch((err) => console.log(err));
+    setFormData((prev) => userInfo);
+    setFavoritePlaygrounds(userInfo.favoritePlaygrounds);
+  };
+
+  useEffect(() => {
+    getDomData();
+  }, [favoritePlaygrounds]);
 
   const getDomData = async () => {
     const domarray: Array<DomDataType> = [];

@@ -118,6 +118,7 @@ export interface CommentProps {
 
 export interface Accept {
   name: string;
+  phone_number: string;
   position: string;
   level: string;
   gender: string;

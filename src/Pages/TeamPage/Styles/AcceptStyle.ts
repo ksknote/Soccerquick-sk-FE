@@ -6,10 +6,9 @@ export const StyledBody = styled.div`
   justify-content: center;
   font-size: 1.8rem;
 `;
-export const StyledGridDiv = styled.div<{ row: number; column: number }>`
+export const StyledGridDiv = styled.div<{ column: number }>`
   display: grid;
   grid-template-columns: ${({ column }) => `repeat(${column}, 1fr)`};
-  grid-template-rows: ${({ row }) => `repeat(${row}, 1fr)`};
   gap: 1rem;
   margin-top: 1rem;
   height: 100%;
@@ -71,7 +70,15 @@ export const StyledNameDiv = styled.div<{ name: string }>`
 
 export const StyledContent = styled.div`
   font-size: 1.3rem;
+  span {
+    font-weight: 500;
+    color: gray;
+    padding-right: 0.5rem;
+  }
   @media (min-width: 1024px) {
+    span {
+      font-weight: 400;
+    }
     font-size: 1.7rem;
   }
 `;

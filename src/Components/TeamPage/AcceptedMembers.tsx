@@ -36,6 +36,7 @@ function Accepted(props: AcceptedModalProps) {
     position: '',
     level: '',
     contents: '',
+    phone_number: '',
   };
   const notyet = {
     name: '모집 중...',
@@ -43,6 +44,7 @@ function Accepted(props: AcceptedModalProps) {
     position: '',
     level: '',
     contents: '',
+    phone_number: '',
   };
   for (let i = 0; i < now - accept.length; i++) {
     acceptGridData.push(anonymous);
@@ -51,23 +53,17 @@ function Accepted(props: AcceptedModalProps) {
     acceptGridData.push(notyet);
   }
   // 기본값은 wideView를 지향함
-  const grid = [1, 15];
+  let grid = 1;
   // gridView일 경우, 전체 갯수에 따라 조정함
   if (gridView) {
-    if (total >= 9) {
-      grid[0] = 3;
-      grid[1] = total;
-    } else {
-      grid[0] = 2;
-      grid[1] = total;
-    }
+    grid = 2;
   }
   return (
     <>
       <Modal>
         <ModalPage style={{ height: '45rem' }}>
           <StyledHeader>
-            <h2>참여자 명단</h2>
+            <h2>팀원 명단</h2>
             <StyledExitButton
               onClick={() => {
                 setAcceptModal(false);
@@ -97,13 +93,13 @@ function Accepted(props: AcceptedModalProps) {
             </StyledViewButton>
           </StyledOption>
           <StyledBody>
-            <StyledGridDiv column={grid[0]} row={grid[1]}>
+            <StyledGridDiv column={grid}>
               {acceptGridData.map((applicant, index) => (
-                <StyledAcceptedMember key={index} row={grid[0]}>
+                <StyledAcceptedMember key={index} row={grid}>
                   {applicant.name !== '비회원 팀원입니다.' &&
                   applicant.name !== '모집 중...' ? (
                     <>
-                      <StyledMemberHeader row={grid[0]}>
+                      <StyledMemberHeader row={grid}>
                         <StyledAuthorDiv gender={applicant.gender}>
                           <StyledImgDiv>
                             <img src={ballIcon} alt="BallIcon" />
@@ -125,8 +121,17 @@ function Accepted(props: AcceptedModalProps) {
                           </StyledPosition>
                         </StyledDetailDiv>
                       </StyledMemberHeader>
-                      {grid[0] === 1 && (
-                        <StyledContent>{applicant.contents}</StyledContent>
+                      {grid === 1 && (
+                        <>
+                          <StyledContent>
+                            <span>연락처: </span>
+                            {applicant.phone_number}
+                          </StyledContent>
+                          <StyledContent>
+                            <span>메 &nbsp;&nbsp;&nbsp;모: </span>
+                            {applicant.contents}
+                          </StyledContent>
+                        </>
                       )}
                     </>
                   ) : (

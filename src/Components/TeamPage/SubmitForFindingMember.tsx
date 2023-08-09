@@ -11,6 +11,7 @@ import {
   StyledHeader,
   StyledOption,
   StyledSubTitle,
+  StyledDescription,
   StyledBlock,
   StyledInput,
   StyledSpan,
@@ -106,15 +107,16 @@ function DetailModal(props: SumbitModalProps) {
               />
             </StyledOption>
             <StyledSubTitle>
-              <StyledBlock>
-                <StyledSpan>메모</StyledSpan>
-                <StyledInput
-                  onChange={(e) => {
-                    setMemo(e.target.value);
-                  }}
-                />
-              </StyledBlock>
+              <StyledSpan>메모</StyledSpan>
+              <StyledInput
+                onChange={(e) => {
+                  setMemo(e.target.value);
+                }}
+              />
             </StyledSubTitle>
+            <StyledDescription>
+              팀 리더가 신청을 수락하면 회원님의 연락처가 전달됩니다.
+            </StyledDescription>
           </DetailPage>
           <StyledButtonContainer>
             <StyledButton

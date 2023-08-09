@@ -4,6 +4,7 @@ import Footer from '../../Components/Footer';
 import Header from '../../Components/Header';
 import { Routes, Route } from 'react-router-dom';
 import FindPage from './Views/SelectCategory';
+import TeamList from './Views/TeamList';
 import { BodyWrapper } from './Styles/ViewsStyle';
 import { Container } from '../../styles/Common/CommonStyle';
 import FindingMember from './Views/FindingMember';
@@ -23,19 +24,8 @@ function TeamPage() {
         <Routes>
           <Route path="/submit" element={<SubmitPage />} />
           <Route path="/edit/*" element={<EditPage />} />
-          <Route path="/team" element={<FindingMember />} />
-          <Route path="/team/*" element={<ViewPage />} />
-          <Route
-            path="/"
-            element={
-              <FindPage
-                findingTeam={findingTeam}
-                findingMember={findingMember}
-                setFindingTeam={setFindingTeam}
-                setFindingMember={setFindingMember}
-              />
-            }
-          />
+          <Route path="/" element={<FindingMember />} />
+          <Route path="/*" element={<ViewPage />} />
         </Routes>
       </BodyWrapper>
       <Footer />

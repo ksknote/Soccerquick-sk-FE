@@ -34,23 +34,6 @@ function FindPage(props: FindPageProps) {
             <StyledButtonText>팀원 구하기</StyledButtonText>
           </StyledButton>
         </Link>
-        {/* <Link to="/teampage/player">
-          <StyledButton
-            onClick={() => {
-              setFindingMember(false);
-              setFindingTeam(true);
-            }}
-          >
-            <StyledImg>
-              <img
-                src={teamIcon}
-                alt="팀 구해요"
-                title="팀 구직 사이트로 이동"
-              />
-            </StyledImg>
-            <StyledButtonText>팀 구하기</StyledButtonText>
-          </StyledButton>
-        </Link> */}
       </StyledDiv>
     </StyledWrapper>
   );

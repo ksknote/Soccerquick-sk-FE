@@ -1,24 +1,14 @@
-import react, { useState, useEffect } from 'react';
+import react, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import axios from 'axios';
 import styled from 'styled-components';
-import Header from '../Header';
-import Footer from '../Footer';
-import MyPageBar from './MyPageBar';
-import MyProfile from './MyPageInfo/MyPageProfile';
-import { MyPageInfo } from './MyPageInfo/MyPageInfo';
-import MyPageCheckPassword from './MyPageInfo/MyPageCheckPassword';
-import MyFavoriteGroundList from './MyFavoriteGround/MyFavoriteGroundList';
-import SearchMyTeamPost from './SearchMyPost/SearchMyTeamPost';
-import SearchMyReviewPost from './SearchMyPost/SearchMyReviewPost';
-import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { AUTH_ACTIONS } from '../../ReduxStore/modules/Auth/authSlice';
+import { useSelector, useDispatch } from 'react-redux';
 import { isLogInSelector } from '../../ReduxStore/modules/Auth/authSelectors';
-import SearchMyApplicationPost from './SearchMyPost/SearchMyApplicationPost';
 import alertModal from '../Commons/alertModal';
-import memoIcon from '../../styles/icon/myPageCategory/memoIcon.svg';
 import reviewIcon from '../../styles/icon/myPageCategory/reviewIconBlack.svg';
-import teamRegisterIcon from '../../styles/icon/myPageCategory/teamRegisterIconBlack.svg';
 import uniformIcon from '../../styles/icon/myPageCategory/uniformIcon.svg';
+import logoutIcon from '../../styles/icon/myPageCategory/logoutIcon.svg';
 import { FormDataType } from '../../Pages/MyPage';
 
 interface MyPageProps {
@@ -30,6 +20,7 @@ interface MyPageProps {
 function MyPage({ userData, myPost, registeredTeam }: MyPageProps) {
   const isLogIn = useSelector(isLogInSelector);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!isLogIn) {
@@ -37,6 +28,26 @@ function MyPage({ userData, myPost, registeredTeam }: MyPageProps) {
       navigate('/');
     }
   }, [isLogIn]);
+
+  const handleLoginOutClick = async () => {
+    const result = await alertModal('로그아웃 하시겠습니까?', 'submit');
+    if (result) {
+      handleAlertConfirm();
+    }
+  };
+  const handleAlertConfirm = async () => {
+    dispatch(AUTH_ACTIONS.logout());
+
+    // logout
+    await axios
+      .delete(`${process.env.REACT_APP_API_URL}/auths/logout`, {
+        withCredentials: true,
+      })
+      .then(() => {
+        navigate(window.location.pathname);
+      })
+      .catch((e) => console.log(e));
+  };
 
   return (
     <MyPageHomeWrapper>
@@ -85,23 +96,17 @@ function MyPage({ userData, myPost, registeredTeam }: MyPageProps) {
             </span>
             <span>내 프로필</span>
           </li>
-          {/* <li onClick={() => navigate('/mypage/myTeamPost')}>
-            <span>
-              <img src={memoIcon} alt="" />
-            </span>
-            <span>나의 팀 모집 글</span>
-          </li>
-          <li onClick={() => navigate('/mypage/myApplicationPost')}>
-            <span>
-              <img src={teamRegisterIcon} alt="" />
-            </span>
-            <span>내가 신청한 팀</span>
-          </li> */}
           <li onClick={() => navigate('/mypage/myReviewPost')}>
             <span>
               <img src={reviewIcon} alt="" />
             </span>
             <span>나의 리뷰</span>
+          </li>
+          <li onClick={handleLoginOutClick}>
+            <span>
+              <img src={logoutIcon} alt="" />
+            </span>
+            <span>로그아웃</span>
           </li>
         </MyPageCategryList>
       </MyPageInfoContainer>

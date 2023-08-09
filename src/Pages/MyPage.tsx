@@ -4,11 +4,13 @@ import axios from 'axios';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import MyFavoriteGroundList from '../Components/MyPage/MyFavoriteGround/MyFavoriteGroundList';
-import SearchMyTeamPost from '../Components/MyPage/SearchMyPost/SearchMyTeamPost';
 import SearchMyReviewPost from '../Components/MyPage/SearchMyPost/SearchMyReviewPost';
+import SearchMyTeamPost from '../Components/MyPage/SearchMyPost/SearchMyTeamPost';
+import MyTeamPost from '../Components/MyPage/SearchMyPost/MyTeamPost';
+import SearchMyApplicationPost from '../Components/MyPage/SearchMyPost/SearchMyApplicationPost';
+import MyApplicatedTeamPost from '../Components/MyPage/SearchMyPost/MyApplicatedTeamPost';
 import { useSelector } from 'react-redux';
 import { isLogInSelector } from '../ReduxStore/modules/Auth/authSelectors';
-import SearchMyApplicationPost from '../Components/MyPage/SearchMyPost/SearchMyApplicationPost';
 import alertModal from '../Components/Commons/alertModal';
 import MyPageHome from '../Components/MyPage/MyPageHome';
 import MyPageProfileLayout from '../Components/MyPage/MyPageInfo/MyPageProfileLayout';
@@ -157,16 +159,21 @@ export function MyPage() {
         />
         <Route path="/favorite" element={<MyFavoriteGroundList />} />
         <Route
-          path="/myTeamPost"
+          path="/myTeamList"
           element={<SearchMyTeamPost filteredItems={filteredMyTeamPosts} />}
         />
+        <Route path="/myTeamList/:group_Id" element={<MyTeamPost />} />
         <Route
-          path="/myApplicationPost"
+          path="/myApplicatedTeamList"
           element={
             <SearchMyApplicationPost
               filteredItems={filteredRegistedTeamPosts}
             />
           }
+        />
+        <Route
+          path="/myApplicatedTeamList/:group_id"
+          element={<MyApplicatedTeamPost />}
         />
         <Route path="/myReviewPost" element={<SearchMyReviewPost />} />
       </Routes>

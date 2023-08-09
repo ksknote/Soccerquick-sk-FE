@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-// MainPage
 export const Wrapper = styled.div`
   width: 100%;
   max-width: 120rem;
@@ -11,6 +10,16 @@ export const Wrapper = styled.div`
 
   @media (min-width: 768px) {
     padding: 2rem 3rem 1rem 3rem;
+  }
+`;
+
+export const BodyWrapper = styled(Wrapper)`
+  padding: 2rem 1rem 10rem 1rem;
+`;
+
+export const MyTeamPostWrapper = styled.div`
+  @media (max-width: 768px) {
+    padding: 2rem 1rem 0 1rem;
   }
 `;
 

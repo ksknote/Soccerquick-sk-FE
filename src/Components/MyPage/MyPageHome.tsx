@@ -73,12 +73,12 @@ function MyPage({ userData, myPost, registeredTeam }: MyPageProps) {
             </StyledUserDetail>
           </UserProfileTop>
           <UserProfileBottom>
-            <ProfileBottomItem onClick={() => navigate('/mypage/myTeamPost')}>
+            <ProfileBottomItem onClick={() => navigate('/mypage/myTeamList')}>
               <p>내가 쓴 글</p>
               <p>{myPost}</p>
             </ProfileBottomItem>
             <ProfileBottomItem
-              onClick={() => navigate('/mypage/myApplicationPost')}
+              onClick={() => navigate('/mypage/myApplicatedTeamList')}
             >
               <p>신청한 팀</p>
               <p>{registeredTeam}</p>

@@ -47,10 +47,7 @@ function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
             filteredItems.map((team, idx) => (
               <TeamRecruitContainer key={team.group_id}>
                 <TeamRecruitLi>
-                  <Link
-                    to={`/teampage/team/${team.group_id}`}
-                    state={{ data: team }}
-                  >
+                  <Link to={`./${team.group_id}`} state={{ data: team }}>
                     <ContentHeader>
                       <RecruitStatus status={team.status}>
                         {team.status}

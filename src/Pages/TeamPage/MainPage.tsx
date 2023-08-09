@@ -9,9 +9,6 @@ import SubmitPage from './Views/PostPage';
 import EditPage from './Views/EditPage';
 import HeaderCategory from '../../Components/Commons/HeaderCategory';
 function TeamPage() {
-  const [findingTeam, setFindingTeam] = React.useState<boolean>(true);
-  const [findingMember, setFindingMember] = React.useState<boolean>(true);
-
   return (
     <>
       <Header />

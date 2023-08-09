@@ -32,7 +32,10 @@ function SearchMyApplicationPost({
           {filteredItems.length > 0 ? (
             filteredItems.map((item, idx) => (
               <TeamRecruitContainer>
-                <Link to={`./${item.group_id}`} state={{ data: item }}>
+                <Link
+                  to={`/teampage/team/${item.group_id}`}
+                  state={{ data: item }}
+                >
                   <TeamRecruitLi>
                     <ContentHeader>
                       <Status status={item.status}>{item.status}</Status>

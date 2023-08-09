@@ -9,7 +9,7 @@ import {
   TeamRecruitContainer,
   TeamRecruitLi,
   ContentHeader,
-  Status,
+  RecruitStatus,
   ContentTitle,
   Position,
   Author,
@@ -30,14 +30,16 @@ function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
         <TeamPageBody>
           {filteredItems.length > 0 ? (
             filteredItems.map((item, idx) => (
-              <TeamRecruitContainer>
+              <TeamRecruitContainer key={item.group_id}>
                 <Link
                   to={`/teampage/team/${item.group_id}`}
                   state={{ data: item }}
                 >
                   <TeamRecruitLi>
                     <ContentHeader>
-                      <Status status={item.status}>{item.status}</Status>
+                      <RecruitStatus status={item.status}>
+                        {item.status}
+                      </RecruitStatus>
                       <Author>모집자: {item.leader_name}</Author>
                     </ContentHeader>
                     <ContentTitle>

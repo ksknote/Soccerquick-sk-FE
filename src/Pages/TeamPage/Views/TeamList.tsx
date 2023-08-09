@@ -13,7 +13,7 @@ import {
   TeamRecruitContainer,
   TeamRecruitLi,
   ContentHeader,
-  Status,
+  RecruitStatus,
   ContentTitle,
   Position,
   Author,
@@ -122,10 +122,16 @@ function TeamList(props: BoardProps) {
         <TeamRecruitContainer>
           {filteredData.length > 0 ? (
             currentData.map((item, idx) => (
-              <Link to={`./${item.group_id}`} state={{ data: item }}>
+              <Link
+                key={item.group_id}
+                to={`./${item.group_id}`}
+                state={{ data: item }}
+              >
                 <TeamRecruitLi>
                   <ContentHeader>
-                    <Status status={item.status}>{item.status}</Status>
+                    <RecruitStatus status={item.status}>
+                      {item.status}
+                    </RecruitStatus>
                     <Author>모집자: {item.author}</Author>
                   </ContentHeader>
                   <ContentTitle>

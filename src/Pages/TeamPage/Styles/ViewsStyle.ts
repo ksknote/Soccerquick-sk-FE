@@ -336,7 +336,8 @@ export const TeamRecruitContainer = styled.div`
 export const TeamRecruitLi = styled.div`
   display: flex;
   flex-direction: column;
-  height: 16rem;
+  height: 100%;
+  min-height: 16rem;
   box-sizing: border-box;
   padding: 1.5rem;
   gap: 1.5rem;
@@ -346,7 +347,7 @@ export const TeamRecruitLi = styled.div`
   font-size: 1.3rem;
   cursor: pointer;
   @media (min-width: 1024px) {
-    height: 17rem;
+    min-height: 17rem;
     font-size: 1.5rem;
   }
 `;
@@ -356,19 +357,21 @@ export const ContentHeader = styled.div`
   justify-content: space-between;
 `;
 
-export const Status = styled.span<{ status: string }>`
+export const Status = styled.span`
   width: fit-content;
   padding: 0.2rem 1rem 0.3rem 1rem;
   border: 0.1rem solid #eeeeee;
   border-radius: 2rem;
   font-size: 1.2rem;
   font-weight: 500;
-  color: ${({ status }) => (status === '모집중' ? 'green' : 'gray')};
-  background-color: ${({ status }) =>
-    status === '모집중' ? '#e6ffeb' : '#eeeeee'};
   @media (min-width: 1024px) {
     font-size: 1.4rem;
   }
+`;
+export const RecruitStatus = styled(Status)<{ status: string }>`
+  color: ${({ status }) => (status === '모집중' ? 'green' : 'gray')};
+  background-color: ${({ status }) =>
+    status === '모집중' ? '#e6ffeb' : '#eeeeee'};
 `;
 
 export const ContentTitle = styled.div`
@@ -377,6 +380,7 @@ export const ContentTitle = styled.div`
   span {
     color: #6e6e6e;
     font-weight: 500;
+    white-space: nowrap;
     :after {
       content: '|';
       font-weight: 300;
@@ -429,4 +433,16 @@ export const Author = styled.div`
 
 export const BodyContainer = styled.div`
   padding: 1rem;
+`;
+
+//SearchMyApplicationPost
+
+export const StatusContainer = styled.div`
+  span:first-child {
+    margin-right: 0.5rem;
+  }
+`;
+export const AcceptStatus = styled(Status)<{ status: number }>`
+  color: ${({ status }) => (status === 1 ? 'green' : 'gray')};
+  background-color: white;
 `;

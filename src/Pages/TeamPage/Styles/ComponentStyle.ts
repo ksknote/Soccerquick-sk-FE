@@ -214,7 +214,7 @@ export const ModalPage = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  height: 100%;
+  height: 30rem;
   background-color: rgba(255, 255, 255);
   border-radius: 2rem;
   z-index: 501;

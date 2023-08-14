@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import LikeButton from '../Commons/LikeButton';
 import alertModal from '../Commons/alertModal';
+import ImageIcon from '../../styles/icon/ImageIcon.svg';
 import {
   isLogInSelector,
   userSelector,
@@ -21,6 +22,7 @@ interface reviewData {
   contents?: string;
   createdAt?: string;
   likedreviews: string[];
+  image: string;
 }
 
 const config = {
@@ -37,6 +39,16 @@ export default function Review(props: ReviewProps) {
   const userId = userData?.user_id;
   const userName = userData?.name || ''; // 빈 문자열로 대체
   const domId = props.dom_id;
+  const [selectedImage, setSelectedImage] = useState<File>();
+
+  const handleSetReviewImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedImage(file);
+    } else {
+      alertModal('이미지를 선택해주세요.', 'warning');
+    }
+  };
 
   useEffect(() => {}, [reviewData]);
 
@@ -94,7 +106,7 @@ export default function Review(props: ReviewProps) {
         });
   }
 
-  function handleWriteReview() {
+  async function handleWriteReview() {
     if (!isLogin) {
       return alertModal('로그인이 필요한 서비스입니다.', 'warning');
     }
@@ -111,6 +123,24 @@ export default function Review(props: ReviewProps) {
     }
 
     // 작성한 리뷰를 서버에 등록
+    let imageUrl = '';
+
+    if (selectedImage) {
+      const formData = new FormData();
+      formData.append('image', selectedImage);
+      try {
+        const res = await axios.post(
+          `${process.env.REACT_APP_API_URL}/communities/uploads`,
+          formData,
+          { withCredentials: true }
+        );
+        imageUrl = res.data.data;
+      } catch (e) {
+        console.log(e);
+        alertModal('지원하지 않는 파일 형식입니다.', 'warning');
+      }
+    }
+
     axios
       .post(
         `${process.env.REACT_APP_API_URL}/reviews`,
@@ -118,6 +148,7 @@ export default function Review(props: ReviewProps) {
           user_id: userId,
           dom_id: domId,
           contents: review,
+          image: imageUrl,
         },
         config
       )
@@ -179,6 +210,9 @@ export default function Review(props: ReviewProps) {
               <span className="review">{item.contents}</span>
             )}
           </div>
+          {item.image && (
+            <img className="review-image" src={item.image} alt="reivewImage" />
+          )}
           {isLogin && item.user_name === userName && (
             <div className="review-content-buttons">
               <button
@@ -210,8 +244,30 @@ export default function Review(props: ReviewProps) {
               setReview(e.target.value);
             }}
           />
+          {selectedImage && (
+            <SelectedImageContainer>
+              <SelectedReviewImage>
+                <img
+                  src={selectedImage ? URL.createObjectURL(selectedImage) : ''}
+                  alt="profile"
+                />
+                <button onClick={() => setSelectedImage(undefined)}>
+                  <span>×</span>
+                </button>
+              </SelectedReviewImage>
+            </SelectedImageContainer>
+          )}
         </div>
         <div className="button-container">
+          <InputTypeFileLabel htmlFor="reviewImageFile">
+            <img src={ImageIcon} alt="imageIcon" />
+          </InputTypeFileLabel>
+          <InputTypeFile
+            type="file"
+            id="reviewImageFile"
+            onChange={handleSetReviewImage}
+            accept="image/*"
+          />
           <button className="write-review-button" onClick={handleWriteReview}>
             작성 완료
           </button>
@@ -281,7 +337,7 @@ const StyledReviews = styled.div`
 
   .user-icon {
     width: 4rem;
-    height: auto;
+    height: 4rem;
     margin-right: 1rem;
     border-radius: 5rem;
   }
@@ -301,6 +357,10 @@ const StyledReviews = styled.div`
     flex-direction: row;
     margin-bottom: 1rem;
     font-size: 1.3rem;
+  }
+
+  .review-image {
+    max-width: 40rem;
   }
 
   .review-edit-textarea {
@@ -369,7 +429,6 @@ const StyledReviews = styled.div`
 const StyledWriteReview = styled.div`
   display: flex;
   flex-direction: column;
-  height: 15rem;
   padding: 2rem;
   margin-top: 1rem;
   background-color: white;
@@ -378,6 +437,7 @@ const StyledWriteReview = styled.div`
 
   .textarea-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     flex: 1;
   }
@@ -398,7 +458,8 @@ const StyledWriteReview = styled.div`
   .button-container {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .write-review-button {
@@ -428,4 +489,47 @@ const StyledWriteReview = styled.div`
       border-radius: 5px;
     }
   }
+`;
+const SelectedImageContainer = styled.div`
+  button {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-size: 1.4rem;
+    color: grey;
+    background: white;
+    box-sizing: border-box;
+    border: 0.1rem solid grey;
+    border-radius: 100%;
+  }
+`;
+const SelectedReviewImage = styled.div`
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  border: 0.1rem solid #e6e6e6;
+  margin: 1rem 0;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  @media (min-width: 768px) {
+    width: 8rem;
+    height: 8rem;
+  }
+`;
+
+const InputTypeFileLabel = styled.label`
+  width: 2.2rem;
+  cursor: pointer;
+`;
+
+const InputTypeFile = styled.input`
+  display: none;
 `;

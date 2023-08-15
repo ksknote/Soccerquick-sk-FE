@@ -435,6 +435,7 @@ const UserInfo = styled.div`
     height: 4rem;
     margin-right: 1rem;
     border-radius: 5rem;
+    object-fit: cover;
     @media (min-width: 1024px) {
       width: 5rem;
       height: 5rem;

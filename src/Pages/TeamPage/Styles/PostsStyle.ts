@@ -150,6 +150,12 @@ export const StyledImgDiv = styled.div`
   height: 3rem;
   border-radius: 100%;
   border: 0.1rem solid lightgray;
+  img {
+    width: 3rem;
+    height: 3rem;
+    object-fit: cover;
+    border-radius: 100%;
+  }
   @media (min-width: 1024px) {
     width: 4rem;
     height: 4rem;

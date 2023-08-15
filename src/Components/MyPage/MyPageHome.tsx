@@ -202,6 +202,7 @@ const StyledProfileImg = styled.input`
   height: 8rem;
   border-radius: 100%;
   background-color: white;
+  object-fit: cover;
 `;
 const StyledText = styled.div<{ bold?: boolean; small?: boolean }>`
   margin-left: 2rem;

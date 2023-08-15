@@ -41,7 +41,6 @@ export default function Review(props: ReviewProps) {
   const domId = props.dom_id;
   const [selectedImage, setSelectedImage] = useState<File>();
   const [selectedEditImage, setSelectedEditImage] = useState<File>();
-  const [isChagedOriginalImage, setIsChangedOriginalImage] = useState(false);
 
   const handleSetReviewImage = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -50,11 +49,9 @@ export default function Review(props: ReviewProps) {
     const file = e.target.files?.[0];
     if (file) {
       if (type === 'new') {
-        console.log('new');
         setSelectedImage(file);
       }
       if (type === 'edit') {
-        console.log('edit!');
         setSelectedEditImage(file);
       }
     } else {
@@ -69,7 +66,6 @@ export default function Review(props: ReviewProps) {
     reviewId: string | undefined,
     imageUrl: string | undefined
   ) {
-    console.log(imageUrl);
     if (isReviewEditable) {
       handleSubmitReview(index, reviewId, imageUrl);
     } else {
@@ -96,7 +92,6 @@ export default function Review(props: ReviewProps) {
     let image: string | undefined;
     if (selectedEditImage || (imageUrl && !selectedEditImage)) {
       image = await setImage('edit');
-      console.log(image);
     }
 
     axios
@@ -220,19 +215,19 @@ export default function Review(props: ReviewProps) {
   }
 
   return (
-    <StyledReviewContainer>
-      <div className="review-header">
+    <Wrapper>
+      <Header>
         <h2>📄 리뷰 목록</h2>
         <span>좋아요 순</span>
-      </div>
+      </Header>
       {reviewData.map((item, index) => (
-        <StyledReviews key={index}>
-          <div className="review-contents-header">
-            <span className="user-info">
+        <ReivewLi key={index}>
+          <ReviewHeader>
+            <UserInfo>
               <span>
-                <img className="user-icon" src={item.user_icon} alt="avatar" />
+                <img src={item.user_icon} alt="avatar" />
               </span>
-              <span className="user-name">
+              <UserDetail>
                 <p>{item.user_name}</p>
                 <p className="review-time">
                   {item.createdAt &&
@@ -242,8 +237,8 @@ export default function Review(props: ReviewProps) {
                       day: 'numeric',
                     })}
                 </p>
-              </span>
-            </span>
+              </UserDetail>
+            </UserInfo>
             <span className="likes">
               <LikeButton
                 likedreviews={item.likedreviews}
@@ -251,8 +246,8 @@ export default function Review(props: ReviewProps) {
                 isLogin={isLogin}
               />
             </span>
-          </div>
-          <TextAreaContainer>
+          </ReviewHeader>
+          <ReviewBody>
             {item.user_name === userName && isReviewEditable ? (
               <>
                 <TextArea
@@ -286,28 +281,30 @@ export default function Review(props: ReviewProps) {
             ) : (
               <ReviewContents>{item.contents}</ReviewContents>
             )}
-          </TextAreaContainer>
-          {item.image && !isReviewEditable && (
-            <img className="review-image" src={item.image} alt="reivewImage" />
-          )}
+            {item.image && !isReviewEditable && (
+              <ReviewImage src={item.image} alt="reivewImage" />
+            )}
+          </ReviewBody>
           {isLogin && item.user_name === userName && (
-            <ButtonContainer>
-              {isReviewEditable && (
-                <>
-                  <InputTypeFileLabel htmlFor="reviewEditImageFile">
-                    <img src={ImageIcon} alt="imageIcon" />
-                  </InputTypeFileLabel>
-                  <InputTypeFile
-                    type="file"
-                    id="reviewEditImageFile"
-                    onChange={(e) => handleSetReviewImage(e, 'edit')}
-                    accept="image/*"
-                  />
-                </>
-              )}
-              <div className="review-content-buttons">
+            <ReviewFooter>
+              <div>
+                {isReviewEditable && (
+                  <>
+                    <InputTypeFileLabel htmlFor="reviewEditImageFile">
+                      <img src={ImageIcon} alt="imageIcon" />
+                    </InputTypeFileLabel>
+                    <InputTypeFile
+                      type="file"
+                      id="reviewEditImageFile"
+                      onChange={(e) => handleSetReviewImage(e, 'edit')}
+                      accept="image/*"
+                    />
+                  </>
+                )}
+              </div>
+              <ButtonContainer>
                 {isReviewEditable ? (
-                  <button
+                  <Button
                     onClick={() => {
                       setIsReviewEditable(!isReviewEditable);
                       setEditReview('');
@@ -315,30 +312,28 @@ export default function Review(props: ReviewProps) {
                     }}
                   >
                     취소
-                  </button>
+                  </Button>
                 ) : (
-                  <button
-                    className="review-delete"
+                  <Button
                     onClick={() => handleDeleteReview(index, item.review_id)}
                   >
                     삭제
-                  </button>
+                  </Button>
                 )}
-                <button
-                  className="review-edit"
+                <Button
                   onClick={() => {
                     handleEditReview(index, item.review_id, item.image);
                   }}
                 >
                   {isReviewEditable ? '완료' : '수정'}
-                </button>
-              </div>
-            </ButtonContainer>
+                </Button>
+              </ButtonContainer>
+            </ReviewFooter>
           )}
-        </StyledReviews>
+        </ReivewLi>
       ))}
-      <StyledWriteReview>
-        <TextAreaContainer>
+      <WriteReviewContainer>
+        <ReviewBody>
           <TextArea
             placeholder="리뷰 내용을 입력하세요"
             value={review}
@@ -359,8 +354,8 @@ export default function Review(props: ReviewProps) {
               </SelectedReviewImage>
             </SelectedImageContainer>
           )}
-        </TextAreaContainer>
-        <ButtonContainer>
+        </ReviewBody>
+        <ReviewFooter>
           <InputTypeFileLabel htmlFor="reviewImageFile">
             <img src={ImageIcon} alt="imageIcon" />
           </InputTypeFileLabel>
@@ -370,52 +365,47 @@ export default function Review(props: ReviewProps) {
             onChange={(e) => handleSetReviewImage(e, 'new')}
             accept="image/*"
           />
-          <button className="write-review-button" onClick={handleWriteReview}>
-            작성 완료
-          </button>
-        </ButtonContainer>
-      </StyledWriteReview>
-    </StyledReviewContainer>
+          <Button onClick={handleWriteReview}>작성 완료</Button>
+        </ReviewFooter>
+      </WriteReviewContainer>
+    </Wrapper>
   );
 }
 
-const StyledReviewContainer = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
 
-  .review-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
+const Header = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  > h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0.6rem 0;
+  }
+  > span {
+    padding: 1rem;
+    font-size: 1.3rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  @media (min-width: 1024px) {
     > h2 {
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin: 0.6rem 0;
+      font-size: 2.2rem;
+      font-weight: 700;
     }
-
     > span {
-      padding: 1rem;
-      font-size: 1.3rem;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-    @media (min-width: 1024px) {
-      > h2 {
-        font-size: 2.2rem;
-        font-weight: 700;
-      }
-      > span {
-        font-size: 1.4rem;
-      }
+      font-size: 1.4rem;
     }
   }
 `;
 
-const StyledReviews = styled.div`
+const ReivewLi = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
@@ -423,108 +413,65 @@ const StyledReviews = styled.div`
   background-color: white;
   filter: drop-shadow(0 0 3px #dddddd);
   border-radius: 10px;
-
-  .review-contents-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  @media (min-width: 1024px) {
+    padding: 2.5rem;
+    margin: 2rem 0;
   }
+`;
 
-  .user-info {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 2rem;
-  }
+const ReviewHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
-  .user-icon {
+const UserInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 2rem;
+  img {
     width: 4rem;
     height: 4rem;
     margin-right: 1rem;
     border-radius: 5rem;
+    @media (min-width: 1024px) {
+      width: 5rem;
+      height: 5rem;
+    }
   }
+`;
 
-  .user-name {
-    font-size: 1.4rem;
-    font-weight: 500;
-  }
-
-  .review-time {
-    font-size: 1.1rem;
-    font-weight: 400;
-  }
-
-  .review-content {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 1rem;
+const UserDetail = styled.div`
+  p {
     font-size: 1.3rem;
-  }
-
-  .review-image {
-    max-width: 40rem;
-  }
-
-  .review-edit-textarea {
-    width: 100%;
-    height: 8rem;
-    padding: 1rem;
-    border: none;
-    resize: none;
-    font-size: 1.7rem;
-
-    :focus {
-      border: 1.5px solid #dddddd;
-      border-radius: 1rem;
-      box-shadow: 1px 1px 10px #efefef;
-      outline: none;
-    }
-  }
-
-  .review-content-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    margin: 1rem;
-
-    .review-edit {
-      font-size: 1.2rem;
-      padding: 0.5rem 1rem;
-      margin-right: 1rem;
-      border: 0.5px solid #cfcfcf;
-      border-radius: 5px;
-      background-color: white;
-
-      &:hover {
-        background-color: #e7e7e7;
-      }
-    }
-
-    .review-delete {
-      font-size: 1.2rem;
-      padding: 0.5rem 1rem;
-      border: 0.5px solid #cfcfcf;
-      border-radius: 5px;
-      background-color: white;
-
-      &:hover {
-        background-color: #eeeeee;
-      }
+    font-weight: 500;
+    :last-child {
+      font-size: 1.1rem;
+      font-weight: 400;
     }
   }
   @media (min-width: 1024px) {
-    margin: 2rem 0;
-
-    .user-name {
+    p {
       font-size: 1.7rem;
+      :last-child {
+        font-size: 1.3rem;
+      }
     }
+  }
+`;
 
-    .review-time {
-      font-size: 1.3rem;
-    }
-    .review-content {
-      font-size: 1.7rem;
-    }
+const ReviewBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const ReviewContents = styled.div`
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  @media (min-width: 1024px) {
+    font-size: 1.6rem;
   }
 `;
 
@@ -533,19 +480,47 @@ const TextArea = styled.textarea`
   height: 70%;
   border: none;
   resize: none; /* 크기 조정 비활성화 */
-  padding: 1rem;
+  padding: 1rem 0;
   font-size: 1.3rem;
 
   :focus {
     outline: none;
   }
+  @media (min-width: 1024px) {
+    font-size: 1.6rem;
+  }
 `;
 
-const ReviewContents = styled.div`
+const ReviewImage = styled.img`
+  max-width: 40rem;
+`;
+
+const ButtonContainer = styled.div`
+  button:last-child {
+    margin-left: 0.5rem;
+  }
+`;
+
+const Button = styled.button`
   font-size: 1.3rem;
+  padding: 0.7rem 1.3rem;
+  border: 0.5px solid #cfcfcf;
+  border-radius: 5px;
+  background-color: white;
+  color: #09cf00;
+
+  &:hover {
+    background-color: #09cf00;
+    color: white;
+  }
+  @media (min-width: 1024px) {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+  }
 `;
 
-const StyledWriteReview = styled.div`
+const WriteReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
@@ -553,55 +528,14 @@ const StyledWriteReview = styled.div`
   background-color: white;
   filter: drop-shadow(0 0 3px #dddddd);
   border-radius: 10px;
-
-  .button-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .write-review-button {
-    font-size: 1.3rem;
-    padding: 0.7rem 1.3rem;
-    border: 0.5px solid #cfcfcf;
-    border-radius: 5px;
-    background-color: white;
-    color: #09cf00;
-
-    &:hover {
-      background-color: #09cf00;
-      color: white;
-    }
-  }
-  @media (min-width: 1024px) {
-    height: 20rem;
-    margin-top: 2rem;
-    .write-review-textarea {
-      height: 70%;
-      padding: 1rem;
-      font-size: 1.7rem;
-    }
-    .write-review-button {
-      font-size: 1.5rem;
-      padding: 1rem 2rem;
-      border-radius: 5px;
-    }
-  }
 `;
 
-const TextAreaContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex: 1;
-`;
-
-const ButtonContainer = styled.div`
+const ReviewFooter = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding-top: 1rem;
 `;
 
 const SelectedImageContainer = styled.div`
@@ -640,8 +574,14 @@ const SelectedReviewImage = styled.div`
 `;
 
 const InputTypeFileLabel = styled.label`
-  width: 2.2rem;
   cursor: pointer;
+  img {
+    width: 2.2rem;
+    @media (min-width: 1024px) {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
 `;
 
 const InputTypeFile = styled.input`

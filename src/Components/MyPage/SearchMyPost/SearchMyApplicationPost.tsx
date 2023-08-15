@@ -1,6 +1,5 @@
 import react from 'react';
 import { useNavigate } from 'react-router-dom';
-import { checkPosition } from '../../../Pages/TeamPage/Views/TeamList';
 import { GroupPost } from '../../../Pages/MyPage';
 import MyPageHeader from '../MyPageHeader';
 import MobileHeader from '../../MobileHeader';
@@ -20,6 +19,7 @@ import {
   AcceptedDespcription,
 } from '../../../Pages/TeamPage/Styles/ViewsStyle';
 import EmptyBox from '../../Commons/EmptyBox';
+import CheckPositionStatus from '../../TeamPage/CheckPostionStatus';
 
 function SearchMyApplicationPost({
   filteredItems,
@@ -67,7 +67,7 @@ function SearchMyApplicationPost({
                     {team.title}
                   </ContentTitle>
                   <Position>
-                    {checkPosition(
+                    {CheckPositionStatus(
                       team.gk_current_count,
                       team.gk_count,
                       team.player_current_count,

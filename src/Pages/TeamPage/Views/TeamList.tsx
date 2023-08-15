@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DropDown from '../../../Components/Commons/DropDown';
 import resetIcon from '../../../styles/icon/reset_black.svg';
-import styled from 'styled-components';
 import {
   StyledTotalNumber,
   TeamPageBody,
@@ -23,57 +22,7 @@ import { useSelector } from 'react-redux';
 import { isLogInSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
 import MyPagination from '../../../Components/MyPage/MyPagination';
 import EmptyBox from '../../../Components/Commons/EmptyBox';
-
-// 포지션 체크하는 부분
-export const checkPosition = (
-  gk: number,
-  gkNeed: number,
-  player: number,
-  playerNeed: number
-) => {
-  if (gk < gkNeed) {
-    if (player < playerNeed) {
-      return (
-        <div>
-          <p>
-            필드플레이어&nbsp;
-            <span>
-              ({player}/{playerNeed})
-            </span>
-          </p>
-          <p>
-            골키퍼&nbsp;
-            <span>
-              ({gk}/{gkNeed})
-            </span>
-          </p>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <p>
-            골키퍼&nbsp;
-            <span>
-              ({gk}/{gkNeed})
-            </span>
-          </p>
-        </div>
-      );
-    }
-  } else if (player < playerNeed) {
-    return (
-      <div>
-        <p>
-          필드플레이어&nbsp;
-          <span>
-            ({player}/{playerNeed})
-          </span>
-        </p>
-      </div>
-    );
-  } else return <div>-</div>;
-};
+import CheckPositionStatus from '../../../Components/TeamPage/CheckPostionStatus';
 
 function TeamList(props: BoardProps) {
   const navigate = useNavigate();
@@ -139,7 +88,7 @@ function TeamList(props: BoardProps) {
                     <p>{item.title}</p>
                   </ContentTitle>
                   <Position>
-                    {checkPosition(
+                    {CheckPositionStatus(
                       item.gk_current_count,
                       item.gk_count,
                       item.player_current_count,

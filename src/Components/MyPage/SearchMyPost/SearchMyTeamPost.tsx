@@ -18,10 +18,10 @@ import {
   TeamMemberList,
 } from '../../../Pages/TeamPage/Styles/ViewsStyle';
 import { GroupPost } from '../../../Pages/MyPage';
-import { checkPosition } from '../../../Pages/TeamPage/Views/TeamList';
 import MyPageHeader from '../MyPageHeader';
 import EmptyBox from '../../Commons/EmptyBox';
 import Accepted from '../../../Components/TeamPage/AcceptedMembers';
+import CheckPositionStatus from '../../TeamPage/CheckPostionStatus';
 
 function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
   const [acceptModal, setAcceptModal] = useState(false);
@@ -61,7 +61,7 @@ function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
                     <p>{team.title}</p>
                   </ContentTitle>
                   <Position>
-                    {checkPosition(
+                    {CheckPositionStatus(
                       team.gk_current_count,
                       team.gk_count,
                       team.player_current_count,

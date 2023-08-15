@@ -13,7 +13,6 @@ import {
   StyledTitleBox,
   StyledTitle,
   StyledTitleInputText,
-  StyledDiv,
   StyledInputText,
   StyledButton,
 } from '../Styles/PostsStyle';

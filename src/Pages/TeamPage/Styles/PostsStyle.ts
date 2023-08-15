@@ -34,12 +34,6 @@ export const StyledTitleInputText = styled.input`
   border: 0.1rem solid #b2b2b2;
 `;
 
-export const StyledDiv = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 2rem;
-`;
-
 export const StyledInputText = styled.input`
   display: flex;
   padding-left: 1rem;

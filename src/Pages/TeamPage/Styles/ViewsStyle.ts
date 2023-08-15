@@ -23,60 +23,6 @@ export const MyTeamPostWrapper = styled.div`
   }
 `;
 
-// SelectCategory
-
-export const StyledWrapper = styled.div`
-  max-width: 120rem;
-  border-top: 0.2rem solid #c9c9c97c;
-  box-shadow: 0px -5px 5px -5px #c9c9c97c;
-`;
-
-export const StyledDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin: 16rem auto;
-`;
-
-export const StyledButton = styled.button`
-  height: 23rem;
-  width: 23rem;
-  background: transparent;
-  :hover {
-    div:first-child {
-      filter: drop-shadow(0 0 1rem #93d663);
-    }
-    div:last-child {
-      color: var(--color--green);
-    }
-  }
-`;
-
-export const StyledImg = styled.div`
-  height: 23rem;
-  width: 23rem;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: white;
-  filter: drop-shadow(0 0 0.5rem #d8d3d3);
-
-  img {
-    height: 12rem;
-    width: 12rem;
-  }
-`;
-
-export const StyledButtonText = styled.div`
-  font-size: 2.4rem;
-  font-weight: 500;
-  color: #6a6a6a;
-  margin-top: 4rem;
-  text-align: center;
-  width: 23rem;
-`;
-
 // FindingMember
 
 export const StyledHeader = styled.div`

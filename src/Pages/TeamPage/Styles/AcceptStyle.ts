@@ -43,17 +43,6 @@ export const StyledMemberHeader = styled.div<{ row: number }>`
   padding-bottom: ${({ row }) => row === 1 && '1rem'};
 `;
 
-export const StyledDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  font-size: 4px;
-  margin: 0.7rem;
-  padding: 0.4rem;
-  border: 1px solid;
-  border-radius: 3rem;
-  background-color: white;
-`;
-
 export const StyledNameDiv = styled.div<{ name: string }>`
   display: flex;
   width: fit-content;

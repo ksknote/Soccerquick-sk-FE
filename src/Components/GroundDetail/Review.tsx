@@ -40,11 +40,23 @@ export default function Review(props: ReviewProps) {
   const userName = userData?.name || ''; // 빈 문자열로 대체
   const domId = props.dom_id;
   const [selectedImage, setSelectedImage] = useState<File>();
+  const [selectedEditImage, setSelectedEditImage] = useState<File>();
+  const [isChagedOriginalImage, setIsChangedOriginalImage] = useState(false);
 
-  const handleSetReviewImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSetReviewImage = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    type: string
+  ) => {
     const file = e.target.files?.[0];
     if (file) {
-      setSelectedImage(file);
+      if (type === 'new') {
+        console.log('new');
+        setSelectedImage(file);
+      }
+      if (type === 'edit') {
+        console.log('edit!');
+        setSelectedEditImage(file);
+      }
     } else {
       alertModal('이미지를 선택해주세요.', 'warning');
     }
@@ -52,37 +64,67 @@ export default function Review(props: ReviewProps) {
 
   useEffect(() => {}, [reviewData]);
 
-  function handleEditReview(index: number, reviewId: string | undefined) {
+  async function handleEditReview(
+    index: number,
+    reviewId: string | undefined,
+    imageUrl: string | undefined
+  ) {
+    console.log(imageUrl);
     if (isReviewEditable) {
-      if (editReview === '') {
-        return alertModal('내용을 입력해주세요!', 'warning');
-      }
-
-      axios
-        .patch(
-          `${process.env.REACT_APP_API_URL}/reviews/${reviewId}`,
-          {
-            contents: editReview,
-            domId,
-          },
-          config
-        )
-        .then((res) => {
-          if (res.status === 200) {
-            const newReviewData = [...reviewData];
-            newReviewData[index].contents = editReview;
-            setReviewData(newReviewData);
-            setIsReviewEditable(false);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-          alertModal('수정에 실패하였습니다.', 'error');
-        });
+      handleSubmitReview(index, reviewId, imageUrl);
     } else {
+      if (imageUrl) {
+        const image = await fetch(imageUrl); // 이미지 데이터 가져오기
+        const blob = await image.blob();
+        const file = new File([blob], 'image.jpg', { type: 'image/jpeg' });
+        setSelectedEditImage(file);
+      }
       setEditReview(reviewData[index].contents || '');
       setIsReviewEditable(true);
     }
+  }
+
+  async function handleSubmitReview(
+    index: number,
+    reviewId: string | undefined,
+    imageUrl: string | undefined
+  ) {
+    if (editReview === '') {
+      return alertModal('내용을 입력해주세요!', 'warning');
+    }
+
+    let image: string | undefined;
+    if (selectedEditImage || (imageUrl && !selectedEditImage)) {
+      image = await setImage('edit');
+      console.log(image);
+    }
+
+    axios
+      .patch(
+        `${process.env.REACT_APP_API_URL}/reviews/${reviewId}`,
+        {
+          contents: editReview,
+          domId,
+          image,
+        },
+        config
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          const newReviewData = [...reviewData];
+          newReviewData[index].contents = editReview;
+          if (image) {
+            newReviewData[index].image = image;
+          }
+          setReviewData(newReviewData);
+          setSelectedEditImage(undefined);
+          setIsReviewEditable(false);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        alertModal('수정에 실패하였습니다.', 'error');
+      });
   }
 
   async function handleDeleteReview(
@@ -123,23 +165,8 @@ export default function Review(props: ReviewProps) {
     }
 
     // 작성한 리뷰를 서버에 등록
-    let imageUrl = '';
 
-    if (selectedImage) {
-      const formData = new FormData();
-      formData.append('image', selectedImage);
-      try {
-        const res = await axios.post(
-          `${process.env.REACT_APP_API_URL}/communities/uploads`,
-          formData,
-          { withCredentials: true }
-        );
-        imageUrl = res.data.data;
-      } catch (e) {
-        console.log(e);
-        alertModal('지원하지 않는 파일 형식입니다.', 'warning');
-      }
-    }
+    let image = await setImage('new');
 
     axios
       .post(
@@ -148,12 +175,13 @@ export default function Review(props: ReviewProps) {
           user_id: userId,
           dom_id: domId,
           contents: review,
-          image: imageUrl,
+          image,
         },
         config
       )
       .then((res) => {
         setReview('');
+        setSelectedImage(undefined);
         // 리뷰를 등록한 후에 서버로부터 최신 댓글 목록을 다시 가져옴
         axios
           .get(`${process.env.REACT_APP_API_URL}/doms/${domId}`, config)
@@ -161,6 +189,34 @@ export default function Review(props: ReviewProps) {
             setReviewData(res.data.data.reviews);
           });
       });
+  }
+
+  async function setImage(type: string) {
+    let imageUrl = '';
+    if (type === 'new' && selectedImage) {
+      imageUrl = await uploadImage(selectedImage);
+    } else if (type === 'edit' && selectedEditImage) {
+      imageUrl = await uploadImage(selectedEditImage);
+    }
+    return imageUrl;
+  }
+
+  async function uploadImage(image: File) {
+    let imageUrl;
+    const formData = new FormData();
+    formData.append('image', image);
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/communities/uploads`,
+        formData,
+        { withCredentials: true }
+      );
+      imageUrl = res.data.data;
+    } catch (e) {
+      console.log(e);
+      alertModal('지원하지 않는 파일 형식입니다.', 'warning');
+    }
+    return imageUrl;
   }
 
   return (
@@ -196,48 +252,94 @@ export default function Review(props: ReviewProps) {
               />
             </span>
           </div>
-          <div className="review-content">
+          <TextAreaContainer>
             {item.user_name === userName && isReviewEditable ? (
-              <textarea
-                className="review-edit-textarea"
-                placeholder="수정 내용을 입력하세요"
-                value={editReview}
-                onChange={(e) => {
-                  setEditReview(e.target.value);
-                }}
-              />
+              <>
+                <TextArea
+                  placeholder="수정 내용을 입력하세요"
+                  value={editReview}
+                  onChange={(e) => {
+                    setEditReview(e.target.value);
+                  }}
+                />
+                {selectedEditImage && (
+                  <SelectedImageContainer>
+                    <SelectedReviewImage>
+                      <img
+                        src={
+                          selectedEditImage &&
+                          URL.createObjectURL(selectedEditImage)
+                        }
+                        alt="profile"
+                      />
+                      <button
+                        onClick={() => {
+                          setSelectedEditImage(undefined);
+                        }}
+                      >
+                        <span>×</span>
+                      </button>
+                    </SelectedReviewImage>
+                  </SelectedImageContainer>
+                )}
+              </>
             ) : (
-              <span className="review">{item.contents}</span>
+              <ReviewContents>{item.contents}</ReviewContents>
             )}
-          </div>
-          {item.image && (
+          </TextAreaContainer>
+          {item.image && !isReviewEditable && (
             <img className="review-image" src={item.image} alt="reivewImage" />
           )}
           {isLogin && item.user_name === userName && (
-            <div className="review-content-buttons">
-              <button
-                className="review-edit"
-                onClick={() => {
-                  setIsReviewEditable(!isReviewEditable);
-                  handleEditReview(index, item.review_id);
-                }}
-              >
-                {isReviewEditable ? '완료' : '수정'}
-              </button>
-              <button
-                className="review-delete"
-                onClick={() => handleDeleteReview(index, item.review_id)}
-              >
-                삭제
-              </button>
-            </div>
+            <ButtonContainer>
+              {isReviewEditable && (
+                <>
+                  <InputTypeFileLabel htmlFor="reviewEditImageFile">
+                    <img src={ImageIcon} alt="imageIcon" />
+                  </InputTypeFileLabel>
+                  <InputTypeFile
+                    type="file"
+                    id="reviewEditImageFile"
+                    onChange={(e) => handleSetReviewImage(e, 'edit')}
+                    accept="image/*"
+                  />
+                </>
+              )}
+              <div className="review-content-buttons">
+                {isReviewEditable ? (
+                  <button
+                    onClick={() => {
+                      setIsReviewEditable(!isReviewEditable);
+                      setEditReview('');
+                      setSelectedEditImage(undefined);
+                    }}
+                  >
+                    취소
+                  </button>
+                ) : (
+                  <button
+                    className="review-delete"
+                    onClick={() => handleDeleteReview(index, item.review_id)}
+                  >
+                    삭제
+                  </button>
+                )}
+                <button
+                  className="review-edit"
+                  onClick={() => {
+                    handleEditReview(index, item.review_id, item.image);
+                  }}
+                >
+                  {isReviewEditable ? '완료' : '수정'}
+                </button>
+              </div>
+            </ButtonContainer>
           )}
         </StyledReviews>
       ))}
       <StyledWriteReview>
-        <div className="textarea-container">
-          <textarea
-            className="write-review-textarea"
+        <TextAreaContainer>
+          <TextArea
             placeholder="리뷰 내용을 입력하세요"
             value={review}
             onChange={(e) => {
@@ -257,21 +359,21 @@ export default function Review(props: ReviewProps) {
               </SelectedReviewImage>
             </SelectedImageContainer>
           )}
-        </div>
-        <div className="button-container">
+        </TextAreaContainer>
+        <ButtonContainer>
           <InputTypeFileLabel htmlFor="reviewImageFile">
             <img src={ImageIcon} alt="imageIcon" />
           </InputTypeFileLabel>
           <InputTypeFile
             type="file"
             id="reviewImageFile"
-            onChange={handleSetReviewImage}
+            onChange={(e) => handleSetReviewImage(e, 'new')}
             accept="image/*"
           />
           <button className="write-review-button" onClick={handleWriteReview}>
             작성 완료
           </button>
-        </div>
+        </ButtonContainer>
       </StyledWriteReview>
     </StyledReviewContainer>
   );
@@ -426,6 +528,23 @@ const StyledReviews = styled.div`
   }
 `;
 
+const TextArea = styled.textarea`
+  width: 100%;
+  height: 70%;
+  border: none;
+  resize: none; /* 크기 조정 비활성화 */
+  padding: 1rem;
+  font-size: 1.3rem;
+
+  :focus {
+    outline: none;
+  }
+`;
+
+const ReviewContents = styled.div`
+  font-size: 1.3rem;
+`;
+
 const StyledWriteReview = styled.div`
   display: flex;
   flex-direction: column;
@@ -434,26 +553,6 @@ const StyledWriteReview = styled.div`
   background-color: white;
   filter: drop-shadow(0 0 3px #dddddd);
   border-radius: 10px;
-
-  .textarea-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex: 1;
-  }
-
-  .write-review-textarea {
-    width: 100%;
-    height: 70%;
-    border: none;
-    resize: none; /* 크기 조정 비활성화 */
-    padding: 1rem;
-    font-size: 1.3rem;
-
-    :focus {
-      outline: none;
-    }
-  }
 
   .button-container {
     display: flex;
@@ -490,6 +589,21 @@ const StyledWriteReview = styled.div`
     }
   }
 `;
+
+const TextAreaContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const SelectedImageContainer = styled.div`
   button {
     position: absolute;

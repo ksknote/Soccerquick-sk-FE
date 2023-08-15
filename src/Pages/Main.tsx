@@ -1,14 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Header from '../Components/Header';
-import HeaderCategory from '../Components/Commons/HeaderCategory';
-import Footer from '../Components/Footer';
 import MainSearch from '../Components/Search/MainSearch';
 import Avatar1 from '../styles/icon/avatar1.png';
 import Avatar3 from '../styles/icon/avatar3.png';
 import Avatar4 from '../styles/icon/avatar4.png';
 import Avatar5 from '../styles/icon/avatar5.png';
+import BaseLayout from '../Components/Template/BaseLayout';
 
 export default function Main() {
   const navigate = useNavigate();
@@ -16,9 +14,7 @@ export default function Main() {
     navigate(`/ground?q=${searchValue}&start=0`);
   };
   return (
-    <>
-      <Header />
-      <HeaderCategory />
+    <BaseLayout>
       <StyledMainContainer>
         <StyledImageContainer>
           <StyledImage src="Images/footy.png" alt="메인이미지" />
@@ -222,8 +218,7 @@ export default function Main() {
           </StyledReviewList>
         </StyledListContainer>
       </StyledMainContainer>
-      <Footer />
-    </>
+    </BaseLayout>
   );
 }
 

@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import Header from '../Components/Header';
-import HeaderCategory from '../Components/Commons/HeaderCategory';
-import Footer from '../Components/Footer';
 import { DomDataType } from './SearchPage';
 import { ProvidedElementList } from '../Components/SearchPage/Contents/SearchData';
 import GroundDetailCarousel from '../Components/GroundDetail/groundDetailCarousel';
@@ -19,6 +16,7 @@ import starFilledIcon from '../styles/icon/star_filled.svg';
 import homeIcon from '../styles/icon/home.svg';
 import alertModal from '../Components/Commons/alertModal';
 import MobileHeader from '../Components/MobileHeader';
+import BaseLayout from '../Components/Template/BaseLayout';
 
 const GroundDetail = () => {
   const [groundData, setGroundData] = useState<DomDataType>();
@@ -111,9 +109,7 @@ const GroundDetail = () => {
   };
 
   return (
-    <>
-      <Header />
-      <HeaderCategory />
+    <BaseLayout>
       <MobileHeader title={groundData ? groundData.title : '풋살 경기장'} />
       {groundData && (
         <GroundDetailContainer>
@@ -214,8 +210,6 @@ const GroundDetail = () => {
           </ContentsBox>
         </GroundDetailContainer>
       )}
-
-      <Footer />
       {showImgModal && groundData && (
         <GroundImageModal
           stadiums={groundData.stadiums}
@@ -229,7 +223,7 @@ const GroundDetail = () => {
           groundData={groundData}
         />
       )}
-    </>
+    </BaseLayout>
   );
 };
 
@@ -345,7 +339,7 @@ const GroundDetailHeaderBtn = styled.div`
     @media (min-width: 1024px) {
       width: 20rem;
       height: 5rem;
-      font-size: 1.3rem;
+      font-size: 1.6rem;
       :not(:first-child) {
         width: 8rem;
         margin-left: 1.3rem;

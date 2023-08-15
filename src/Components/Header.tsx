@@ -30,7 +30,7 @@ const Header = () => {
           {isLogin ? (
             <MyPageMenu />
           ) : (
-            <HeaderLoginButton onClick={handleLoginModal}>
+            <HeaderLoginButton onClick={() => navigate('/auth')}>
               <img src={MypageIcon} alt="my" />
               <div>로그인</div>
             </HeaderLoginButton>
@@ -53,6 +53,9 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const LogoMain = styled.div`

@@ -1,18 +1,15 @@
 import React from 'react';
-import Footer from '../../Components/Footer';
-import Header from '../../Components/Header';
+import BaseLayout from '../../Components/Template/BaseLayout';
 import { Routes, Route } from 'react-router-dom';
 import { BodyWrapper } from './Styles/ViewsStyle';
 import FindingMember from './Views/FindingMember';
 import ViewPage from './Views/ViewPage';
 import SubmitPage from './Views/PostPage';
 import EditPage from './Views/EditPage';
-import HeaderCategory from '../../Components/Commons/HeaderCategory';
+
 function TeamPage() {
   return (
-    <>
-      <Header />
-      <HeaderCategory />
+    <BaseLayout>
       <BodyWrapper>
         <Routes>
           <Route path="/submit" element={<SubmitPage />} />
@@ -21,8 +18,7 @@ function TeamPage() {
           <Route path="/*" element={<ViewPage />} />
         </Routes>
       </BodyWrapper>
-      <Footer />
-    </>
+    </BaseLayout>
   );
 }
 

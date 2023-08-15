@@ -5,7 +5,6 @@ import { RootState, AppDispatch } from '../../../ReduxStore/store';
 import { fetchData } from '../../../ReduxStore/modules/TeamPage/actions';
 import MobileHeader from '../../MobileHeader';
 import {
-  Wrapper,
   BodyContainer,
   TeamPageBody,
   TeamRecruitContainer,
@@ -34,7 +33,7 @@ function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
     setAcceptModal(true);
   };
   return (
-    <Wrapper>
+    <>
       <MyPageHeader
         title="내 팀 모집 글"
         totalItemsCount={filteredItems.length}
@@ -90,7 +89,7 @@ function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
           now={data.player + data.gk}
         />
       )}
-    </Wrapper>
+    </>
   );
 }
 

@@ -7,6 +7,7 @@ import Avatar3 from '../styles/icon/avatar3.png';
 import Avatar4 from '../styles/icon/avatar4.png';
 import Avatar5 from '../styles/icon/avatar5.png';
 import BaseLayout from '../Components/Template/BaseLayout';
+import { BodyWrapper } from '../styles/Common/CommonStyle';
 
 export default function Main() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function Main() {
   };
   return (
     <BaseLayout>
-      <StyledMainContainer>
+      <BodyWrapper>
         <StyledImageContainer>
           <StyledImage src="Images/footy.png" alt="메인이미지" />
           <StyledImageContents>
@@ -217,17 +218,10 @@ export default function Main() {
             </div>
           </StyledReviewList>
         </StyledListContainer>
-      </StyledMainContainer>
+      </BodyWrapper>
     </BaseLayout>
   );
 }
-
-const StyledMainContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 120rem;
-  margin: 1.5rem auto; /* 좌우 여백 자동 조정 */
-`;
 
 const StyledImageContainer = styled.div`
   width: 100%;

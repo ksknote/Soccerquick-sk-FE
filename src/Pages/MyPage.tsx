@@ -1,8 +1,6 @@
 import react, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router';
 import axios from 'axios';
-import Footer from '../Components/Footer';
-import Header from '../Components/Header';
 import MyFavoriteGroundList from '../Components/MyPage/MyFavoriteGround/MyFavoriteGroundList';
 import SearchMyReviewPost from '../Components/MyPage/SearchMyPost/SearchMyReviewPost';
 import SearchMyTeamPost from '../Components/MyPage/SearchMyPost/SearchMyTeamPost';
@@ -15,6 +13,7 @@ import alertModal from '../Components/Commons/alertModal';
 import MyPageHome from '../Components/MyPage/MyPageHome';
 import MyPageProfileLayout from '../Components/MyPage/MyPageInfo/MyPageProfileLayout';
 import { userSelector } from '../ReduxStore/modules/Auth/authSelectors';
+import MyPageLayout from '../Components/Template/MyPageLayout';
 
 export type FormDataType = {
   user_id: string;
@@ -137,48 +136,48 @@ export function MyPage() {
 
   return (
     <>
-      <Header />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <MyPageHome
-              userData={formData}
-              myPost={filteredMyTeamPosts.length}
-              registeredTeam={filteredRegistedTeamPosts.length}
-            />
-          }
-        />
-        <Route
-          path="/myProfile"
-          element={
-            <MyPageProfileLayout
-              userData={formData}
-              setUserData={setFormData}
-            />
-          }
-        />
-        <Route path="/favorite" element={<MyFavoriteGroundList />} />
-        <Route
-          path="/myTeamList"
-          element={<SearchMyTeamPost filteredItems={filteredMyTeamPosts} />}
-        />
-        <Route path="/myTeamList/:group_Id" element={<MyTeamPost />} />
-        <Route
-          path="/myApplicatedTeamList"
-          element={
-            <SearchMyApplicationPost
-              filteredItems={filteredRegistedTeamPosts}
-            />
-          }
-        />
-        <Route
-          path="/myApplicatedTeamList/:group_id"
-          element={<MyApplicatedTeamPost />}
-        />
-        <Route path="/myReviewPost" element={<SearchMyReviewPost />} />
-      </Routes>
-      <Footer />
+      <MyPageLayout>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <MyPageHome
+                userData={formData}
+                myPost={filteredMyTeamPosts.length}
+                registeredTeam={filteredRegistedTeamPosts.length}
+              />
+            }
+          />
+          <Route
+            path="/myProfile"
+            element={
+              <MyPageProfileLayout
+                userData={formData}
+                setUserData={setFormData}
+              />
+            }
+          />
+          <Route path="/favorite" element={<MyFavoriteGroundList />} />
+          <Route
+            path="/myTeamList"
+            element={<SearchMyTeamPost filteredItems={filteredMyTeamPosts} />}
+          />
+          <Route path="/myTeamList/:group_Id" element={<MyTeamPost />} />
+          <Route
+            path="/myApplicatedTeamList"
+            element={
+              <SearchMyApplicationPost
+                filteredItems={filteredRegistedTeamPosts}
+              />
+            }
+          />
+          <Route
+            path="/myApplicatedTeamList/:group_id"
+            element={<MyApplicatedTeamPost />}
+          />
+          <Route path="/myReviewPost" element={<SearchMyReviewPost />} />
+        </Routes>
+      </MyPageLayout>
     </>
   );
 }

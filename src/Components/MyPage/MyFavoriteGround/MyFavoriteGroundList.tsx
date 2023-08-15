@@ -10,7 +10,6 @@ import MyPagination from '../MyPagination';
 import MobileHeader from '../../MobileHeader';
 import MyPageHeader from '../MyPageHeader';
 import EmptyBox from '../../Commons/EmptyBox';
-import { Wrapper } from '../../../Pages/TeamPage/Styles/ViewsStyle';
 import alertModal from '../../../Components/Commons/alertModal';
 import { FormDataType } from '../../../Pages/MyPage';
 
@@ -86,7 +85,7 @@ function MyFavoriteGroundList() {
   const navigate = useNavigate();
 
   return (
-    <Wrapper>
+    <>
       <MyPageHeader
         title="즐겨찾는 경기장"
         totalItemsCount={filteredData.length}
@@ -147,7 +146,7 @@ function MyFavoriteGroundList() {
           currentPage={currentPage}
         /> */}
       </Searchpage>
-    </Wrapper>
+    </>
   );
 }
 

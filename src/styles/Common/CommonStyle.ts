@@ -6,3 +6,19 @@ export const Container = styled.div`
   display: grid;
   grid-template-rows: auto 1fr auto;
 `;
+
+export const Wrapper = styled.div`
+  width: 100%;
+  max-width: 120rem;
+  height: 100%;
+  min-height: 100vh;
+  margin: auto;
+  padding-bottom: 8rem;
+  @media (min-width: 768px) {
+    padding: 2rem 3rem 1rem 3rem;
+  }
+`;
+
+export const BodyWrapper = styled(Wrapper)`
+  padding: 2rem 1rem 2rem 1rem;
+`;

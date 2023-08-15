@@ -4,7 +4,6 @@ import { GroupPost } from '../../../Pages/MyPage';
 import MyPageHeader from '../MyPageHeader';
 import MobileHeader from '../../MobileHeader';
 import {
-  Wrapper,
   BodyContainer,
   TeamPageBody,
   TeamRecruitContainer,
@@ -38,7 +37,7 @@ function SearchMyApplicationPost({
   };
 
   return (
-    <Wrapper>
+    <>
       <MyPageHeader title="신청한 팀" totalItemsCount={filteredItems.length} />
       <MobileHeader title="신청한 팀" />
       <BodyContainer>
@@ -103,7 +102,7 @@ function SearchMyApplicationPost({
           </TeamRecruitContainer>
         </TeamPageBody>
       </BodyContainer>
-    </Wrapper>
+    </>
   );
 }
 

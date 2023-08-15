@@ -50,7 +50,7 @@ function MyPage({ userData, myPost, registeredTeam }: MyPageProps) {
   };
 
   return (
-    <MyPageHomeWrapper>
+    <>
       <PageTitle>
         <p>마이페이지</p>
       </PageTitle>
@@ -110,17 +110,11 @@ function MyPage({ userData, myPost, registeredTeam }: MyPageProps) {
           </li>
         </MyPageCategryList>
       </MyPageInfoContainer>
-    </MyPageHomeWrapper>
+    </>
   );
 }
 
 export default MyPage;
-
-const MyPageHomeWrapper = styled.div`
-  @media (min-width: 768px) {
-    height: 100vh;
-  }
-`;
 
 const PageTitle = styled.div`
   width: 90%;

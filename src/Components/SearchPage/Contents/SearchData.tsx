@@ -216,8 +216,6 @@ const SearchContainer = styled.div`
 const Searchpage = styled.div`
   display: flex;
   font-size: 1.7rem;
-  max-width: 120rem;
-
   margin: 0 auto 7rem auto;
   display: flex;
   justify-content: center;

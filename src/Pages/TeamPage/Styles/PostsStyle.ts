@@ -61,14 +61,6 @@ export const StyledButton = styled.button<{ color?: string }>`
 
 // 여기부터 ViewPage Style
 
-export const StyledWrap = styled.div`
-width: 100%
-  max-width: 120rem;
-  @media (min-width: 1024px) {
-    margin: 3rem auto;
-  }
-`;
-
 export const StyledPost = styled.div`
   width: 100%;
   border: 0.1rem solid lightgray;

@@ -4,7 +4,6 @@ import Footer from '../../../Components/Footer';
 import AdminMainPage from '../../../Components/AdminPage/AdminMainPage';
 import AdminUserManager from '../../../Components/AdminPage/AdminUserManagePage';
 import { Routes, Route, Link } from 'react-router-dom';
-import { Container } from '../../../styles/Common/CommonStyle';
 import {
   AdminContainer,
   BodyContainer,

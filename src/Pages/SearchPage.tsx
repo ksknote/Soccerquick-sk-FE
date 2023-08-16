@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
@@ -7,7 +7,6 @@ import SearchData from '../Components/SearchPage/Contents/SearchData';
 import HeaderCategory from '../Components/Commons/HeaderCategory';
 import GroundComparison from '../Components/SearchPage/Contents/GroundComparison';
 import ComparisonData from '../Components/SearchPage/Contents/ComparisonData';
-import FeildSearchInput from '../Components/Search/FieldSearch';
 import FieldMap from '../Components/SearchPage/Contents/FieldMap';
 import axios from 'axios';
 
@@ -90,13 +89,10 @@ function SearchPage() {
   }, []);
   return (
     <>
-      <HeaderContainer>
-        <Header />
-      </HeaderContainer>
-      <HeaderNavContainer>
-        <HeaderCategory />
-        <FeildSearchInput />
-      </HeaderNavContainer>
+      <Header />
+
+      <HeaderCategory />
+
       <StyledBody>
         {searchKeyword && (
           <FieldMap
@@ -137,25 +133,12 @@ function SearchPage() {
 }
 
 export default SearchPage;
-const HeaderContainer = styled.div`
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const HeaderNavContainer = styled.div`
-  height: 0;
-
-  @media (min-width: 768px) {
-    height: 8rem;
-    position: relative;
-    max-width: 120rem;
-    margin: 0 auto;
-  }
-`;
 
 const StyledBody = styled.div`
   justify-content: center;
   max-width: 120rem;
   margin: auto;
+  @media (min-width: 768px) {
+    padding: 0 2rem;
+  }
 `;

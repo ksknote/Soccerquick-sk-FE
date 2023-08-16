@@ -93,8 +93,6 @@ const StyledCategoryText = styled.span<CategoryTextProps>`
   border-bottom: ${({ focused }) => focused && '0.2rem solid #727f88'};
   cursor: pointer;
   &:hover {
-    font-size: ${({ focused }) => (focused ? '2.2rem' : '2.1rem')};
-    padding-bottom: 0.5rem;
     border-bottom: 2px solid #e8e8e8;
   }
   @media (min-width: 768px) {

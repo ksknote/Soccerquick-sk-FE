@@ -43,13 +43,11 @@ const FeildSearch = () => {
 export default FeildSearch;
 
 const FeildSearchBar = styled.div`
-  position: absolute;
   height: 4rem;
   background-color: white;
   padding: 0.8rem;
   display: inline-block;
   border-radius: 0.6rem;
-  filter: drop-shadow(0 0 0.2rem grey);
   z-index: 101;
   input {
     color: #3e5463;
@@ -69,25 +67,39 @@ const FeildSearchBar = styled.div`
   }
 
   @media (max-width: 767.9px) {
-    width: 97%;
+    position: absolute;
+    width: 96%;
     top: 1rem;
     left: 50%;
     transform: translateX(-50%);
+    filter: drop-shadow(0 0 0.2rem grey);
   }
 
   @media (min-width: 768px) {
-    right: 1.5rem;
-    top: -0.5rem;
-    width: 35rem;
-  }
-  @media (min-width: 768px) and (max-width: 1024px) {
-    font-size: 1.5rem;
-    line-height: 2rem;
+    width: 100%;
+    height: 5rem;
+    font-size: 2rem;
+    line-height: 2.2rem;
+    background: #f0f0f0cc;
+    margin: 1rem 0;
+    input::placeholder {
+      color: #7a7a7a;
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+    img {
+      position: absolute;
+      width: 2.5rem;
+      top: 3.5rem;
+      right: 1.5rem;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
   }
   @media (min-width: 1024px) {
-    font-size: 2rem;
-    height: 4.4rem;
-    line-height: 2.2rem;
-    margin: 1.5rem;
+    margin: 1.5rem 0;
+    img {
+      top: 4rem;
+    }
   }
 `;

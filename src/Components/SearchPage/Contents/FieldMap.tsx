@@ -5,6 +5,7 @@ import ResetIcon from '../../../styles/icon/reset_white.svg';
 import CustomMapMarker from './CustomMapMarker';
 import { DomDataType } from '../../../Pages/SearchPage';
 import alertModal from '../../Commons/alertModal';
+import FeildSearch from '../../Search/FieldSearch';
 
 interface FieldMapType {
   searchKeyword: string;
@@ -187,6 +188,7 @@ const FieldMap: React.FC<FieldMapType> = ({
 
   return (
     <StyledMapContainer>
+      <FeildSearch />
       <StyledMap id="map" ref={mapElement}></StyledMap>
       <StyledButton onClick={() => resetListHandler()}>
         <StyledButtonIcon>

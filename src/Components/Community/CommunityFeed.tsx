@@ -1,6 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { BodyWrapper } from '../../styles/Common/CommonStyle';
+import styled from 'styled-components';
 import commentIcon from '../../styles/icon/comment_green.svg';
 import searchIcon from '../../styles/icon/search.svg';
 import { StyledWriteButton } from '../../Pages/TeamPage/Styles/ViewsStyle';
@@ -8,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 function CommunityPostFeed() {
   const navigate = useNavigate();
   return (
-    <Wrapper>
+    <>
       <SearchBar>
         <input type="text" placeholder="키워드로 검색" />
         <img src={searchIcon} alt="검색" />
@@ -24,7 +23,12 @@ function CommunityPostFeed() {
       </Nav>
       <PostList>
         {DummyData.map((post, index) => (
-          <Post key={post.post_id}>
+          <Post
+            key={post.post_id}
+            onClick={() =>
+              navigate(`./${post.post_id}`, { state: { data: post } })
+            }
+          >
             <PostImage>
               {post.image.length > 0 ? (
                 <img src={post.image[0]} alt="" />
@@ -64,14 +68,11 @@ function CommunityPostFeed() {
           </Post>
         ))}
       </PostList>
-    </Wrapper>
+    </>
   );
 }
 
 export default CommunityPostFeed;
-const Wrapper = styled.div`
-  margin: 1rem 2rem;
-`;
 
 const SearchBar = styled.div`
   width: 100%;
@@ -300,7 +301,7 @@ const CommentCount = styled.div`
   }
 `;
 
-const DummyData = [
+export const DummyData = [
   {
     user_id: 'mongry',
     nick_name: '몽그리',

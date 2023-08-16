@@ -7,9 +7,8 @@ import { fetchData } from '../../../ReduxStore/modules/TeamPage/actions';
 import { RootState, AppDispatch } from '../../../ReduxStore/store';
 import Accepted from '../../../Components/TeamPage/AcceptedMembers';
 import {
-  StyledWrap,
   StyledPost,
-  StyledHeader,
+  TeamPostHeader,
   StyledBoardName,
   StyledAuthorDiv,
   StyledImgDiv,
@@ -23,11 +22,10 @@ import {
   StyledPositionName,
   StyledPositionDetails,
   StyledPositionDetail,
-  StyledBody,
   StyledAuthorButtonContainer,
   StyledCommentsDiv,
   StyledFooter,
-} from '../Styles/PostsStyle';
+} from '../../../styles/Common/PostsStyle';
 import {
   isLogInSelector,
   userSelector,
@@ -99,15 +97,14 @@ function DetailPage() {
     }
   };
 
-  console.log(data);
   return (
-    <StyledWrap>
+    <>
       {!data ? (
         <div>데이터 로딩중</div>
       ) : (
         <>
           <StyledPost>
-            <StyledHeader status={data.status}>
+            <TeamPostHeader status={data.status}>
               <StyledBoardName
                 onClick={() => {
                   navigate(`/teampage`);
@@ -125,11 +122,14 @@ function DetailPage() {
               </h1>
               <StyledAuthorDiv>
                 <StyledImgDiv>
-                  <img src={leaderProfile} alt="BallIcon" />
+                  <img
+                    src={leaderProfile ? leaderProfile : ballIcon}
+                    alt="BallIcon"
+                  />
                 </StyledImgDiv>
                 <p>{data.author}</p>
               </StyledAuthorDiv>
-            </StyledHeader>
+            </TeamPostHeader>
             <StyledDetailDiv>
               <StyledSubTitle>모집 정보</StyledSubTitle>
               <StyledDetailLocationLi>
@@ -192,12 +192,11 @@ function DetailPage() {
                 </StyledPositionContainer>
               </div>
             </StyledDetailDiv>
-            <StyledBody>
+            <div>
               <StyledSubTitle>상세 내용</StyledSubTitle>
-              <div>
-                <HtmlParser data={data.contents} />
-              </div>
-            </StyledBody>
+
+              <HtmlParser data={data.contents} />
+            </div>
             <StyledAuthorButtonContainer>
               {userData?.name === data.author && (
                 <Link to={`/teampage/edit/${url}`}>
@@ -268,7 +267,7 @@ function DetailPage() {
           </div>
         </>
       )}
-    </StyledWrap>
+    </>
   );
 }
 

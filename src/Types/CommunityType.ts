@@ -1,0 +1,19 @@
+export interface PostType {
+  user_id: string;
+  nick_name: string;
+  profile: string;
+  post_id: string;
+  title: string;
+  description: string;
+  image: string[];
+  notice: string;
+  comments: CommentType[];
+  createdAt: string;
+}
+
+export interface CommentType {
+  comment_id: string;
+  user_id: string;
+  post_id: string;
+  content: string;
+}

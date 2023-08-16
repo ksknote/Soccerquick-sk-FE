@@ -95,7 +95,7 @@ function Comment(props: CommentProps) {
 
         {data.map((applicant: SubmitApplicant, index: number) => (
           <CommentLiContainer key={index}>
-            <StyledAuthorDiv gender={applicant.gender}>
+            <StyledAuthorDiv>
               <StyledImgDiv>
                 <img src={ballIcon} alt="BallIcon" />
               </StyledImgDiv>

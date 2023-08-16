@@ -12,7 +12,7 @@ import {
   StyledTitleInputText,
   StyledInputText,
   StyledButton,
-} from '../Styles/PostsStyle';
+} from '../../../styles/Common/PostsStyle';
 import SubmitFindingMembers from '../../../Components/TeamPage/FindingMembers';
 import alertModal from '../../../Components/Commons/alertModal';
 import axios from 'axios';

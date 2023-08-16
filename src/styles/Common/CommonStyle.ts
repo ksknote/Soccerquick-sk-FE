@@ -15,10 +15,13 @@ export const Wrapper = styled.div`
   margin: auto;
   padding-bottom: 8rem;
   @media (min-width: 768px) {
-    padding: 2rem 3rem 1rem 3rem;
+    padding: 1rem 2rem;
   }
 `;
 
 export const BodyWrapper = styled(Wrapper)`
-  padding: 2rem 1rem 2rem 1rem;
+  padding: 2rem;
+  @media (min-width: 768px) {
+    padding: 1rem 2rem;
+  }
 `;

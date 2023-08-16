@@ -15,7 +15,7 @@ import {
   StyledTitleInputText,
   StyledInputText,
   StyledButton,
-} from '../Styles/PostsStyle';
+} from '../../../styles/Common/PostsStyle';
 
 function EditPage() {
   const quillRef = useRef<ReactQuill>(null);

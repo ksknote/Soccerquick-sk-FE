@@ -100,7 +100,7 @@ function Accepted(props: AcceptedModalProps) {
                   applicant.name !== '모집 중...' ? (
                     <>
                       <StyledMemberHeader row={grid}>
-                        <StyledAuthorDiv gender={applicant.gender}>
+                        <StyledAuthorDiv>
                           <StyledImgDiv>
                             <img src={ballIcon} alt="BallIcon" />
                           </StyledImgDiv>

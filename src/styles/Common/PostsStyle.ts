@@ -72,23 +72,28 @@ export const StyledPost = styled.div`
   }
 `;
 
-export const StyledHeader = styled.div<{ status: string }>`
-  border-bottom: 0.15rem solid lightgray;
+export const StyledHeader = styled.div`
+  padding-bottom: 1.5rem;
+  border-bottom: 0.1rem solid lightgray;
   h1 {
     font-size: 1.8em;
     font-weight: 600;
-    margin: 0.5rem 0 1rem 0;
-    span {
-      color: ${({ status }) =>
-        status === '모집중' ? 'var(--color--green)' : 'gray'};
-    }
+    margin: 1rem 0;
+    padding-bottom: 1rem;
   }
   @media (min-width: 1024px) {
-    border-bottom: 0.2rem solid lightgray;
+    border-bottom: 0.1rem solid lightgray;
     h1 {
       font-size: 2.5em;
       margin: 1.3rem 0;
     }
+  }
+`;
+
+export const TeamPostHeader = styled(StyledHeader)<{ status: string }>`
+  span {
+    color: ${({ status }) =>
+      status === '모집중' ? 'var(--color--green)' : 'gray'};
   }
 `;
 
@@ -114,10 +119,10 @@ export const StyledBoardName = styled.div`
 `;
 
 export const StyledAuthorDiv = styled.div`
+  height: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding-bottom: 1rem;
   p {
     font-size: 1.3rem;
     padding-left: 0.5rem;
@@ -275,8 +280,6 @@ export const StyledPositionDetail = styled.div<{ color?: string }>`
     }
   }
 `;
-
-export const StyledBody = styled.div``;
 
 export const StyledAuthorButtonContainer = styled.div`
   margin: 1rem auto 0 auto;

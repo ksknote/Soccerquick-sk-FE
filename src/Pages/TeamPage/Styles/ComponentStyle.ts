@@ -36,11 +36,10 @@ export const CommentLiContainer = styled.div`
   }
 `;
 
-export const StyledAuthorDiv = styled.div<{ gender?: string }>`
+export const StyledAuthorDiv = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  /* padding-bottom: 1rem; */
   p {
     font-size: 1.3rem;
     padding-left: 1rem;

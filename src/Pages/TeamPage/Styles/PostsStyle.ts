@@ -145,6 +145,10 @@ export const StyledImgDiv = styled.div`
   @media (min-width: 1024px) {
     width: 4rem;
     height: 4rem;
+    img {
+      width: 4rem;
+      height: 4rem;
+    }
   }
 `;
 

@@ -134,6 +134,9 @@ const HeaderBottom = styled.div`
 const PostDate = styled.p`
   color: gray;
   font-size: 1.3rem;
+  @media (min-width: 1024px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const PostBody = styled.div`

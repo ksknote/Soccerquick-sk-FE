@@ -68,7 +68,7 @@ export const StyledPost = styled.div`
   padding: 1.5rem;
   @media (min-width: 1024px) {
     padding: 2.5rem;
-    border: 0.2rem solid lightgray;
+    border: 0.1rem solid lightgray;
   }
 `;
 

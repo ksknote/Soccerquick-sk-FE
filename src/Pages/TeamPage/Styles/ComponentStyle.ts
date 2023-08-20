@@ -147,9 +147,10 @@ export const getBackgroundColorBySkill = (data: string) => {
 
 export const StyledContents = styled.div`
   font-size: 1.3rem;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
   @media (min-width: 1024px) {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    padding: 2.2rem 0;
   }
 `;
 

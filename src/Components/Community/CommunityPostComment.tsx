@@ -6,15 +6,11 @@ import {
   StyledCommentContainer,
   StyledCommentTitle,
   CommentLiContainer,
-  StyledAuthorDiv,
   StyledImgDiv,
-  StyledDetailDiv,
-  StyledGender,
-  StyledPosition,
-  StyledLevel,
   StyledContents,
-  StyledCommentButtons,
 } from '../../Pages/TeamPage/Styles/ComponentStyle';
+import styled from 'styled-components';
+import CommunityPostCommentReply from './CommunityPostCommentReply';
 
 function CommunityPostComment({ comments }: { comments: CommentType[] }) {
   return (
@@ -22,18 +18,30 @@ function CommunityPostComment({ comments }: { comments: CommentType[] }) {
       <div>
         <StyledCommentTitle>
           <img src={commentIcon} alt="" />
-          신청 목록
+          댓글 {comments.length}개
         </StyledCommentTitle>
 
         {comments.map((comment) => (
           <CommentLiContainer key={comment.comment_id}>
-            <StyledAuthorDiv>
+            <CommentAuthorDiv>
               <StyledImgDiv>
                 <img src={ballIcon} alt="BallIcon" />
               </StyledImgDiv>
-              <p>{comment.user_id}</p>
-            </StyledAuthorDiv>
+              <div>
+                <CommentAuthor>{comment.nick_name}</CommentAuthor>
+                <PostDate>
+                  {new Date(comment.createdAt).toLocaleDateString('ko-KR', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </PostDate>
+              </div>
+            </CommentAuthorDiv>
             <StyledContents>{comment.content}</StyledContents>
+            <CommunityPostCommentReply
+              reply={comment.comments}
+            ></CommunityPostCommentReply>
           </CommentLiContainer>
         ))}
       </div>
@@ -42,3 +50,24 @@ function CommunityPostComment({ comments }: { comments: CommentType[] }) {
 }
 
 export default CommunityPostComment;
+
+export const CommentAuthorDiv = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+`;
+
+export const CommentAuthor = styled.p`
+  font-size: 1.3rem;
+  @media (min-width: 1024px) {
+    font-size: 1.8rem;
+  }
+`;
+export const PostDate = styled.div`
+  color: gray;
+  font-size: 1.1rem;
+  @media (min-width: 1024px) {
+    font-size: 1.4rem;
+  }
+`;

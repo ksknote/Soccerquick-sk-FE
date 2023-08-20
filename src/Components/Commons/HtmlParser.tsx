@@ -19,7 +19,7 @@ const StyledBody = styled.div`
   font-size: 1.3rem;
   @media (min-width: 1024px) {
     padding: 2rem 0;
-    font-size: 2rem;
+    font-size: 1.8rem;
     min-height: 20rem;
   }
 `;

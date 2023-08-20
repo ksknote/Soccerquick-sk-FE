@@ -4,6 +4,8 @@ import commentIcon from '../../styles/icon/comment_green.svg';
 import searchIcon from '../../styles/icon/search.svg';
 import { StyledWriteButton } from '../../Pages/TeamPage/Styles/ViewsStyle';
 import { useNavigate } from 'react-router-dom';
+import { PostType } from '../../Types/CommunityType';
+
 function CommunityPostFeed() {
   const navigate = useNavigate();
   return (
@@ -301,7 +303,7 @@ const CommentCount = styled.div`
   }
 `;
 
-export const DummyData = [
+export const DummyData: PostType[] = [
   {
     user_id: 'mongry',
     nick_name: '몽그리',
@@ -325,6 +327,24 @@ export const DummyData = [
         post_id: 'testpostId',
         content: '테스트입니다.',
         createdAt: '2023-08-15T01:39:10.037+00:00',
+        comments: [
+          {
+            comment_id: 'test',
+            user_id: 'commenter',
+            nick_name: '몽그리',
+            post_id: 'testpostId',
+            content: '테스트입니다.',
+            createdAt: '2023-08-15T01:39:10.037+00:00',
+          },
+          {
+            comment_id: 'test',
+            user_id: 'commenter',
+            nick_name: '몽그리',
+            post_id: 'testpostId',
+            content: '테스트입니다.',
+            createdAt: '2023-08-15T01:39:10.037+00:00',
+          },
+        ],
       },
       {
         comment_id: 'test',
@@ -333,6 +353,7 @@ export const DummyData = [
         post_id: 'testpostId',
         content: '테스트입니다.',
         createdAt: '2023-08-15T01:39:10.037+00:00',
+        comments: [],
       },
     ],
     createdAt: '2023-08-15T01:39:10.037+00:00',
@@ -356,6 +377,7 @@ export const DummyData = [
         post_id: 'testpostId',
         content: '테스트입니다.',
         createdAt: '2023-08-15T01:39:10.037+00:00',
+        comments: [],
       },
       {
         comment_id: 'test',
@@ -364,6 +386,7 @@ export const DummyData = [
         post_id: 'testpostId',
         content: '테스트입니다.',
         createdAt: '2023-08-15T01:39:10.037+00:00',
+        comments: [],
       },
     ],
     createdAt: '2023-08-15T01:39:10.037+00:00',
@@ -390,6 +413,7 @@ export const DummyData = [
         post_id: 'testpostId',
         content: '테스트입니다.',
         createdAt: '2023-08-15T01:39:10.037+00:00',
+        comments: [],
       },
       {
         comment_id: 'test',
@@ -398,6 +422,7 @@ export const DummyData = [
         post_id: 'testpostId',
         content: '테스트입니다.',
         createdAt: '2023-08-15T01:39:10.037+00:00',
+        comments: [],
       },
     ],
     createdAt: '2023-08-15T01:39:10.037+00:00',
@@ -421,6 +446,7 @@ export const DummyData = [
         post_id: 'testpostId',
         content: '테스트입니다.',
         createdAt: '2023-08-15T01:39:10.037+00:00',
+        comments: [],
       },
       {
         comment_id: 'test',
@@ -429,6 +455,7 @@ export const DummyData = [
         post_id: 'testpostId',
         content: '테스트입니다.',
         createdAt: '2023-08-15T01:39:10.037+00:00',
+        comments: [],
       },
     ],
     createdAt: '2023-08-15T01:39:10.037+00:00',
@@ -455,6 +482,7 @@ export const DummyData = [
         post_id: 'testpostId',
         content: '테스트입니다.',
         createdAt: '2023-08-15T01:39:10.037+00:00',
+        comments: [],
       },
       {
         comment_id: 'test',
@@ -463,6 +491,7 @@ export const DummyData = [
         post_id: 'testpostId',
         content: '테스트입니다.',
         createdAt: '2023-08-15T01:39:10.037+00:00',
+        comments: [],
       },
     ],
     createdAt: '2023-08-15T01:39:10.037+00:00',
@@ -489,6 +518,7 @@ export const DummyData = [
         post_id: 'testpostId',
         content: '테스트입니다.',
         createdAt: '2023-08-15T01:39:10.037+00:00',
+        comments: [],
       },
       {
         comment_id: 'test',
@@ -497,6 +527,7 @@ export const DummyData = [
         post_id: 'testpostId',
         content: '테스트입니다.',
         createdAt: '2023-08-15T01:39:10.037+00:00',
+        comments: [],
       },
     ],
     createdAt: '2023-08-15T01:39:10.037+00:00',
@@ -523,6 +554,7 @@ export const DummyData = [
         post_id: 'testpostId',
         content: '테스트입니다.',
         createdAt: '2023-08-15T01:39:10.037+00:00',
+        comments: [],
       },
       {
         comment_id: 'test',
@@ -531,6 +563,7 @@ export const DummyData = [
         post_id: 'testpostId',
         content: '테스트입니다.',
         createdAt: '2023-08-15T01:39:10.037+00:00',
+        comments: [],
       },
     ],
     createdAt: '2023-08-15T01:39:10.037+00:00',

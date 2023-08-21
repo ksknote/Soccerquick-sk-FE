@@ -159,7 +159,7 @@ const DropdownItem = styled.button<DropdownItemProps>`
   cursor: pointer;
   background-color: ${(props) => (props.picked ? 'rgb(2,208,0)' : '#fff')};
   &:hover {
-    background-color: ${(props) => !props.picked && '#dedede;'};
+    background-color: ${(props) => !props.picked && '#eaf6e8;'};
   }
   @media (min-width: 1024px) {
     font-size: 1.5rem;

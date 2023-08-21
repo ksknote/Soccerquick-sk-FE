@@ -1,6 +1,7 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import styled from 'styled-components';
 import { ImageActions } from '@xeger/quill-image-actions';
 import { ImageFormats } from '@xeger/quill-image-formats';
 import axios from 'axios';
@@ -99,12 +100,8 @@ function WriteCommunityPost({
     };
   }, []);
 
-  useEffect(() => {
-    console.log(value);
-  }, [value]);
-
   return (
-    <>
+    <Wrapper>
       <ReactQuill
         ref={quillRef}
         value={value || ''}
@@ -113,10 +110,19 @@ function WriteCommunityPost({
         modules={modules}
         formats={formats}
         onChange={handleEditorChange}
-        style={{ width: '100%', height: '45rem', padding: '0 2rem' }}
       ></ReactQuill>
-    </>
+    </Wrapper>
   );
 }
 
 export default WriteCommunityPost;
+
+const Wrapper = styled.div`
+  .quill {
+    width: 100%;
+    height: 30rem;
+    @media (min-width: 1024px) {
+      height: 40rem;
+    }
+  }
+`;

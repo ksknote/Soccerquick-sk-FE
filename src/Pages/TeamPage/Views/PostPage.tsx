@@ -2,7 +2,6 @@ import React, { useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FilteringOptions from '../../../Components/Commons/FilteringOptions';
 import DropDown from '../../../Components/Commons/DropDown';
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import {
   StyledContainer,
@@ -16,9 +15,9 @@ import {
 import SubmitFindingMembers from '../../../Components/TeamPage/FindingMembers';
 import alertModal from '../../../Components/Commons/alertModal';
 import axios from 'axios';
+import ReactQuillEditor from '../../../Components/Commons/ReactQuillEditor';
 
 function SubmitPage() {
-  const quillRef = useRef<ReactQuill>(null);
   const [boardCategory, setBoardCategory] = React.useState('카테고리');
   const [title, setTitle] = React.useState('');
   const [area, setArea] = React.useState('');
@@ -108,58 +107,6 @@ function SubmitPage() {
     }
   }
 
-  const imageHandler = () => {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
-    input.click();
-
-    input.addEventListener('change', async () => {
-      if (input.files) {
-        const file = input.files[0];
-        const formData = new FormData();
-        formData.append('image', file);
-        try {
-          const res = await axios.post(
-            `${process.env.REACT_APP_API_URL}/communities/uploads`,
-            formData,
-            { withCredentials: true }
-          );
-          const imageUrl = res.data.data;
-          const quill = quillRef.current?.getEditor();
-          const range = quill?.getSelection()?.index;
-
-          if (range) {
-            quill.insertEmbed(range, 'image', imageUrl);
-          }
-          return { ...res, success: true };
-        } catch (e) {
-          console.log(e);
-        }
-      }
-    });
-  };
-
-  // quill 라이브러리 상단바에 사용할 모듈을 정하는 부분
-  const quillModules = useMemo(() => {
-    return {
-      toolbar: {
-        container: [
-          ['image'],
-          [{ header: [1, 2, 3, 4, false] }],
-          ['bold', 'italic', 'underline', 'strike'],
-          [{ color: [] }],
-          // ['link'],
-          [{ list: 'ordered' }, { list: 'bullet' }],
-          ['clean'],
-        ],
-        handlers: {
-          image: imageHandler,
-        },
-      },
-    };
-  }, []);
-
   return (
     <>
       <StyledContainer
@@ -221,12 +168,9 @@ function SubmitPage() {
       </StyledContainer>
       <StyledContainer>
         <StyledBox style={{ display: 'grid' }}>
-          <ReactQuill
-            ref={quillRef}
+          <ReactQuillEditor
             value={content}
-            onChange={handleEditorChange}
-            modules={quillModules}
-            style={{ width: '120rem', height: '45rem', padding: '0 2rem' }}
+            handleEditorChange={handleEditorChange}
           />
         </StyledBox>
         <StyledBox style={{ justifyContent: 'center' }}>

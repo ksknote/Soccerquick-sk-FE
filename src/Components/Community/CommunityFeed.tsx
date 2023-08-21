@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import commentIcon from '../../styles/icon/comment_green.svg';
 import searchIcon from '../../styles/icon/search.svg';
-import { StyledWriteButton } from '../../Pages/TeamPage/Styles/ViewsStyle';
+import { StyledBigButton } from '../../styles/Common/ButtonStyle';
 import { useNavigate } from 'react-router-dom';
 import { PostType } from '../../Types/CommunityType';
 
@@ -19,9 +19,9 @@ function CommunityPostFeed() {
           <span>최신순</span>
           <span>댓글순</span>
         </SortTabs>
-        <StyledWriteButton onClick={() => navigate('./submit')}>
+        <StyledBigButton onClick={() => navigate('./submit')}>
           새 글 작성
-        </StyledWriteButton>
+        </StyledBigButton>
       </Nav>
       <PostList>
         {DummyData.map((post, index) => (

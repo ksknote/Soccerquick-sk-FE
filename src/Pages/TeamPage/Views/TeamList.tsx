@@ -7,7 +7,6 @@ import {
   TeamPageBody,
   TeamPageOption,
   StyledResetButton,
-  StyledWriteButton,
   OptionContainer,
   TeamRecruitContainer,
   TeamRecruitLi,
@@ -18,6 +17,7 @@ import {
   Author,
 } from '../Styles/ViewsStyle';
 import { BoardProps } from '../../../Types/TeamPageType';
+import { StyledBigButton } from '../../../styles/Common/ButtonStyle';
 import { useSelector } from 'react-redux';
 import { isLogInSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
 import MyPagination from '../../../Components/MyPage/MyPagination';
@@ -40,13 +40,13 @@ function TeamList(props: BoardProps) {
   return (
     <div>
       {isLogin && (
-        <StyledWriteButton
+        <StyledBigButton
           onClick={() => {
             navigate('/teampage/submit');
           }}
         >
           글 작성하기
-        </StyledWriteButton>
+        </StyledBigButton>
       )}
       <OptionContainer>
         <StyledTotalNumber>

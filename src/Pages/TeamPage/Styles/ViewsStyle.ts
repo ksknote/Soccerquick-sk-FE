@@ -200,23 +200,6 @@ export const TeamPageFooter = styled.div`
   float: right;
 `;
 
-export const StyledWriteButton = styled.button`
-  width: 10rem;
-  height: 4rem;
-  border-radius: 0.8rem;
-  background-color: var(--color--green);
-  color: white;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-left: 1rem;
-  @media (min-width: 1024px) {
-    font-size: 1.7rem;
-
-    width: 12rem;
-    height: 5rem;
-  }
-`;
-
 export const PageSelect = styled.div`
   clear: both;
   margin-top: 9rem;

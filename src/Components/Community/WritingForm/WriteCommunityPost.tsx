@@ -4,7 +4,10 @@ import ReactQuillEditor from '../../Commons/ReactQuillEditor';
 import DropDown from '../../Commons/DropDown';
 import HashTags from './HashTags';
 import Thumbnail from './Thumbnail';
-import { StyledWriteButton } from '../../../Pages/TeamPage/Styles/ViewsStyle';
+import {
+  StyledBigButton,
+  StyledWhiteBigButton,
+} from '../../../styles/Common/ButtonStyle';
 import alertModal from '../../Commons/alertModal';
 import axios from 'axios';
 
@@ -60,6 +63,7 @@ function WriteCommunityPost() {
       editorContents,
     };
     localStorage.setItem('temporarilySavedCommunityPost', JSON.stringify(form));
+    setIsTemporarilySaved(true);
     alertModal('포스트가 임시 저장 되었습니다.', 'success');
   };
 
@@ -89,6 +93,7 @@ function WriteCommunityPost() {
     setTitle(parsedFormData.title);
     setHashTags([...parsedFormData.hashTags]);
     setEditorContents(parsedFormData.editorContents);
+    setIsTemporarilySaved(false);
   };
 
   async function uploadImage(image: File) {
@@ -155,13 +160,17 @@ function WriteCommunityPost() {
           />
         </EditorWrapper>
       </SectionDiv>
-      <SectionDiv>
+      <FooterButtons>
         {isTemporarilySaved && (
-          <button onClick={handleGetSavedForm}>불러오기</button>
+          <StyledWhiteBigButton onClick={handleGetSavedForm}>
+            불러오기
+          </StyledWhiteBigButton>
         )}
-        <button onClick={handleSaveTemporarily}>임시 저장</button>
-        <StyledWriteButton>작성 완료</StyledWriteButton>
-      </SectionDiv>
+        <StyledWhiteBigButton onClick={handleSaveTemporarily}>
+          임시 저장
+        </StyledWhiteBigButton>
+        <StyledBigButton>작성 완료</StyledBigButton>
+      </FooterButtons>
     </>
   );
 }
@@ -225,5 +234,14 @@ const EditorWrapper = styled.div`
   height: 38rem;
   @media (min-width: 1024px) {
     height: 45rem;
+  }
+`;
+
+const FooterButtons = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: 768px) {
+    padding-bottom: 3rem;
   }
 `;

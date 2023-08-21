@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-function HashTags() {
+import alertModal from '../../Commons/alertModal';
+
+interface HashTagsPropsType {
+  hashTags: string[];
+  setHashTags: React.Dispatch<React.SetStateAction<string[]>>;
+}
+function HashTags({ hashTags, setHashTags }: HashTagsPropsType) {
   const [inputHashTag, setInputHashTag] = useState('');
-  const [hashTags, setHashTags] = useState<string[]>([]);
 
   //공백 입력 시 등록 x
   const isEmptyValue = (value: string) => {
@@ -13,13 +18,18 @@ function HashTags() {
   };
 
   const addHashTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    //허용하는 코드
-    const allowedCommand = ['Comma', 'Enter', 'Space', 'NumpadEnter'];
-    if (!allowedCommand.includes(e.code)) return;
+    if (hashTags.length === 10) {
+      alertModal('해시태그는 최대 10개까지 등록 가능합니다.', 'text');
+      return;
+    }
 
     if (isEmptyValue(inputHashTag.trim())) {
       return setInputHashTag('');
     }
+
+    //허용하는 코드
+    const allowedCommand = ['Comma', 'Enter', 'Space', 'NumpadEnter'];
+    if (!allowedCommand.includes(e.code)) return;
 
     let newHashTag = inputHashTag.trim();
     const regExp = /[\{\}\[\]\/?.;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
@@ -87,6 +97,7 @@ function HashTags() {
 export default HashTags;
 
 const Wrapper = styled.div`
+  min-height: 10rem;
   border: 0.1rem solid #e6e6e6;
   padding: 1.5rem;
   font-size: 1.3rem;
@@ -97,6 +108,8 @@ const Wrapper = styled.div`
 
 const HashTagList = styled.div`
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 const Tag = styled.div`

@@ -5,8 +5,8 @@ import BaseLayout from '../../Components/Template/BaseLayout';
 import { Routes, Route } from 'react-router-dom';
 import CommunityPostFeed from '../../Components/Community/CommunityFeed';
 import CommunityPostDetail from '../../Components/Community/CommunityPost';
-import WriteCommunityPost from '../../Components/Community/WriteCommunityPost';
-import EditComminityPost from '../../Components/Community/EditComminityPost';
+import WriteCommunityPost from '../../Components/Community/WritingForm/WriteCommunityPost';
+import EditComminityPost from '../../Components/Community/WritingForm/EditComminityPost';
 import { BodyWrapper } from '../../styles/Common/CommonStyle';
 function Community() {
   return (

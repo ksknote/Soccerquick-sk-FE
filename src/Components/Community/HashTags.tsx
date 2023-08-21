@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import styled from 'styled-components';
 function HashTags() {
   const [inputHashTag, setInputHashTag] = useState('');
   const [hashTags, setHashTags] = useState<string[]>([]);
@@ -33,7 +33,7 @@ function HashTags() {
     if (isEmptyValue(newHashTag)) return;
 
     setHashTags((prevHashTags) => {
-      return [...new Set([...prevHashTags, newHashTag])];
+      return [...new Set([...prevHashTags, '#' + newHashTag])];
     });
 
     setInputHashTag('');
@@ -53,24 +53,68 @@ function HashTags() {
     setInputHashTag(e.target.value);
   };
 
+  const deleteHandler = (idx: number) => {
+    setHashTags((prev) => {
+      let slicedTags = [...prev.slice(0, idx), ...prev.slice(idx + 1)];
+      return slicedTags;
+    });
+  };
+
   return (
-    <div>
-      <div>
+    <Wrapper>
+      <HashTagList>
         {hashTags.length > 0 &&
-          hashTags.map((hashTag) => {
-            return <div key={hashTag}>{hashTag}</div>;
+          hashTags.map((hashTag, idx) => {
+            return (
+              <Tag key={hashTag}>
+                {hashTag} <span onClick={() => deleteHandler(idx)}>×</span>
+              </Tag>
+            );
           })}
-        <input
-          value={inputHashTag}
-          onChange={(e) => changeHashTagInput(e)}
-          onKeyUp={(e) => addHashTag(e)}
-          onKeyDown={(e) => keyDownHandler(e)}
-          placeholder="#해시태그를 등록해보세요. (최대 10개)"
-          className="hashTagInput"
-        />
-      </div>
-    </div>
+      </HashTagList>
+      <HashTagInput
+        value={inputHashTag}
+        onChange={(e) => changeHashTagInput(e)}
+        onKeyUp={(e) => addHashTag(e)}
+        onKeyDown={(e) => keyDownHandler(e)}
+        placeholder="#해시태그를 등록해보세요. (최대 10개)"
+        className="hashTagInput"
+      />
+    </Wrapper>
   );
 }
 
 export default HashTags;
+
+const Wrapper = styled.div`
+  border: 0.1rem solid #e6e6e6;
+  padding: 1.5rem;
+  font-size: 1.3rem;
+  @media (min-width: 1024px) {
+    font-size: 1.5rem;
+  }
+`;
+
+const HashTagList = styled.div`
+  display: flex;
+`;
+
+const Tag = styled.div`
+  color: white;
+  background: #46b500;
+  border-radius: 0.9rem;
+  padding: 0.2rem 0.8rem;
+  margin: 0 0.5rem 1rem 0;
+`;
+
+const HashTagInput = styled.input`
+  outline: none;
+  border: none;
+  width: 100%;
+
+  @media (min-width: 1024px) {
+    ::placeholder {
+      font-size: 1.5rem;
+    }
+  }
+`;

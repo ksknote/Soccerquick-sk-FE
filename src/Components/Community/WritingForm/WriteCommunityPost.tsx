@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { isLogInSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
 import styled from 'styled-components';
 import ReactQuillEditor from '../../Commons/ReactQuillEditor';
 import DropDown from '../../Commons/DropDown';
@@ -10,6 +12,7 @@ import {
 } from '../../../styles/Common/ButtonStyle';
 import alertModal from '../../Commons/alertModal';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const subjectList = [
   '주제를 선택해주세요.',
@@ -19,7 +22,18 @@ const subjectList = [
   '자유 수다',
 ];
 
+interface PostDataType {
+  title: string;
+  description: string;
+  thumbnail: string;
+  subject: string;
+  hashTags: string[];
+  notice: string;
+}
+
 function WriteCommunityPost() {
+  const navigate = useNavigate();
+  const isLogin = useSelector(isLogInSelector);
   const [imageFile, setImageFile] = useState<File>();
   const [imageUrl, setImageUrl] = useState('');
   const [subject, setSubject] = useState('');
@@ -36,21 +50,32 @@ function WriteCommunityPost() {
     if (prevForm) setIsTemporarilySaved(true);
   }, []);
 
-  useEffect(() => {
-    let selectedSubject = subject === '주제를 선택해주세요' ? '' : subject;
-    setSubject(selectedSubject);
-  }, [subject]);
-
   const handleSetTitle = (value: string) => {
     if (value.length > 50) return;
     setTitle(value);
   };
 
-  const handleSaveTemporarily = async () => {
-    if (title.length === 0 || editorContents.length === 0) {
-      alertModal('제목과 본문을 작성해주세요.', 'warning');
-      return;
+  const uploadImage = async (image: File) => {
+    let imageUrl;
+    const formData = new FormData();
+    formData.append('image', image);
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/communities/uploads`,
+        formData,
+        { withCredentials: true }
+      );
+      imageUrl = res.data.data;
+    } catch (e) {
+      console.log(e);
+      alertModal('지원하지 않는 파일 형식입니다.', 'warning');
     }
+    return imageUrl;
+  };
+
+  const handleSaveTemporarily = async () => {
+    const isEmpty = checkEmpty();
+    if (isEmpty) return;
     let imageUrl;
     if (imageFile) {
       imageUrl = await uploadImage(imageFile);
@@ -65,6 +90,14 @@ function WriteCommunityPost() {
     localStorage.setItem('temporarilySavedCommunityPost', JSON.stringify(form));
     setIsTemporarilySaved(true);
     alertModal('포스트가 임시 저장 되었습니다.', 'success');
+  };
+
+  const checkEmpty = () => {
+    if (title.length === 0 || editorContents.length === 0) {
+      alertModal('제목과 본문을 작성해주세요.', 'warning');
+      return true;
+    }
+    return false;
   };
 
   const handleGetSavedForm = async () => {
@@ -88,6 +121,7 @@ function WriteCommunityPost() {
     }
 
     const parsedFormData = JSON.parse(prevForm);
+    setImageFile(undefined);
     setImageUrl(parsedFormData.thumbnail);
     setSubject(parsedFormData.subject);
     setTitle(parsedFormData.title);
@@ -96,23 +130,43 @@ function WriteCommunityPost() {
     setIsTemporarilySaved(false);
   };
 
-  async function uploadImage(image: File) {
-    let imageUrl;
-    const formData = new FormData();
-    formData.append('image', image);
-    try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/communities/uploads`,
-        formData,
-        { withCredentials: true }
-      );
-      imageUrl = res.data.data;
-    } catch (e) {
-      console.log(e);
-      alertModal('지원하지 않는 파일 형식입니다.', 'warning');
+  const handleSubmitPost = async () => {
+    if (!isLogin) {
+      alertModal('로그인이 필요한 서비스입니다.', 'warning');
+      return;
     }
-    return imageUrl;
-  }
+    if (!checkEmpty) return;
+    let thumbnail;
+    if (imageFile) {
+      thumbnail = await uploadImage(imageFile);
+    } else {
+      thumbnail = imageUrl;
+    }
+    let selectedSubject = subject === '주제를 선택해주세요' ? '' : subject;
+    const postData = {
+      title,
+      description: editorContents,
+      thumbnail,
+      subject: selectedSubject,
+      hashTags,
+      notice: '일반 게시글',
+    };
+    PostFormData(postData);
+  };
+
+  const PostFormData = (data: PostDataType) => {
+    const url = `${process.env.REACT_APP_API_URL}/communities`;
+    const config = {
+      withCredentials: true,
+    };
+    axios
+      .post(url, data, config)
+      .then((res) => {
+        alertModal('게시물이 등록되었습니다.', 'success');
+        navigate('/community');
+      })
+      .catch((e) => console.error(e));
+  };
 
   return (
     <>
@@ -169,7 +223,7 @@ function WriteCommunityPost() {
         <StyledWhiteBigButton onClick={handleSaveTemporarily}>
           임시 저장
         </StyledWhiteBigButton>
-        <StyledBigButton>작성 완료</StyledBigButton>
+        <StyledBigButton onClick={handleSubmitPost}>작성 완료</StyledBigButton>
       </FooterButtons>
     </>
   );

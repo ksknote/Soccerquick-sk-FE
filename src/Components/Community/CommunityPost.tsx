@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../../ReduxStore/modules/TeamPage/actions';
 import { RootState, AppDispatch } from '../../ReduxStore/store';
 import { userSelector } from '../../ReduxStore/modules/Auth/authSelectors';
-import { DummyData } from './CommunityFeed';
+import { DummyData } from './Feed/CommunityPostList';
 
 import CommunityPostContents from './CommunityPostContents';
 import CommunityPostComment from './CommunityPostComment';

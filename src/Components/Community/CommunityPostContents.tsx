@@ -23,10 +23,10 @@ import chevronIcon from '../../styles/icon/chevron_green.svg';
 import ballIcon from '../../styles/icon/soccerball.svg';
 import axios from 'axios';
 import alertModal from '../Commons/alertModal';
-import { PostType } from '../../Types/CommunityType';
+import { DummyPostType } from '../../Types/CommunityType';
 import { Status } from '../../Pages/TeamPage/Styles/ViewsStyle';
 
-function CommunityPostContents({ postData }: { postData: PostType }) {
+function CommunityPostContents({ postData }: { postData: DummyPostType }) {
   const {
     user_id,
     nick_name,
@@ -34,7 +34,6 @@ function CommunityPostContents({ postData }: { postData: PostType }) {
     post_id,
     title,
     description,
-    image,
     notice,
     createdAt,
   } = postData;

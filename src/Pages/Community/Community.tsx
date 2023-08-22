@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import BaseLayout from '../../Components/Template/BaseLayout';
 import { Routes, Route } from 'react-router-dom';
-import CommunityPostFeed from '../../Components/Community/CommunityFeed';
+import CommunityPostFeed from '../../Components/Community/Feed/CommunityFeed';
 import CommunityPostDetail from '../../Components/Community/CommunityPost';
 import WriteCommunityPost from '../../Components/Community/WritingForm/WriteCommunityPost';
 import EditComminityPost from '../../Components/Community/WritingForm/EditComminityPost';

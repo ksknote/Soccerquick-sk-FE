@@ -121,8 +121,12 @@ const Wrapper = styled.div`
   .quill {
     width: 100%;
     height: 30rem;
+
     @media (min-width: 1024px) {
       height: 40rem;
+      .ql-container {
+        font-size: 1.7rem;
+      }
     }
   }
 `;

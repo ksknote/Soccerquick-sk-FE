@@ -1,4 +1,4 @@
-export interface PostType {
+export interface DummyPostType {
   user_id: string;
   nick_name: string;
   profile: string;
@@ -6,6 +6,21 @@ export interface PostType {
   title: string;
   description: string;
   image: string[];
+  notice: string;
+  comments: CommentType[];
+  createdAt: string;
+}
+
+export interface PostType {
+  user_id: string;
+  nick_name: string;
+  profile: string;
+  post_id: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  subject: string;
+  hashTags: string[];
   notice: string;
   comments: CommentType[];
   createdAt: string;

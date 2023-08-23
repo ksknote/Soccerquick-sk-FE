@@ -25,3 +25,15 @@ export const BodyWrapper = styled(Wrapper)`
     padding: 1rem 2rem;
   }
 `;
+
+export const Cell = styled.div`
+  display: inline;
+  padding: 0.1rem 1rem 0.1rem 1rem;
+  margin-right: 0.5rem;
+  border: 0.1rem solid #eeeeee;
+  border-radius: 2rem;
+  font-size: 1.1rem;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;

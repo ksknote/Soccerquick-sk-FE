@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { PostType } from '../../../Types/CommunityType';
-import parse from 'html-react-parser';
 import commentIcon from '../../../styles/icon/comment_green.svg';
+import likeIcon from '../../../styles/icon/like_green.svg';
 import Skeleton, { Shining } from '../../Commons/Skeleton';
+import { Cell } from '../../../styles/Common/CommonStyle';
 
 interface PostCardPropsType {
   post: PostType;
@@ -13,6 +14,14 @@ interface PostCardPropsType {
 
 function PostCard({ post, index }: PostCardPropsType) {
   const navigate = useNavigate();
+
+  //본문 미리보기를 위해 html string에서 순수 문자열만 추출
+  function stripHTML(htmlString: string) {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlString;
+    return tempDiv.textContent || tempDiv.innerText || '';
+  }
+
   return (
     <Post
       onClick={() => navigate(`./${post.post_id}`, { state: { data: post } })}
@@ -29,17 +38,20 @@ function PostCard({ post, index }: PostCardPropsType) {
       <PostContents>
         <div>
           <PostTitle>{post.title}</PostTitle>
-          <PostDescription>
-            {parse(post.description, { trim: false })}
-          </PostDescription>
+          <PostDescription>{stripHTML(post.description)}</PostDescription>
         </div>
-        <PostDate>
-          {new Date(post.createdAt).toLocaleDateString('ko-KR', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
-        </PostDate>
+        <PostSubFooter>
+          {post.subject && (
+            <PostSubject data={post.subject}>{post.subject}</PostSubject>
+          )}
+          <PostDate>
+            {new Date(post.createdAt).toLocaleDateString('ko-KR', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </PostDate>
+        </PostSubFooter>
         <PostFooter>
           <AuthorInfo>
             <AuthorProfile>
@@ -47,12 +59,16 @@ function PostCard({ post, index }: PostCardPropsType) {
             </AuthorProfile>
             <p>{post.nick_name}</p>
           </AuthorInfo>
-          <div>
-            <CommentCount>
+          <LikenComment>
+            <div>
+              <img src={likeIcon} alt="commentIcon" />
+              <span>{post.like.length}</span>
+            </div>
+            <div>
               <img src={commentIcon} alt="commentIcon" />
               <span>{post.comments.length}</span>
-            </CommentCount>
-          </div>
+            </div>
+          </LikenComment>
         </PostFooter>
       </PostContents>
     </Post>
@@ -69,6 +85,7 @@ export function PostCardSkeleton() {
     }, 500);
     return () => clearTimeout(timeoutId);
   }, []);
+
   return (
     <Post>
       <PostImage>
@@ -217,7 +234,19 @@ const PostDescription = styled.div`
   -webkit-box-orient: vertical;
 `;
 
+const PostSubFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const PostSubject = styled(Cell)<{ data: string }>`
+  font-size: 1.2rem;
+  color: ${({ data }) => getColorBydata(data)};
+  background-color: ${({ data }) => getBackgroundColorBydata(data)};
+`;
+
 const PostDate = styled.p`
+  line-height: 2rem;
   color: gray;
   font-size: 1.3rem;
 `;
@@ -257,23 +286,53 @@ const AuthorProfileSkeleton = styled(AuthorProfileLayout)<{ visible: boolean }>`
     visible ? 'var(--color--skeleton)' : 'white'};
 `;
 
-const CommentCount = styled.div`
+const LikenComment = styled.div`
   display: flex;
-  height: 100%;
-  align-items: center;
-  gap: 0.5rem;
-  padding-right: 1rem;
-  color: gray;
-  img {
-    height: 2.5rem;
-    width: 2.5rem;
-  }
-  @media (min-width: 768px) {
+  div {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    gap: 0.5rem;
+    color: gray;
     img {
-      height: 2rem;
-      width: 2rem;
+      height: 2.5rem;
+      width: 2.5rem;
     }
-    gap: 0.3rem;
-    font-size: 1.3rem;
+
+    :first-child {
+      padding-right: 1rem;
+    }
+    @media (min-width: 768px) {
+      img {
+        height: 2rem;
+        width: 2rem;
+      }
+      gap: 0.3rem;
+      font-size: 1.3rem;
+    }
   }
 `;
+
+const getColorBydata = (data: string) => {
+  if (data === '풋살 후기') {
+    return '#3b6189';
+  } else if (data === '유니폼/장비 자랑') {
+    return '#622c1e';
+  } else if (data === '우리 팀 소개') {
+    return '#305d4d';
+  } else if (data === '자유 수다') {
+    return '#565355';
+  }
+};
+
+const getBackgroundColorBydata = (data: string) => {
+  if (data === '풋살 후기') {
+    return '#f1f8fb';
+  } else if (data === '유니폼/장비 자랑') {
+    return '#fffaf6';
+  } else if (data === '우리 팀 소개') {
+    return '#f0faf5';
+  } else if (data === '자유 수다') {
+    return '#f9f7f8';
+  }
+};

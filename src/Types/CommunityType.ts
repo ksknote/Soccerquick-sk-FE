@@ -22,6 +22,7 @@ export interface PostType {
   subject: string;
   hashTags: string[];
   notice: string;
+  like: Array<string>;
   comments: CommentType[];
   createdAt: string;
 }

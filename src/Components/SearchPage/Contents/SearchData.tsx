@@ -7,6 +7,7 @@ import MyPagination from '../../MyPage/MyPagination';
 import checkIcon from '../../../styles/icon/check.svg';
 import { DomDataType } from '../../../Pages/SearchPage';
 import alertModal from '../../Commons/alertModal';
+import { Cell } from '../../../styles/Common/CommonStyle';
 // import { checkHandler } from './GroundComparison';
 
 type FindingGroundProps = {
@@ -162,16 +163,16 @@ function FindingGround(props: FindingGroundProps) {
                       <p onClick={(e) => clickDomHandler(item.dom_id)}>
                         {item.title}
                       </p>
-                      <StyledTableCell>
+                      <StyledCellContainer>
                         {Object.keys(ProvidedElementList).map(
                           (provided) =>
                             item[provided] && (
-                              <StyledTable key={provided} data={provided}>
+                              <StyledFieldCell key={provided} data={provided}>
                                 {ProvidedElementList[provided]}
-                              </StyledTable>
+                              </StyledFieldCell>
                             )
                         )}
-                      </StyledTableCell>
+                      </StyledCellContainer>
                     </StyledMainTd>
 
                     <td>
@@ -270,7 +271,7 @@ const StyledLabelTr = styled.tr`
   }
 `;
 
-const StyledTableCell = styled.div`
+const StyledCellContainer = styled.div`
   display: inline-block;
   height: 3rem;
   padding-top: 0.5rem;
@@ -285,18 +286,9 @@ const StyledTableCell = styled.div`
   }
 `;
 
-const StyledTable = styled.div<{ data: string }>`
-  display: inline;
-  padding: 0.1rem 1rem 0.1rem 1rem;
-  margin-right: 0.5rem;
-  border: 0.1rem solid #eeeeee;
-  border-radius: 2rem;
-  font-size: 1.1rem;
-  font-weight: 400;
+const StyledFieldCell = styled(Cell)<{ data: string }>`
   color: ${({ data }) => getColorBydata(data)};
   background-color: ${({ data }) => getBackgroundColorBydata(data)};
-  text-overflow: ellipsis;
-  white-space: nowrap;
   @media (min-width: 1024px) {
     font-size: 1.4rem;
     margin-right: 1.2rem;

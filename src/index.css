@@ -21,6 +21,7 @@ code {
   --color--lightgray: #fdfdfd;
   --color--gray: #eeeeee;
   --color--darkgray: #727f88;
+  --color--skeleton: #e5e5e5;
 }
 
 /* 1rem 10px 단위 설정   */

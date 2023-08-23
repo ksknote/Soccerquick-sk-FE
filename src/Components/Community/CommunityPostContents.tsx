@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {
   StyledPost,
@@ -6,10 +6,7 @@ import {
   StyledBoardName,
   StyledAuthorDiv,
   StyledImgDiv,
-  StyledSubTitle,
   StyledAuthorButtonContainer,
-  StyledCommentsDiv,
-  StyledFooter,
 } from '../../styles/Common/PostsStyle';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
@@ -23,20 +20,9 @@ import chevronIcon from '../../styles/icon/chevron_green.svg';
 import ballIcon from '../../styles/icon/soccerball.svg';
 import axios from 'axios';
 import alertModal from '../Commons/alertModal';
-import { DummyPostType } from '../../Types/CommunityType';
-import { Status } from '../../Pages/TeamPage/Styles/ViewsStyle';
+import { PostType } from '../../Types/CommunityType';
 
-function CommunityPostContents({ postData }: { postData: DummyPostType }) {
-  const {
-    user_id,
-    nick_name,
-    profile,
-    post_id,
-    title,
-    description,
-    notice,
-    createdAt,
-  } = postData;
+function CommunityPostContents({ postData }: { postData: PostType }) {
   // 글 작성자인지 확인하기 위한 데이터
   const userData = useSelector(userSelector);
   const isLogin = useSelector(isLogInSelector);
@@ -70,6 +56,8 @@ function CommunityPostContents({ postData }: { postData: DummyPostType }) {
     }
   };
 
+  console.log(postData);
+
   return (
     <StyledPost>
       <div>
@@ -85,16 +73,19 @@ function CommunityPostContents({ postData }: { postData: DummyPostType }) {
         </StyledBoardName>
 
         <StyledHeader>
-          <h1>{title}</h1>
+          <h1>{postData.title}</h1>
           <HeaderBottom>
             <StyledAuthorDiv>
               <StyledImgDiv>
-                <img src={profile ? profile : ballIcon} alt="BallIcon" />
+                <img
+                  src={postData.profile ? postData.profile : ballIcon}
+                  alt="BallIcon"
+                />
               </StyledImgDiv>
-              <p>{nick_name}</p>
+              <p>{postData.nick_name}</p>
             </StyledAuthorDiv>
             <PostDate>
-              {new Date(createdAt).toLocaleDateString('ko-KR', {
+              {new Date(postData.createdAt).toLocaleDateString('ko-KR', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
@@ -104,15 +95,15 @@ function CommunityPostContents({ postData }: { postData: DummyPostType }) {
         </StyledHeader>
       </div>
       <PostBody>
-        <HtmlParser data={description} />
+        <HtmlParser data={postData.description} />
       </PostBody>
       <StyledAuthorButtonContainer>
-        {userData?.user_id === user_id && (
+        {userData?.user_id === postData.user_id && (
           <Link to={`/teampage/edit/${url}`}>
             <button>수정</button>
           </Link>
         )}
-        {(userData?.name === user_id ||
+        {(userData?.name === postData.user_id ||
           userData?.role === 'admin' ||
           userData?.role === 'manager') && (
           <button onClick={deletePostHandler}>삭제</button>

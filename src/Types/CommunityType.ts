@@ -1,16 +1,3 @@
-export interface DummyPostType {
-  user_id: string;
-  nick_name: string;
-  profile: string;
-  post_id: string;
-  title: string;
-  description: string;
-  image: string[];
-  notice: string;
-  comments: CommentType[];
-  createdAt: string;
-}
-
 export interface PostType {
   user_id: string;
   nick_name: string;
@@ -44,4 +31,9 @@ export interface ReplyType {
   post_id: string;
   content: string;
   createdAt: string;
+}
+
+export interface PostWithCommentsType {
+  post: PostType;
+  comment: CommentType[];
 }

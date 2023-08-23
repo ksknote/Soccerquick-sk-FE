@@ -16,7 +16,7 @@ function Community() {
           <Route path="/submit" element={<WriteCommunityPost />} />
           <Route path="/edit/*" element={<EditComminityPost />} />
           <Route path="/" element={<CommunityPostFeed />} />
-          <Route path="/test" element={<CommunityPostDetail />} />
+          <Route path="/*" element={<CommunityPostDetail />} />
         </Routes>
       </BodyWrapper>
     </BaseLayout>

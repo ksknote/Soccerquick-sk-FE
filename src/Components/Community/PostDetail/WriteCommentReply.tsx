@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { StyledCommentButtons } from '../../Pages/TeamPage/Styles/ComponentStyle';
-interface ReplyPropsType {}
-function CommunityPostReplyTextArea({}: ReplyPropsType) {
+import { StyledCommentButtons } from '../../../Pages/TeamPage/Styles/ComponentStyle';
+
+function WriteCommentReply() {
   const [isTextAreaOpen, setIsTextAreaOpen] = useState(false);
 
   if (isTextAreaOpen) {
@@ -24,7 +24,7 @@ function CommunityPostReplyTextArea({}: ReplyPropsType) {
   );
 }
 
-export default CommunityPostReplyTextArea;
+export default WriteCommentReply;
 
 const Wrapper = styled.div`
   border-top: 0.1rem solid #e6e6e6;

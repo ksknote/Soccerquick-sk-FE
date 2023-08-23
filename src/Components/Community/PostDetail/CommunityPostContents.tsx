@@ -7,20 +7,20 @@ import {
   StyledAuthorDiv,
   StyledImgDiv,
   StyledAuthorButtonContainer,
-} from '../../styles/Common/PostsStyle';
+} from '../../../styles/Common/PostsStyle';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
-import HtmlParser from '../Commons/HtmlParser';
+import HtmlParser from '../../Commons/HtmlParser';
 import { useSelector } from 'react-redux';
 import {
   isLogInSelector,
   userSelector,
-} from '../../ReduxStore/modules/Auth/authSelectors';
-import chevronIcon from '../../styles/icon/chevron_green.svg';
-import ballIcon from '../../styles/icon/soccerball.svg';
+} from '../../../ReduxStore/modules/Auth/authSelectors';
+import chevronIcon from '../../../styles/icon/chevron_green.svg';
+import ballIcon from '../../../styles/icon/soccerball.svg';
 import axios from 'axios';
-import alertModal from '../Commons/alertModal';
-import { PostType } from '../../Types/CommunityType';
+import alertModal from '../../Commons/alertModal';
+import { PostType } from '../../../Types/CommunityType';
 
 function CommunityPostContents({ postData }: { postData: PostType }) {
   // 글 작성자인지 확인하기 위한 데이터

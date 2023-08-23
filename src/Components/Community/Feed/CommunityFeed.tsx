@@ -19,11 +19,13 @@ function CommunityPostFeed() {
     () => {
       fetchData();
     },
-    { threshold: 0 }
+    { threshold: 0, rootMargin: '10px' }
   );
 
   const fetchData = () => {
     if (isFetchingEnd) return;
+    setIsLoading(true);
+
     const url = `${process.env.REACT_APP_API_URL}/communities?page=${page}&itemsPerPage=12`;
     const config = {
       withCredentials: true,
@@ -37,6 +39,7 @@ function CommunityPostFeed() {
           setPostData((prev) => [...prev, ...res.data.data]);
           setPage((prev) => prev + 1);
         }
+        setIsLoading(false);
       })
       .catch((e) => console.error(e));
   };
@@ -56,8 +59,8 @@ function CommunityPostFeed() {
           새 글 작성
         </StyledBigButton>
       </Nav>
-      <CommunityPostList postData={postData} />
-      <div ref={targetRef}></div>
+      <CommunityPostList postData={postData} isLoading={isLoading} />
+      <Target ref={targetRef}></Target>
     </>
   );
 }
@@ -120,4 +123,8 @@ const SortTabs = styled.div`
   @media (min-width: 1024px) {
     font-size: 1.5rem;
   }
+`;
+
+const Target = styled.div`
+  height: 3rem;
 `;

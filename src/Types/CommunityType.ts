@@ -16,7 +16,8 @@ export interface PostType {
 
 export interface CommentType {
   comment_id: string;
-  user_id: string;
+  user_id: string; //ObjectId
+  userId: string;
   profile: string;
   nick_name: string;
   post_id: string;

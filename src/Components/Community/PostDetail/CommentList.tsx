@@ -32,7 +32,7 @@ function CommentList({ comments }: { comments: CommentType[] }) {
             </Comment.UserInfo>
           </Comment.AuthorDiv>
           <Comment.Contents>{comment.content}</Comment.Contents>
-          <WriteCommentReply />
+          <WriteCommentReply comment={comment} />
           <CommentReplyList reply={comment.reply}></CommentReplyList>
         </BoxContainer>
       ))}

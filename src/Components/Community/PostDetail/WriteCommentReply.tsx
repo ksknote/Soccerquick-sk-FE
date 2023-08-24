@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '../../../styles/Common/CommonStyle';
 import { Comment } from '../../../styles/Common/CommentStyle';
-function WriteCommentReply() {
+import { useSelector } from 'react-redux';
+import { userSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
+import { CommentType } from '../../../Types/CommunityType';
+
+function WriteCommentReply({ comment }: { comment: CommentType }) {
+  const userData = useSelector(userSelector);
   const [isTextAreaOpen, setIsTextAreaOpen] = useState(false);
 
   if (isTextAreaOpen) {
@@ -19,10 +24,24 @@ function WriteCommentReply() {
     );
   }
 
+  if (userData?.user_id === comment.userId) {
+    return (
+      <Comment.SpaceBetweenFooter>
+        <ReplyButton onClick={() => setIsTextAreaOpen((prev) => !prev)}>
+          답글 달기
+        </ReplyButton>
+        <div>
+          <Button.WhiteSmall>삭제</Button.WhiteSmall>
+          <Button.GreenSmall>수정</Button.GreenSmall>
+        </div>
+      </Comment.SpaceBetweenFooter>
+    );
+  }
+
   return (
-    <ReplayButton onClick={() => setIsTextAreaOpen((prev) => !prev)}>
+    <ReplyButton onClick={() => setIsTextAreaOpen((prev) => !prev)}>
       답글 달기
-    </ReplayButton>
+    </ReplyButton>
   );
 }
 
@@ -54,7 +73,7 @@ const TextArea = styled.textarea`
   }
 `;
 
-const ReplayButton = styled.button`
+const ReplyButton = styled.button`
   background: transparent;
   color: gray;
   padding: 0;

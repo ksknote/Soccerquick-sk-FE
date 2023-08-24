@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import CommunityPostReplyTextArea from './CommentFooter';
+import CommunityPostReplyTextArea from './CommentItemContent';
 import { ReplyType } from '../../../Types/CommunityType';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import ballIcon from '../../../styles/icon/soccerball.svg';
@@ -38,7 +38,6 @@ function CommentReplyList({ reply }: { reply: ReplyType[] }) {
 export default CommentReplyList;
 
 const Wrapper = styled.div`
-  padding-top: 1rem;
   @media (min-width: 1024px) {
     padding-top: 2.5rem;
   }

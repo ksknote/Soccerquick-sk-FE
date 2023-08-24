@@ -30,14 +30,9 @@ function CommunityPostDetail() {
   }, [url, updatePost]);
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/communities/${url}`)
-      .then((res) => {
-        console.log(res);
-        setPostData(res.data.data);
-      });
+    fetchPostData();
   }, [fetchPostData]);
-  console.log(postData);
+
   return (
     <>
       {postData && (

@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CommentType } from '../../../Types/CommunityType';
 import { BoxContainer } from '../../../styles/Common/CommonStyle';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import ballIcon from '../../../styles/icon/soccerball.svg';
 import CommentReplyList from './CommentReplyList';
-import CommentFooter from './CommentFooter';
+import CommentItemContent from './CommentItemContent';
 
-function CommentList({ comments }: { comments: CommentType[] }) {
+interface CommentList {
+  comments: CommentType[];
+  setUpdatePost: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function CommentList({ comments, setUpdatePost }: CommentList) {
   return (
     <div>
       {comments.map((comment) => (
@@ -31,8 +36,7 @@ function CommentList({ comments }: { comments: CommentType[] }) {
               </div>
             </Comment.UserInfo>
           </Comment.AuthorDiv>
-          <Comment.Contents>{comment.content}</Comment.Contents>
-          <CommentFooter comment={comment} />
+          <CommentItemContent comment={comment} setUpdatePost={setUpdatePost} />
           <CommentReplyList reply={comment.reply}></CommentReplyList>
         </BoxContainer>
       ))}

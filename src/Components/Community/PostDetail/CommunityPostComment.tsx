@@ -4,7 +4,6 @@ import commentIcon from '../../../styles/icon/comment.svg';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import CommentList from './CommentList';
 import WriteComment from './WriteComment';
-import { PostWithCommentsType } from '../../../Types/CommunityType';
 
 interface CommentPropsType {
   postId: string;
@@ -25,7 +24,7 @@ function CommunityPostComment({
           댓글 {comments.length}개
         </Comment.Title>
         <WriteComment postId={postId} setUpdatePost={setUpdatePost} />
-        <CommentList comments={comments} />
+        <CommentList comments={comments} setUpdatePost={setUpdatePost} />
       </div>
     </Comment.Container>
   );

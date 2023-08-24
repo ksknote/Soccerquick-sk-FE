@@ -132,7 +132,12 @@ export const Comment = {
   //이미지 첨부 관련 스타일드 컴포넌트
 
   Image: styled.img`
-    max-width: 40rem;
+    max-width: 20rem;
+    max-height: 20rem;
+    @media (min-width: 1024px) {
+      max-width: 40rem;
+      max-height: 30rem;
+    }
   `,
 
   SelectedImageContainer: styled.div`

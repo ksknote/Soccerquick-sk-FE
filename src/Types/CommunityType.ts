@@ -22,8 +22,9 @@ export interface CommentType {
   nick_name: string;
   post_id: string;
   content: string;
-  createdAt: string;
+  image: string;
   reply: ReplyType[];
+  createdAt: string;
 }
 
 export interface ReplyType {

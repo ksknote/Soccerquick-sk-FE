@@ -43,7 +43,7 @@ function WriteComment({ postId, setUpdatePost }: WriteCommentPropsType) {
     const config = { withCredentials: true };
     const data = {
       content: newComment,
-      // image,
+      image,
     };
     axios
       .post(

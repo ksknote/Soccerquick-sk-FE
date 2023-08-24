@@ -5,10 +5,29 @@ import { Comment } from '../../../styles/Common/CommentStyle';
 import { useSelector } from 'react-redux';
 import { userSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
 import { CommentType } from '../../../Types/CommunityType';
+import alertModal from '../../Commons/alertModal';
+import axios from 'axios';
 
-function WriteCommentReply({ comment }: { comment: CommentType }) {
+function CommentFooter({ comment }: { comment: CommentType }) {
   const userData = useSelector(userSelector);
   const [isTextAreaOpen, setIsTextAreaOpen] = useState(false);
+  const config = { withCredentials: true };
+
+  const deleteCommentHandler = async () => {
+    const confirmed = await alertModal('삭제하시겠습니까?', 'submit');
+    if (confirmed) {
+      axios
+        .delete(
+          `${process.env.REACT_APP_API_URL}/communities/${comment.post_id}/comment/${comment.comment_id}`,
+          config
+        )
+        .then((res) => {
+          alertModal('삭제되었습니다.', 'success');
+          console.log(res);
+        })
+        .catch((e) => console.log(e));
+    }
+  };
 
   if (isTextAreaOpen) {
     return (
@@ -31,7 +50,9 @@ function WriteCommentReply({ comment }: { comment: CommentType }) {
           답글 달기
         </ReplyButton>
         <div>
-          <Button.WhiteSmall>삭제</Button.WhiteSmall>
+          <Button.WhiteSmall onClick={deleteCommentHandler}>
+            삭제
+          </Button.WhiteSmall>
           <Button.GreenSmall>수정</Button.GreenSmall>
         </div>
       </Comment.SpaceBetweenFooter>
@@ -45,7 +66,7 @@ function WriteCommentReply({ comment }: { comment: CommentType }) {
   );
 }
 
-export default WriteCommentReply;
+export default CommentFooter;
 
 const Wrapper = styled.div`
   border-top: 0.1rem solid #e6e6e6;

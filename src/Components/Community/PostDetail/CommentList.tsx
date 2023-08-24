@@ -4,7 +4,7 @@ import { BoxContainer } from '../../../styles/Common/CommonStyle';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import ballIcon from '../../../styles/icon/soccerball.svg';
 import CommentReplyList from './CommentReplyList';
-import WriteCommentReply from './WriteCommentReply';
+import CommentFooter from './CommentFooter';
 
 function CommentList({ comments }: { comments: CommentType[] }) {
   return (
@@ -32,7 +32,7 @@ function CommentList({ comments }: { comments: CommentType[] }) {
             </Comment.UserInfo>
           </Comment.AuthorDiv>
           <Comment.Contents>{comment.content}</Comment.Contents>
-          <WriteCommentReply comment={comment} />
+          <CommentFooter comment={comment} />
           <CommentReplyList reply={comment.reply}></CommentReplyList>
         </BoxContainer>
       ))}

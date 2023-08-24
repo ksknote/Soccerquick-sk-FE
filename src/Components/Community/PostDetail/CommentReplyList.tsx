@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import CommunityPostReplyTextArea from './WriteCommentReply';
+import CommunityPostReplyTextArea from './CommentFooter';
 import { ReplyType } from '../../../Types/CommunityType';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import ballIcon from '../../../styles/icon/soccerball.svg';

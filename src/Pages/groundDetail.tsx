@@ -10,7 +10,7 @@ import GroundImageModal from '../Components/GroundDetail/GroundImageModal';
 import ShareModal from '../Components/GroundDetail/ShareModal';
 import OneMarkerMap from '../Components/GroundDetail/OneMarkerMap';
 import ScrollToTarget from '../Components/scrollToTarget';
-import Review from '../Components/GroundDetail/Review';
+import Review from '../Components/GroundDetail/review/Review';
 import starIcon from '../styles/icon/star.svg';
 import starFilledIcon from '../styles/icon/star_filled.svg';
 import homeIcon from '../styles/icon/home.svg';
@@ -205,7 +205,7 @@ const GroundDetail = () => {
           </ContentsBox>
           <ContentsBox>
             {dom_id && reviewData && (
-              <Review dom_id={dom_id} reviewData={reviewData} />
+              <Review dom_id={dom_id} review={reviewData} />
             )}
           </ContentsBox>
         </GroundDetailContainer>

@@ -17,19 +17,22 @@ export interface PostType {
 export interface CommentType {
   comment_id: string;
   user_id: string;
+  profile: string;
   nick_name: string;
   post_id: string;
   content: string;
   createdAt: string;
-  comments: ReplyType[];
+  reply: ReplyType[];
 }
 
 export interface ReplyType {
-  comment_id: string;
+  reply_id: string;
+  profile: string;
   user_id: string;
   nick_name: string;
   post_id: string;
   content: string;
+  comment_id: string;
   createdAt: string;
 }
 

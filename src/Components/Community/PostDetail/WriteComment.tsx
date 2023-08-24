@@ -11,50 +11,52 @@ import {
   isLogInSelector,
 } from '../../../ReduxStore/modules/Auth/authSelectors';
 
-function WriteComment() {
+interface WriteCommentPropsType {
+  postId: string;
+  setUpdatePost: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function WriteComment({ postId, setUpdatePost }: WriteCommentPropsType) {
   const isLogin = useSelector(isLogInSelector);
   const userData = useSelector(userSelector);
   const userId = userData?.user_id;
   const [newComment, setNewComment] = useState<string>('');
   const [selectedImage, setSelectedImage] = useState<File>();
 
-  // const handleSetReviewImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files?.[0];
-  //   if (!file) {
-  //     alertModal('이미지를 선택해주세요.', 'warning');
-  //     return;
-  //   }
-  //   setSelectedImage(file);
-  // };
+  const handleSetReviewImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) {
+      alertModal('이미지를 선택해주세요.', 'warning');
+      return;
+    }
+    setSelectedImage(file);
+  };
 
-  // async function handleWriteReview() {
-  //   if (!isLogin) {
-  //     return alertModal('로그인이 필요한 서비스입니다.', 'warning');
-  //   }
-  //   if (newComment === '') {
-  //     return alertModal('내용을 입력해주세요!', 'warning');
-  //   }
-  //   const image = await uploadImage(selectedImage);
-  //   const config = { withCredentials: true };
-  //   const data = {
-  //     user_id: userId,
-  //     dom_id: domId,
-  //     contents: newComment,
-  //     image,
-  //   };
-  //   axios
-  //     .post(`${process.env.REACT_APP_API_URL}/reviews`, data, config)
-  //     .then((res) => {
-  //       setNewComment('');
-  //       setSelectedImage(undefined);
-  //       // 리뷰를 등록한 후에 서버로부터 최신 댓글 목록을 다시 가져옴
-  //       axios
-  //         .get(`${process.env.REACT_APP_API_URL}/doms/${domId}`, config)
-  //         .then((res) => {
-  //           setReviewData(res.data.data.reviews);
-  //         });
-  //     });
-  // }
+  async function handleWriteReview() {
+    if (!isLogin) {
+      return alertModal('로그인이 필요한 서비스입니다.', 'warning');
+    }
+    if (newComment === '') {
+      return alertModal('내용을 입력해주세요!', 'warning');
+    }
+    const image = await uploadImage(selectedImage);
+    const config = { withCredentials: true };
+    const data = {
+      content: newComment,
+      // image,
+    };
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/communities/${postId}/comment`,
+        data,
+        config
+      )
+      .then((res) => {
+        setNewComment('');
+        setSelectedImage(undefined);
+        setUpdatePost(true);
+      });
+  }
   if (isLogin)
     return (
       <BoxContainer>
@@ -87,9 +89,12 @@ function WriteComment() {
           <Comment.InputTypeFile
             type="file"
             id="reviewImageFile"
+            onChange={(e) => handleSetReviewImage(e)}
             accept="image/*"
           />
-          <Button.GreenSmall>작성 완료</Button.GreenSmall>
+          <Button.GreenSmall onClick={handleWriteReview}>
+            작성 완료
+          </Button.GreenSmall>
         </Comment.SpaceBetweenFooter>
       </BoxContainer>
     );

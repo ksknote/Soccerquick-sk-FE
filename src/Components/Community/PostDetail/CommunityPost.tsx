@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +17,17 @@ function CommunityPostDetail() {
   const dispatch = useDispatch<AppDispatch>();
   // const postData = useSelector((state: RootState) => state.data.data);
   const [postData, setPostData] = useState<PostWithCommentsType>();
+  const [updatePost, setUpdatePost] = useState(false);
+
+  const fetchPostData = useCallback(async () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/communities/${url}`)
+      .then((res) => {
+        console.log(res);
+        setPostData(res.data.data);
+        setUpdatePost(false);
+      });
+  }, [url, updatePost]);
 
   useEffect(() => {
     axios
@@ -25,16 +36,18 @@ function CommunityPostDetail() {
         console.log(res);
         setPostData(res.data.data);
       });
-  }, []);
-
+  }, [fetchPostData]);
+  console.log(postData);
   return (
     <>
       {postData && (
         <>
           <CommunityPostContents postData={postData.post} />
-          {postData.comment && (
-            <CommunityPostComment comments={postData.comment} />
-          )}
+          <CommunityPostComment
+            comments={postData.comment}
+            postId={postData.post.post_id}
+            setUpdatePost={setUpdatePost}
+          />
         </>
       )}
     </>

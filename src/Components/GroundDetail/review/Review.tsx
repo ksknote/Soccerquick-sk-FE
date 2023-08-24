@@ -4,6 +4,7 @@ import WriteReview from './WriteReview';
 import ReviewItemHeader from './ReviewItemHeader';
 import ReviewItemBody from './ReviewItemBody';
 import { ReviewDataType, ReviewProps } from '../../../Types/ReviewType';
+import { BoxContainer } from '../../../styles/Common/CommonStyle';
 
 export default function Review({ review, dom_id }: ReviewProps) {
   const [reviewData, setReviewData] = useState<ReviewDataType[]>(review);
@@ -13,9 +14,10 @@ export default function Review({ review, dom_id }: ReviewProps) {
         <h2>📄 리뷰 목록</h2>
         <span>좋아요 순</span>
       </Header>
+      <WriteReview setReviewData={setReviewData} domId={dom_id} />
       {reviewData &&
         reviewData.map((item, index) => (
-          <ReivewLi key={index}>
+          <BoxContainer key={index}>
             <ReviewItemHeader reviewItem={item} />
             <ReviewItemBody
               reviewItem={item}
@@ -24,9 +26,8 @@ export default function Review({ review, dom_id }: ReviewProps) {
               domId={dom_id}
               index={index}
             />
-          </ReivewLi>
+          </BoxContainer>
         ))}
-      <WriteReview setReviewData={setReviewData} domId={dom_id} />
     </Wrapper>
   );
 }
@@ -61,19 +62,5 @@ const Header = styled.div`
     > span {
       font-size: 1.4rem;
     }
-  }
-`;
-
-const ReivewLi = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 2rem;
-  margin: 1rem 0;
-  background-color: white;
-  filter: drop-shadow(0 0 3px #dddddd);
-  border-radius: 10px;
-  @media (min-width: 1024px) {
-    padding: 2.5rem;
-    margin: 2rem 0;
   }
 `;

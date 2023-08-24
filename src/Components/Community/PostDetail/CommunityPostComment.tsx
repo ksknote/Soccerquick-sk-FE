@@ -1,26 +1,22 @@
 import React from 'react';
 import { CommentType } from '../../../Types/CommunityType';
 import commentIcon from '../../../styles/icon/comment.svg';
-import {
-  StyledCommentContainer,
-  StyledCommentTitle,
-} from '../../../Pages/TeamPage/Styles/ComponentStyle';
-import styled from 'styled-components';
+import { Comment } from '../../../styles/Common/CommentStyle';
 import CommentList from './CommentList';
 import WriteComment from './WriteComment';
 
 function CommunityPostComment({ comments }: { comments: CommentType[] }) {
   return (
-    <StyledCommentContainer>
+    <Comment.Container>
       <div>
-        <StyledCommentTitle>
+        <Comment.Title>
           <img src={commentIcon} alt="" />
           댓글 {comments.length}개
-        </StyledCommentTitle>
+        </Comment.Title>
         <WriteComment />
         <CommentList comments={comments} />
       </div>
-    </StyledCommentContainer>
+    </Comment.Container>
   );
 }
 

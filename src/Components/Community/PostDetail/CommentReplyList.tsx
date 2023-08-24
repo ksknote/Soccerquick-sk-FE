@@ -2,15 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import CommunityPostReplyTextArea from './WriteCommentReply';
 import { ReplyType } from '../../../Types/CommunityType';
-import {
-  StyledImgDiv,
-  StyledContents,
-} from '../../../Pages/TeamPage/Styles/ComponentStyle';
-import {
-  CommentAuthorDiv,
-  CommentAuthor,
-  PostDate,
-} from '../../../styles/Common/CommentStyle';
+import { Comment } from '../../../styles/Common/CommentStyle';
 import ballIcon from '../../../styles/icon/soccerball.svg';
 
 function CommentReplyList({ reply }: { reply: ReplyType[] }) {
@@ -20,22 +12,22 @@ function CommentReplyList({ reply }: { reply: ReplyType[] }) {
         <ReplyLi>
           <ReplyIcon>∟</ReplyIcon>
           <div>
-            <CommentAuthorDiv>
-              <StyledImgDiv>
+            <Comment.AuthorDiv>
+              <Comment.ImgDiv>
                 <img src={ballIcon} alt="BallIcon" />
-              </StyledImgDiv>
+              </Comment.ImgDiv>
               <div>
-                <CommentAuthor>{comment.nick_name}</CommentAuthor>
-                <PostDate>
+                <Comment.Author>{comment.nick_name}</Comment.Author>
+                <Comment.PostDate>
                   {new Date(comment.createdAt).toLocaleDateString('ko-KR', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
                   })}
-                </PostDate>
+                </Comment.PostDate>
               </div>
-            </CommentAuthorDiv>
-            <StyledContents>{comment.content}</StyledContents>
+            </Comment.AuthorDiv>
+            <Comment.Contents>{comment.content}</Comment.Contents>
           </div>
         </ReplyLi>
       ))}

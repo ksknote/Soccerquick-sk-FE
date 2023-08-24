@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { StyledCommentButtons } from '../../../Pages/TeamPage/Styles/ComponentStyle';
-
+import { Button } from '../../../styles/Common/CommonStyle';
+import { Comment } from '../../../styles/Common/CommentStyle';
 function WriteCommentReply() {
   const [isTextAreaOpen, setIsTextAreaOpen] = useState(false);
 
@@ -9,10 +9,12 @@ function WriteCommentReply() {
     return (
       <Wrapper>
         <TextArea wrap="hard" placeholder="댓글을 작성하세요." />
-        <StyledCommentButtons>
-          <button onClick={() => setIsTextAreaOpen(false)}>취소</button>
-          <button>댓글 작성</button>
-        </StyledCommentButtons>
+        <Comment.ButtonsFooter>
+          <Button.WhiteSmall onClick={() => setIsTextAreaOpen(false)}>
+            취소
+          </Button.WhiteSmall>
+          <Button.GreenSmall>댓글 작성</Button.GreenSmall>
+        </Comment.ButtonsFooter>
       </Wrapper>
     );
   }

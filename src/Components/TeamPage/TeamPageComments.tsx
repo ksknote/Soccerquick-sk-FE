@@ -1,26 +1,17 @@
 import React from 'react';
+import axios from 'axios';
+import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { userSelector } from '../../ReduxStore/modules/Auth/authSelectors';
+import { BoxContainer, Button } from '../../styles/Common/CommonStyle';
+import { Comment as CommentStyle } from '../../styles/Common/CommentStyle';
+import { Team } from '../../styles/Common/TeamStyle';
 import ballIcon from '../../styles/icon/soccerball.svg';
 import checkIcon from '../../styles/icon/check_white.svg';
 import commentIcon from '../../styles/icon/comment.svg';
-import axios from 'axios';
 import { SubmitApplicant, CommentProps } from '../../Types/TeamPageType';
 import alertModal from '../Commons/alertModal';
-import {
-  StyledCommentContainer,
-  StyledCommentTitle,
-  CommentLiContainer,
-  StyledAuthorDiv,
-  StyledImgDiv,
-  StyledDetailDiv,
-  StyledGender,
-  StyledPosition,
-  StyledLevel,
-  StyledContents,
-  StyledCommentButtons,
-} from '../../Pages/TeamPage/Styles/ComponentStyle';
 
 function Comment(props: CommentProps) {
   const { data, user } = props;
@@ -86,48 +77,50 @@ function Comment(props: CommentProps) {
     }
   };
   return (
-    <StyledCommentContainer>
+    <CommentStyle.Container>
       <div>
-        <StyledCommentTitle>
+        <CommentStyle.Title>
           <img src={commentIcon} alt="" />
           신청 목록
-        </StyledCommentTitle>
+        </CommentStyle.Title>
 
         {data.map((applicant: SubmitApplicant, index: number) => (
-          <CommentLiContainer key={index}>
-            <StyledAuthorDiv>
-              <StyledImgDiv>
-                <img src={ballIcon} alt="BallIcon" />
-              </StyledImgDiv>
-              <p>{applicant.name}</p>
-            </StyledAuthorDiv>
-            <StyledContents>{applicant.contents}</StyledContents>
-            <StyledDetailDiv>
-              <StyledGender gender={applicant.gender}>
+          <BoxContainer key={index}>
+            <CommentStyle.AuthorDiv>
+              <CommentStyle.UserInfo>
+                <CommentStyle.ImgDiv>
+                  <img src={ballIcon} alt="BallIcon" />
+                </CommentStyle.ImgDiv>
+                <CommentStyle.Author>{applicant.name}</CommentStyle.Author>
+              </CommentStyle.UserInfo>
+            </CommentStyle.AuthorDiv>
+            <CommentStyle.Contents>{applicant.contents}</CommentStyle.Contents>
+            <Team.DetailDiv>
+              <Team.Gender gender={applicant.gender}>
                 #{applicant.gender}
-              </StyledGender>
-              <StyledPosition position={applicant.position}>
+              </Team.Gender>
+              <Team.Position position={applicant.position}>
                 #
                 {applicant.position === '상관없음'
                   ? '포지션 무관'
                   : applicant.position}
-              </StyledPosition>
-              <StyledLevel level={applicant.level}>
+              </Team.Position>
+              <Team.Level level={applicant.level}>
                 #{applicant.level}
-              </StyledLevel>
-            </StyledDetailDiv>
+              </Team.Level>
+            </Team.DetailDiv>
             {userData?.name === user && (
-              <StyledCommentButtons>
+              <Button.WhiteSmall>
                 <button onClick={() => rejectMember(applicant.id)}>거절</button>
                 <button onClick={() => acceptMember(applicant.id)}>
                   <img src={checkIcon} alt="" /> 수락
                 </button>
-              </StyledCommentButtons>
+              </Button.WhiteSmall>
             )}
-          </CommentLiContainer>
+          </BoxContainer>
         ))}
       </div>
-    </StyledCommentContainer>
+    </CommentStyle.Container>
   );
 }
 

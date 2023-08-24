@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import searchIcon from '../../../styles/icon/search.svg';
-import { StyledBigButton } from '../../../styles/Common/ButtonStyle';
+import { Button } from '../../../styles/Common/CommonStyle';
 import { useNavigate } from 'react-router-dom';
 import { PostType } from '../../../Types/CommunityType';
 import CommunityPostList from './CommunityPostList';
@@ -55,9 +55,9 @@ function CommunityPostFeed() {
           <span>최신순</span>
           <span>댓글순</span>
         </SortTabs>
-        <StyledBigButton onClick={() => navigate('./submit')}>
+        <Button.GreenBig onClick={() => navigate('./submit')}>
           새 글 작성
-        </StyledBigButton>
+        </Button.GreenBig>
       </Nav>
       <CommunityPostList postData={postData} isLoading={isLoading} />
       <Target ref={targetRef}></Target>

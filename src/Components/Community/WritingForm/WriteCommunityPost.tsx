@@ -6,10 +6,7 @@ import ReactQuillEditor from '../../Commons/ReactQuillEditor';
 import DropDown from '../../Commons/DropDown';
 import HashTags from './HashTags';
 import Thumbnail from './Thumbnail';
-import {
-  StyledBigButton,
-  StyledWhiteBigButton,
-} from '../../../styles/Common/ButtonStyle';
+import { Button } from '../../../styles/Common/CommonStyle';
 import alertModal from '../../Commons/alertModal';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -216,14 +213,14 @@ function WriteCommunityPost() {
       </SectionDiv>
       <FooterButtons>
         {isTemporarilySaved && (
-          <StyledWhiteBigButton onClick={handleGetSavedForm}>
+          <Button.WhiteBig onClick={handleGetSavedForm}>
             불러오기
-          </StyledWhiteBigButton>
+          </Button.WhiteBig>
         )}
-        <StyledWhiteBigButton onClick={handleSaveTemporarily}>
+        <Button.WhiteBig onClick={handleSaveTemporarily}>
           임시 저장
-        </StyledWhiteBigButton>
-        <StyledBigButton onClick={handleSubmitPost}>작성 완료</StyledBigButton>
+        </Button.WhiteBig>
+        <Button.GreenBig onClick={handleSubmitPost}>작성 완료</Button.GreenBig>
       </FooterButtons>
     </>
   );

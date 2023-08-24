@@ -6,20 +6,12 @@ import {
   isLogInSelector,
   userSelector,
 } from '../../../ReduxStore/modules/Auth/authSelectors';
-import {
-  ReviewBody,
-  TextArea,
-  SelectedImageContainer,
-  SelectedReviewImage,
-  WriteReviewFooter,
-  InputTypeFileLabel,
-  InputTypeFile,
-  Button,
-} from './ReviewItemBody';
 import ImageIcon from '../../../styles/icon/ImageIcon.svg';
 import alertModal from '../../Commons/alertModal';
 import uploadImage from '../../../Utils/uploadImage';
 import axios from 'axios';
+import { Comment } from '../../../styles/Common/CommentStyle';
+import { BoxContainer, Button } from '../../../styles/Common/CommonStyle';
 
 function WriteReview({ setReviewData, domId }: WriteReviewPropsType) {
   const isLogin = useSelector(isLogInSelector);
@@ -67,9 +59,9 @@ function WriteReview({ setReviewData, domId }: WriteReviewPropsType) {
   }
 
   return (
-    <WriteReviewContainer>
-      <ReviewBody>
-        <TextArea
+    <BoxContainer>
+      <Comment.Body>
+        <Comment.TextArea
           placeholder="리뷰 내용을 입력하세요"
           value={newReview}
           onChange={(e) => {
@@ -77,8 +69,8 @@ function WriteReview({ setReviewData, domId }: WriteReviewPropsType) {
           }}
         />
         {selectedImage && (
-          <SelectedImageContainer>
-            <SelectedReviewImage>
+          <Comment.SelectedImageContainer>
+            <Comment.SelectedReviewImage>
               <img
                 src={selectedImage ? URL.createObjectURL(selectedImage) : ''}
                 alt="profile"
@@ -86,34 +78,26 @@ function WriteReview({ setReviewData, domId }: WriteReviewPropsType) {
               <button onClick={() => setSelectedImage(undefined)}>
                 <span>×</span>
               </button>
-            </SelectedReviewImage>
-          </SelectedImageContainer>
+            </Comment.SelectedReviewImage>
+          </Comment.SelectedImageContainer>
         )}
-      </ReviewBody>
-      <WriteReviewFooter>
-        <InputTypeFileLabel htmlFor="reviewImageFile">
+      </Comment.Body>
+      <Comment.SpaceBetweenFooter>
+        <Comment.InputTypeFileLabel htmlFor="reviewImageFile">
           <img src={ImageIcon} alt="imageIcon" />
-        </InputTypeFileLabel>
-        <InputTypeFile
+        </Comment.InputTypeFileLabel>
+        <Comment.InputTypeFile
           type="file"
           id="reviewImageFile"
           onChange={(e) => handleSetReviewImage(e)}
           accept="image/*"
         />
-        <Button onClick={handleWriteReview}>작성 완료</Button>
-      </WriteReviewFooter>
-    </WriteReviewContainer>
+        <Button.GreenSmall onClick={handleWriteReview}>
+          작성 완료
+        </Button.GreenSmall>
+      </Comment.SpaceBetweenFooter>
+    </BoxContainer>
   );
 }
 
 export default WriteReview;
-
-const WriteReviewContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 2rem;
-  margin-top: 1rem;
-  background-color: white;
-  filter: drop-shadow(0 0 3px #dddddd);
-  border-radius: 10px;
-`;

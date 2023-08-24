@@ -4,30 +4,30 @@ import { useSelector } from 'react-redux';
 import { isLogInSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
 import { ReviewDataType } from '../../../Types/ReviewType';
 import LikeButton from '../../Commons/LikeButton';
-
+import { Comment } from '../../../styles/Common/CommentStyle';
 function ReviewItemHeader({ reviewItem }: { reviewItem: ReviewDataType }) {
   const isLogin = useSelector(isLogInSelector);
   const { user_icon, user_name, createdAt, likedreviews, review_id } =
     reviewItem;
 
   return (
-    <ReviewHeader>
-      <UserInfo>
-        <span>
+    <Comment.AuthorDiv>
+      <Comment.UserInfo>
+        <Comment.ImgDiv>
           <img src={user_icon} alt="avatar" />
-        </span>
-        <UserDetail>
-          <p>{user_name}</p>
-          <p className="review-time">
+        </Comment.ImgDiv>
+        <div>
+          <Comment.Author>{user_name}</Comment.Author>
+          <Comment.PostDate>
             {createdAt &&
               new Date(createdAt).toLocaleDateString('ko-KR', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
               })}
-          </p>
-        </UserDetail>
-      </UserInfo>
+          </Comment.PostDate>
+        </div>
+      </Comment.UserInfo>
       <span className="likes">
         <LikeButton
           likedreviews={likedreviews}
@@ -35,7 +35,7 @@ function ReviewItemHeader({ reviewItem }: { reviewItem: ReviewDataType }) {
           isLogin={isLogin}
         />
       </span>
-    </ReviewHeader>
+    </Comment.AuthorDiv>
   );
 }
 

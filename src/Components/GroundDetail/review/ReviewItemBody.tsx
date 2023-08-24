@@ -10,6 +10,8 @@ import {
 import uploadImage from '../../../Utils/uploadImage';
 import alertModal from '../../Commons/alertModal';
 import ImageIcon from '../../../styles/icon/ImageIcon.svg';
+import { Comment } from '../../../styles/Common/CommentStyle';
+import { Button } from '../../../styles/Common/CommonStyle';
 
 function ReviewItemBody(Props: ReviewItemPropsType) {
   const { reviewItem, reviewData, setReviewData, domId, index } = Props;
@@ -105,8 +107,8 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
   if (isReviewEditable) {
     return (
       <>
-        <ReviewBody>
-          <TextArea
+        <Comment.Body>
+          <Comment.TextArea
             placeholder="수정 내용을 입력하세요"
             value={editReview}
             onChange={(e) => {
@@ -114,8 +116,8 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
             }}
           />
           {selectedEditImage && (
-            <SelectedImageContainer>
-              <SelectedReviewImage>
+            <Comment.SelectedImageContainer>
+              <Comment.SelectedReviewImage>
                 <img
                   src={
                     selectedEditImage && URL.createObjectURL(selectedEditImage)
@@ -129,24 +131,24 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
                 >
                   <span>×</span>
                 </button>
-              </SelectedReviewImage>
-            </SelectedImageContainer>
+              </Comment.SelectedReviewImage>
+            </Comment.SelectedImageContainer>
           )}
-        </ReviewBody>
-        <WriteReviewFooter>
+        </Comment.Body>
+        <Comment.SpaceBetweenFooter>
           <div>
-            <InputTypeFileLabel htmlFor="reviewEditImageFile">
+            <Comment.InputTypeFileLabel htmlFor="reviewEditImageFile">
               <img src={ImageIcon} alt="imageIcon" />
-            </InputTypeFileLabel>
-            <InputTypeFile
+            </Comment.InputTypeFileLabel>
+            <Comment.InputTypeFile
               type="file"
               id="reviewEditImageFile"
               onChange={(e) => handleSetReviewImage(e)}
               accept="image/*"
             />
           </div>
-          <ButtonContainer>
-            <Button
+          <div>
+            <Button.WhiteSmall
               onClick={() => {
                 setIsReviewEditable(false);
                 setEditReview('');
@@ -154,8 +156,8 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
               }}
             >
               취소
-            </Button>
-            <Button
+            </Button.WhiteSmall>
+            <Button.GreenSmall
               onClick={() => {
                 handleFetchEditReview(
                   index,
@@ -165,161 +167,39 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
               }}
             >
               완료
-            </Button>
-          </ButtonContainer>
-        </WriteReviewFooter>
+            </Button.GreenSmall>
+          </div>
+        </Comment.SpaceBetweenFooter>
       </>
     );
   }
 
   return (
     <>
-      <ReviewBody>
-        <ReviewContents>{contents}</ReviewContents>
+      <Comment.Body>
+        <Comment.Contents>{contents}</Comment.Contents>
         {image && !isReviewEditable && (
-          <ReviewImage src={image} alt="reivewImage" />
+          <Comment.Image src={image} alt="reivewImage" />
         )}
-      </ReviewBody>
+      </Comment.Body>
       {isLogin && user_name === userName && (
-        <ReviewFooter>
-          <ButtonContainer>
-            <Button onClick={() => handleDeleteReview(index, review_id)}>
-              삭제
-            </Button>
-            <Button
-              onClick={() => {
-                handleClickEdit(index, image);
-              }}
-            >
-              수정
-            </Button>
-          </ButtonContainer>
-        </ReviewFooter>
+        <Comment.ButtonsFooter>
+          <Button.WhiteSmall
+            onClick={() => handleDeleteReview(index, review_id)}
+          >
+            삭제
+          </Button.WhiteSmall>
+          <Button.GreenSmall
+            onClick={() => {
+              handleClickEdit(index, image);
+            }}
+          >
+            수정
+          </Button.GreenSmall>
+        </Comment.ButtonsFooter>
       )}
     </>
   );
 }
 
 export default ReviewItemBody;
-
-export const ReviewBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-const ReviewContents = styled.div`
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-  @media (min-width: 1024px) {
-    font-size: 1.6rem;
-  }
-`;
-
-const ReviewImage = styled.img`
-  max-width: 40rem;
-`;
-
-export const TextArea = styled.textarea`
-  width: 100%;
-  height: 70%;
-  border: none;
-  resize: none; /* 크기 조정 비활성화 */
-  padding: 1rem 0;
-  font-size: 1.3rem;
-
-  :focus {
-    outline: none;
-  }
-  @media (min-width: 1024px) {
-    font-size: 1.6rem;
-  }
-`;
-
-export const SelectedImageContainer = styled.div`
-  button {
-    position: absolute;
-    top: -1rem;
-    right: -1rem;
-    width: 2.2rem;
-    height: 2.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    font-size: 1.4rem;
-    color: grey;
-    background: white;
-    box-sizing: border-box;
-    border: 0.1rem solid grey;
-    border-radius: 100%;
-  }
-`;
-
-export const SelectedReviewImage = styled.div`
-  position: relative;
-  width: 5rem;
-  height: 5rem;
-  border: 0.1rem solid #e6e6e6;
-  margin: 1rem 0;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-  @media (min-width: 768px) {
-    width: 8rem;
-    height: 8rem;
-  }
-`;
-
-const ReviewFooter = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  padding-top: 1rem;
-`;
-
-export const WriteReviewFooter = styled(ReviewFooter)`
-  justify-content: space-between;
-`;
-
-export const InputTypeFileLabel = styled.label`
-  cursor: pointer;
-  img {
-    width: 2.2rem;
-    @media (min-width: 1024px) {
-      width: 3rem;
-      height: 3rem;
-    }
-  }
-`;
-
-export const InputTypeFile = styled.input`
-  display: none;
-`;
-
-export const ButtonContainer = styled.div`
-  button:last-child {
-    margin-left: 0.5rem;
-  }
-`;
-
-export const Button = styled.button`
-  font-size: 1.3rem;
-  padding: 0.7rem 1.3rem;
-  border: 0.5px solid #cfcfcf;
-  border-radius: 5px;
-  background-color: white;
-  color: #09cf00;
-
-  &:hover {
-    background-color: #09cf00;
-    color: white;
-  }
-  @media (min-width: 1024px) {
-    font-size: 1.5rem;
-    padding: 1rem 2rem;
-    border-radius: 5px;
-  }
-`;

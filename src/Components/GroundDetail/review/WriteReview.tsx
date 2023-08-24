@@ -20,7 +20,7 @@ function WriteReview({ setReviewData, domId }: WriteReviewPropsType) {
   const [newReview, setNewReview] = useState<string>('');
   const [selectedImage, setSelectedImage] = useState<File>();
 
-  const handleSetReviewImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const setImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) {
       alertModal('이미지를 선택해주세요.', 'warning');
@@ -29,7 +29,7 @@ function WriteReview({ setReviewData, domId }: WriteReviewPropsType) {
     setSelectedImage(file);
   };
 
-  async function handleWriteReview() {
+  const writeReviewHandler = async () => {
     if (!isLogin) {
       return alertModal('로그인이 필요한 서비스입니다.', 'warning');
     }
@@ -56,7 +56,7 @@ function WriteReview({ setReviewData, domId }: WriteReviewPropsType) {
             setReviewData(res.data.data.reviews);
           });
       });
-  }
+  };
 
   return (
     <BoxContainer>
@@ -70,7 +70,7 @@ function WriteReview({ setReviewData, domId }: WriteReviewPropsType) {
         />
         {selectedImage && (
           <Comment.SelectedImageContainer>
-            <Comment.SelectedReviewImage>
+            <Comment.SelectedImage>
               <img
                 src={selectedImage ? URL.createObjectURL(selectedImage) : ''}
                 alt="profile"
@@ -78,7 +78,7 @@ function WriteReview({ setReviewData, domId }: WriteReviewPropsType) {
               <button onClick={() => setSelectedImage(undefined)}>
                 <span>×</span>
               </button>
-            </Comment.SelectedReviewImage>
+            </Comment.SelectedImage>
           </Comment.SelectedImageContainer>
         )}
       </Comment.Body>
@@ -89,10 +89,10 @@ function WriteReview({ setReviewData, domId }: WriteReviewPropsType) {
         <Comment.InputTypeFile
           type="file"
           id="reviewImageFile"
-          onChange={(e) => handleSetReviewImage(e)}
+          onChange={(e) => setImageHandler(e)}
           accept="image/*"
         />
-        <Button.GreenSmall onClick={handleWriteReview}>
+        <Button.GreenSmall onClick={writeReviewHandler}>
           작성 완료
         </Button.GreenSmall>
       </Comment.SpaceBetweenFooter>

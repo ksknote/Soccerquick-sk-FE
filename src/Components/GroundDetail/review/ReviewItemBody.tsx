@@ -18,21 +18,27 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
   const { review_id, user_name, contents, image } = reviewItem;
   const [isReviewEditable, setIsReviewEditable] = useState<boolean>(false);
   const [selectedEditImage, setSelectedEditImage] = useState<File>();
+  const [isImageChanged, setIsImageChanged] = useState(false);
+
   const [editReview, setEditReview] = useState<string>('');
   const isLogin = useSelector(isLogInSelector);
   const userData = useSelector(userSelector);
   const userName = userData?.name || '';
   const config = { withCredentials: true };
 
-  const handleSetReviewImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const setImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) {
       alertModal('이미지를 선택해주세요.', 'warning');
     }
     setSelectedEditImage(file);
+    setIsImageChanged(true);
   };
 
-  async function handleClickEdit(index: number, imageUrl: string | undefined) {
+  async function setEditableHandler(
+    index: number,
+    imageUrl: string | undefined
+  ) {
     if (imageUrl) {
       const image = await fetch(imageUrl); // 이미지 데이터 가져오기
       const blob = await image.blob();
@@ -43,7 +49,7 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
     setIsReviewEditable(true);
   }
 
-  async function handleFetchEditReview(
+  async function editReviewHandler(
     index: number,
     reviewId: string | undefined,
     imageUrl: string | undefined
@@ -51,9 +57,8 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
     if (editReview === '') {
       return alertModal('내용을 입력해주세요!', 'warning');
     }
-
     let image: string | undefined;
-    if (selectedEditImage || (imageUrl && !selectedEditImage)) {
+    if (selectedEditImage && isImageChanged) {
       image = await uploadImage(selectedEditImage);
     }
     const data = { contents: editReview, domId, image };
@@ -117,12 +122,11 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
           />
           {selectedEditImage && (
             <Comment.SelectedImageContainer>
-              <Comment.SelectedReviewImage>
+              <Comment.SelectedImage>
                 <img
                   src={
                     selectedEditImage && URL.createObjectURL(selectedEditImage)
                   }
-                  alt="profile"
                 />
                 <button
                   onClick={() => {
@@ -131,7 +135,7 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
                 >
                   <span>×</span>
                 </button>
-              </Comment.SelectedReviewImage>
+              </Comment.SelectedImage>
             </Comment.SelectedImageContainer>
           )}
         </Comment.Body>
@@ -143,7 +147,7 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
             <Comment.InputTypeFile
               type="file"
               id="reviewEditImageFile"
-              onChange={(e) => handleSetReviewImage(e)}
+              onChange={(e) => setImageHandler(e)}
               accept="image/*"
             />
           </div>
@@ -159,7 +163,7 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
             </Button.WhiteSmall>
             <Button.GreenSmall
               onClick={() => {
-                handleFetchEditReview(
+                editReviewHandler(
                   index,
                   reviewItem.review_id,
                   reviewItem.image
@@ -191,7 +195,7 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
           </Button.WhiteSmall>
           <Button.GreenSmall
             onClick={() => {
-              handleClickEdit(index, image);
+              setEditableHandler(index, image);
             }}
           >
             수정

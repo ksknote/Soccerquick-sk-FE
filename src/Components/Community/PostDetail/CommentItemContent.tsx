@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Button } from '../../../styles/Common/CommonStyle';
-import { Comment } from '../../../styles/Common/CommentStyle';
+import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { userSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
+import { Button } from '../../../styles/Common/CommonStyle';
+import { Comment } from '../../../styles/Common/CommentStyle';
 import { CommentType } from '../../../Types/CommunityType';
 import alertModal from '../../Commons/alertModal';
-import axios from 'axios';
+import ImageIcon from '../../../styles/icon/ImageIcon.svg';
+import uploadImage from '../../../Utils/uploadImage';
 
 interface CommentFooterPropsType {
   comment: CommentType;
@@ -21,23 +23,11 @@ function CommentItemContent({
   const [isTextAreaOpen, setIsTextAreaOpen] = useState(false);
   const [isCommentEditable, setIsCommentEditable] = useState(false);
   const [editComment, setEditComment] = useState('');
+  const [selectedEditImage, setSelectedEditImage] = useState<File>();
+  const [isImageChanged, setIsImageChanged] = useState(false);
   const url = `${process.env.REACT_APP_API_URL}/communities/${comment.post_id}/comment/${comment.comment_id}`;
   const config = { withCredentials: true };
 
-  const deleteCommentHandler = async () => {
-    const confirmed = await alertModal('삭제하시겠습니까?', 'submit');
-    if (confirmed) {
-      axios
-        .delete(url, config)
-        .then((res) => {
-          alertModal('삭제되었습니다.', 'success');
-          setUpdatePost(true);
-        })
-        .catch((e) => console.log(e));
-    }
-  };
-
-  //대댓글 작성 활성화 된 경우
   if (isTextAreaOpen) {
     return (
       <Comment.Body>
@@ -56,16 +46,32 @@ function CommentItemContent({
     );
   }
 
+  //댓글 수정 활성화된 경우
+
   const undoEditHandler = () => {
     setIsCommentEditable(false);
     setEditComment('');
   };
 
-  const editCommentHandler = () => {
+  const setCommentImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) {
+      alertModal('이미지를 선택해주세요.', 'warning');
+      return;
+    }
+    setSelectedEditImage(file);
+    setIsImageChanged(true);
+  };
+
+  const editCommentHandler = async () => {
     if (editComment.length === 0) {
       return alertModal('내용을 입력해주세요.', 'warning');
     }
-    const data = { content: editComment };
+    let image: string | undefined;
+    if (selectedEditImage && isImageChanged) {
+      image = await uploadImage(selectedEditImage);
+    }
+    const data = { content: editComment, image };
     axios
       .patch(url, data, config)
       .then((res) => {
@@ -73,6 +79,7 @@ function CommentItemContent({
         setUpdatePost(true);
         setIsCommentEditable(false);
         setEditComment('');
+        setSelectedEditImage(undefined);
       })
       .catch((e) => {
         alertModal('수정에 실패하였습니다.', ' warning');
@@ -88,7 +95,34 @@ function CommentItemContent({
           value={editComment}
           onChange={(e) => setEditComment(e.target.value)}
         />
-        <Comment.ButtonsFooter>
+        {selectedEditImage && (
+          <Comment.SelectedImageContainer>
+            <Comment.SelectedImage>
+              <img
+                src={
+                  selectedEditImage && URL.createObjectURL(selectedEditImage)
+                }
+              />
+              <button
+                onClick={() => {
+                  setSelectedEditImage(undefined);
+                }}
+              >
+                <span>×</span>
+              </button>
+            </Comment.SelectedImage>
+          </Comment.SelectedImageContainer>
+        )}
+        <Comment.SpaceBetweenFooter>
+          <Comment.InputTypeFileLabel htmlFor="EditImageFile">
+            <img src={ImageIcon} alt="imageIcon" />
+          </Comment.InputTypeFileLabel>
+          <Comment.InputTypeFile
+            type="file"
+            id="EditImageFile"
+            onChange={(e) => setCommentImageHandler(e)}
+            accept="image/*"
+          />
           <div>
             <Button.WhiteSmall onClick={undoEditHandler}>
               취소
@@ -97,18 +131,41 @@ function CommentItemContent({
               완료
             </Button.GreenSmall>
           </div>
-        </Comment.ButtonsFooter>
+        </Comment.SpaceBetweenFooter>
       </Comment.Body>
     );
   }
 
   //작성자인 경우
+  const deleteCommentHandler = async () => {
+    const confirmed = await alertModal('삭제하시겠습니까?', 'submit');
+    if (confirmed) {
+      axios
+        .delete(url, config)
+        .then((res) => {
+          alertModal('삭제되었습니다.', 'success');
+          setUpdatePost(true);
+        })
+        .catch((e) => console.log(e));
+    }
+  };
+
+  async function setEditableHandler() {
+    if (comment.image) {
+      const image = await fetch(comment.image); // 이미지 데이터 가져오기
+      const blob = await image.blob();
+      const file = new File([blob], 'image.jpg', { type: 'image/jpeg' });
+      setSelectedEditImage(file);
+    }
+    setEditComment(comment.content || '');
+    setIsCommentEditable(true);
+  }
+
   if (userData?.user_id === comment.userId) {
     return (
       <Comment.Body>
         <Comment.Contents>{comment.content}</Comment.Contents>
         {comment.image && <Comment.Image src={comment.image} />}
-
         <Comment.SpaceBetweenFooter>
           <ReplyButton onClick={() => setIsTextAreaOpen((prev) => !prev)}>
             답글 달기
@@ -117,7 +174,7 @@ function CommentItemContent({
             <Button.WhiteSmall onClick={deleteCommentHandler}>
               삭제
             </Button.WhiteSmall>
-            <Button.GreenSmall onClick={() => setIsCommentEditable(true)}>
+            <Button.GreenSmall onClick={setEditableHandler}>
               수정
             </Button.GreenSmall>
           </div>

@@ -70,7 +70,7 @@ function WriteComment({ postId, setUpdatePost }: WriteCommentPropsType) {
           />
           {selectedImage && (
             <Comment.SelectedImageContainer>
-              <Comment.SelectedReviewImage>
+              <Comment.SelectedImage>
                 <img
                   src={selectedImage ? URL.createObjectURL(selectedImage) : ''}
                   alt="profile"
@@ -78,7 +78,7 @@ function WriteComment({ postId, setUpdatePost }: WriteCommentPropsType) {
                 <button onClick={() => setSelectedImage(undefined)}>
                   <span>×</span>
                 </button>
-              </Comment.SelectedReviewImage>
+              </Comment.SelectedImage>
             </Comment.SelectedImageContainer>
           )}
         </Comment.Body>

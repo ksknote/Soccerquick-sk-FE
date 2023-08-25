@@ -32,7 +32,11 @@ function CommentItemContent({
     return (
       <Comment.Body>
         <Comment.Contents>{comment.content}</Comment.Contents>
-        {comment.image && <Comment.Image src={comment.image} />}
+        {comment.image && (
+          <Comment.Image>
+            <img src={comment.image} />
+          </Comment.Image>
+        )}
         <Wrapper>
           <TextArea wrap="hard" placeholder="댓글을 작성하세요." />
           <Comment.ButtonsFooter>
@@ -165,7 +169,11 @@ function CommentItemContent({
     return (
       <Comment.Body>
         <Comment.Contents>{comment.content}</Comment.Contents>
-        {comment.image && <Comment.Image src={comment.image} />}
+        {comment.image && (
+          <Comment.Image>
+            <img src={comment.image} />
+          </Comment.Image>
+        )}{' '}
         <Comment.SpaceBetweenFooter>
           <ReplyButton onClick={() => setIsTextAreaOpen((prev) => !prev)}>
             답글 달기
@@ -187,7 +195,11 @@ function CommentItemContent({
   return (
     <Comment.Body>
       <Comment.Contents>{comment.content}</Comment.Contents>
-      {comment.image && <Comment.Image src={comment.image} />}
+      {comment.image && (
+        <Comment.Image>
+          <img src={comment.image} />
+        </Comment.Image>
+      )}
       <ReplyButton onClick={() => setIsTextAreaOpen((prev) => !prev)}>
         답글 달기
       </ReplyButton>

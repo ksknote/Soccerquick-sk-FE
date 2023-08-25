@@ -183,7 +183,9 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
       <Comment.Body>
         <Comment.Contents>{contents}</Comment.Contents>
         {image && !isReviewEditable && (
-          <Comment.Image src={image} alt="reivewImage" />
+          <Comment.Image>
+            <img src={image} />
+          </Comment.Image>
         )}
       </Comment.Body>
       {isLogin && user_name === userName && (

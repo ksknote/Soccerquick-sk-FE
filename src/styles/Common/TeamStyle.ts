@@ -30,13 +30,7 @@ export const Team = {
 
   DetailDiv: styled.div`
     font-size: 1.3rem;
-    padding: 0.7rem 0;
-    > div {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      padding-bottom: 0.6rem;
-    }
+
     span {
       font-weight: 400;
       padding: 0 0.8rem;

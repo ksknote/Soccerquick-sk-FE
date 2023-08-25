@@ -177,6 +177,7 @@ export const StyledMemberHeader = styled.div<{ row: number }>`
   width: 100%;
   height: 100%;
   display: flex;
+  gap: 1rem;
   flex-direction: ${({ row }) => row !== 1 && 'column'};
   justify-content: space-between;
   padding-bottom: ${({ row }) => row === 1 && '1rem'};

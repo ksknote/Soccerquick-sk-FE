@@ -10,7 +10,7 @@ import alertModal from '../../Commons/alertModal';
 import ImageIcon from '../../../styles/icon/ImageIcon.svg';
 import uploadImage from '../../../Utils/uploadImage';
 
-interface CommentFooterPropsType {
+interface CommentContentPropsType {
   comment: CommentType;
   setUpdatePost: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -18,7 +18,7 @@ interface CommentFooterPropsType {
 function CommentItemContent({
   comment,
   setUpdatePost,
-}: CommentFooterPropsType) {
+}: CommentContentPropsType) {
   const userData = useSelector(userSelector);
   const [isReplyOpen, setIsReplyOpen] = useState(false);
   const [replyContent, setReplyContent] = useState('');
@@ -79,15 +79,18 @@ function CommentItemContent({
   };
 
   //대댓글 활성화된 경우
+
   if (isReplyOpen) {
     return (
       <Comment.Body>
-        <Comment.Contents>{comment.content}</Comment.Contents>
-        {comment.image && (
-          <Comment.Image>
-            <img src={comment.image} />
-          </Comment.Image>
-        )}
+        <Comment.ContentsWrapper>
+          <Comment.Contents>{comment.content}</Comment.Contents>
+          {comment.image && (
+            <Comment.Image>
+              <img src={comment.image} />
+            </Comment.Image>
+          )}
+        </Comment.ContentsWrapper>
         <Wrapper>
           <TextArea>
             <textarea
@@ -137,8 +140,6 @@ function CommentItemContent({
     );
   }
 
-  //댓글 수정 활성화된 경우
-
   const undoEditHandler = () => {
     setIsCommentEditable(false);
     setEditComment('');
@@ -168,6 +169,8 @@ function CommentItemContent({
         console.log(e);
       });
   };
+
+  //댓글 수정 활성화된 경우
 
   if (isCommentEditable) {
     return (
@@ -218,7 +221,6 @@ function CommentItemContent({
     );
   }
 
-  //작성자인 경우
   const deleteCommentHandler = async () => {
     const confirmed = await alertModal('삭제하시겠습니까?', 'submit');
     if (confirmed) {
@@ -243,26 +245,30 @@ function CommentItemContent({
     setIsCommentEditable(true);
   }
 
+  //작성자인 경우
+
   if (userData?.user_id === comment.userId) {
     return (
       <Comment.Body>
-        <Comment.Contents>{comment.content}</Comment.Contents>
-        {comment.image && (
-          <Comment.Image>
-            <img src={comment.image} />
-          </Comment.Image>
-        )}
+        <Comment.ContentsWrapper>
+          <Comment.Contents>{comment.content}</Comment.Contents>
+          {comment.image && (
+            <Comment.Image>
+              <img src={comment.image} />
+            </Comment.Image>
+          )}
+        </Comment.ContentsWrapper>
         <Comment.SpaceBetweenFooter>
-          <ReplyButton onClick={() => setIsReplyOpen((prev) => !prev)}>
+          <Comment.TextButton onClick={() => setIsReplyOpen((prev) => !prev)}>
             답글 달기
-          </ReplyButton>
+          </Comment.TextButton>
           <div>
-            <Button.WhiteSmall onClick={deleteCommentHandler}>
+            <Comment.TextButton onClick={deleteCommentHandler}>
               삭제
-            </Button.WhiteSmall>
-            <Button.GreenSmall onClick={setEditableHandler}>
+            </Comment.TextButton>
+            <Comment.TextButton onClick={setEditableHandler}>
               수정
-            </Button.GreenSmall>
+            </Comment.TextButton>
           </div>
         </Comment.SpaceBetweenFooter>
       </Comment.Body>
@@ -272,16 +278,19 @@ function CommentItemContent({
   //작성자X 대댓글 활성화X
   return (
     <Comment.Body>
-      <Comment.Contents>{comment.content}</Comment.Contents>
-      {comment.image && (
-        <Comment.Image>
-          <img src={comment.image} />
-        </Comment.Image>
-      )}
+      <Comment.ContentsWrapper>
+        <Comment.Contents>{comment.content}</Comment.Contents>
+        {comment.image && (
+          <Comment.Image>
+            <img src={comment.image} />
+          </Comment.Image>
+        )}
+      </Comment.ContentsWrapper>
+
       <div>
-        <ReplyButton onClick={() => setIsReplyOpen((prev) => !prev)}>
+        <Comment.TextButton onClick={() => setIsReplyOpen((prev) => !prev)}>
           답글 달기
-        </ReplyButton>
+        </Comment.TextButton>
       </div>
     </Comment.Body>
   );
@@ -315,14 +324,5 @@ const TextArea = styled.div`
     @media (min-width: 1024px) {
       font-size: 1.8rem;
     }
-  }
-`;
-
-const ReplyButton = styled.button`
-  background: transparent;
-  color: gray;
-  padding: 0;
-  @media (min-width: 1024px) {
-    font-size: 1.7rem;
   }
 `;

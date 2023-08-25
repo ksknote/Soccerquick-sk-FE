@@ -1,34 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import CommunityPostReplyTextArea from './CommentItemContent';
 import { ReplyType } from '../../../Types/CommunityType';
 import { Comment } from '../../../styles/Common/CommentStyle';
-import ballIcon from '../../../styles/icon/soccerball.svg';
+import CommentItemHeader from './CommentItemHeader';
+import CommentReplyContent from './CommentReplyContent';
 
-function CommentReplyList({ reply }: { reply: ReplyType[] }) {
+interface ReplyListPropsType {
+  reply: ReplyType[];
+  setUpdatePost: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function CommentReplyList({ reply, setUpdatePost }: ReplyListPropsType) {
   return (
-    <Wrapper>
+    <Wrapper show={reply.length !== 0}>
       {reply.map((comment) => (
         <ReplyLi>
           <ReplyIcon>∟</ReplyIcon>
-          <div>
-            <Comment.AuthorDiv>
-              <Comment.ImgDiv>
-                <img src={ballIcon} alt="BallIcon" />
-              </Comment.ImgDiv>
-              <div>
-                <Comment.Author>{comment.nick_name}</Comment.Author>
-                <Comment.PostDate>
-                  {new Date(comment.createdAt).toLocaleDateString('ko-KR', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </Comment.PostDate>
-              </div>
-            </Comment.AuthorDiv>
-            <Comment.Contents>{comment.content}</Comment.Contents>
-          </div>
+          <ReplyContainer>
+            <CommentItemHeader
+              profile={comment.profile}
+              nick_name={comment.nick_name}
+              createdAt={comment.createdAt}
+            />
+            <CommentReplyContent
+              comment={comment}
+              setUpdatePost={setUpdatePost}
+            />
+          </ReplyContainer>
         </ReplyLi>
       ))}
     </Wrapper>
@@ -37,15 +35,13 @@ function CommentReplyList({ reply }: { reply: ReplyType[] }) {
 
 export default CommentReplyList;
 
-const Wrapper = styled.div`
-  @media (min-width: 1024px) {
-    padding-top: 2.5rem;
-  }
+const Wrapper = styled.div<{ show: boolean }>`
+  background: #f8f8f6;
+  border-radius: 0 0 1.5rem 1.5rem;
 `;
 const ReplyLi = styled.div`
   display: flex;
-  background: #f8f8f6;
-  padding: 2rem 0;
+  padding: 2rem 2rem;
   :not(:first-child) {
     border-top: 0.1rem solid #e6e6e6;
   }
@@ -56,4 +52,8 @@ const ReplyIcon = styled.div`
   font-size: 1.5rem;
   color: gray;
   text-align: center;
+`;
+
+const ReplyContainer = styled.div`
+  width: 100%;
 `;

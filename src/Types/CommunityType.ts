@@ -31,6 +31,7 @@ export interface ReplyType {
   reply_id: string;
   profile: string;
   user_id: string;
+  userId: string;
   nick_name: string;
   post_id: string;
   content: string;

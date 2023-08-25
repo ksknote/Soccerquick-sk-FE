@@ -94,7 +94,11 @@ function Comment(props: CommentProps) {
                 <CommentStyle.Author>{applicant.name}</CommentStyle.Author>
               </CommentStyle.UserInfo>
             </CommentStyle.AuthorDiv>
-            <CommentStyle.Contents>{applicant.contents}</CommentStyle.Contents>
+            <CommentStyle.ContentsWrapper>
+              <CommentStyle.Contents>
+                {applicant.contents}
+              </CommentStyle.Contents>
+            </CommentStyle.ContentsWrapper>
             <Team.DetailDiv>
               <Team.Gender gender={applicant.gender}>
                 #{applicant.gender}

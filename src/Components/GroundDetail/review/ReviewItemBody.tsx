@@ -181,12 +181,14 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
   return (
     <>
       <Comment.Body>
-        <Comment.Contents>{contents}</Comment.Contents>
-        {image && !isReviewEditable && (
-          <Comment.Image>
-            <img src={image} />
-          </Comment.Image>
-        )}
+        <Comment.ContentsWrapper>
+          <Comment.Contents>{contents}</Comment.Contents>
+          {image && !isReviewEditable && (
+            <Comment.Image>
+              <img src={image} />
+            </Comment.Image>
+          )}
+        </Comment.ContentsWrapper>
       </Comment.Body>
       {isLogin && user_name === userName && (
         <Comment.ButtonsFooter>

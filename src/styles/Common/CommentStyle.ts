@@ -27,7 +27,6 @@ export const Comment = {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 1rem;
     gap: 1rem;
   `,
 
@@ -81,9 +80,15 @@ export const Comment = {
     justify-content: center;
   `,
 
+  ContentsWrapper: styled.div`
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  `,
+
   Contents: styled.div`
     font-size: 1.3rem;
-    padding: 1.5rem 0;
     @media (min-width: 1024px) {
       font-size: 1.8rem;
       padding: 2.2rem 0;
@@ -108,7 +113,6 @@ export const Comment = {
   ButtonsFooter: styled.div`
     display: flex;
     justify-content: flex-end;
-    padding-top: 1rem;
     button:last-child {
       margin-left: 0.7rem;
       @media (min-width: 1024px) {
@@ -120,12 +124,20 @@ export const Comment = {
   SpaceBetweenFooter: styled.div`
     display: flex;
     justify-content: space-between;
-    padding-top: 1rem;
     button:last-child {
       margin-left: 0.7rem;
       @media (min-width: 1024px) {
         margin-left: 1rem;
       }
+    }
+  `,
+
+  TextButton: styled.button`
+    background: transparent;
+    color: gray;
+    padding: 0 0.3rem;
+    @media (min-width: 1024px) {
+      font-size: 1.7rem;
     }
   `,
 

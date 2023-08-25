@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { CommentType } from '../../../Types/CommunityType';
 import { BoxContainer } from '../../../styles/Common/CommonStyle';
 import CommentReplyList from './CommentReplyList';
@@ -14,14 +15,34 @@ function CommentList({ comments, setUpdatePost }: CommentList) {
   return (
     <div>
       {comments.map((comment) => (
-        <BoxContainer key={comment.comment_id}>
-          <CommentItemHeader comment={comment} />
-          <CommentItemContent comment={comment} setUpdatePost={setUpdatePost} />
-          <CommentReplyList reply={comment.reply}></CommentReplyList>
-        </BoxContainer>
+        <CommentBoxContainer key={comment.comment_id}>
+          <CommentItem>
+            <CommentItemHeader
+              profile={comment.profile}
+              nick_name={comment.nick_name}
+              createdAt={comment.createdAt}
+            />
+            <CommentItemContent
+              comment={comment}
+              setUpdatePost={setUpdatePost}
+            />
+          </CommentItem>
+          <CommentReplyList
+            reply={comment.reply}
+            setUpdatePost={setUpdatePost}
+          />
+        </CommentBoxContainer>
       ))}
     </div>
   );
 }
 
 export default CommentList;
+
+const CommentBoxContainer = styled(BoxContainer)`
+  padding: 0;
+`;
+
+const CommentItem = styled.div`
+  padding: 2rem;
+`;

@@ -20,7 +20,9 @@ function CommentItemContent({
   setUpdatePost,
 }: CommentFooterPropsType) {
   const userData = useSelector(userSelector);
-  const [isTextAreaOpen, setIsTextAreaOpen] = useState(false);
+  const [isReplyOpen, setIsReplyOpen] = useState(false);
+  const [replyContent, setReplyContent] = useState('');
+  const [selectedReplyImage, setSelectedReplyImage] = useState<File>();
   const [isCommentEditable, setIsCommentEditable] = useState(false);
   const [editComment, setEditComment] = useState('');
   const [selectedEditImage, setSelectedEditImage] = useState<File>();
@@ -28,7 +30,56 @@ function CommentItemContent({
   const url = `${process.env.REACT_APP_API_URL}/communities/${comment.post_id}/comment/${comment.comment_id}`;
   const config = { withCredentials: true };
 
-  if (isTextAreaOpen) {
+  const setImageHandler = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    type: string
+  ) => {
+    const file = e.target.files?.[0];
+    if (!file) {
+      alertModal('이미지를 선택해주세요.', 'warning');
+      return;
+    }
+    if (type === 'reply') {
+      setSelectedReplyImage(file);
+    } else if (type === 'edit') {
+      setSelectedEditImage(file);
+      setIsImageChanged(true);
+    }
+  };
+
+  const undoReplyHandler = () => {
+    setIsReplyOpen(false);
+    setReplyContent('');
+  };
+
+  const submitReplyHandler = async () => {
+    if (replyContent.length === 0) {
+      return alertModal('내용을 입력해주세요.', 'warning');
+    }
+    let image: string | undefined;
+    if (selectedReplyImage && isImageChanged) {
+      image = await uploadImage(selectedReplyImage);
+    }
+    const data = { content: replyContent, image };
+    console.log(`${url}/reply`);
+    axios
+      .post(`${url}/reply`, data, config)
+      .then((res) => {
+        setUpdatePost(true);
+        setIsReplyOpen(false);
+        setReplyContent('');
+        setSelectedReplyImage(undefined);
+        setIsImageChanged(false);
+        console.log('얍');
+      })
+      .catch((e) => {
+        alertModal('댓글 작성에 실패했습니다.', ' warning');
+        console.log(e);
+      });
+  };
+
+  //대댓글 활성화된 경우
+  if (isReplyOpen) {
     return (
       <Comment.Body>
         <Comment.Contents>{comment.content}</Comment.Contents>
@@ -38,13 +89,49 @@ function CommentItemContent({
           </Comment.Image>
         )}
         <Wrapper>
-          <TextArea wrap="hard" placeholder="댓글을 작성하세요." />
-          <Comment.ButtonsFooter>
-            <Button.WhiteSmall onClick={() => setIsTextAreaOpen(false)}>
-              취소
-            </Button.WhiteSmall>
-            <Button.GreenSmall>댓글 작성</Button.GreenSmall>
-          </Comment.ButtonsFooter>
+          <TextArea>
+            <textarea
+              value={replyContent}
+              onChange={(e) => setReplyContent(e.target.value)}
+              placeholder="댓글을 작성하세요."
+            />
+            {selectedReplyImage && (
+              <Comment.SelectedImageContainer>
+                <Comment.SelectedImage>
+                  <img
+                    src={
+                      selectedReplyImage
+                        ? URL.createObjectURL(selectedReplyImage)
+                        : ''
+                    }
+                    alt="profile"
+                  />
+                  <button onClick={() => setSelectedReplyImage(undefined)}>
+                    <span>×</span>
+                  </button>
+                </Comment.SelectedImage>
+              </Comment.SelectedImageContainer>
+            )}
+          </TextArea>
+          <Comment.SpaceBetweenFooter>
+            <Comment.InputTypeFileLabel htmlFor="replyImageFile">
+              <img src={ImageIcon} alt="imageIcon" />
+            </Comment.InputTypeFileLabel>
+            <Comment.InputTypeFile
+              type="file"
+              id="replyImageFile"
+              onChange={(e) => setImageHandler(e, 'reply')}
+              accept="image/*"
+            />
+            <div>
+              <Button.WhiteSmall onClick={undoReplyHandler}>
+                취소
+              </Button.WhiteSmall>
+              <Button.GreenSmall onClick={submitReplyHandler}>
+                댓글 작성
+              </Button.GreenSmall>
+            </div>
+          </Comment.SpaceBetweenFooter>
         </Wrapper>
       </Comment.Body>
     );
@@ -57,17 +144,7 @@ function CommentItemContent({
     setEditComment('');
   };
 
-  const setCommentImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) {
-      alertModal('이미지를 선택해주세요.', 'warning');
-      return;
-    }
-    setSelectedEditImage(file);
-    setIsImageChanged(true);
-  };
-
-  const editCommentHandler = async () => {
+  const submitEditCommentHandler = async () => {
     if (editComment.length === 0) {
       return alertModal('내용을 입력해주세요.', 'warning');
     }
@@ -84,6 +161,7 @@ function CommentItemContent({
         setIsCommentEditable(false);
         setEditComment('');
         setSelectedEditImage(undefined);
+        setIsImageChanged(false);
       })
       .catch((e) => {
         alertModal('수정에 실패하였습니다.', ' warning');
@@ -124,14 +202,14 @@ function CommentItemContent({
           <Comment.InputTypeFile
             type="file"
             id="EditImageFile"
-            onChange={(e) => setCommentImageHandler(e)}
+            onChange={(e) => setImageHandler(e, 'edit')}
             accept="image/*"
           />
           <div>
             <Button.WhiteSmall onClick={undoEditHandler}>
               취소
             </Button.WhiteSmall>
-            <Button.GreenSmall onClick={editCommentHandler}>
+            <Button.GreenSmall onClick={submitEditCommentHandler}>
               완료
             </Button.GreenSmall>
           </div>
@@ -173,9 +251,9 @@ function CommentItemContent({
           <Comment.Image>
             <img src={comment.image} />
           </Comment.Image>
-        )}{' '}
+        )}
         <Comment.SpaceBetweenFooter>
-          <ReplyButton onClick={() => setIsTextAreaOpen((prev) => !prev)}>
+          <ReplyButton onClick={() => setIsReplyOpen((prev) => !prev)}>
             답글 달기
           </ReplyButton>
           <div>
@@ -200,9 +278,11 @@ function CommentItemContent({
           <img src={comment.image} />
         </Comment.Image>
       )}
-      <ReplyButton onClick={() => setIsTextAreaOpen((prev) => !prev)}>
-        답글 달기
-      </ReplyButton>
+      <div>
+        <ReplyButton onClick={() => setIsReplyOpen((prev) => !prev)}>
+          답글 달기
+        </ReplyButton>
+      </div>
     </Comment.Body>
   );
 }
@@ -217,21 +297,24 @@ const Wrapper = styled.div`
   }
 `;
 
-const TextArea = styled.textarea`
+const TextArea = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 7rem;
-  border: none;
-  resize: none; /* 크기 조정 비활성화 */
+  height: 100%;
   box-sizing: border-box;
   border: 0.1rem solid #e6e6e6;
   margin-bottom: 1rem;
   padding: 1rem;
-  :focus {
-    outline: none;
-  }
-  @media (min-width: 1024px) {
-    height: 10rem;
-    font-size: 1.8rem;
+  textarea {
+    border: none;
+    resize: none; /* 크기 조정 비활성화 */
+    :focus {
+      outline: none;
+    }
+    @media (min-width: 1024px) {
+      font-size: 1.8rem;
+    }
   }
 `;
 

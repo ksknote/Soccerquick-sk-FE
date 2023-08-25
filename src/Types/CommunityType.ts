@@ -34,6 +34,7 @@ export interface ReplyType {
   nick_name: string;
   post_id: string;
   content: string;
+  image: string;
   comment_id: string;
   createdAt: string;
 }

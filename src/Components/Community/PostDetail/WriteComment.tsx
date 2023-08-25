@@ -19,32 +19,28 @@ interface WriteCommentPropsType {
 function WriteComment({ postId, setUpdatePost }: WriteCommentPropsType) {
   const isLogin = useSelector(isLogInSelector);
   const userData = useSelector(userSelector);
-  const userId = userData?.user_id;
   const [newComment, setNewComment] = useState<string>('');
   const [selectedImage, setSelectedImage] = useState<File>();
 
   const handleSetReviewImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) {
-      alertModal('이미지를 선택해주세요.', 'warning');
-      return;
-    }
+    if (!file) return alertModal('이미지를 선택해주세요.', 'warning');
+
     setSelectedImage(file);
   };
 
   async function handleWriteReview() {
-    if (!isLogin) {
-      return alertModal('로그인이 필요한 서비스입니다.', 'warning');
-    }
-    if (newComment === '') {
-      return alertModal('내용을 입력해주세요!', 'warning');
-    }
+    if (!isLogin) return alertModal('로그인이 필요한 서비스입니다.', 'warning');
+
+    if (newComment === '') return alertModal('내용을 입력해주세요!', 'warning');
+
     const image = await uploadImage(selectedImage);
     const config = { withCredentials: true };
     const data = {
       content: newComment,
       image,
     };
+
     axios
       .post(
         `${process.env.REACT_APP_API_URL}/communities/${postId}/comment`,

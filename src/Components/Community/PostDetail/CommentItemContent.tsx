@@ -41,6 +41,7 @@ function CommentItemContent({
     }
     if (type === 'reply') {
       setSelectedReplyImage(file);
+      setIsImageChanged(true);
     } else if (type === 'edit') {
       setSelectedEditImage(file);
       setIsImageChanged(true);
@@ -56,12 +57,12 @@ function CommentItemContent({
     if (replyContent.length === 0) {
       return alertModal('내용을 입력해주세요.', 'warning');
     }
+
     let image: string | undefined;
     if (selectedReplyImage && isImageChanged) {
       image = await uploadImage(selectedReplyImage);
     }
     const data = { content: replyContent, image };
-    console.log(`${url}/reply`);
     axios
       .post(`${url}/reply`, data, config)
       .then((res) => {
@@ -70,7 +71,6 @@ function CommentItemContent({
         setReplyContent('');
         setSelectedReplyImage(undefined);
         setIsImageChanged(false);
-        console.log('얍');
       })
       .catch((e) => {
         alertModal('댓글 작성에 실패했습니다.', ' warning');

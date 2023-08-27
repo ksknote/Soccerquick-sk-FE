@@ -49,11 +49,11 @@ function MobileCategory() {
       </Tab>
       <Tab
         onClick={() => {
-          navigate('/review');
+          navigate('/community');
         }}
       >
-        <Icon src={reviewIcon} alt="review" />
-        <Label>리뷰</Label>
+        <Icon src={reviewIcon} alt="community" />
+        <Label>커뮤니티</Label>
       </Tab>
       <Tab>
         <Icon src={userIcon} alt="user" onClick={() => handleUserTab()} />
@@ -83,6 +83,11 @@ const Container = styled.div`
 
 const Tab = styled.div`
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 `;
 
 const Icon = styled.img`

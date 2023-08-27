@@ -39,10 +39,10 @@ export default function HeaderCategory() {
         <StyledCategoryText
           focused={isReviewPage}
           onClick={() => {
-            navigate('/review');
+            navigate('/community');
           }}
         >
-          리뷰
+          커뮤니티
         </StyledCategoryText>
 
         <StyledCategoryText

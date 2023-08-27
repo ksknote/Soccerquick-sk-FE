@@ -40,6 +40,7 @@ export const Comment = {
   ImgDiv: styled.div`
     width: 4rem;
     height: 4rem;
+    background: white;
     border-radius: 100%;
     border: 0.1rem solid lightgray;
     @media (min-width: 1024px) {
@@ -91,7 +92,6 @@ export const Comment = {
     font-size: 1.3rem;
     @media (min-width: 1024px) {
       font-size: 1.8rem;
-      padding: 2.2rem 0;
     }
   `,
 
@@ -100,9 +100,8 @@ export const Comment = {
     height: 70%;
     border: none;
     resize: none; /* 크기 조정 비활성화 */
-    padding: 1rem 0;
+    margin: 2rem 0;
     font-size: 1.3rem;
-
     :focus {
       outline: none;
     }

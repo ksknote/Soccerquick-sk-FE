@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { userSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
 import { Button } from '../../../styles/Common/CommonStyle';
@@ -70,7 +71,7 @@ function CommentReplyContent({
   if (isReplyEditable) {
     return (
       <Comment.Body>
-        <Comment.TextArea
+        <ReplyEditTextArea
           placeholder="수정 내용을 입력하세요."
           value={editContent}
           onChange={(e) => setEditContent(e.target.value)}
@@ -181,3 +182,9 @@ function CommentReplyContent({
 }
 
 export default CommentReplyContent;
+
+const ReplyEditTextArea = styled(Comment.TextArea)`
+  border: 0.1rem solid #e6e6e6;
+  box-sizing: border-box;
+  padding: 1rem;
+`;

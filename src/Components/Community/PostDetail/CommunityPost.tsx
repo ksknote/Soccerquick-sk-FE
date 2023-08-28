@@ -39,7 +39,7 @@ function CommunityPostDetail() {
         <>
           <CommunityPostContents postData={postData.post} />
           <CommunityPostComment
-            comments={postData.comment}
+            comments={postData.comments}
             postId={postData.post.post_id}
             setUpdatePost={setUpdatePost}
           />

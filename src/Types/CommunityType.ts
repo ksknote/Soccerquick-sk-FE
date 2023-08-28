@@ -14,6 +14,11 @@ export interface PostType {
   createdAt: string;
 }
 
+export interface CommentwithRepliesType {
+  comment: CommentType;
+  replies: ReplyType[];
+}
+
 export interface CommentType {
   comment_id: string;
   user_id: string; //ObjectId
@@ -42,5 +47,5 @@ export interface ReplyType {
 
 export interface PostWithCommentsType {
   post: PostType;
-  comment: CommentType[];
+  comments: CommentwithRepliesType[];
 }

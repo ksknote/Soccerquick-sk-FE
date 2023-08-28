@@ -1,20 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CommentType } from '../../../Types/CommunityType';
+import { CommentwithRepliesType } from '../../../Types/CommunityType';
 import { BoxContainer } from '../../../styles/Common/CommonStyle';
 import CommentReplyList from './CommentReplyList';
 import CommentItemHeader from './CommentItemHeader';
 import CommentItemContent from './CommentItemContent';
 
 interface CommentList {
-  comments: CommentType[];
+  comments: CommentwithRepliesType[];
   setUpdatePost: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function CommentList({ comments, setUpdatePost }: CommentList) {
   return (
     <div>
-      {comments.map((comment) => (
+      {comments.map(({ comment, replies }) => (
         <CommentBoxContainer key={comment.comment_id}>
           <CommentItem>
             <CommentItemHeader
@@ -27,10 +27,7 @@ function CommentList({ comments, setUpdatePost }: CommentList) {
               setUpdatePost={setUpdatePost}
             />
           </CommentItem>
-          <CommentReplyList
-            reply={comment.reply}
-            setUpdatePost={setUpdatePost}
-          />
+          <CommentReplyList replies={replies} setUpdatePost={setUpdatePost} />
         </CommentBoxContainer>
       ))}
     </div>

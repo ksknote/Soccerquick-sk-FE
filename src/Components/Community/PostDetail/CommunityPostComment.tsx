@@ -1,5 +1,5 @@
 import React from 'react';
-import { CommentType } from '../../../Types/CommunityType';
+import { CommentwithRepliesType } from '../../../Types/CommunityType';
 import commentIcon from '../../../styles/icon/comment.svg';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import CommentList from './CommentList';
@@ -7,7 +7,7 @@ import WriteComment from './WriteComment';
 
 interface CommentPropsType {
   postId: string;
-  comments: CommentType[];
+  comments: CommentwithRepliesType[];
   setUpdatePost: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

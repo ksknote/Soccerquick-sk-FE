@@ -6,24 +6,24 @@ import CommentItemHeader from './CommentItemHeader';
 import CommentReplyContent from './CommentReplyContent';
 
 interface ReplyListPropsType {
-  reply: ReplyType[];
+  replies: ReplyType[];
   setUpdatePost: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function CommentReplyList({ reply, setUpdatePost }: ReplyListPropsType) {
+function CommentReplyList({ replies, setUpdatePost }: ReplyListPropsType) {
   return (
-    <Wrapper show={reply.length !== 0}>
-      {reply.map((comment) => (
-        <ReplyLi>
+    <Wrapper show={replies.length !== 0}>
+      {replies.map((reply) => (
+        <ReplyLi key={reply.reply_id}>
           <ReplyIcon>∟</ReplyIcon>
           <ReplyContainer>
             <CommentItemHeader
-              profile={comment.profile}
-              nick_name={comment.nick_name}
-              createdAt={comment.createdAt}
+              profile={reply.profile}
+              nick_name={reply.nick_name}
+              createdAt={reply.createdAt}
             />
             <CommentReplyContent
-              comment={comment}
+              comment={reply}
               setUpdatePost={setUpdatePost}
             />
           </ReplyContainer>

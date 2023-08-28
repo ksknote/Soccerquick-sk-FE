@@ -73,7 +73,11 @@ function CommentItemContent({
         setIsImageChanged(false);
       })
       .catch((e) => {
-        alertModal(e.response.data.message, ' warning');
+        if (e.response.data.statusCode === 500) {
+          alertModal('댓글 작성에 실패했습니다.', 'error');
+        } else {
+          alertModal(e.response.data.message, 'warning');
+        }
         console.log(e);
       });
   };
@@ -165,7 +169,11 @@ function CommentItemContent({
         setIsImageChanged(false);
       })
       .catch((e) => {
-        alertModal(e.response.data.message, ' warning');
+        if (e.response.data.statusCode === 500) {
+          alertModal('댓글 수정에 실패했습니다.', 'error');
+        } else {
+          alertModal(e.response.data.message, 'warning');
+        }
         console.log(e);
       });
   };
@@ -231,7 +239,11 @@ function CommentItemContent({
           setUpdatePost(true);
         })
         .catch((e) => {
-          alertModal(e.response.data.message, 'warning');
+          if (e.response.data.statusCode === 500) {
+            alertModal('댓글 삭제에 실패했습니다.', 'error');
+          } else {
+            alertModal(e.response.data.message, 'warning');
+          }
           console.log(e);
         });
     }

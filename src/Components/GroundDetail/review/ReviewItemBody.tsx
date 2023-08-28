@@ -81,7 +81,11 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
         }
       })
       .catch((e) => {
-        alertModal(e.response.data.message, 'warning');
+        if (e.response.data.statusCode === 500) {
+          alertModal('리뷰 수정에 실패했습니다.', 'error');
+        } else {
+          alertModal(e.response.data.message, 'warning');
+        }
         console.error(e);
       });
   }
@@ -107,7 +111,11 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
           }
         })
         .catch((e) => {
-          alertModal(e.response.data.message, 'warning');
+          if (e.response.data.statusCode === 500) {
+            alertModal('댓글 삭제에 실패했습니다.', 'error');
+          } else {
+            alertModal(e.response.data.message, 'warning');
+          }
           console.error(e);
         });
     }

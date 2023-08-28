@@ -54,6 +54,14 @@ function WriteReview({ setReviewData, domId }: WriteReviewPropsType) {
           .get(`${process.env.REACT_APP_API_URL}/doms/${domId}`, config)
           .then((res) => {
             setReviewData(res.data.data.reviews);
+          })
+          .catch((e) => {
+            if (e.response.data.statusCode === 500) {
+              alertModal('리뷰 작성에 실패했습니다.', 'error');
+            } else {
+              alertModal(e.response.data.message, 'warning');
+            }
+            console.log(e);
           });
       });
   };

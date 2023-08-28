@@ -80,9 +80,9 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
           setIsReviewEditable(false);
         }
       })
-      .catch((error) => {
-        console.error(error);
-        alertModal('수정에 실패하였습니다.', 'error');
+      .catch((e) => {
+        alertModal(e.response.data.message, 'warning');
+        console.error(e);
       });
   }
 
@@ -105,6 +105,10 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
             setReviewData(newReviewData);
             alertModal('리뷰가 삭제되었습니다.', 'success');
           }
+        })
+        .catch((e) => {
+          alertModal(e.response.data.message, 'warning');
+          console.error(e);
         });
     }
   }

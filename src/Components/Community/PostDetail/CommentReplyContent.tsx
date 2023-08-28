@@ -63,7 +63,7 @@ function CommentReplyContent({
         setIsImageChanged(false);
       })
       .catch((e) => {
-        alertModal('수정에 실패하였습니다.', ' warning');
+        alertModal(e.response.data.message, 'warning');
         console.log(e);
       });
   };
@@ -127,7 +127,10 @@ function CommentReplyContent({
           alertModal('삭제되었습니다.', 'success');
           setUpdatePost(true);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          alertModal(e.response.data.message, 'warning');
+          console.error(e);
+        });
     }
   };
 

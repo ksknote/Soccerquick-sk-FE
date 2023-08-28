@@ -51,6 +51,10 @@ function WriteComment({ postId, setUpdatePost }: WriteCommentPropsType) {
         setNewComment('');
         setSelectedImage(undefined);
         setUpdatePost(true);
+      })
+      .catch((e) => {
+        alertModal(e.response.data.message, 'warning');
+        console.log(e);
       });
   }
   if (isLogin)

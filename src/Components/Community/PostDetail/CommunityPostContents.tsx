@@ -1,13 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-  StyledPost,
-  StyledHeader,
-  StyledBoardName,
-  StyledAuthorDiv,
-  StyledImgDiv,
-  StyledAuthorButtonContainer,
-} from '../../../styles/Common/PostsStyle';
+import { Post } from '../../../styles/Common/PostsStyle';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
 import HtmlParser from '../../Commons/HtmlParser';
@@ -56,12 +49,10 @@ function CommunityPostContents({ postData }: { postData: PostType }) {
     }
   };
 
-  console.log(postData);
-
   return (
-    <StyledPost>
+    <Post.Wrapper>
       <div>
-        <StyledBoardName
+        <Post.BoardName
           onClick={() => {
             navigate(`/community`);
           }}
@@ -70,34 +61,32 @@ function CommunityPostContents({ postData }: { postData: PostType }) {
             <img src={chevronIcon} alt="chevronIcon" />
             커뮤니티
           </div>
-        </StyledBoardName>
+        </Post.BoardName>
 
-        <StyledHeader>
+        <Post.Header>
           <h1>{postData.title}</h1>
-          <HeaderBottom>
-            <StyledAuthorDiv>
-              <StyledImgDiv>
-                <img
-                  src={postData.profile ? postData.profile : ballIcon}
-                  alt="BallIcon"
-                />
-              </StyledImgDiv>
-              <p>{postData.nick_name}</p>
-            </StyledAuthorDiv>
-            <PostDate>
+          <Post.AuthorDiv>
+            <Post.ImgDiv>
+              <img
+                src={postData.profile ? postData.profile : ballIcon}
+                alt="BallIcon"
+              />
+            </Post.ImgDiv>
+            <p>{postData.nick_name}</p>
+            <Post.PostDate>
               {new Date(postData.createdAt).toLocaleDateString('ko-KR', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
               })}
-            </PostDate>
-          </HeaderBottom>
-        </StyledHeader>
+            </Post.PostDate>
+          </Post.AuthorDiv>
+        </Post.Header>
       </div>
       <PostBody>
         <HtmlParser data={postData.description} />
       </PostBody>
-      <StyledAuthorButtonContainer>
+      <Post.AuthorButtonContainer>
         {userData?.user_id === postData.user_id && (
           <Link to={`/teampage/edit/${url}`}>
             <button>수정</button>
@@ -108,26 +97,12 @@ function CommunityPostContents({ postData }: { postData: PostType }) {
           userData?.role === 'manager') && (
           <button onClick={deletePostHandler}>삭제</button>
         )}
-      </StyledAuthorButtonContainer>
-    </StyledPost>
+      </Post.AuthorButtonContainer>
+    </Post.Wrapper>
   );
 }
 
 export default CommunityPostContents;
-
-const HeaderBottom = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const PostDate = styled.p`
-  color: gray;
-  font-size: 1.3rem;
-  @media (min-width: 1024px) {
-    font-size: 1.5rem;
-  }
-`;
 
 const PostBody = styled.div`
   padding: 2rem 0;

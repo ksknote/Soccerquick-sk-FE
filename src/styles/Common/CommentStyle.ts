@@ -38,23 +38,23 @@ export const Comment = {
   `,
 
   ImgDiv: styled.div`
-    width: 4rem;
-    height: 4rem;
+    width: 3.5rem;
+    height: 3.5rem;
     background: white;
     border-radius: 100%;
     border: 0.1rem solid lightgray;
     @media (min-width: 1024px) {
-      width: 5rem;
-      height: 5rem;
-    }
-    img {
       width: 4rem;
       height: 4rem;
+    }
+    img {
+      width: 3.5rem;
+      height: 3.5rem;
       border-radius: 100%;
       object-fit: cover;
       @media (min-width: 1024px) {
-        width: 5rem;
-        height: 5rem;
+        width: 4rem;
+        height: 4rem;
       }
     }
   `,

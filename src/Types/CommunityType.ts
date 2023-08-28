@@ -1,5 +1,11 @@
+export interface PostWithCommentsType {
+  post: PostType;
+  comments: CommentwithRepliesType[];
+}
+
 export interface PostType {
-  user_id: string;
+  user_id: string; //ObjectId
+  userId: string;
   nick_name: string;
   profile: string;
   post_id: string;
@@ -43,9 +49,4 @@ export interface ReplyType {
   image: string;
   comment_id: string;
   createdAt: string;
-}
-
-export interface PostWithCommentsType {
-  post: PostType;
-  comments: CommentwithRepliesType[];
 }

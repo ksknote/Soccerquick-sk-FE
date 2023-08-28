@@ -20,6 +20,8 @@ function CommunityPostContents({ postData }: { postData: PostType }) {
   const userData = useSelector(userSelector);
   const isLogin = useSelector(isLogInSelector);
   const navigate = useNavigate();
+  const isAuthor = userData?.user_id === postData.userId;
+  const isAdmin = userData?.role === 'admin' || userData?.role === 'manager';
 
   // 최초 렌더링 시 데이터를 받아와서 저장하는 부분
   const location = useLocation();
@@ -32,19 +34,26 @@ function CommunityPostContents({ postData }: { postData: PostType }) {
     withCredentials: true,
   };
 
-  // 삭제 요청을 보내는 버튼
   const deletePostHandler = async () => {
     const confirmed = await alertModal('정말로 삭제하시겠습니까?', 'submit');
 
     if (confirmed) {
       axios
-        .delete(`${process.env.REACT_APP_API_URL}/groups/${url}`, config)
+        .delete(
+          `${process.env.REACT_APP_API_URL}/communities/${postData.post_id}`,
+          config
+        )
         .then((res) => {
           alertModal('게시글이 삭제되었습니다.', 'success');
-          navigate('/teampage/team');
+          navigate('/community');
         })
-        .catch((error) => {
-          console.log('삭제 실패');
+        .catch((e) => {
+          if (e.response.data.statusCode === 500) {
+            alertModal('댓글 작성에 실패했습니다.', 'error');
+          } else {
+            alertModal(e.response.data.message, 'warning');
+          }
+          console.log(e);
         });
     }
   };
@@ -87,14 +96,12 @@ function CommunityPostContents({ postData }: { postData: PostType }) {
         <HtmlParser data={postData.description} />
       </PostBody>
       <Post.AuthorButtonContainer>
-        {userData?.user_id === postData.user_id && (
+        {isAuthor && (
           <Link to={`/teampage/edit/${url}`}>
             <button>수정</button>
           </Link>
         )}
-        {(userData?.name === postData.user_id ||
-          userData?.role === 'admin' ||
-          userData?.role === 'manager') && (
+        {(isAuthor || isAdmin) && (
           <button onClick={deletePostHandler}>삭제</button>
         )}
       </Post.AuthorButtonContainer>

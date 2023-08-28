@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { userSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
+import {
+  userSelector,
+  isLogInSelector,
+} from '../../../ReduxStore/modules/Auth/authSelectors';
 import { Button } from '../../../styles/Common/CommonStyle';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import { CommentType } from '../../../Types/CommunityType';
 import alertModal from '../../Commons/alertModal';
 import ImageIcon from '../../../styles/icon/ImageIcon.svg';
 import uploadImage from '../../../Utils/uploadImage';
+import { useNavigate } from 'react-router-dom';
 
 interface CommentContentPropsType {
   comment: CommentType;
@@ -20,6 +24,8 @@ function CommentItemContent({
   setUpdatePost,
 }: CommentContentPropsType) {
   const userData = useSelector(userSelector);
+  const isLogin = useSelector(isLogInSelector);
+  const navigate = useNavigate();
   const [isReplyOpen, setIsReplyOpen] = useState(false);
   const [replyContent, setReplyContent] = useState('');
   const [selectedReplyImage, setSelectedReplyImage] = useState<File>();
@@ -45,6 +51,18 @@ function CommentItemContent({
     } else if (type === 'edit') {
       setSelectedEditImage(file);
       setIsImageChanged(true);
+    }
+  };
+
+  const openReplyHandler = async () => {
+    if (!isLogin) {
+      const confirm = await alertModal(
+        '로그인이 필요합니다. 로그인 하시겠습니까?',
+        'submit'
+      );
+      if (confirm) navigate('/auth');
+    } else {
+      setIsReplyOpen(true);
     }
   };
 
@@ -274,7 +292,7 @@ function CommentItemContent({
           )}
         </Comment.ContentsWrapper>
         <Comment.SpaceBetweenFooter>
-          <Comment.TextButton onClick={() => setIsReplyOpen((prev) => !prev)}>
+          <Comment.TextButton onClick={openReplyHandler}>
             답글 달기
           </Comment.TextButton>
           <div>
@@ -303,7 +321,7 @@ function CommentItemContent({
       </Comment.ContentsWrapper>
 
       <div>
-        <Comment.TextButton onClick={() => setIsReplyOpen((prev) => !prev)}>
+        <Comment.TextButton onClick={openReplyHandler}>
           답글 달기
         </Comment.TextButton>
       </div>

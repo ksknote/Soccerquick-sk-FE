@@ -12,7 +12,7 @@ interface ReplyListPropsType {
 
 function CommentReplyList({ replies, setUpdatePost }: ReplyListPropsType) {
   return (
-    <Wrapper show={replies.length !== 0}>
+    <Wrapper>
       {replies.map((reply) => (
         <ReplyLi key={reply.reply_id}>
           <ReplyIcon>∟</ReplyIcon>
@@ -35,15 +35,18 @@ function CommentReplyList({ replies, setUpdatePost }: ReplyListPropsType) {
 
 export default CommentReplyList;
 
-const Wrapper = styled.div<{ show: boolean }>`
+const Wrapper = styled.div`
   background: #f8f8f6;
   border-radius: 0 0 1.5rem 1.5rem;
 `;
 const ReplyLi = styled.div`
   display: flex;
-  padding: 2rem 2rem;
+  padding: 2rem;
   :not(:first-child) {
     border-top: 0.1rem solid #e6e6e6;
+  }
+  @media (min-width: 1024px) {
+    padding: 2.5rem;
   }
 `;
 

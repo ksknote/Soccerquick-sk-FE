@@ -96,7 +96,7 @@ function CommentItemContent({
           )}
         </Comment.ContentsWrapper>
         <Wrapper>
-          <TextArea>
+          <ReplyTextArea>
             <textarea
               value={replyContent}
               onChange={(e) => setReplyContent(e.target.value)}
@@ -119,7 +119,7 @@ function CommentItemContent({
                 </Comment.SelectedImage>
               </Comment.SelectedImageContainer>
             )}
-          </TextArea>
+          </ReplyTextArea>
           <Comment.SpaceBetweenFooter>
             <Comment.InputTypeFileLabel htmlFor="replyImageFile">
               <img src={ImageIcon} alt="imageIcon" />
@@ -183,7 +183,7 @@ function CommentItemContent({
   if (isCommentEditable) {
     return (
       <Comment.Body>
-        <Comment.TextArea
+        <EditTextArea
           placeholder="수정 내용을 입력하세요."
           value={editComment}
           onChange={(e) => setEditComment(e.target.value)}
@@ -321,7 +321,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const TextArea = styled.div`
+const ReplyTextArea = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -344,4 +344,8 @@ const TextArea = styled.div`
       font-size: 1.8rem;
     }
   }
+`;
+
+const EditTextArea = styled(Comment.TextArea)`
+  margin: 2.5rem 0;
 `;

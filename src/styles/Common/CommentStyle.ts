@@ -86,6 +86,9 @@ export const Comment = {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    @media (min-width: 1024px) {
+      padding: 2.5rem 0;
+    }
   `,
 
   Contents: styled.div`
@@ -100,13 +103,16 @@ export const Comment = {
     height: 70%;
     border: none;
     resize: none; /* 크기 조정 비활성화 */
-    margin: 2rem 0;
+    margin: 1rem 0;
     font-size: 1.3rem;
     :focus {
       outline: none;
     }
     @media (min-width: 1024px) {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
+      ::placeholder {
+        font-size: 1.8rem;
+      }
     }
   `,
   ButtonsFooter: styled.div`
@@ -190,6 +196,8 @@ export const Comment = {
 
   InputTypeFileLabel: styled.label`
     cursor: pointer;
+    display: flex;
+    align-items: center;
     img {
       width: 2.2rem;
       @media (min-width: 1024px) {

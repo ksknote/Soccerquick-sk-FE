@@ -42,4 +42,7 @@ const CommentBoxContainer = styled(BoxContainer)`
 
 const CommentItem = styled.div`
   padding: 2rem;
+  @media (min-width: 1024px) {
+    padding: 2.5rem;
+  }
 `;

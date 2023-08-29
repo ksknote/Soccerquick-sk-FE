@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import {
   isLogInSelector,
   userSelector,
-} from '../../../ReduxStore/modules/Auth/authSelectors';
+} from '../../../redux/modules/Auth/authSelectors';
 import chevronIcon from '../../../styles/icon/chevron_green.svg';
 import ballIcon from '../../../styles/icon/soccerball.svg';
 import axios from 'axios';
@@ -97,7 +97,7 @@ function CommunityPostContents({ postData }: { postData: PostType }) {
       </PostBody>
       <Post.AuthorButtonContainer>
         {isAuthor && (
-          <Link to={`/teampage/edit/${url}`}>
+          <Link to={`/community/edit/${postData.post_id}`}>
             <button>수정</button>
           </Link>
         )}

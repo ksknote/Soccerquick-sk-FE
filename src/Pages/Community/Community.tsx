@@ -13,10 +13,10 @@ function Community() {
     <BaseLayout>
       <BodyWrapper>
         <Routes>
-          <Route path="/submit" element={<WriteCommunityPost />} />
-          <Route path="/edit/*" element={<EditComminityPost />} />
           <Route path="/" element={<CommunityPostFeed />} />
-          <Route path="/*" element={<CommunityPostDetail />} />
+          <Route path="/:post_id" element={<CommunityPostDetail />} />
+          <Route path="/submit" element={<WriteCommunityPost />} />
+          <Route path="/edit/:post_id" element={<WriteCommunityPost />} />
         </Routes>
       </BodyWrapper>
     </BaseLayout>

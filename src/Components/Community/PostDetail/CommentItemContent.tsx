@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import {
   userSelector,
   isLogInSelector,
-} from '../../../ReduxStore/modules/Auth/authSelectors';
+} from '../../../redux/modules/Auth/authSelectors';
 import { Button } from '../../../styles/Common/CommonStyle';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import { CommentType } from '../../../Types/CommunityType';

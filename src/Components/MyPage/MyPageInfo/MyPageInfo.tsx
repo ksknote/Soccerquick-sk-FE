@@ -5,9 +5,9 @@ import { FormDataType } from '../../../Pages/MyPage';
 import { MyPageInput } from './MyPageInput';
 import { checkNewPassword } from '../checkPassword';
 import { useNavigate } from 'react-router-dom';
-import { AUTH_ACTIONS } from '../../../ReduxStore/modules/Auth/authSlice';
+import { AUTH_ACTIONS } from '../../../redux/modules/Auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { userSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
+import { userSelector } from '../../../redux/modules/Auth/authSelectors';
 import alertModal from '../../Commons/alertModal';
 
 type MyPageInfoProps = {

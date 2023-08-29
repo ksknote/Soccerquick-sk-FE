@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../ReduxStore/store';
+import { RootState } from '../../../redux/store';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import FindingMembers from '../../../Components/TeamPage/FindingMembers';
@@ -23,7 +23,7 @@ function EditPage() {
   const location = useLocation();
   const url = location.pathname.split('/').pop();
   // location 객체를 통해 받는 것은 보안 상 문제가 있음. 전역 상태관리를 추천함.
-  const data = useSelector((state: RootState) => state.data.data);
+  const data = useSelector((state: RootState) => state.teamPost.data);
   // const data = location.state;
 
   let category: string;

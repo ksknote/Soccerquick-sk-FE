@@ -6,7 +6,7 @@ import { Comment } from '../../../styles/Common/CommentStyle';
 import ImageIcon from '../../../styles/icon/ImageIcon.svg';
 import alertModal from '../../Commons/alertModal';
 import uploadImage from '../../../Utils/uploadImage';
-import { isLogInSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
+import { isLogInSelector } from '../../../redux/modules/Auth/authSelectors';
 import { useNavigate } from 'react-router-dom';
 
 interface WriteCommentPropsType {

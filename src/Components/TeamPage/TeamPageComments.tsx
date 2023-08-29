@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { userSelector } from '../../ReduxStore/modules/Auth/authSelectors';
+import { userSelector } from '../../redux/modules/Auth/authSelectors';
 import { BoxContainer, Button } from '../../styles/Common/CommonStyle';
 import { Comment as CommentStyle } from '../../styles/Common/CommentStyle';
 import { Team } from '../../styles/Common/TeamStyle';

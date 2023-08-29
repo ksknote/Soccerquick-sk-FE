@@ -1,6 +1,5 @@
 import React from 'react';
 import { fetchDataActionTypes } from './actionTypes';
-import { PayloadAction } from '@reduxjs/toolkit';
 
 interface DataState {
   data: string | null;
@@ -13,7 +12,7 @@ const initialState: DataState = {
   error: null,
 };
 
-const reducer = (state = initialState, action: any) => {
+const teamPostReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case fetchDataActionTypes.FETCH_DATA_REQUEST:
       return {
@@ -38,4 +37,4 @@ const reducer = (state = initialState, action: any) => {
   }
 };
 
-export default reducer;
+export default teamPostReducer;

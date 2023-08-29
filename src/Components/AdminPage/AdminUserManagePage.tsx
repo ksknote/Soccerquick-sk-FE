@@ -13,7 +13,7 @@ import {
 } from '../../Pages/AdminPage/Styles/AdminPageStyle';
 import { UserData } from '../../Types/AdminPageType';
 import MyPagination from '../MyPage/MyPagination';
-import { userSelector } from '../../ReduxStore/modules/Auth/authSelectors';
+import { userSelector } from '../../redux/modules/Auth/authSelectors';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 

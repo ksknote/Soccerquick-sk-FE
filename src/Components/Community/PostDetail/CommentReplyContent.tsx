@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { userSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
+import { userSelector } from '../../../redux/modules/Auth/authSelectors';
 import { Button } from '../../../styles/Common/CommonStyle';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import { ReplyType } from '../../../Types/CommunityType';

@@ -5,7 +5,7 @@ import { WriteReviewPropsType } from '../../../Types/ReviewType';
 import {
   isLogInSelector,
   userSelector,
-} from '../../../ReduxStore/modules/Auth/authSelectors';
+} from '../../../redux/modules/Auth/authSelectors';
 import ImageIcon from '../../../styles/icon/ImageIcon.svg';
 import alertModal from '../../Commons/alertModal';
 import uploadImage from '../../../Utils/uploadImage';

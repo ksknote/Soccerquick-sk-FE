@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { isLogInSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
+import { isLogInSelector } from '../../../redux/modules/Auth/authSelectors';
 import { DomDataType } from '../../../Pages/SearchPage';
 import { ProvidedElementList } from '../../SearchPage/Contents/SearchData';
 import MyPagination from '../MyPagination';

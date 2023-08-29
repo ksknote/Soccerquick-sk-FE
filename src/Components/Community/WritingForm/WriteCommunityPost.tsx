@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { isLogInSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
+import { isLogInSelector } from '../../../redux/modules/Auth/authSelectors';
 import styled from 'styled-components';
 import ReactQuillEditor from '../../Commons/ReactQuillEditor';
 import DropDown from '../../Commons/DropDown';
@@ -37,11 +38,17 @@ function WriteCommunityPost() {
   const [title, setTitle] = useState('');
   const [hashTags, setHashTags] = useState<string[]>([]);
   const [editorContents, setEditorContents] = useState('');
+  const [isTemporarilySaved, setIsTemporarilySaved] = useState(false);
+  const { post_id } = useParams();
+  const isEditMode = post_id !== undefined;
+
   const handleEditorChange: (value: string) => void = (value) => {
     setEditorContents(value);
   };
-  const [isTemporarilySaved, setIsTemporarilySaved] = useState(false);
 
+  useEffect(() => {
+    if (!isEditMode) return;
+  }, []);
   useEffect(() => {
     let prevForm = localStorage.getItem('temporarilySavedCommunityPost');
     if (prevForm) setIsTemporarilySaved(true);

@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import 'react-quill/dist/quill.snow.css';
 import HtmlParser from '../../../Components/Commons/HtmlParser';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchData } from '../../../ReduxStore/modules/TeamPage/actions';
-import { RootState, AppDispatch } from '../../../ReduxStore/store';
+import { fetchData } from '../../../redux/modules/TeamPage/actions';
+import { RootState, AppDispatch } from '../../../redux/store';
 import Accepted from '../../../Components/TeamPage/AcceptedMembers';
 import { Post } from '../../../styles/Common/PostsStyle';
 import {
   isLogInSelector,
   userSelector,
-} from '../../../ReduxStore/modules/Auth/authSelectors';
+} from '../../../redux/modules/Auth/authSelectors';
 import SubmitForFindingMember from '../../../Components/TeamPage/SubmitForFindingMember';
 import TeamPageComments from '../../../Components/TeamPage/TeamPageComments';
 import chevronIcon from '../../../styles/icon/chevron_green.svg';
@@ -34,12 +34,12 @@ function DetailPage() {
   const location = useLocation();
   const url = location.pathname.split('/').pop();
   const dispatch = useDispatch<AppDispatch>();
-  const data = useSelector((state: RootState) => state.data.data);
+  const data = useSelector((state: RootState) => state.teamPost.data);
   const [leaderProfile, setLeaderProfile] = useState('');
 
   React.useEffect(() => {
     dispatch(fetchData(url));
-  }, [dispatch, url]);
+  }, []);
 
   const config = {
     headers: {

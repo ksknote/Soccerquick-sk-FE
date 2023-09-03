@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 import {
   userSelector,
   isLogInSelector,
 } from '../../../redux/modules/Auth/authSelectors';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../../../redux/store';
+import { fetchCommunityPost } from '../../../redux/modules/Community/actions';
 import { Button } from '../../../styles/Common/CommonStyle';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import { CommentType } from '../../../Types/CommunityType';
@@ -16,15 +18,15 @@ import { useNavigate } from 'react-router-dom';
 
 interface CommentContentPropsType {
   comment: CommentType;
-  setUpdatePost: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function CommentItemContent({
-  comment,
-  setUpdatePost,
-}: CommentContentPropsType) {
+function CommentItemContent({ comment }: CommentContentPropsType) {
+  const dispatch = useDispatch<AppDispatch>();
   const userData = useSelector(userSelector);
   const isLogin = useSelector(isLogInSelector);
+  const post_id = useSelector(
+    (state: RootState) => state.communityPost.post_id
+  );
   const navigate = useNavigate();
   const [isReplyOpen, setIsReplyOpen] = useState(false);
   const [replyContent, setReplyContent] = useState('');
@@ -35,6 +37,10 @@ function CommentItemContent({
   const [isImageChanged, setIsImageChanged] = useState(false);
   const url = `${process.env.REACT_APP_API_URL}/communities/${comment.post_id}/comment/${comment.comment_id}`;
   const config = { withCredentials: true };
+
+  const updatePost = () => {
+    dispatch(fetchCommunityPost(post_id));
+  };
 
   const setImageHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -84,7 +90,7 @@ function CommentItemContent({
     axios
       .post(`${url}/reply`, data, config)
       .then((res) => {
-        setUpdatePost(true);
+        updatePost();
         setIsReplyOpen(false);
         setReplyContent('');
         setSelectedReplyImage(undefined);
@@ -180,7 +186,7 @@ function CommentItemContent({
       .patch(url, data, config)
       .then((res) => {
         alertModal('댓글 수정 완료', 'success');
-        setUpdatePost(true);
+        updatePost();
         setIsCommentEditable(false);
         setEditComment('');
         setSelectedEditImage(undefined);
@@ -254,7 +260,7 @@ function CommentItemContent({
         .delete(url, config)
         .then((res) => {
           alertModal('삭제되었습니다.', 'success');
-          setUpdatePost(true);
+          updatePost();
         })
         .catch((e) => {
           if (e.response.data.statusCode === 500) {

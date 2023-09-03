@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../../../redux/store';
+import { fetchCommunityPost } from '../../../redux/modules/Community/actions';
+import { isLogInSelector } from '../../../redux/modules/Auth/authSelectors';
 import { BoxContainer, Button } from '../../../styles/Common/CommonStyle';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import ImageIcon from '../../../styles/icon/ImageIcon.svg';
 import alertModal from '../../Commons/alertModal';
 import uploadImage from '../../../Utils/uploadImage';
-import { isLogInSelector } from '../../../redux/modules/Auth/authSelectors';
-import { useNavigate } from 'react-router-dom';
 
-interface WriteCommentPropsType {
-  postId: string;
-  setUpdatePost: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function WriteComment({ postId, setUpdatePost }: WriteCommentPropsType) {
+function WriteComment() {
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const isLogin = useSelector(isLogInSelector);
+  const post_id = useSelector(
+    (state: RootState) => state.communityPost.post_id
+  );
   const [newComment, setNewComment] = useState<string>('');
   const [selectedImage, setSelectedImage] = useState<File>();
+
+  const updatePost = () => {
+    dispatch(fetchCommunityPost(post_id));
+  };
 
   const checkLoginHandler = async (e?: React.MouseEvent) => {
     if (!isLogin) {
@@ -51,14 +56,14 @@ function WriteComment({ postId, setUpdatePost }: WriteCommentPropsType) {
 
     axios
       .post(
-        `${process.env.REACT_APP_API_URL}/communities/${postId}/comment`,
+        `${process.env.REACT_APP_API_URL}/communities/${post_id}/comment`,
         data,
         config
       )
       .then((res) => {
         setNewComment('');
         setSelectedImage(undefined);
-        setUpdatePost(true);
+        updatePost();
       })
       .catch((e) => {
         if (e.response.data.statusCode === 500) {

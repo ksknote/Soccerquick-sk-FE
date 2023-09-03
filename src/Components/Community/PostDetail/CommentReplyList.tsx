@@ -7,10 +7,9 @@ import CommentReplyContent from './CommentReplyContent';
 
 interface ReplyListPropsType {
   replies: ReplyType[];
-  setUpdatePost: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function CommentReplyList({ replies, setUpdatePost }: ReplyListPropsType) {
+function CommentReplyList({ replies }: ReplyListPropsType) {
   return (
     <Wrapper>
       {replies.map((reply) => (
@@ -22,10 +21,7 @@ function CommentReplyList({ replies, setUpdatePost }: ReplyListPropsType) {
               nick_name={reply.nick_name}
               createdAt={reply.createdAt}
             />
-            <CommentReplyContent
-              comment={reply}
-              setUpdatePost={setUpdatePost}
-            />
+            <CommentReplyContent comment={reply} />
           </ReplyContainer>
         </ReplyLi>
       ))}

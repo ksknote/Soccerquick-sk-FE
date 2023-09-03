@@ -1,35 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../../../redux/store';
+import { fetchCommunityPost } from '../../../redux/modules/Community/actions';
 import { CommentwithRepliesType } from '../../../Types/CommunityType';
 import { BoxContainer } from '../../../styles/Common/CommonStyle';
 import CommentReplyList from './CommentReplyList';
 import CommentItemHeader from './CommentItemHeader';
 import CommentItemContent from './CommentItemContent';
 
-interface CommentList {
-  comments: CommentwithRepliesType[];
-  setUpdatePost: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function CommentList({ comments, setUpdatePost }: CommentList) {
+function CommentList() {
+  const comments = useSelector(
+    (state: RootState) => state.communityPost.postData?.comments
+  );
   return (
     <div>
-      {comments.map(({ comment, replies }) => (
-        <CommentBoxContainer key={comment.comment_id}>
-          <CommentItem>
-            <CommentItemHeader
-              profile={comment.profile}
-              nick_name={comment.nick_name}
-              createdAt={comment.createdAt}
-            />
-            <CommentItemContent
-              comment={comment}
-              setUpdatePost={setUpdatePost}
-            />
-          </CommentItem>
-          <CommentReplyList replies={replies} setUpdatePost={setUpdatePost} />
-        </CommentBoxContainer>
-      ))}
+      {comments &&
+        comments.map(({ comment, replies }) => (
+          <CommentBoxContainer key={comment.comment_id}>
+            <CommentItem>
+              <CommentItemHeader
+                profile={comment.profile}
+                nick_name={comment.nick_name}
+                createdAt={comment.createdAt}
+              />
+              <CommentItemContent comment={comment} />
+            </CommentItem>
+            <CommentReplyList replies={replies} />
+          </CommentBoxContainer>
+        ))}
     </div>
   );
 }

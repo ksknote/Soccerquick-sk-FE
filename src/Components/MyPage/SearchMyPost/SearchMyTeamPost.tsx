@@ -27,9 +27,9 @@ function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
   const dispatch = useDispatch<AppDispatch>();
   const data = useSelector((state: RootState) => state.teamPost.data);
   const navigate = useNavigate();
+
   const handleTeamDetailClick = (groupId: string) => {
     dispatch(fetchData(groupId));
-
     setAcceptModal(true);
   };
   return (

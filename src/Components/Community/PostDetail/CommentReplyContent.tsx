@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../../../redux/store';
 import { userSelector } from '../../../redux/modules/Auth/authSelectors';
+import { fetchCommunityPost } from '../../../redux/modules/Community/actions';
 import { Button } from '../../../styles/Common/CommonStyle';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import { ReplyType } from '../../../Types/CommunityType';
@@ -12,14 +14,14 @@ import uploadImage from '../../../Utils/uploadImage';
 
 interface ReplyContentPropsType {
   comment: ReplyType;
-  setUpdatePost: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function CommentReplyContent({
-  comment,
-  setUpdatePost,
-}: ReplyContentPropsType) {
+function CommentReplyContent({ comment }: ReplyContentPropsType) {
   const userData = useSelector(userSelector);
+  const dispatch = useDispatch<AppDispatch>();
+  const post_id = useSelector(
+    (state: RootState) => state.communityPost.post_id
+  );
   const [isReplyEditable, setIsReplyEditable] = useState(false);
   const [editContent, setEditContent] = useState('');
   const [selectedEditImage, setSelectedEditImage] = useState<File>();
@@ -27,6 +29,10 @@ function CommentReplyContent({
 
   const url = `${process.env.REACT_APP_API_URL}/communities/${comment.post_id}/comment/${comment.comment_id}/reply/${comment.reply_id}`;
   const config = { withCredentials: true };
+
+  const updatePost = () => {
+    dispatch(fetchCommunityPost(post_id));
+  };
 
   const setImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -56,7 +62,7 @@ function CommentReplyContent({
       .patch(url, data, config)
       .then((res) => {
         alertModal('댓글 수정 완료', 'success');
-        setUpdatePost(true);
+        updatePost();
         setIsReplyEditable(false);
         setEditContent('');
         setSelectedEditImage(undefined);
@@ -129,7 +135,7 @@ function CommentReplyContent({
         .delete(url, config)
         .then((res) => {
           alertModal('삭제되었습니다.', 'success');
-          setUpdatePost(true);
+          updatePost();
         })
         .catch((e) => {
           if (e.response.data.statusCode === 500) {

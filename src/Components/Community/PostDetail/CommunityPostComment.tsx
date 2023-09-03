@@ -1,31 +1,23 @@
 import React from 'react';
-import { CommentwithRepliesType } from '../../../Types/CommunityType';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
 import commentIcon from '../../../styles/icon/comment.svg';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import CommentList from './CommentList';
 import WriteComment from './WriteComment';
 
-interface CommentPropsType {
-  postId: string;
-  comments: CommentwithRepliesType[];
-  setUpdatePost: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function CommunityPostComment({
-  comments,
-  postId,
-  setUpdatePost,
-}: CommentPropsType) {
+function CommunityPostComment() {
+  const comments = useSelector(
+    (state: RootState) => state.communityPost.postData?.comments
+  );
   return (
     <Comment.Container>
-      <div>
-        <Comment.Title>
-          <img src={commentIcon} alt="" />
-          댓글 {comments.length}개
-        </Comment.Title>
-        <WriteComment postId={postId} setUpdatePost={setUpdatePost} />
-        <CommentList comments={comments} setUpdatePost={setUpdatePost} />
-      </div>
+      <Comment.Title>
+        <img src={commentIcon} alt="" />
+        댓글 {comments ? comments.length : 0}개
+      </Comment.Title>
+      <WriteComment />
+      <CommentList />
     </Comment.Container>
   );
 }

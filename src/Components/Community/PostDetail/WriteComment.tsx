@@ -35,14 +35,14 @@ function WriteComment() {
       if (confirm) navigate('/auth');
     }
   };
-  const handleSetReviewImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const setReviewImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return alertModal('이미지를 선택해주세요.', 'warning');
 
     setSelectedImage(file);
   };
 
-  async function handleWriteReview() {
+  async function writeReviewHanlder() {
     if (!isLogin) return checkLoginHandler();
 
     if (newComment === '') return alertModal('내용을 입력해주세요!', 'warning');
@@ -108,10 +108,10 @@ function WriteComment() {
           type="file"
           id="reviewImageFile"
           onClick={(e) => checkLoginHandler(e)}
-          onChange={(e) => handleSetReviewImage(e)}
+          onChange={(e) => setReviewImageHandler(e)}
           accept="image/*"
         />
-        <Button.GreenSmall onClick={handleWriteReview}>
+        <Button.GreenSmall onClick={writeReviewHanlder}>
           작성 완료
         </Button.GreenSmall>
       </Comment.SpaceBetweenFooter>

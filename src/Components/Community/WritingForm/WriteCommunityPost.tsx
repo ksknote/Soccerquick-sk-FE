@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
 import { isLogInSelector } from '../../../redux/modules/Auth/authSelectors';
+import axios from 'axios';
 import styled from 'styled-components';
 import ReactQuillEditor from '../../Commons/ReactQuillEditor';
 import DropDown from '../../Commons/DropDown';
@@ -9,8 +11,6 @@ import HashTags from './HashTags';
 import Thumbnail from './Thumbnail';
 import { Button } from '../../../styles/Common/CommonStyle';
 import alertModal from '../../Commons/alertModal';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const subjectList = [
   '주제를 선택해주세요.',
@@ -39,10 +39,22 @@ function WriteCommunityPost() {
   const [hashTags, setHashTags] = useState<string[]>([]);
   const [editorContents, setEditorContents] = useState('');
   const [isTemporarilySaved, setIsTemporarilySaved] = useState(false);
-  const { post_id } = useParams();
-  const isEditMode = post_id !== undefined;
+  const postData = useSelector(
+    (state: RootState) => state.communityPost.postData?.post
+  );
+  const isEditMode = postData !== undefined;
 
-  const handleEditorChange: (value: string) => void = (value) => {
+  useEffect(() => {
+    if (!isEditMode) return;
+    const { thumbnail, subject, title, hashTags, description } = postData;
+    setImageUrl(thumbnail);
+    setSubject(subject);
+    setTitle(title);
+    setHashTags(hashTags);
+    setEditorContents(description);
+  }, [isEditMode]);
+
+  const setContentsHandler: (value: string) => void = (value) => {
     setEditorContents(value);
   };
 
@@ -104,7 +116,7 @@ function WriteCommunityPost() {
     return false;
   };
 
-  const handleGetSavedForm = async () => {
+  const getSavedFormHandler = async () => {
     const prevForm = localStorage.getItem('temporarilySavedCommunityPost');
     if (!prevForm) {
       alertModal('임시 저장된 포스팅이 없습니다.', 'text');
@@ -134,7 +146,7 @@ function WriteCommunityPost() {
     setIsTemporarilySaved(false);
   };
 
-  const handleSubmitPost = async () => {
+  const clickCompleteButtonHandler = async () => {
     if (!isLogin) {
       alertModal('로그인이 필요한 서비스입니다.', 'warning');
       return;
@@ -143,11 +155,11 @@ function WriteCommunityPost() {
     let thumbnail;
     if (imageFile) {
       thumbnail = await uploadImage(imageFile);
-    } else {
+    } else if (!(isEditMode && imageUrl === postData.thumbnail)) {
       thumbnail = imageUrl;
     }
     let selectedSubject = subject === '주제를 선택해주세요' ? '' : subject;
-    const postData = {
+    const data = {
       title,
       description: editorContents,
       thumbnail,
@@ -155,10 +167,33 @@ function WriteCommunityPost() {
       hashTags,
       notice: '일반 게시글',
     };
-    PostFormData(postData);
+
+    if (isEditMode) editPost(data);
+    else submitPost(data);
   };
 
-  const PostFormData = (data: PostDataType) => {
+  const editPost = (data: PostDataType) => {
+    const url = `${process.env.REACT_APP_API_URL}/communities/${postData?.post_id}`;
+    const config = {
+      withCredentials: true,
+    };
+    axios
+      .patch(url, data, config)
+      .then((res) => {
+        alertModal('게시물이 수정되었습니다.', 'success');
+        navigate(`/community/${postData?.post_id}`);
+      })
+      .catch((e) => {
+        if (e.response.data.statusCode === 500) {
+          alertModal('댓글 수정에 실패했습니다.', 'error');
+        } else {
+          alertModal(e.response.data.message, 'warning');
+        }
+        console.log(e);
+      });
+  };
+
+  const submitPost = (data: PostDataType) => {
     const url = `${process.env.REACT_APP_API_URL}/communities`;
     const config = {
       withCredentials: true,
@@ -169,7 +204,14 @@ function WriteCommunityPost() {
         alertModal('게시물이 등록되었습니다.', 'success');
         navigate('/community');
       })
-      .catch((e) => console.error(e));
+      .catch((e) => {
+        if (e.response.data.statusCode === 500) {
+          alertModal('게시글 작성에 실패했습니다.', 'error');
+        } else {
+          alertModal(e.response.data.message, 'warning');
+        }
+        console.log(e);
+      });
   };
 
   return (
@@ -188,7 +230,6 @@ function WriteCommunityPost() {
         <SectionDiv>
           <SectionTitle>대표 이미지</SectionTitle>
           <Thumbnail
-            imageFile={imageFile}
             setImageFile={setImageFile}
             imageUrl={imageUrl}
             setImageUrl={setImageUrl}
@@ -214,20 +255,22 @@ function WriteCommunityPost() {
         <EditorWrapper>
           <ReactQuillEditor
             value={editorContents}
-            handleEditorChange={handleEditorChange}
+            handleEditorChange={setContentsHandler}
           />
         </EditorWrapper>
       </SectionDiv>
       <FooterButtons>
         {isTemporarilySaved && (
-          <Button.WhiteBig onClick={handleGetSavedForm}>
+          <Button.WhiteBig onClick={getSavedFormHandler}>
             불러오기
           </Button.WhiteBig>
         )}
         <Button.WhiteBig onClick={handleSaveTemporarily}>
           임시 저장
         </Button.WhiteBig>
-        <Button.GreenBig onClick={handleSubmitPost}>작성 완료</Button.GreenBig>
+        <Button.GreenBig onClick={clickCompleteButtonHandler}>
+          {isEditMode ? '수정 완료' : '작성 완료'}
+        </Button.GreenBig>
       </FooterButtons>
     </>
   );

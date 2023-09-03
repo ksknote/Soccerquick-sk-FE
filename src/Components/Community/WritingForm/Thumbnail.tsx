@@ -4,14 +4,12 @@ import ImageIcon from '../../../styles/icon/ImageIcon.svg';
 import alertModal from '../../Commons/alertModal';
 
 interface ThumbnailPropsType {
-  imageFile: File | undefined;
   setImageFile: React.Dispatch<React.SetStateAction<File | undefined>>;
   imageUrl: string;
   setImageUrl: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function Thumbnail({
-  imageFile,
   setImageFile,
   imageUrl,
   setImageUrl,
@@ -106,5 +104,9 @@ const ThumbnailControl = styled.div<{ isShow: boolean }>`
 
   label {
     padding-right: 0.5rem;
+    cursor: pointer;
+  }
+  span {
+    cursor: pointer;
   }
 `;

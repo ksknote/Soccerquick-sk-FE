@@ -13,11 +13,12 @@ export const fetchCommunityPost = (
   return async (dispatch) => {
     dispatch(fetchCommunityPostRequest());
     try {
+      if (!post_id) throw new Error('포스트를 찾을 수 없습니다.');
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/communities/${post_id}`
       );
       const postData = response.data.data;
-      dispatch(fetchCommunityPostSuccess(postData));
+      dispatch(fetchCommunityPostSuccess(post_id, postData));
     } catch (error: any) {
       const errorMessage = error.response.data.message;
       dispatch(fetchCommunityPostFailure(errorMessage));
@@ -30,10 +31,13 @@ export const fetchCommunityPostRequest = () => ({
   type: FETCH_COMMUNITY_POST_REQUEST,
 });
 
-export const fetchCommunityPostSuccess = (postData: PostWithCommentsType) => {
+export const fetchCommunityPostSuccess = (
+  post_id: string,
+  postData: PostWithCommentsType
+) => {
   return {
     type: FETCH_COMMUNITY_POST_SUCCESS,
-    payload: postData,
+    payload: { post_id, postData },
   };
 };
 

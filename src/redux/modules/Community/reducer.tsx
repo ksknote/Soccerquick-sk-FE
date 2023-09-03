@@ -8,6 +8,7 @@ import {
 } from './types';
 
 const initialState: StateType = {
+  post_id: '',
   postData: null,
   loading: false,
   error: null,
@@ -27,7 +28,8 @@ const communityPostReducer: CommunityPostReducerType = (
     case FETCH_COMMUNITY_POST_SUCCESS:
       return {
         ...state,
-        postData: action.payload,
+        post_id: action.payload.post_id,
+        postData: action.payload.postData,
         loading: false,
       };
     case FETCH_COMMUNITY_POST_FAILURE:

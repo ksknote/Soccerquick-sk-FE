@@ -8,6 +8,7 @@ export interface ActionType {
 }
 
 export interface StateType {
+  post_id: string;
   postData: PostWithCommentsType | null;
   loading: boolean;
   error: string | null;

@@ -1,18 +1,22 @@
 import React from 'react';
 import {
+  StateType,
+  CommunityPostReducerType,
   FETCH_COMMUNITY_POST_REQUEST,
   FETCH_COMMUNITY_POST_FAILURE,
   FETCH_COMMUNITY_POST_SUCCESS,
-} from './actionType';
+} from './types';
 
-const initialState = {
+const initialState: StateType = {
   postData: null,
   loading: false,
   error: null,
 };
 
-const communityPostReducer = (state = initialState, action: any) => {
-  console.log(action);
+const communityPostReducer: CommunityPostReducerType = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
     case FETCH_COMMUNITY_POST_REQUEST:
       return {

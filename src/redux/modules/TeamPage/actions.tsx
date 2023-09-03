@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { fetchDataActionTypes } from './actionTypes';
+import { fetchDataActionTypes } from './types';
 
 import { AppThunk } from '../../store';
 

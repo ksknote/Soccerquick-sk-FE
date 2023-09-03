@@ -3,7 +3,8 @@ import {
   FETCH_COMMUNITY_POST_REQUEST,
   FETCH_COMMUNITY_POST_SUCCESS,
   FETCH_COMMUNITY_POST_FAILURE,
-} from './actionType';
+} from './types';
+import { PostWithCommentsType } from '../../../Types/CommunityType';
 import axios from 'axios';
 
 export const fetchCommunityPost = (
@@ -17,7 +18,6 @@ export const fetchCommunityPost = (
       );
       const postData = response.data.data;
       dispatch(fetchCommunityPostSuccess(postData));
-      console.log(response);
     } catch (error: any) {
       const errorMessage = error.response.data.message;
       dispatch(fetchCommunityPostFailure(errorMessage));
@@ -30,14 +30,14 @@ export const fetchCommunityPostRequest = () => ({
   type: FETCH_COMMUNITY_POST_REQUEST,
 });
 
-export const fetchCommunityPostSuccess = (postData: any) => {
+export const fetchCommunityPostSuccess = (postData: PostWithCommentsType) => {
   return {
     type: FETCH_COMMUNITY_POST_SUCCESS,
     payload: postData,
   };
 };
 
-export const fetchCommunityPostFailure = (errorMessage: any) => {
+export const fetchCommunityPostFailure = (errorMessage: string) => {
   return {
     type: FETCH_COMMUNITY_POST_FAILURE,
     payload: errorMessage,

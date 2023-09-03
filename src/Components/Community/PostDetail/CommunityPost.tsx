@@ -1,14 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchData } from '../../../redux/modules/TeamPage/actions';
-import { RootState, AppDispatch } from '../../../redux/store';
-import { userSelector } from '../../../redux/modules/Auth/authSelectors';
+import { AppDispatch } from '../../../redux/store';
+import { StateType } from '../../../redux/modules/Community/types';
 import CommunityPostContents from './CommunityPostContents';
 import CommunityPostComment from './CommunityPostComment';
-import axios from 'axios';
-import { PostWithCommentsType } from '../../../Types/CommunityType';
 import { fetchCommunityPost } from '../../../redux/modules/Community/actions';
 
 function CommunityPostDetail() {
@@ -16,25 +13,10 @@ function CommunityPostDetail() {
   const location = useLocation();
   const post_id = location.pathname.split('/').pop();
   const dispatch = useDispatch<AppDispatch>();
-  // const postData = useSelector((state: RootState) => state.data.data);
-  // const [postData, setPostData] = useState<PostWithCommentsType>();
   const [updatePost, setUpdatePost] = useState(false);
   const postData = useSelector(
-    (state: RootState) => state.communityPost.postData
+    ({ communityPost }: { communityPost: StateType }) => communityPost.postData
   );
-  // const fetchPostData = useCallback(async () => {
-  //   axios
-  //     .get(`${process.env.REACT_APP_API_URL}/communities/${post_id}`)
-  //     .then((res) => {
-  //       console.log(res);
-  //       setPostData(res.data.data);
-  //       setUpdatePost(false);
-  //     });
-  // }, [post_id, updatePost]);
-
-  // useEffect(() => {
-  //   fetchPostData();
-  // }, [fetchPostData]);
 
   useEffect(() => {
     dispatch(fetchCommunityPost(post_id));

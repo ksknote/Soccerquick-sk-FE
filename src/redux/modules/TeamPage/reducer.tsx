@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchDataActionTypes } from './actionTypes';
+import { fetchDataActionTypes } from './types';
 
 interface DataState {
   data: string | null;

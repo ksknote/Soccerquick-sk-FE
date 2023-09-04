@@ -3,20 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import MypageIcon from '../styles/icon/mypage.svg';
 import SoccerquickLogo from '../styles/icon/soccerquick-logo.png';
-import AuthModal from './AuthModal/AuthModal';
 import { MyPageMenu } from './Commons/MyPageMenu';
 import { useSelector } from 'react-redux';
 import { isLogInSelector } from '../redux/modules/Auth/authSelectors';
 
 const Header = () => {
-  const [authModal, setAuthModal] = useState<boolean>(false);
   const navigate = useNavigate();
   const isLogin = useSelector(isLogInSelector);
-
-  const handleLoginModal = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setAuthModal((prev) => !prev);
-  };
 
   return (
     <HeaderContainer>
@@ -37,7 +30,6 @@ const Header = () => {
           )}
         </HeaderMyPage>
       </HeaderMenu>
-      {authModal && <AuthModal setAuthModal={setAuthModal} />}
     </HeaderContainer>
   );
 };

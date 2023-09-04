@@ -1,9 +1,9 @@
-import Signup from '../../components/AuthModal/Signup';
-import Login from '../../components/AuthModal/Login';
+import Signup from '../../components/auth/Signup';
+import Login from '../../components/auth/Login';
 import styled, { css } from 'styled-components';
 import { useState } from 'react';
 
-function AuthModal() {
+function Auth() {
   const [isLogin, setIsLogin] = useState<boolean>(true);
 
   const handleIsLogin = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -23,7 +23,7 @@ function AuthModal() {
   );
 }
 
-export default AuthModal;
+export default Auth;
 
 const ModalContainer = styled.div`
   width: 100%;

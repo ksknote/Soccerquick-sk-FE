@@ -4,10 +4,10 @@ import axios from 'axios';
 import {
   userSelector,
   isLogInSelector,
-} from '../../../ReduxStore/modules/Auth/authSelectors';
+} from '../../../redux/modules/Auth/authSelectors';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppDispatch, RootState } from '../../../ReduxStore/store';
-import { fetchCommunityPost } from '../../../ReduxStore/modules/Community/actions';
+import { AppDispatch, RootState } from '../../../redux/store';
+import { fetchCommunityPost } from '../../../redux/modules/Community/actions';
 import { Button } from '../../../styles/Common/CommonStyle';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import { CommentType } from '../../../Types/CommunityType';

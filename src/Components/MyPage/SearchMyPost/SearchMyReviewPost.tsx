@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import MyPostTable from './MyPostTable';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { userSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
+import { userSelector } from '../../../redux/modules/Auth/authSelectors';
 import { changeReviewObjectToArray } from '../changeObjectToArray';
 
 export type DomReviewType = {

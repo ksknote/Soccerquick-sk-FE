@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../ReduxStore/store';
+import { RootState } from '../../../redux/store';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import FindingMembers from '../../../components/TeamPage/FindingMembers';

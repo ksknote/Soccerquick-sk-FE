@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { isLogInSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
+import { isLogInSelector } from '../../../redux/modules/Auth/authSelectors';
 import { ReviewDataType } from '../../../Types/ReviewType';
 import LikeButton from '../../Commons/LikeButton';
 import { Comment } from '../../../styles/Common/CommentStyle';

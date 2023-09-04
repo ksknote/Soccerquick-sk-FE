@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { AUTH_ACTIONS } from '../../ReduxStore/modules/Auth/authSlice';
+import { AUTH_ACTIONS } from '../../redux/modules/Auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { userSelector } from '../../ReduxStore/modules/Auth/authSelectors';
+import { userSelector } from '../../redux/modules/Auth/authSelectors';
 import alertModal from './alertModal';
 import axios from 'axios';
 

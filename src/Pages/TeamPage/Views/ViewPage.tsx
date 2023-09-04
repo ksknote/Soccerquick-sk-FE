@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import 'react-quill/dist/quill.snow.css';
 import HtmlParser from '../../../components/Commons/HtmlParser';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchData } from '../../../ReduxStore/modules/TeamPage/actions';
-import { RootState, AppDispatch } from '../../../ReduxStore/store';
+import { fetchData } from '../../../redux/modules/TeamPage/actions';
+import { RootState, AppDispatch } from '../../../redux/store';
 import Accepted from '../../../components/TeamPage/AcceptedMembers';
 import { Post } from '../../../styles/Common/PostsStyle';
 import {
   isLogInSelector,
   userSelector,
-} from '../../../ReduxStore/modules/Auth/authSelectors';
+} from '../../../redux/modules/Auth/authSelectors';
 import SubmitForFindingMember from '../../../components/TeamPage/SubmitForFindingMember';
 import TeamPageComments from '../../../components/TeamPage/TeamPageComments';
 import chevronIcon from '../../../styles/icon/chevron_green.svg';

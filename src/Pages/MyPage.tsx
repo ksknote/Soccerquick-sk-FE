@@ -8,11 +8,11 @@ import MyTeamPost from '../components/MyPage/SearchMyPost/MyTeamPost';
 import SearchMyApplicationPost from '../components/MyPage/SearchMyPost/SearchMyApplicationPost';
 import MyApplicatedTeamPost from '../components/MyPage/SearchMyPost/MyApplicatedTeamPost';
 import { useSelector } from 'react-redux';
-import { isLogInSelector } from '../ReduxStore/modules/Auth/authSelectors';
+import { isLogInSelector } from '../redux/modules/Auth/authSelectors';
 import alertModal from '../components/Commons/alertModal';
 import MyPageHome from '../components/MyPage/MyPageHome';
 import MyPageProfileLayout from '../components/MyPage/MyPageInfo/MyPageProfileLayout';
-import { userSelector } from '../ReduxStore/modules/Auth/authSelectors';
+import { userSelector } from '../redux/modules/Auth/authSelectors';
 import MyPageLayout from '../components/Template/MyPageLayout';
 
 export type FormDataType = {

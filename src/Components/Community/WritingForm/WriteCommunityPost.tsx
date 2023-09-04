@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../ReduxStore/store';
-import { isLogInSelector } from '../../../ReduxStore/modules/Auth/authSelectors';
+import { RootState } from '../../../redux/store';
+import { isLogInSelector } from '../../../redux/modules/Auth/authSelectors';
 import axios from 'axios';
 import styled from 'styled-components';
 import ReactQuillEditor from '../../Commons/ReactQuillEditor';

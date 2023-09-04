@@ -1,8 +1,8 @@
 import react, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../../ReduxStore/store';
-import { fetchData } from '../../../ReduxStore/modules/TeamPage/actions';
+import { RootState, AppDispatch } from '../../../redux/store';
+import { fetchData } from '../../../redux/modules/TeamPage/actions';
 import MobileHeader from '../../MobileHeader';
 import {
   BodyContainer,

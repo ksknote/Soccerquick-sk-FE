@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import {
   isLogInSelector,
   userSelector,
-} from '../../../ReduxStore/modules/Auth/authSelectors';
+} from '../../../redux/modules/Auth/authSelectors';
 import uploadImage from '../../../Utils/uploadImage';
 import alertModal from '../../Commons/alertModal';
 import ImageIcon from '../../../styles/icon/ImageIcon.svg';

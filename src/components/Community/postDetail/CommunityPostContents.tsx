@@ -8,8 +8,8 @@ import { useSelector } from 'react-redux';
 import {
   isLogInSelector,
   userSelector,
-} from '../../../ReduxStore/modules/Auth/authSelectors';
-import { RootState } from '../../../ReduxStore/store';
+} from '../../../redux/modules/Auth/authSelectors';
+import { RootState } from '../../../redux/store';
 import chevronIcon from '../../../styles/icon/chevron_green.svg';
 import ballIcon from '../../../styles/icon/soccerball.svg';
 import axios from 'axios';

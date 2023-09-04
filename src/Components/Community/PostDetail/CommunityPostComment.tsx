@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../ReduxStore/store';
+import { RootState } from '../../../redux/store';
 import commentIcon from '../../../styles/icon/comment.svg';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import CommentList from './CommentList';

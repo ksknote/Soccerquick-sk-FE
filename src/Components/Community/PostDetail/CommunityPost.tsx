@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../../ReduxStore/store';
-import { fetchCommunityPost } from '../../../ReduxStore/modules/Community/actions';
+import { AppDispatch } from '../../../redux/store';
+import { fetchCommunityPost } from '../../../redux/modules/Community/actions';
 import CommunityPostContents from './CommunityPostContents';
 import CommunityPostComment from './CommunityPostComment';
 

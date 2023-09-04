@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react';
-import { AUTH_ACTIONS } from '../../ReduxStore/modules/Auth/authSlice';
+import { AUTH_ACTIONS } from '../../redux/modules/Auth/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import alertModal from '../Commons/alertModal';

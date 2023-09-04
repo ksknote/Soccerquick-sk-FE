@@ -9,7 +9,7 @@ import {
 import { Team } from '../../styles/styled-components/TeamStyle';
 import styled from 'styled-components';
 import { AcceptedModalProps } from '../../types/TeamPageType';
-import ballIcon from '../../styles/icon/soccerball.svg';
+import ballIcon from '../../assets/icon/soccerball.svg';
 
 function Accepted(props: AcceptedModalProps) {
   const { setAcceptModal, accept, total, now } = props;

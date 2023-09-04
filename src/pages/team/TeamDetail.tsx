@@ -14,10 +14,10 @@ import {
 } from '../../redux/modules/auth/authSelectors';
 import SubmitForFindingMember from '../../components/team/SubmitForFindingMember';
 import TeamPageComments from '../../components/team/TeamPageComments';
-import chevronIcon from '../../styles/icon/chevron_green.svg';
-import ballIcon from '../../styles/icon/soccerball.svg';
-import playerIcon from '../../styles/icon/player.svg';
-import goalKeeperIcon from '../../styles/icon/goalkeeper.svg';
+import chevronIcon from '../../assets/icon/chevron_green.svg';
+import ballIcon from '../../assets/icon/soccerball.svg';
+import playerIcon from '../../assets/icon/player.svg';
+import goalKeeperIcon from '../../assets/icon/goalkeeper.svg';
 import axios from 'axios';
 import alertModal from '../../components/commons/alertModal';
 

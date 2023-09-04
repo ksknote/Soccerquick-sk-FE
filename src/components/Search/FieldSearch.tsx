@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
-import SearchIcon from '../../styles/icon/search.svg';
+import SearchIcon from '../../assets/icon/search.svg';
 import { useSearchParams } from 'react-router-dom';
 
 const FeildSearch = () => {

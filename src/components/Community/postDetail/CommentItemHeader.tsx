@@ -1,7 +1,7 @@
 import React from 'react';
 import { Comment } from '../../../styles/styled-components/CommentStyle';
 import { CommentType } from '../../../types/CommunityType';
-import ballIcon from '../../../styles/icon/soccerball.svg';
+import ballIcon from '../../../assets/icon/soccerball.svg';
 
 interface CommentItemHeaderPropsType {
   profile: string;

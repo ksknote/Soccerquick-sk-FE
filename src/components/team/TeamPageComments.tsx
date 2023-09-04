@@ -10,9 +10,9 @@ import {
 } from '../../styles/styled-components/CommonStyle';
 import { Comment as CommentStyle } from '../../styles/styled-components/CommentStyle';
 import { Team } from '../../styles/styled-components/TeamStyle';
-import ballIcon from '../../styles/icon/soccerball.svg';
-import checkIcon from '../../styles/icon/check_white.svg';
-import commentIcon from '../../styles/icon/comment.svg';
+import ballIcon from '../../assets/icon/soccerball.svg';
+import checkIcon from '../../assets/icon/check_white.svg';
+import commentIcon from '../../assets/icon/comment.svg';
 import { SubmitApplicant, CommentProps } from '../../types/TeamPageType';
 import alertModal from '../commons/alertModal';
 

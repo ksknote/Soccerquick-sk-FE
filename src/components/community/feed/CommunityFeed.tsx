@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import searchIcon from '../../../styles/icon/search.svg';
+import searchIcon from '../../../assets/icon/search.svg';
 import { Button } from '../../../styles/styled-components/CommonStyle';
 import { useNavigate } from 'react-router-dom';
 import { PostType } from '../../../types/CommunityType';

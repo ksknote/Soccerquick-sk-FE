@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import userIcon from '../../styles/icon/mobileCateogry/userIcon.svg';
-import reviewIcon from '../../styles/icon/mobileCateogry/reviewIcon.svg';
-import homeIcon from '../../styles/icon/mobileCateogry/homeIcon.svg';
-import fieldIcon from '../../styles/icon/mobileCateogry/fieldIcon.svg';
-import teamIcon from '../../styles/icon/mobileCateogry/teamIcon.svg';
+import userIcon from '../../assets/icon/mobileCateogry/userIcon.svg';
+import reviewIcon from '../../assets/icon/mobileCateogry/reviewIcon.svg';
+import homeIcon from '../../assets/icon/mobileCateogry/homeIcon.svg';
+import fieldIcon from '../../assets/icon/mobileCateogry/fieldIcon.svg';
+import teamIcon from '../../assets/icon/mobileCateogry/teamIcon.svg';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { isLogInSelector } from '../../redux/modules/auth/authSelectors';

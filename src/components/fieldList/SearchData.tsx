@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import SearchFilter from './SearchFilter';
 import GroundListSkeleton from './groundListSkeleton';
 import MyPagination from '../myPage/MyPagination';
-import checkIcon from '../../styles/icon/check.svg';
+import checkIcon from '../../assets/icon/check.svg';
 import { DomDataType } from '../../pages/SearchPage';
 import alertModal from '../commons/alertModal';
 import { Cell } from '../../styles/styled-components/CommonStyle';

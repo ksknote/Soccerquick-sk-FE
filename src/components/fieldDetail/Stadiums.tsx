@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { DomDataType } from '../../pages/SearchPage';
-import largeIcon from '../../styles/icon/large.svg';
-import groundIcon from '../../styles/icon/ground.svg';
-import flagIcon from '../../styles/icon/flag.svg';
-import grassIcon from '../../styles/icon/grass.svg';
-import logo from '../../styles/icon/exampleImg.svg';
+import largeIcon from '../../assets/icon/large.svg';
+import groundIcon from '../../assets/icon/ground.svg';
+import flagIcon from '../../assets/icon/flag.svg';
+import grassIcon from '../../assets/icon/grass.svg';
+import logo from '../../assets/icon/exampleImg.svg';
 
 interface StadiumsProps {
   stadiumsData: DomDataType['stadiums'];

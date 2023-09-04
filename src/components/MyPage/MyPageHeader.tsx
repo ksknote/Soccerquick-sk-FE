@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import chevronIcon from '../../styles/icon/chevron_grey.svg';
+import chevronIcon from '../../assets/icon/chevron_grey.svg';
 
 function MyPageHeader({
   totalItemsCount,

@@ -10,8 +10,8 @@ import {
   userSelector,
 } from '../../../redux/modules/auth/authSelectors';
 import { RootState } from '../../../redux/store';
-import chevronIcon from '../../../styles/icon/chevron_green.svg';
-import ballIcon from '../../../styles/icon/soccerball.svg';
+import chevronIcon from '../../../assets/icon/chevron_green.svg';
+import ballIcon from '../../../assets/icon/soccerball.svg';
 import axios from 'axios';
 import alertModal from '../../commons/alertModal';
 

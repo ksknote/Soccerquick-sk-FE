@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { DomDataType } from '../../pages/SearchPage';
-import kakaoIcon from '../../styles/icon/kakao.svg';
+import kakaoIcon from '../../assets/icon/kakao.svg';
 import alertModal from '../commons/alertModal';
 import {
   FacebookShareButton,

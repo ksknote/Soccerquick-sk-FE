@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import MypageIcon from '../styles/icon/mypage.svg';
-import SoccerquickLogo from '../styles/icon/soccerquick-logo.png';
+import MypageIcon from '../assets/icon/mypage.svg';
+import SoccerquickLogo from '../assets/icon/soccerquick-logo.png';
 import { MyPageMenu } from './commons/MyPageMenu';
 import { useSelector } from 'react-redux';
 import { isLogInSelector } from '../redux/modules/auth/authSelectors';

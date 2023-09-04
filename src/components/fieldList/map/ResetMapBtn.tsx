@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
-import ResetIcon from '../../../styles/icon/reset_white.svg';
+import ResetIcon from '../../../assets/icon/reset_white.svg';
 
 const ResetMapBtn = () => {
   return (

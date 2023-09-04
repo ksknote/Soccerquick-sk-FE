@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import DropDown from '../../components/commons/DropDown';
-import resetIcon from '../../styles/icon/reset_black.svg';
+import resetIcon from '../../assets/icon/reset_black.svg';
 import {
   StyledTotalNumber,
   TeamPageBody,

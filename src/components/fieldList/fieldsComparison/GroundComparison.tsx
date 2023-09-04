@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { DomDataType } from '../../../pages/SearchPage';
 import styled from 'styled-components';
-import chevronIcon from '../../../styles/icon/chevron_down.svg';
-import checkIcon from '../../../styles/icon/check.svg';
-import deleteIcon from '../../../styles/icon/delete.svg';
-import logo from '../../../styles/icon/exampleImg.svg';
+import chevronIcon from '../../../assets/icon/chevron_down.svg';
+import checkIcon from '../../../assets/icon/check.svg';
+import deleteIcon from '../../../assets/icon/delete.svg';
+import logo from '../../../assets/icon/exampleImg.svg';
 import alertModal from '../../commons/alertModal';
 
 interface GroundComparisonProps {

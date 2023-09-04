@@ -2,10 +2,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import MainSearch from '../components/search/MainSearch';
-import Avatar1 from '../styles/icon/avatar1.png';
-import Avatar3 from '../styles/icon/avatar3.png';
-import Avatar4 from '../styles/icon/avatar4.png';
-import Avatar5 from '../styles/icon/avatar5.png';
+import Avatar1 from '../assets/icon/avatar1.png';
+import Avatar3 from '../assets/icon/avatar3.png';
+import Avatar4 from '../assets/icon/avatar4.png';
+import Avatar5 from '../assets/icon/avatar5.png';
 import BaseLayout from '../components/template/BaseLayout';
 import { BodyWrapper } from '../styles/styled-components/CommonStyle';
 

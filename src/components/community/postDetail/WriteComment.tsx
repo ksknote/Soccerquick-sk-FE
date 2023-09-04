@@ -10,7 +10,7 @@ import {
   Button,
 } from '../../../styles/styled-components/CommonStyle';
 import { Comment } from '../../../styles/styled-components/CommentStyle';
-import ImageIcon from '../../../styles/icon/ImageIcon.svg';
+import ImageIcon from '../../../assets/icon/ImageIcon.svg';
 import alertModal from '../../commons/alertModal';
 import uploadImage from '../../../utils/uploadImage';
 

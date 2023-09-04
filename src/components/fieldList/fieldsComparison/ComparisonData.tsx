@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { DomDataType } from '../../../pages/SearchPage';
 import { ProvidedElementList } from '../../fieldList/SearchData';
-import logo from '../../../styles/icon/exampleImg.svg';
+import logo from '../../../assets/icon/exampleImg.svg';
 
 interface ComparsionDataProps {
   checkedArray: DomDataType[];

@@ -6,9 +6,9 @@ import { AUTH_ACTIONS } from '../../redux/modules/auth/authSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { isLogInSelector } from '../../redux/modules/auth/authSelectors';
 import alertModal from '../commons/alertModal';
-import reviewIcon from '../../styles/icon/myPageCategory/reviewIconBlack.svg';
-import uniformIcon from '../../styles/icon/myPageCategory/uniformIcon.svg';
-import logoutIcon from '../../styles/icon/myPageCategory/logoutIcon.svg';
+import reviewIcon from '../../assets/icon/myPageCategory/reviewIconBlack.svg';
+import uniformIcon from '../../assets/icon/myPageCategory/uniformIcon.svg';
+import logoutIcon from '../../assets/icon/myPageCategory/logoutIcon.svg';
 import { FormDataType } from '../../pages/MyPage';
 
 interface MyPageProps {

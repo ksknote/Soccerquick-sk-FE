@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { PostType } from '../../../types/CommunityType';
-import commentIcon from '../../../styles/icon/comment_green.svg';
-import likeIcon from '../../../styles/icon/like_green.svg';
+import commentIcon from '../../../assets/icon/comment_green.svg';
+import likeIcon from '../../../assets/icon/like_green.svg';
 import Skeleton, { Shining } from '../../commons/Skeleton';
 import { Cell } from '../../../styles/styled-components/CommonStyle';
 

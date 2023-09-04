@@ -1,12 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import MainSearch from '../components/Search/MainSearch';
+import MainSearch from '../components/search/MainSearch';
 import Avatar1 from '../styles/icon/avatar1.png';
 import Avatar3 from '../styles/icon/avatar3.png';
 import Avatar4 from '../styles/icon/avatar4.png';
 import Avatar5 from '../styles/icon/avatar5.png';
-import BaseLayout from '../components/Template/BaseLayout';
+import BaseLayout from '../components/template/BaseLayout';
 import { BodyWrapper } from '../styles/Common/CommonStyle';
 
 export default function Main() {

@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import UserDetailModal from './UserDetailModal';
-import DropDown from '../Commons/DropDown';
-import FilterlingOptions from '../Commons/FilteringOptions';
+import DropDown from '../commons/DropDown';
+import FilterlingOptions from '../commons/FilteringOptions';
 import {
   UserManageContainer,
   UserManageContainerTable,
@@ -12,8 +12,8 @@ import {
   StyledTd,
 } from '../../pages/AdminPage/Styles/AdminPageStyle';
 import { UserData } from '../../types/AdminPageType';
-import MyPagination from '../MyPage/MyPagination';
-import { userSelector } from '../../redux/modules/Auth/authSelectors';
+import MyPagination from '../myPage/MyPagination';
+import { userSelector } from '../../redux/modules/auth/authSelectors';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 

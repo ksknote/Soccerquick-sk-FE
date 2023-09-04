@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import MypageIcon from '../styles/icon/mypage.svg';
 import SoccerquickLogo from '../styles/icon/soccerquick-logo.png';
-import { MyPageMenu } from './Commons/MyPageMenu';
+import { MyPageMenu } from './commons/MyPageMenu';
 import { useSelector } from 'react-redux';
-import { isLogInSelector } from '../redux/modules/Auth/authSelectors';
+import { isLogInSelector } from '../redux/modules/auth/authSelectors';
 
 const Header = () => {
   const navigate = useNavigate();

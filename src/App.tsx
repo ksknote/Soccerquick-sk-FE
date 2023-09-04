@@ -6,17 +6,17 @@ import { PersistGate } from 'redux-persist/integration/react';
 import './App.css';
 import MainPage from './pages/Main';
 import ReviewPage from './pages/ReviewPages/ReviewPage';
-import TeamPage from './pages/TeamPage/MainPage';
+import TeamPage from './pages/team/MainPage';
 import SearchPage from './pages/SearchPage';
 import GroundDetail from './pages/groundDetail';
 import Admin from './pages/AdminPage/Views/MainPage';
 import { MyPage } from './pages/MyPage';
-import MyPageHome from './components/MyPage/MyPageHome';
-import MobileCategory from './components/Commons/MobileCategory';
+import MyPageHome from './components/myPage/MyPageHome';
+import MobileCategory from './components/commons/MobileCategory';
 // Redux 공부를 위한 추가 Store
 import { store, persistor } from './redux/store';
 import Auth from './pages/AuthPage/Auth';
-import Community from './pages/Community/Community';
+import Community from './pages/community/Community';
 
 function App() {
   return (

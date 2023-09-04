@@ -9,8 +9,8 @@ import {
   ModalButton,
   ModalSelectBox,
   ModalTerms,
-} from '../Commons/AuthComponents';
-import alertModal from '../Commons/alertModal';
+} from '../commons/AuthComponents';
+import alertModal from '../commons/alertModal';
 import { useNavigate } from 'react-router-dom';
 
 const postSignupUrl = `${process.env.REACT_APP_API_URL}/auths/signup`; // signup api url

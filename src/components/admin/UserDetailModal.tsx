@@ -12,9 +12,9 @@ import {
   RestrictButton,
   ReturnButton,
 } from '../../pages/AdminPage/Styles/AdminPageStyle';
-import alertModal from '../Commons/alertModal';
+import alertModal from '../commons/alertModal';
 import { DedatilModalProps } from '../../types/AdminPageType';
-import { userSelector } from '../../redux/modules/Auth/authSelectors';
+import { userSelector } from '../../redux/modules/auth/authSelectors';
 import { useSelector } from 'react-redux';
 
 function DetailModal(props: DedatilModalProps) {

@@ -1,19 +1,19 @@
 import react, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router';
 import axios from 'axios';
-import MyFavoriteGroundList from '../components/MyPage/MyFavoriteGround/MyFavoriteGroundList';
-import SearchMyReviewPost from '../components/MyPage/SearchMyPost/SearchMyReviewPost';
-import SearchMyTeamPost from '../components/MyPage/SearchMyPost/SearchMyTeamPost';
-import MyTeamPost from '../components/MyPage/SearchMyPost/MyTeamPost';
-import SearchMyApplicationPost from '../components/MyPage/SearchMyPost/SearchMyApplicationPost';
-import MyApplicatedTeamPost from '../components/MyPage/SearchMyPost/MyApplicatedTeamPost';
+import MyFavoriteGroundList from '../components/myPage/MyFavoriteGround/MyFavoriteGroundList';
+import SearchMyReviewPost from '../components/myPage/SearchMyPost/SearchMyReviewPost';
+import SearchMyTeamPost from '../components/myPage/SearchMyPost/SearchMyTeamPost';
+import MyTeamPost from '../components/myPage/SearchMyPost/MyTeamPost';
+import SearchMyApplicationPost from '../components/myPage/SearchMyPost/SearchMyApplicationPost';
+import MyApplicatedTeamPost from '../components/myPage/SearchMyPost/MyApplicatedTeamPost';
 import { useSelector } from 'react-redux';
-import { isLogInSelector } from '../redux/modules/Auth/authSelectors';
-import alertModal from '../components/Commons/alertModal';
-import MyPageHome from '../components/MyPage/MyPageHome';
-import MyPageProfileLayout from '../components/MyPage/MyPageInfo/MyPageProfileLayout';
-import { userSelector } from '../redux/modules/Auth/authSelectors';
-import MyPageLayout from '../components/Template/MyPageLayout';
+import { isLogInSelector } from '../redux/modules/auth/authSelectors';
+import alertModal from '../components/commons/alertModal';
+import MyPageHome from '../components/myPage/MyPageHome';
+import MyPageProfileLayout from '../components/myPage/MyPageInfo/MyPageProfileLayout';
+import { userSelector } from '../redux/modules/auth/authSelectors';
+import MyPageLayout from '../components/template/MyPageLayout';
 
 export type FormDataType = {
   user_id: string;

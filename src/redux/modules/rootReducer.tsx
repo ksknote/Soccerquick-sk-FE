@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import teamPostReducer from './TeamPage/reducer';
-import communityPostReducer from './Community/reducer';
-import authSlice from './Auth/authSlice';
+import teamPostReducer from './team/reducer';
+import communityPostReducer from './community/reducer';
+import authSlice from './auth/authSlice';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 

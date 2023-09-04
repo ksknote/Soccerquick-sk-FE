@@ -1,5 +1,5 @@
 import React from 'react';
-import { PostWithCommentsType } from '../../../Types/CommunityType';
+import { PostWithCommentsType } from '../../../types/CommunityType';
 import { Reducer } from 'redux';
 
 export interface ActionType {

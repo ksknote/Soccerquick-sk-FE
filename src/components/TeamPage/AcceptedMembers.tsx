@@ -8,7 +8,7 @@ import {
 } from '../../pages/TeamPage/Styles/ComponentStyle';
 import { Team } from '../../styles/Common/TeamStyle';
 import styled from 'styled-components';
-import { AcceptedModalProps } from '../../Types/TeamPageType';
+import { AcceptedModalProps } from '../../types/TeamPageType';
 import ballIcon from '../../styles/icon/soccerball.svg';
 
 function Accepted(props: AcceptedModalProps) {

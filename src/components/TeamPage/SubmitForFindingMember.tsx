@@ -2,7 +2,7 @@ import React from 'react';
 import DropDown from '../Commons/DropDown';
 import FILTERING_OPTIONS from '../Commons/FilteringOptions';
 import axios from 'axios';
-import { SumbitModalProps } from '../../Types/TeamPageType';
+import { SumbitModalProps } from '../../types/TeamPageType';
 import alertModal from '../Commons/alertModal';
 import {
   Modal,

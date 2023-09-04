@@ -16,7 +16,7 @@ import {
   Position,
   Author,
 } from '../Styles/ViewsStyle';
-import { BoardProps } from '../../../Types/TeamPageType';
+import { BoardProps } from '../../../types/TeamPageType';
 import { Button } from '../../../styles/Common/CommonStyle';
 import { useSelector } from 'react-redux';
 import { isLogInSelector } from '../../../redux/modules/Auth/authSelectors';

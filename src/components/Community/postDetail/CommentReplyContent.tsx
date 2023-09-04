@@ -7,10 +7,10 @@ import { userSelector } from '../../../redux/modules/Auth/authSelectors';
 import { fetchCommunityPost } from '../../../redux/modules/Community/actions';
 import { Button } from '../../../styles/Common/CommonStyle';
 import { Comment } from '../../../styles/Common/CommentStyle';
-import { ReplyType } from '../../../Types/CommunityType';
+import { ReplyType } from '../../../types/CommunityType';
 import alertModal from '../../Commons/alertModal';
 import ImageIcon from '../../../styles/icon/ImageIcon.svg';
-import uploadImage from '../../../Utils/uploadImage';
+import uploadImage from '../../../utils/uploadImage';
 
 interface ReplyContentPropsType {
   comment: ReplyType;

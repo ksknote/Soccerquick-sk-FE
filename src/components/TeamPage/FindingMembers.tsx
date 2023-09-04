@@ -1,5 +1,5 @@
 import React from 'react';
-import { FindingMemberProps } from '../../Types/TeamPageType';
+import { FindingMemberProps } from '../../types/TeamPageType';
 import {
   StyledBox,
   StyledTitle,

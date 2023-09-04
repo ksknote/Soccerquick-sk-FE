@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PostType } from '../../../Types/CommunityType';
+import { PostType } from '../../../types/CommunityType';
 import PostCard, { PostCardSkeleton } from './PostCard';
 
 interface CommunityPostListPropsType {

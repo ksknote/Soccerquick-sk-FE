@@ -11,7 +11,7 @@ import {
   PageSelect,
   StyledTd,
 } from '../../pages/AdminPage/Styles/AdminPageStyle';
-import { UserData } from '../../Types/AdminPageType';
+import { UserData } from '../../types/AdminPageType';
 import MyPagination from '../MyPage/MyPagination';
 import { userSelector } from '../../redux/modules/Auth/authSelectors';
 import { useSelector } from 'react-redux';

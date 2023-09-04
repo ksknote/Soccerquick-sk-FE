@@ -1,7 +1,7 @@
 import React from 'react';
 import FilteringOptions from '../../../components/Commons/FilteringOptions';
 import { StyledHeader } from '../Styles/ViewsStyle';
-import { DataProps, FindMemberFilter } from '../../../Types/TeamPageType';
+import { DataProps, FindMemberFilter } from '../../../types/TeamPageType';
 import axios from 'axios';
 import TeamList from './TeamList';
 

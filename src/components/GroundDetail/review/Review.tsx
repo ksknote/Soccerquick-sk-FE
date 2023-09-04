@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import WriteReview from './WriteReview';
 import ReviewItemHeader from './ReviewItemHeader';
 import ReviewItemBody from './ReviewItemBody';
-import { ReviewDataType, ReviewProps } from '../../../Types/ReviewType';
+import { ReviewDataType, ReviewProps } from '../../../types/ReviewType';
 import { BoxContainer } from '../../../styles/Common/CommonStyle';
 
 export default function Review({ review, dom_id }: ReviewProps) {

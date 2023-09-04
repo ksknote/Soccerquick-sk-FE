@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ReplyType } from '../../../Types/CommunityType';
+import { ReplyType } from '../../../types/CommunityType';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import CommentItemHeader from './CommentItemHeader';
 import CommentReplyContent from './CommentReplyContent';

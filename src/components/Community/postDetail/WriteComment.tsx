@@ -9,7 +9,7 @@ import { BoxContainer, Button } from '../../../styles/Common/CommonStyle';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import ImageIcon from '../../../styles/icon/ImageIcon.svg';
 import alertModal from '../../Commons/alertModal';
-import uploadImage from '../../../Utils/uploadImage';
+import uploadImage from '../../../utils/uploadImage';
 
 function WriteComment() {
   const navigate = useNavigate();

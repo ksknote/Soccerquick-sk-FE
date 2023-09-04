@@ -1,6 +1,6 @@
 import React from 'react';
 import { Comment } from '../../../styles/Common/CommentStyle';
-import { CommentType } from '../../../Types/CommunityType';
+import { CommentType } from '../../../types/CommunityType';
 import ballIcon from '../../../styles/icon/soccerball.svg';
 
 interface CommentItemHeaderPropsType {

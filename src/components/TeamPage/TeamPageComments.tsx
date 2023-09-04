@@ -10,7 +10,7 @@ import { Team } from '../../styles/Common/TeamStyle';
 import ballIcon from '../../styles/icon/soccerball.svg';
 import checkIcon from '../../styles/icon/check_white.svg';
 import commentIcon from '../../styles/icon/comment.svg';
-import { SubmitApplicant, CommentProps } from '../../Types/TeamPageType';
+import { SubmitApplicant, CommentProps } from '../../types/TeamPageType';
 import alertModal from '../Commons/alertModal';
 
 function Comment(props: CommentProps) {

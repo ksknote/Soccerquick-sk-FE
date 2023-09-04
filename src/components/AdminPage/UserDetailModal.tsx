@@ -13,7 +13,7 @@ import {
   ReturnButton,
 } from '../../pages/AdminPage/Styles/AdminPageStyle';
 import alertModal from '../Commons/alertModal';
-import { DedatilModalProps } from '../../Types/AdminPageType';
+import { DedatilModalProps } from '../../types/AdminPageType';
 import { userSelector } from '../../redux/modules/Auth/authSelectors';
 import { useSelector } from 'react-redux';
 

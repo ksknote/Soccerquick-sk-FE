@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../../redux/store';
 import { fetchCommunityPost } from '../../../redux/modules/Community/actions';
-import { CommentwithRepliesType } from '../../../Types/CommunityType';
+import { CommentwithRepliesType } from '../../../types/CommunityType';
 import { BoxContainer } from '../../../styles/Common/CommonStyle';
 import CommentReplyList from './CommentReplyList';
 import CommentItemHeader from './CommentItemHeader';

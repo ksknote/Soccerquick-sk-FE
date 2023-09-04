@@ -4,7 +4,7 @@ import {
   FETCH_COMMUNITY_POST_SUCCESS,
   FETCH_COMMUNITY_POST_FAILURE,
 } from './types';
-import { PostWithCommentsType } from '../../../Types/CommunityType';
+import { PostWithCommentsType } from '../../../types/CommunityType';
 import axios from 'axios';
 
 export const fetchCommunityPost = (

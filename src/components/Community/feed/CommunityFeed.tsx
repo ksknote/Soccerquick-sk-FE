@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import searchIcon from '../../../styles/icon/search.svg';
 import { Button } from '../../../styles/Common/CommonStyle';
 import { useNavigate } from 'react-router-dom';
-import { PostType } from '../../../Types/CommunityType';
+import { PostType } from '../../../types/CommunityType';
 import CommunityPostList from './CommunityPostList';
-import useIntersect from '../../../Utils/useIntersect';
+import useIntersect from '../../../utils/useIntersect';
 import axios from 'axios';
 
 function CommunityPostFeed() {

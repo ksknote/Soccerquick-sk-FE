@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { WriteReviewPropsType } from '../../../Types/ReviewType';
+import { WriteReviewPropsType } from '../../../types/ReviewType';
 import {
   isLogInSelector,
   userSelector,
 } from '../../../redux/modules/Auth/authSelectors';
 import ImageIcon from '../../../styles/icon/ImageIcon.svg';
 import alertModal from '../../Commons/alertModal';
-import uploadImage from '../../../Utils/uploadImage';
+import uploadImage from '../../../utils/uploadImage';
 import axios from 'axios';
 import { Comment } from '../../../styles/Common/CommentStyle';
 import { BoxContainer, Button } from '../../../styles/Common/CommonStyle';

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { isLogInSelector } from '../../../redux/modules/Auth/authSelectors';
-import { ReviewDataType } from '../../../Types/ReviewType';
+import { ReviewDataType } from '../../../types/ReviewType';
 import LikeButton from '../../Commons/LikeButton';
 import { Comment } from '../../../styles/Common/CommentStyle';
 function ReviewItemHeader({ reviewItem }: { reviewItem: ReviewDataType }) {

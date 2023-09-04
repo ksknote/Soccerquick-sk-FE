@@ -1,5 +1,5 @@
 import React from 'react';
-import ViewPage from '../../../pages/team/Views/ViewPage';
+import ViewPage from '../../../pages/team/TeamDetail';
 import MobileHeader from '../../MobileHeader';
 import MyPageHeader from '../MyPageHeader';
 import { MyTeamPostWrapper } from '../../../pages/team/Styles/ViewsStyle';

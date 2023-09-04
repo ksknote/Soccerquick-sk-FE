@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import searchIcon from '../../../styles/icon/search.svg';
-import { Button } from '../../../styles/Common/CommonStyle';
+import { Button } from '../../../styles/styled-components/CommonStyle';
 import { useNavigate } from 'react-router-dom';
 import { PostType } from '../../../types/CommunityType';
 import CommunityPostList from './CommunityPostList';

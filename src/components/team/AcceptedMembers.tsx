@@ -6,7 +6,7 @@ import {
   StyledExitButton,
   StyledOption,
 } from '../../pages/team/Styles/ComponentStyle';
-import { Team } from '../../styles/Common/TeamStyle';
+import { Team } from '../../styles/styled-components/TeamStyle';
 import styled from 'styled-components';
 import { AcceptedModalProps } from '../../types/TeamPageType';
 import ballIcon from '../../styles/icon/soccerball.svg';

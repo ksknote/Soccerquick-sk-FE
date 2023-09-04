@@ -4,9 +4,12 @@ import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { userSelector } from '../../redux/modules/auth/authSelectors';
-import { BoxContainer, Button } from '../../styles/Common/CommonStyle';
-import { Comment as CommentStyle } from '../../styles/Common/CommentStyle';
-import { Team } from '../../styles/Common/TeamStyle';
+import {
+  BoxContainer,
+  Button,
+} from '../../styles/styled-components/CommonStyle';
+import { Comment as CommentStyle } from '../../styles/styled-components/CommentStyle';
+import { Team } from '../../styles/styled-components/TeamStyle';
 import ballIcon from '../../styles/icon/soccerball.svg';
 import checkIcon from '../../styles/icon/check_white.svg';
 import commentIcon from '../../styles/icon/comment.svg';

@@ -10,8 +10,8 @@ import {
 import uploadImage from '../../../utils/uploadImage';
 import alertModal from '../../commons/alertModal';
 import ImageIcon from '../../../styles/icon/ImageIcon.svg';
-import { Comment } from '../../../styles/Common/CommentStyle';
-import { Button } from '../../../styles/Common/CommonStyle';
+import { Comment } from '../../../styles/styled-components/CommentStyle';
+import { Button } from '../../../styles/styled-components/CommonStyle';
 
 function ReviewItemBody(Props: ReviewItemPropsType) {
   const { reviewItem, reviewData, setReviewData, domId, index } = Props;

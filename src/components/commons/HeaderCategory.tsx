@@ -11,8 +11,8 @@ export default function HeaderCategory() {
   const location = useLocation();
 
   const isHome = location.pathname === '/';
-  const isGroundPage = location.pathname.includes('/ground');
-  const isReviewPage = location.pathname.includes('/review');
+  const isFeildPage = location.pathname.includes('/ground');
+  const isCommunityPage = location.pathname.includes('/community');
   const isTeampage = location.pathname.includes('/teampage');
 
   return (
@@ -28,7 +28,7 @@ export default function HeaderCategory() {
         </StyledCategoryText>
 
         <StyledCategoryText
-          focused={isGroundPage}
+          focused={isFeildPage}
           onClick={() => {
             navigate('/ground');
           }}
@@ -37,7 +37,7 @@ export default function HeaderCategory() {
         </StyledCategoryText>
 
         <StyledCategoryText
-          focused={isReviewPage}
+          focused={isCommunityPage}
           onClick={() => {
             navigate('/community');
           }}

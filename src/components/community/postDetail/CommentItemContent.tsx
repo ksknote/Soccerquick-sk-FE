@@ -8,8 +8,8 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../../redux/store';
 import { fetchCommunityPost } from '../../../redux/modules/community/actions';
-import { Button } from '../../../styles/Common/CommonStyle';
-import { Comment } from '../../../styles/Common/CommentStyle';
+import { Button } from '../../../styles/styled-components/CommonStyle';
+import { Comment } from '../../../styles/styled-components/CommentStyle';
 import { CommentType } from '../../../types/CommunityType';
 import alertModal from '../../commons/alertModal';
 import ImageIcon from '../../../styles/icon/ImageIcon.svg';

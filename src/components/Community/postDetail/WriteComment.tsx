@@ -5,8 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../../redux/store';
 import { fetchCommunityPost } from '../../../redux/modules/community/actions';
 import { isLogInSelector } from '../../../redux/modules/auth/authSelectors';
-import { BoxContainer, Button } from '../../../styles/Common/CommonStyle';
-import { Comment } from '../../../styles/Common/CommentStyle';
+import {
+  BoxContainer,
+  Button,
+} from '../../../styles/styled-components/CommonStyle';
+import { Comment } from '../../../styles/styled-components/CommentStyle';
 import ImageIcon from '../../../styles/icon/ImageIcon.svg';
 import alertModal from '../../commons/alertModal';
 import uploadImage from '../../../utils/uploadImage';

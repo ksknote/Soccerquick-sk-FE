@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
-import { Wrapper } from '../../styles/Common/CommonStyle';
+import { Wrapper } from '../../styles/styled-components/CommonStyle';
 
 interface MyPageLayoutProps {
   children: React.ReactNode;

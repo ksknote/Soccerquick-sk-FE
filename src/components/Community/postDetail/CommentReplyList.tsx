@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ReplyType } from '../../../types/CommunityType';
-import { Comment } from '../../../styles/Common/CommentStyle';
+import { Comment } from '../../../styles/styled-components/CommentStyle';
 import CommentItemHeader from './CommentItemHeader';
 import CommentReplyContent from './CommentReplyContent';
 

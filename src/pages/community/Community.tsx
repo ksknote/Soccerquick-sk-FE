@@ -7,7 +7,7 @@ import CommunityPostFeed from '../../components/community/feed/CommunityFeed';
 import CommunityPostDetail from '../../components/community/postDetail/CommunityPost';
 import WriteCommunityPost from '../../components/community/writingForm/WriteCommunityPost';
 import EditComminityPost from '../../components/community/writingForm/EditComminityPost';
-import { BodyWrapper } from '../../styles/Common/CommonStyle';
+import { BodyWrapper } from '../../styles/styled-components/CommonStyle';
 function Community() {
   return (
     <BaseLayout>

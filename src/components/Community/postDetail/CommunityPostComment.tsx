@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import commentIcon from '../../../styles/icon/comment.svg';
-import { Comment } from '../../../styles/Common/CommentStyle';
+import { Comment } from '../../../styles/styled-components/CommentStyle';
 import CommentList from './CommentList';
 import WriteComment from './WriteComment';
 

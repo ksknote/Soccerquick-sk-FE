@@ -11,7 +11,7 @@ import {
   LevelUpButton,
   RestrictButton,
   ReturnButton,
-} from '../../pages/AdminPage/Styles/AdminPageStyle';
+} from '../../pages/admin/AdminPageStyle';
 import alertModal from '../commons/alertModal';
 import { DedatilModalProps } from '../../types/AdminPageType';
 import { userSelector } from '../../redux/modules/auth/authSelectors';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import DropDown from '../../../components/commons/DropDown';
-import resetIcon from '../../../styles/icon/reset_black.svg';
+import DropDown from '../../components/commons/DropDown';
+import resetIcon from '../../styles/icon/reset_black.svg';
 import {
   StyledTotalNumber,
   TeamPageBody,
@@ -15,14 +15,14 @@ import {
   ContentTitle,
   Position,
   Author,
-} from '../Styles/ViewsStyle';
-import { BoardProps } from '../../../types/TeamPageType';
-import { Button } from '../../../styles/Common/CommonStyle';
+} from './Styles/ViewsStyle';
+import { BoardProps } from '../../types/TeamPageType';
+import { Button } from '../../styles/styled-components/CommonStyle';
 import { useSelector } from 'react-redux';
-import { isLogInSelector } from '../../../redux/modules/auth/authSelectors';
-import MyPagination from '../../../components/myPage/MyPagination';
-import EmptyBox from '../../../components/commons/EmptyBox';
-import CheckPositionStatus from '../../../components/team/CheckPostionStatus';
+import { isLogInSelector } from '../../redux/modules/auth/authSelectors';
+import MyPagination from '../../components/myPage/MyPagination';
+import EmptyBox from '../../components/commons/EmptyBox';
+import CheckPositionStatus from '../../components/team/CheckPostionStatus';
 
 function TeamList(props: BoardProps) {
   const navigate = useNavigate();

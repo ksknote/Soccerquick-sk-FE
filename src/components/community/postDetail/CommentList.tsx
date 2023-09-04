@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../../redux/store';
 import { fetchCommunityPost } from '../../../redux/modules/community/actions';
 import { CommentwithRepliesType } from '../../../types/CommunityType';
-import { BoxContainer } from '../../../styles/Common/CommonStyle';
+import { BoxContainer } from '../../../styles/styled-components/CommonStyle';
 import CommentReplyList from './CommentReplyList';
 import CommentItemHeader from './CommentItemHeader';
 import CommentItemContent from './CommentItemContent';

@@ -10,7 +10,7 @@ import {
   StyledButton,
   PageSelect,
   StyledTd,
-} from '../../pages/AdminPage/Styles/AdminPageStyle';
+} from '../../pages/admin/AdminPageStyle';
 import { UserData } from '../../types/AdminPageType';
 import MyPagination from '../myPage/MyPagination';
 import { userSelector } from '../../redux/modules/auth/authSelectors';

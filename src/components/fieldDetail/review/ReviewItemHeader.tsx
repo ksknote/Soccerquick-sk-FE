@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { isLogInSelector } from '../../../redux/modules/auth/authSelectors';
 import { ReviewDataType } from '../../../types/ReviewType';
 import LikeButton from '../../commons/LikeButton';
-import { Comment } from '../../../styles/Common/CommentStyle';
+import { Comment } from '../../../styles/styled-components/CommentStyle';
 function ReviewItemHeader({ reviewItem }: { reviewItem: ReviewDataType }) {
   const isLogin = useSelector(isLogInSelector);
   const { user_icon, user_name, createdAt, likedreviews, review_id } =

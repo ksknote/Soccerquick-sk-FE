@@ -9,7 +9,7 @@ import ReactQuillEditor from '../../commons/ReactQuillEditor';
 import DropDown from '../../commons/DropDown';
 import HashTags from './HashTags';
 import Thumbnail from './Thumbnail';
-import { Button } from '../../../styles/Common/CommonStyle';
+import { Button } from '../../../styles/styled-components/CommonStyle';
 import alertModal from '../../commons/alertModal';
 
 const subjectList = [

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Post } from '../../../styles/Common/PostsStyle';
+import { Post } from '../../../styles/styled-components/PostsStyle';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
 import HtmlParser from '../../commons/HtmlParser';

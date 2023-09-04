@@ -5,7 +5,7 @@ import { PostType } from '../../../types/CommunityType';
 import commentIcon from '../../../styles/icon/comment_green.svg';
 import likeIcon from '../../../styles/icon/like_green.svg';
 import Skeleton, { Shining } from '../../commons/Skeleton';
-import { Cell } from '../../../styles/Common/CommonStyle';
+import { Cell } from '../../../styles/styled-components/CommonStyle';
 
 interface PostCardPropsType {
   post: PostType;

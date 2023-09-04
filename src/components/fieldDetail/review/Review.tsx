@@ -4,7 +4,7 @@ import WriteReview from './WriteReview';
 import ReviewItemHeader from './ReviewItemHeader';
 import ReviewItemBody from './ReviewItemBody';
 import { ReviewDataType, ReviewProps } from '../../../types/ReviewType';
-import { BoxContainer } from '../../../styles/Common/CommonStyle';
+import { BoxContainer } from '../../../styles/styled-components/CommonStyle';
 
 export default function Review({ review, dom_id }: ReviewProps) {
   const [reviewData, setReviewData] = useState<ReviewDataType[]>(review);

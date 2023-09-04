@@ -1,5 +1,5 @@
 import React from 'react';
-import { Comment } from '../../../styles/Common/CommentStyle';
+import { Comment } from '../../../styles/styled-components/CommentStyle';
 import { CommentType } from '../../../types/CommunityType';
 import ballIcon from '../../../styles/icon/soccerball.svg';
 

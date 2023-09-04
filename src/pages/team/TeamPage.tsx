@@ -1,11 +1,11 @@
 import React from 'react';
 import BaseLayout from '../../components/template/BaseLayout';
 import { Routes, Route } from 'react-router-dom';
-import FindingMember from './Views/FindingMember';
-import ViewPage from './Views/ViewPage';
-import SubmitPage from './Views/PostPage';
-import EditPage from './Views/EditPage';
-import { BodyWrapper } from '../../styles/Common/CommonStyle';
+import FindingMember from './FindingMember';
+import ViewPage from './TeamDetail';
+import SubmitPage from './PostPage';
+import EditPage from './EditPage';
+import { BodyWrapper } from '../../styles/styled-components/CommonStyle';
 function TeamPage() {
   return (
     <BaseLayout>

@@ -5,17 +5,16 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import './App.css';
 import MainPage from './pages/Main';
-import ReviewPage from './pages/ReviewPages/ReviewPage';
-import TeamPage from './pages/team/MainPage';
+import TeamPage from './pages/team/TeamPage';
 import SearchPage from './pages/SearchPage';
 import GroundDetail from './pages/groundDetail';
-import Admin from './pages/AdminPage/Views/MainPage';
+import Admin from './pages/admin/MainPage';
 import { MyPage } from './pages/MyPage';
 import MyPageHome from './components/myPage/MyPageHome';
 import MobileCategory from './components/commons/MobileCategory';
 // Redux 공부를 위한 추가 Store
 import { store, persistor } from './redux/store';
-import Auth from './pages/AuthPage/Auth';
+import Auth from './pages/auth/Auth';
 import Community from './pages/community/Community';
 
 function App() {
@@ -30,7 +29,6 @@ function App() {
             <Route path="/admin/*" element={<Admin />} />
             <Route path="/mypage/*" element={<MyPage />} />
             <Route path="/teampage/*" element={<TeamPage />} />
-            <Route path="/review/*" element={<ReviewPage />} />
             <Route path="/ground/:dom_id" element={<GroundDetail />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/community/*" element={<Community />} />

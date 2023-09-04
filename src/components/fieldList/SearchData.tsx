@@ -7,7 +7,7 @@ import MyPagination from '../myPage/MyPagination';
 import checkIcon from '../../styles/icon/check.svg';
 import { DomDataType } from '../../pages/SearchPage';
 import alertModal from '../commons/alertModal';
-import { Cell } from '../../styles/Common/CommonStyle';
+import { Cell } from '../../styles/styled-components/CommonStyle';
 // import { checkHandler } from './GroundComparison';
 
 type FindingGroundProps = {

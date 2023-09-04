@@ -4,19 +4,19 @@ import { Provider } from 'react-redux';
 // import { store, persistor } from './store/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import './App.css';
-import MainPage from './Pages/Main';
-import ReviewPage from './Pages/ReviewPages/ReviewPage';
-import TeamPage from './Pages/TeamPage/MainPage';
-import SearchPage from './Pages/SearchPage';
-import GroundDetail from './Pages/groundDetail';
-import Admin from './Pages/AdminPage/Views/MainPage';
-import { MyPage } from './Pages/MyPage';
-import MyPageHome from './Components/MyPage/MyPageHome';
-import MobileCategory from './Components/Commons/MobileCategory';
+import MainPage from './pages/Main';
+import ReviewPage from './pages/ReviewPages/ReviewPage';
+import TeamPage from './pages/TeamPage/MainPage';
+import SearchPage from './pages/SearchPage';
+import GroundDetail from './pages/groundDetail';
+import Admin from './pages/AdminPage/Views/MainPage';
+import { MyPage } from './pages/MyPage';
+import MyPageHome from './components/MyPage/MyPageHome';
+import MobileCategory from './components/Commons/MobileCategory';
 // Redux 공부를 위한 추가 Store
 import { store, persistor } from './ReduxStore/store';
-import Auth from './Pages/AuthPage/Auth';
-import Community from './Pages/\bCommunity/Community';
+import Auth from './pages/AuthPage/Auth';
+import Community from './pages/Community/Community';
 
 function App() {
   return (

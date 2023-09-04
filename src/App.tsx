@@ -15,7 +15,8 @@ import MyPageHome from './Components/MyPage/MyPageHome';
 import MobileCategory from './Components/Commons/MobileCategory';
 // Redux 공부를 위한 추가 Store
 import { store, persistor } from './ReduxStore/store';
-import Auth from '../src/Pages/AuthPage/Auth';
+import Auth from './Pages/AuthPage/Auth';
+import Community from './Pages/\bCommunity/Community';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/review/*" element={<ReviewPage />} />
             <Route path="/ground/:dom_id" element={<GroundDetail />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/community/*" element={<Community />} />
           </Routes>
         </BrowserRouter>
       </PersistGate>

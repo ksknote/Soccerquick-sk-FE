@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import useIntersect from '../../../utils/useIntersect';
-import searchIcon from '../../../assets/icon/search.svg';
 import { Button } from '../../../styles/styled-components/CommonStyle';
 import { PostType } from '../../../types/CommunityType';
+import CommunitySearch from './CommunitySearch';
 import CommunityPostList from './CommunityPostList';
 import Loading from '../../commons/Loading';
+import debounce from '../../../utils/debounce';
 
 function CommunityPostFeed() {
   const navigate = useNavigate();
@@ -15,6 +16,18 @@ function CommunityPostFeed() {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isFetchingEnded, setIsFetchingEnded] = useState(false);
+  const [searchKeyword, setSearchKeyword] = useState('');
+
+  const keywordChageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchKeyword(e.target.value);
+  };
+
+  useEffect(() => {
+    setPostData([]);
+    setPage(1);
+    setIsFetchingEnded(false);
+    debounce(fetchData, 300);
+  }, [searchKeyword]);
 
   const targetRef = useIntersect(
     () => {
@@ -27,7 +40,7 @@ function CommunityPostFeed() {
     if (isFetchingEnded) return;
     setIsLoading(true);
 
-    const url = `${process.env.REACT_APP_API_URL}/communities?page=${page}&itemsPerPage=12`;
+    const url = `${process.env.REACT_APP_API_URL}/communities?keyword=${searchKeyword}&page=${page}&itemsPerPage=12`;
     const config = {
       withCredentials: true,
     };
@@ -48,10 +61,10 @@ function CommunityPostFeed() {
 
   return (
     <>
-      <SearchBar>
-        <input type="text" placeholder="키워드로 검색" />
-        <img src={searchIcon} alt="검색" />
-      </SearchBar>
+      <CommunitySearch
+        keywordChageHandler={keywordChageHandler}
+        searchKeyword={searchKeyword}
+      />
       <Nav>
         <SortTabs>
           <span>최신순</span>
@@ -69,41 +82,6 @@ function CommunityPostFeed() {
 }
 
 export default CommunityPostFeed;
-
-const SearchBar = styled.div`
-  width: 100%;
-  height: 5rem;
-  display: grid;
-  grid-template-columns: 1fr 4rem;
-  border-radius: 0.6rem;
-  background: #f0f0f0cc;
-  margin: 1rem auto;
-  padding: 0.8rem;
-  input {
-    color: #7a7a7a;
-    border: none;
-    background: none;
-    height: 100%;
-    padding-left: 1rem;
-    ::placeholder {
-      color: #7a7a7a;
-      font-size: 1.5rem;
-      font-weight: 400;
-    }
-  }
-  img {
-    height: 100%;
-    width: 2.5rem;
-    cursor: pointer;
-  }
-  @media (min-width: 768px) {
-    width: 100%;
-    height: 5rem;
-    font-size: 2rem;
-    line-height: 2.2rem;
-    margin: 0 auto;
-  }
-`;
 
 const Nav = styled.nav`
   display: flex;

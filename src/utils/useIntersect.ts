@@ -14,7 +14,6 @@ const useIntersect = (
     (entries: IntersectionObserverEntry[]) => {
       const entry = entries[0];
       if (entry.isIntersecting) {
-        console.log('노출됨');
         onIntersect(); //타겟이 뷰포트에 노출된 경우
       }
     },

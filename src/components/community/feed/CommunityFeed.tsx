@@ -7,10 +7,11 @@ import { Button } from '../../../styles/styled-components/CommonStyle';
 import { PostType } from '../../../types/CommunityType';
 import CommunitySearch from './CommunitySearch';
 import CommunityPostList from './CommunityPostList';
+import CommunityFeedSorter from './CommunityFeedSorter';
 import Loading from '../../commons/Loading';
 import debounce from '../../../utils/debounce';
 
-enum SortEnum {
+export enum SortEnum {
   Latest = 'Latest',
   Comment = 'Comment',
 }
@@ -18,7 +19,6 @@ enum SortEnum {
 function CommunityPostFeed() {
   const navigate = useNavigate();
   const [postData, setPostData] = useState<PostType[]>([]);
-  const [sortedData, setSortedData] = useState<PostType[]>([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isFetchingEnded, setIsFetchingEnded] = useState(false);
@@ -35,7 +35,6 @@ function CommunityPostFeed() {
     setIsFetchingEnded(false);
     debounce(fetchData, 300);
   }, [searchKeyword, sortType]);
-  console.log(page);
 
   const targetRef = useIntersect(
     () => {
@@ -74,10 +73,7 @@ function CommunityPostFeed() {
         searchKeyword={searchKeyword}
       />
       <Nav>
-        <SortTabs>
-          <span onClick={() => setSortType(SortEnum.Latest)}>최신순</span>
-          <span onClick={() => setSortType(SortEnum.Comment)}>댓글순</span>
-        </SortTabs>
+        <CommunityFeedSorter sortType={sortType} setSortType={setSortType} />
         <Button.GreenBig onClick={() => navigate('./submit')}>
           새 글 작성
         </Button.GreenBig>
@@ -96,22 +92,6 @@ const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 0;
-`;
-
-const SortTabs = styled.div`
-  display: flex;
-  gap: 1rem;
-  font-size: 1.5rem;
-  color: #7a7a7a;
-  cursor: pointer;
-  span:before {
-    content: '•';
-    padding-right: 0.5rem;
-    font-size: 1.7rem;
-  }
-  @media (min-width: 1024px) {
-    font-size: 1.5rem;
-  }
 `;
 
 const Target = styled.div<{ isFetchingEnded: boolean }>`

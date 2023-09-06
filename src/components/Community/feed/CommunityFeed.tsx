@@ -13,7 +13,8 @@ function CommunityPostFeed() {
   const [postData, setPostData] = useState<PostType[]>([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [isFetchingEnd, setIsFetchingEnd] = useState(false);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [isFetchingEnded, setIsFetchingEnded] = useState(false);
 
   const targetRef = useIntersect(
     () => {
@@ -23,7 +24,7 @@ function CommunityPostFeed() {
   );
 
   const fetchData = () => {
-    if (isFetchingEnd) return;
+    if (isFetchingEnded) return;
     setIsLoading(true);
 
     const url = `${process.env.REACT_APP_API_URL}/communities?page=${page}&itemsPerPage=12`;
@@ -34,11 +35,13 @@ function CommunityPostFeed() {
       .get(url, config)
       .then((res) => {
         if (res.status === 204) {
-          setIsFetchingEnd(true);
+          setIsFetchingEnded(true);
         } else {
           setPostData((prev) => [...prev, ...res.data.data]);
           setPage((prev) => prev + 1);
+          console.log('fetching');
         }
+
         setIsLoading(false);
       })
       .catch((e) => console.error(e));
@@ -60,7 +63,7 @@ function CommunityPostFeed() {
         </Button.GreenBig>
       </Nav>
       <CommunityPostList postData={postData} isLoading={isLoading} />
-      <Target ref={targetRef}></Target>
+      <Target ref={targetRef} isFetchingEnded={isFetchingEnded}></Target>
     </>
   );
 }
@@ -125,6 +128,7 @@ const SortTabs = styled.div`
   }
 `;
 
-const Target = styled.div`
+const Target = styled.div<{ isFetchingEnded: boolean }>`
+  display: ${({ isFetchingEnded }) => isFetchingEnded && 'none'};
   height: 3rem;
 `;

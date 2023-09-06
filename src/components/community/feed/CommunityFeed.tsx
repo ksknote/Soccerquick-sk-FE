@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import axios from 'axios';
 import useIntersect from '../../../utils/useIntersect';
 import searchIcon from '../../../assets/icon/search.svg';
-import loadingGif from '../../../assets/icon/loading.gif';
 import { Button } from '../../../styles/styled-components/CommonStyle';
 import { PostType } from '../../../types/CommunityType';
 import CommunityPostList from './CommunityPostList';
+import Loading from '../../commons/Loading';
 
 function CommunityPostFeed() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ function CommunityPostFeed() {
     () => {
       fetchData();
     },
-    { threshold: 0, rootMargin: '10px' }
+    { threshold: 0, rootMargin: '200px' }
   );
 
   const fetchData = () => {
@@ -39,7 +39,6 @@ function CommunityPostFeed() {
         } else {
           setPostData((prev) => [...prev, ...res.data.data]);
           setPage((prev) => prev + 1);
-          console.log('fetching');
         }
 
         setIsLoading(false);
@@ -47,7 +46,6 @@ function CommunityPostFeed() {
       .catch((e) => console.error(e));
   };
 
-  console.log(isLoading);
   return (
     <>
       <SearchBar>
@@ -64,9 +62,7 @@ function CommunityPostFeed() {
         </Button.GreenBig>
       </Nav>
       <CommunityPostList postData={postData} isLoading={isLoading} />
-      <Loading isLoading={isLoading}>
-        <img src={loadingGif} alt="loading" />
-      </Loading>
+      {isLoading && <Loading />}
       <Target ref={targetRef} isFetchingEnded={isFetchingEnded}></Target>
     </>
   );
@@ -129,20 +125,6 @@ const SortTabs = styled.div`
   }
   @media (min-width: 1024px) {
     font-size: 1.5rem;
-  }
-`;
-
-const Loading = styled.div<{ isLoading: boolean }>`
-  display: ${({ isLoading }) => (isLoading ? 'flex' : 'none')};
-  height: 10rem;
-  justify-content: center;
-  align-items: center;
-  img {
-    width: 5rem;
-    height: 5rem;
-  }
-  @media (min-width: 1024px) {
-    height: 20rem;
   }
 `;
 

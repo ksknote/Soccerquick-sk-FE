@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import loadingGif from '../../../assets/icon/loading.gif';
+import loadingGif from '../../assets/icon/loading.gif';
 
 function Loading() {
   return (

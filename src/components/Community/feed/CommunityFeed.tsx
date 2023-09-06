@@ -10,13 +10,20 @@ import CommunityPostList from './CommunityPostList';
 import Loading from '../../commons/Loading';
 import debounce from '../../../utils/debounce';
 
+enum SortEnum {
+  Latest = 'Latest',
+  Comment = 'Comment',
+}
+
 function CommunityPostFeed() {
   const navigate = useNavigate();
   const [postData, setPostData] = useState<PostType[]>([]);
+  const [sortedData, setSortedData] = useState<PostType[]>([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isFetchingEnded, setIsFetchingEnded] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState('');
+  const [sortType, setSortType] = useState<SortEnum>(SortEnum.Latest);
 
   const keywordChageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(e.target.value);
@@ -27,7 +34,8 @@ function CommunityPostFeed() {
     setPage(1);
     setIsFetchingEnded(false);
     debounce(fetchData, 300);
-  }, [searchKeyword]);
+  }, [searchKeyword, sortType]);
+  console.log(page);
 
   const targetRef = useIntersect(
     () => {
@@ -40,7 +48,7 @@ function CommunityPostFeed() {
     if (isFetchingEnded) return;
     setIsLoading(true);
 
-    const url = `${process.env.REACT_APP_API_URL}/communities?keyword=${searchKeyword}&page=${page}&itemsPerPage=12`;
+    const url = `${process.env.REACT_APP_API_URL}/communities?keyword=${searchKeyword}&sort=${sortType}&page=${page}&itemsPerPage=12`;
     const config = {
       withCredentials: true,
     };
@@ -67,8 +75,8 @@ function CommunityPostFeed() {
       />
       <Nav>
         <SortTabs>
-          <span>최신순</span>
-          <span>댓글순</span>
+          <span onClick={() => setSortType(SortEnum.Latest)}>최신순</span>
+          <span onClick={() => setSortType(SortEnum.Comment)}>댓글순</span>
         </SortTabs>
         <Button.GreenBig onClick={() => navigate('./submit')}>
           새 글 작성

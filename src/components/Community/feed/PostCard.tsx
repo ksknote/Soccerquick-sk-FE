@@ -25,6 +25,7 @@ function PostCard({ post, index }: PostCardPropsType) {
   return (
     <Post
       onClick={() => navigate(`./${post.post_id}`, { state: { data: post } })}
+      visible={true}
     >
       <PostImage>
         {post.thumbnail ? (
@@ -82,12 +83,12 @@ export function PostCardSkeleton() {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setIsSkeletonVisible(true);
-    }, 500);
+    }, 200);
     return () => clearTimeout(timeoutId);
   }, []);
 
   return (
-    <Post>
+    <Post visible={isSkeletonVisible}>
       <PostImage>
         <SkeletonCover visible={isSkeletonVisible}></SkeletonCover>
       </PostImage>
@@ -116,8 +117,8 @@ export function PostCardSkeleton() {
 
 export default PostCard;
 
-const Post = styled.li`
-  display: flex;
+const Post = styled.li<{ visible: boolean }>`
+  display: ${({ visible }) => (visible ? 'flex' : 'none')};
   flex-direction: column;
   height: 100%;
   min-height: 16rem;

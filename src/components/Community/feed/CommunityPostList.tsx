@@ -6,17 +6,23 @@ import PostCard, { PostCardSkeleton } from './PostCard';
 interface CommunityPostListPropsType {
   postData: PostType[];
   isLoading: boolean;
+  isFetchingEnded: boolean;
 }
 
 function CommunityPostList({
   postData,
   isLoading,
+  isFetchingEnded,
 }: CommunityPostListPropsType) {
+  if (postData.length === 0 && !isLoading && isFetchingEnded)
+    return <Wrapper>게시글이 없습니다.</Wrapper>;
+
   return (
     <PostList>
-      {postData.map((post: PostType, index: number) => (
-        <PostCard post={post} index={index} key={post.post_id} />
-      ))}
+      {postData &&
+        postData.map((post: PostType, index: number) => (
+          <PostCard post={post} index={index} key={post.post_id} />
+        ))}
       {isLoading &&
         Array.from({ length: 8 }).map((_, index) => (
           <PostCardSkeleton key={index} />
@@ -26,6 +32,15 @@ function CommunityPostList({
 }
 
 export default CommunityPostList;
+
+const Wrapper = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: gray;
+  padding-top: 10rem;
+`;
 
 const PostList = styled.ul`
   display: grid;

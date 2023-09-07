@@ -54,13 +54,13 @@ function CommunityPostFeed() {
     axios
       .get(url, config)
       .then((res) => {
+        let newPosts = res.data.data;
         if (res.status === 204) {
           setIsFetchingEnded(true);
         } else {
-          setPostData((prev) => [...prev, ...res.data.data]);
           setPage((prev) => prev + 1);
+          setPostData((prev) => [...prev, ...newPosts]);
         }
-
         setIsLoading(false);
       })
       .catch((e) => console.error(e));
@@ -78,7 +78,11 @@ function CommunityPostFeed() {
           새 글 작성
         </Button.GreenBig>
       </Nav>
-      <CommunityPostList postData={postData} isLoading={isLoading} />
+      <CommunityPostList
+        postData={postData}
+        isLoading={isLoading}
+        isFetchingEnded={isFetchingEnded}
+      />
       {isLoading && <Loading />}
       <Target ref={targetRef} isFetchingEnded={isFetchingEnded}></Target>
     </>

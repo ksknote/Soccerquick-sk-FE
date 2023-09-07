@@ -15,12 +15,12 @@ import {
   Position,
   Author,
   TeamMemberList,
-} from '../../../pages/team/Styles/ViewsStyle';
+} from '../../team/Styles/ViewsStyle';
 import { GroupPost } from '../../../pages/MyPage';
 import MyPageHeader from '../MyPageHeader';
 import EmptyBox from '../../commons/EmptyBox';
-import Accepted from '../../team/AcceptedMembers';
-import CheckPositionStatus from '../../team/CheckPostionStatus';
+import MemberListModal from '../../team/postDetail/MemberListModal';
+import CheckPositionStatus from '../../team/feed/CheckPostionStatus';
 
 function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
   const [acceptModal, setAcceptModal] = useState(false);
@@ -82,7 +82,7 @@ function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
         </TeamPageBody>
       </BodyContainer>
       {acceptModal && (
-        <Accepted
+        <MemberListModal
           setAcceptModal={setAcceptModal}
           accept={data.accept}
           total={data.playerNeed + data.gkNeed}

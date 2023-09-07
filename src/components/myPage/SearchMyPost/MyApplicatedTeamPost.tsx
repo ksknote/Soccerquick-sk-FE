@@ -1,8 +1,8 @@
 import React from 'react';
-import ViewPage from '../../../pages/team/TeamDetail';
+import ViewPage from '../../team/postDetail/TeamDetail';
 import MobileHeader from '../../MobileHeader';
 import MyPageHeader from '../MyPageHeader';
-import { MyTeamPostWrapper } from '../../../pages/team/Styles/ViewsStyle';
+import { MyTeamPostWrapper } from '../../team/Styles/ViewsStyle';
 
 function MyApplicatedTeamPost() {
   return (

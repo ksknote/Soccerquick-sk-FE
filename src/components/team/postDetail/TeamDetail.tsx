@@ -2,24 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import 'react-quill/dist/quill.snow.css';
-import HtmlParser from '../../components/commons/HtmlParser';
+import HtmlParser from '../../commons/HtmlParser';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchData } from '../../redux/modules/team/actions';
-import { RootState, AppDispatch } from '../../redux/store';
-import Accepted from '../../components/team/AcceptedMembers';
-import { Post } from '../../styles/styled-components/PostsStyle';
+import { fetchData } from '../../../redux/modules/team/actions';
+import { RootState, AppDispatch } from '../../../redux/store';
+import MemberListModal from './MemberListModal';
+import { Post } from '../../../styles/styled-components/PostsStyle';
 import {
   isLogInSelector,
   userSelector,
-} from '../../redux/modules/auth/authSelectors';
-import SubmitForFindingMember from '../../components/team/SubmitForFindingMember';
-import TeamPageComments from '../../components/team/TeamPageComments';
-import chevronIcon from '../../assets/icon/chevron_green.svg';
-import ballIcon from '../../assets/icon/soccerball.svg';
-import playerIcon from '../../assets/icon/player.svg';
-import goalKeeperIcon from '../../assets/icon/goalkeeper.svg';
+} from '../../../redux/modules/auth/authSelectors';
+import RegisterModal from './RegisterModal';
+import TeamPageComments from '../TeamPageComments';
+import chevronIcon from '../../../assets/icon/chevron_green.svg';
+import ballIcon from '../../../assets/icon/soccerball.svg';
+import playerIcon from '../../../assets/icon/player.svg';
+import goalKeeperIcon from '../../../assets/icon/goalkeeper.svg';
 import axios from 'axios';
-import alertModal from '../../components/commons/alertModal';
+import alertModal from '../../commons/alertModal';
 
 function DetailPage() {
   // 글 작성자인지 확인하기 위한 데이터
@@ -242,13 +242,13 @@ function DetailPage() {
                 )}
             </StyledFooter>
             {showModal && (
-              <SubmitForFindingMember
+              <RegisterModal
                 setShowModal={setShowModal}
                 groupId={data.group_id}
               />
             )}
             {acceptModal && (
-              <Accepted
+              <MemberListModal
                 setAcceptModal={setAcceptModal}
                 accept={data.accept}
                 total={data.playerNeed + data.gkNeed}

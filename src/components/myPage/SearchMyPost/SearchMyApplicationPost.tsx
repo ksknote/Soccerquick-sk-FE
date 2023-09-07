@@ -16,9 +16,9 @@ import {
   Position,
   Author,
   AcceptedDespcription,
-} from '../../../pages/team/Styles/ViewsStyle';
+} from '../../team/Styles/ViewsStyle';
 import EmptyBox from '../../commons/EmptyBox';
-import CheckPositionStatus from '../../team/CheckPostionStatus';
+import CheckPositionStatus from '../../team/feed/CheckPostionStatus';
 
 function SearchMyApplicationPost({
   filteredItems,

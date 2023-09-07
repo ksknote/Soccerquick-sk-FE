@@ -1,11 +1,11 @@
 import React, { useMemo, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { RootState } from '../../../redux/store';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import FindingMembers from '../../components/team/FindingMembers';
-import alertModal from '../../components/commons/alertModal';
+import PositionInput from './PositionInput';
+import alertModal from '../../commons/alertModal';
 import axios from 'axios';
 import {
   StyledContainer,
@@ -15,7 +15,7 @@ import {
   StyledTitleInputText,
   StyledInputText,
   StyledButton,
-} from '../../styles/styled-components/PostsStyle';
+} from '../../../styles/styled-components/PostsStyle';
 
 function EditPage() {
   const quillRef = useRef<ReactQuill>(null);
@@ -236,7 +236,7 @@ function EditPage() {
 
       <StyledContainer>
         {category === '팀원 구해요' && (
-          <FindingMembers
+          <PositionInput
             player={player}
             setPlayer={setPlayer}
             gk={gk}

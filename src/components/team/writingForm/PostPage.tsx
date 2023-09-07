@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FilteringOptions from '../../components/commons/FilteringOptions';
-import DropDown from '../../components/commons/DropDown';
+import FilteringOptions from '../../commons/FilteringOptions';
+import DropDown from '../../commons/DropDown';
 import 'react-quill/dist/quill.snow.css';
 import {
   StyledContainer,
@@ -11,11 +11,11 @@ import {
   StyledTitleInputText,
   StyledInputText,
   StyledButton,
-} from '../../styles/styled-components/PostsStyle';
-import SubmitFindingMembers from '../../components/team/FindingMembers';
-import alertModal from '../../components/commons/alertModal';
+} from '../../../styles/styled-components/PostsStyle';
+import PositionInput from './PositionInput';
+import alertModal from '../../commons/alertModal';
 import axios from 'axios';
-import ReactQuillEditor from '../../components/commons/ReactQuillEditor';
+import ReactQuillEditor from '../../commons/ReactQuillEditor';
 
 function SubmitPage() {
   const [boardCategory, setBoardCategory] = React.useState('카테고리');
@@ -154,7 +154,7 @@ function SubmitPage() {
 
       <StyledContainer>
         {boardCategory === '팀원 구해요' && (
-          <SubmitFindingMembers
+          <PositionInput
             player={player}
             setPlayer={setPlayer}
             gk={gk}

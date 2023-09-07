@@ -1,13 +1,13 @@
 import React from 'react';
-import { FindingMemberProps } from '../../types/TeamPageType';
+import { FindingMemberProps } from '../../../types/TeamPageType';
 import {
   StyledBox,
   StyledTitle,
   StyledSmallTitle,
   StyledInputNumber,
-} from '../../pages/team/Styles/ComponentStyle';
+} from '../Styles/ComponentStyle';
 
-function FindingMembers(props: FindingMemberProps) {
+function PositionInput(props: FindingMemberProps) {
   const {
     gk,
     setGk,
@@ -92,4 +92,4 @@ function FindingMembers(props: FindingMemberProps) {
   );
 }
 
-export default FindingMembers;
+export default PositionInput;

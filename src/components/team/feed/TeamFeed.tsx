@@ -1,11 +1,11 @@
 import React from 'react';
-import FilteringOptions from '../../components/commons/FilteringOptions';
-import { StyledHeader } from './Styles/ViewsStyle';
-import { DataProps, FindMemberFilter } from '../../types/TeamPageType';
+import FilteringOptions from '../../commons/FilteringOptions';
+import { StyledHeader } from '../Styles/ViewsStyle';
+import { DataProps, FindMemberFilter } from '../../../types/TeamPageType';
 import axios from 'axios';
-import TeamList from './TeamList';
+import TeamList from './TeamPostList';
 
-function FindingMember() {
+function TeamFeed() {
   const [status, setStatus] = React.useState('');
   const [area, setArea] = React.useState('');
 
@@ -139,4 +139,4 @@ function FindingMember() {
   );
 }
 
-export default FindingMember;
+export default TeamFeed;

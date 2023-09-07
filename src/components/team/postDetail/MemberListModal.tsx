@@ -5,13 +5,13 @@ import {
   StyledHeader,
   StyledExitButton,
   StyledOption,
-} from '../../pages/team/Styles/ComponentStyle';
-import { Team } from '../../styles/styled-components/TeamStyle';
+} from '../Styles/ComponentStyle';
+import { Team } from '../../../styles/styled-components/TeamStyle';
 import styled from 'styled-components';
-import { AcceptedModalProps } from '../../types/TeamPageType';
-import ballIcon from '../../assets/icon/soccerball.svg';
+import { AcceptedModalProps } from '../../../types/TeamPageType';
+import ballIcon from '../../../assets/icon/soccerball.svg';
 
-function Accepted(props: AcceptedModalProps) {
+function MemberListModal(props: AcceptedModalProps) {
   const { setAcceptModal, accept, total, now } = props;
   const [wideView, setWideView] = React.useState(true);
   const [gridView, setGridView] = React.useState(false);
@@ -136,7 +136,7 @@ function Accepted(props: AcceptedModalProps) {
   );
 }
 
-export default Accepted;
+export default MemberListModal;
 
 export const StyledBody = styled.div`
   width: 100%;

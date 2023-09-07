@@ -1,9 +1,9 @@
 import React from 'react';
-import DropDown from '../commons/DropDown';
-import FILTERING_OPTIONS from '../commons/FilteringOptions';
+import DropDown from '../../commons/DropDown';
+import FILTERING_OPTIONS from '../../commons/FilteringOptions';
 import axios from 'axios';
-import { SumbitModalProps } from '../../types/TeamPageType';
-import alertModal from '../commons/alertModal';
+import { SumbitModalProps } from '../../../types/TeamPageType';
+import alertModal from '../../commons/alertModal';
 import {
   Modal,
   ModalPage,
@@ -18,9 +18,9 @@ import {
   StyledButtonContainer,
   StyledButton,
   StyledExitButton,
-} from '../../pages/team/Styles/ComponentStyle';
+} from '../Styles/ComponentStyle';
 
-function DetailModal(props: SumbitModalProps) {
+function RegisterModal(props: SumbitModalProps) {
   const { groupId, setShowModal } = props;
   const [position, setPosition] = React.useState('포지션');
   const [skill, setSkill] = React.useState('실력수준');
@@ -134,4 +134,4 @@ function DetailModal(props: SumbitModalProps) {
   );
 }
 
-export default DetailModal;
+export default RegisterModal;

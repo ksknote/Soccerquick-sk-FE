@@ -6,6 +6,10 @@ export const Post = {
     border: 0.1rem solid lightgray;
     border-radius: 2rem;
     padding: 1.5rem;
+    @media (min-width: 768px) {
+      width: 768px;
+      margin: auto;
+    }
     @media (min-width: 1024px) {
       padding: 2.5rem;
       border: 0.1rem solid lightgray;

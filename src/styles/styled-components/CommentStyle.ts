@@ -4,6 +4,10 @@ export const Comment = {
   Container: styled.div`
     width: 100%;
     margin: 1rem auto;
+    @media (min-width: 768px) {
+      width: 768px;
+      margin: auto;
+    }
   `,
 
   Title: styled.h2`

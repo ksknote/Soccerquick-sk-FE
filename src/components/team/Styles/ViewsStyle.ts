@@ -39,9 +39,6 @@ export const Teampage = styled.div`
 `;
 
 export const StyledTotalNumber = styled.p`
-  /* display: flex;
-  align-items: center; */
-  padding-left: 1rem;
   font-size: 1.5rem;
   color: #5e5d5d;
   @media (min-width: 1024px) {

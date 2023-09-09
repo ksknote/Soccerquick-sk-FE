@@ -276,7 +276,7 @@ export const StyledDetailDiv = styled.div`
   padding: 1rem 0;
 
   @media (min-width: 1024px) {
-    font-size: 2rem;
+    font-size: 1.8rem;
     padding: 2rem 0;
   }
 `;
@@ -355,7 +355,7 @@ export const StyledPositionName = styled.div`
     font-weight: 500;
   }
   @media (min-width: 1024px) {
-    font-size: 2rem;
+    font-size: 1.8rem;
     div:last-child {
       font-size: 1.6rem;
     }
@@ -386,9 +386,9 @@ export const StyledPositionDetail = styled.div<{ color?: string }>`
   }
   @media (min-width: 1024px) {
     p {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
       span {
-        font-size: 3rem;
+        font-size: 2rem;
         padding: 0 0.4rem;
       }
     }

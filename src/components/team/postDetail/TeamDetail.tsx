@@ -100,10 +100,12 @@ function DetailPage() {
                 </div>
               </Post.BoardName>
 
-              <h1>
-                <span>[{data.status}] </span>
-                {data.title}
-              </h1>
+              <Post.Title>
+                <h1>
+                  <span>[{data.status}] </span>
+                  {data.title}
+                </h1>
+              </Post.Title>
               <Post.AuthorDiv>
                 <Post.ImgDiv>
                   <img
@@ -283,8 +285,10 @@ export const StyledDetailDiv = styled.div`
 
 export const StyledSubTitle = styled.h3`
   font-size: 1.6rem;
+  font-weight: 500;
+  color: #2f2f2f;
   @media (min-width: 1024px) {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 `;
 

@@ -72,9 +72,11 @@ function CommunityPostContents() {
                 커뮤니티
               </div>
             </Post.BoardName>
-
             <Post.Header>
-              <h1>{postData.title}</h1>
+              <Post.Title>
+                <Subject>{postData.subject}</Subject>
+                <h1>{postData.title}</h1>
+              </Post.Title>
               <Post.AuthorDiv>
                 <Post.ImgDiv>
                   <img
@@ -94,7 +96,19 @@ function CommunityPostContents() {
             </Post.Header>
           </div>
           <PostBody>
+            {postData.thumbnail && (
+              <Thumbnail>
+                <img src={postData.thumbnail} alt="" />
+              </Thumbnail>
+            )}
             <HtmlParser data={postData.description} />
+            {postData.hashTags.length > 0 && (
+              <HashTags>
+                {postData.hashTags.map((hashTag) => (
+                  <HashTag>{hashTag}</HashTag>
+                ))}
+              </HashTags>
+            )}
           </PostBody>
           <Post.AuthorButtonContainer>
             {isAuthor && (
@@ -116,4 +130,46 @@ export default CommunityPostContents;
 
 const PostBody = styled.div`
   padding: 2rem 0;
+`;
+
+const Subject = styled.p`
+  color: gray;
+  font-size: 1.3rem;
+  @media (min-width: 1024px) {
+    font-size: 1.6rem;
+    padding-bottom: 0.5rem;
+  }
+`;
+
+const Thumbnail = styled.div`
+  max-width: 600px;
+  margin: auto;
+  padding-bottom: 2rem;
+  img {
+    object-fit: cover;
+  }
+  @media (min-width: 768px) {
+    padding-bottom: 3rem;
+  }
+`;
+
+const HashTags = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
+const HashTag = styled.span`
+  padding: 0.3rem 0.8rem;
+  margin-bottom: 0.875rem;
+  margin-right: 0.875rem;
+  border: 0.1rem solid #eeeeee;
+  border-radius: 2rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #5aaf5a;
+  @media (min-width: 1024px) {
+    font-size: 1.4rem;
+    padding: 0.5rem 1rem;
+  }
 `;

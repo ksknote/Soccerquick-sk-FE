@@ -19,17 +19,27 @@ export const Post = {
   Header: styled.div`
     padding-bottom: 1.5rem;
     border-bottom: 0.1rem solid lightgray;
-    h1 {
-      font-size: 1.8em;
-      font-weight: 600;
-      margin: 1.5rem 0;
-    }
     @media (min-width: 1024px) {
       padding-bottom: 2rem;
       border-bottom: 0.1rem solid lightgray;
+    }
+  `,
+
+  Title: styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2.5rem 0;
+    h1 {
+      margin: 0;
+      font-size: 2.3em;
+      font-weight: 500;
+    }
+    @media (min-width: 1024px) {
+      margin: 2.7rem 0;
       h1 {
-        font-size: 2.5em;
-        margin: 2.5rem 0;
+        font-size: 2.5rem;
       }
     }
   `,

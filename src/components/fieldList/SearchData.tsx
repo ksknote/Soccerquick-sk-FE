@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import SearchFilter from './SearchFilter';
 import GroundListSkeleton from './groundListSkeleton';
-import MyPagination from '../myPage/MyPagination';
+import MyPagination from '../myPages/MyPagination';
 import checkIcon from '../../assets/icon/check.svg';
 import { DomDataType } from '../../pages/SearchPage';
 import alertModal from '../commons/alertModal';

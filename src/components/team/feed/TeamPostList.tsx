@@ -20,7 +20,7 @@ import { BoardProps } from '../../../types/TeamPageType';
 import { Button } from '../../../styles/styled-components/CommonStyle';
 import { useSelector } from 'react-redux';
 import { isLogInSelector } from '../../../redux/modules/auth/authSelectors';
-import MyPagination from '../../myPage/MyPagination';
+import MyPagination from '../../myPages/MyPagination';
 import EmptyBox from '../../commons/EmptyBox';
 import CheckPositionStatus from './CheckPostionStatus';
 

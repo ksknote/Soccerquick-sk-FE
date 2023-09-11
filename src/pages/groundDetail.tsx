@@ -16,7 +16,7 @@ import starFilledIcon from '../assets/icon/star_filled.svg';
 import homeIcon from '../assets/icon/home.svg';
 import alertModal from '../components/commons/alertModal';
 import MobileHeader from '../components/MobileHeader';
-import BaseLayout from '../components/template/BaseLayout';
+import BaseLayout from '../components/templates/BaseLayout';
 
 const GroundDetail = () => {
   const [groundData, setGroundData] = useState<DomDataType>();

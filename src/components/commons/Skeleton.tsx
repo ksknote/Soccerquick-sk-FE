@@ -12,16 +12,16 @@ function Skeleton({ width, height, margin, borderRadius }: SkeletonPropsType) {
   const [isSkeletonVisible, setIsSkeletonVisible] = useState(false);
 
   //깜빡임 방지
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setIsSkeletonVisible(true);
-    }, 500);
-    return () => clearTimeout(timeoutId);
-  }, []);
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //     setIsSkeletonVisible(true);
+  //   }, 500);
+  //   return () => clearTimeout(timeoutId);
+  // }, []);
   return (
     <SkeletonLine
       style={{ width, height, margin, borderRadius }}
-      visible={isSkeletonVisible}
+      visible={true}
     ></SkeletonLine>
   );
 }

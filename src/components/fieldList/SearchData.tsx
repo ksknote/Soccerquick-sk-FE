@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import SearchFilter from './SearchFilter';
-import GroundListSkeleton from './groundListSkeleton';
+import GroundListSkeleton from './FieldListSkeleton';
 import MyPagination from '../myPages/MyPagination';
 import checkIcon from '../../assets/icon/check.svg';
 import { DomDataType } from '../../pages/SearchPage';
 import alertModal from '../commons/alertModal';
 import { Cell } from '../../styles/styled-components/CommonStyle';
+import FieldListSkeleton from './FieldListSkeleton';
 // import { checkHandler } from './GroundComparison';
 
 type FindingGroundProps = {
@@ -186,7 +187,9 @@ function FindingGround(props: FindingGroundProps) {
                 ))}
               </tbody>
             ) : (
-              <GroundListSkeleton />
+              Array.from({ length: 10 }).map((_, index) => (
+                <FieldListSkeleton key={index} />
+              ))
             )}
           </table>
           <div style={{ height: '100%', width: '100%' }}> </div>
@@ -339,13 +342,18 @@ const StyledCheckboxTd = styled.td`
 
 const StyledAddressTd = styled.td`
   display: none;
+
   @media (min-width: 768px) {
     display: table-cell;
     width: 13%;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 500;
     text-align: center;
     padding-left: 0.2rem;
+  }
+  @media (min-width: 1024px) {
+    font-size: 1.6rem;
+
   }
 `;
 

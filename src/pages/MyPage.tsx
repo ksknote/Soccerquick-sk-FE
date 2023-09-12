@@ -1,19 +1,19 @@
 import react, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router';
 import axios from 'axios';
-import MyFavoriteGroundList from '../components/myPage/MyFavoriteGround/MyFavoriteGroundList';
-import SearchMyReviewPost from '../components/myPage/SearchMyPost/SearchMyReviewPost';
-import SearchMyTeamPost from '../components/myPage/SearchMyPost/SearchMyTeamPost';
-import MyTeamPost from '../components/myPage/SearchMyPost/MyTeamPost';
-import SearchMyApplicationPost from '../components/myPage/SearchMyPost/SearchMyApplicationPost';
-import MyApplicatedTeamPost from '../components/myPage/SearchMyPost/MyApplicatedTeamPost';
+import MyFavoriteGroundList from '../components/myPages/MyFavoriteGround/MyFavoriteGroundList';
+import SearchMyReviewPost from '../components/myPages/SearchMyPost/SearchMyReviewPost';
+import SearchMyTeamPost from '../components/myPages/SearchMyPost/SearchMyTeamPost';
+import MyTeamPost from '../components/myPages/SearchMyPost/MyTeamPost';
+import SearchMyApplicationPost from '../components/myPages/SearchMyPost/SearchMyApplicationPost';
+import MyApplicatedTeamPost from '../components/myPages/SearchMyPost/MyApplicatedTeamPost';
 import { useSelector } from 'react-redux';
 import { isLogInSelector } from '../redux/modules/auth/authSelectors';
 import alertModal from '../components/commons/alertModal';
-import MyPageHome from '../components/myPage/MyPageHome';
-import MyPageProfileLayout from '../components/myPage/MyPageInfo/MyPageProfileLayout';
+import MyPageHome from '../components/myPages/MyPageHome';
+import MyPageProfileLayout from '../components/myPages/MyPageInfo/MyPageProfileLayout';
 import { userSelector } from '../redux/modules/auth/authSelectors';
-import MyPageLayout from '../components/template/MyPageLayout';
+import MyPageLayout from '../components/templates/MyPageLayout';
 
 export type FormDataType = {
   user_id: string;

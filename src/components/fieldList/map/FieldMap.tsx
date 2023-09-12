@@ -5,7 +5,7 @@ import ResetIcon from '../../../assets/icon/reset_white.svg';
 import CustomMapMarker from './CustomMapMarker';
 import { DomDataType } from '../../../pages/SearchPage';
 import alertModal from '../../commons/alertModal';
-import FeildSearch from '../../search/FieldSearch';
+import FeildSearch from '../../search-test/FieldSearch';
 
 interface FieldMapType {
   searchKeyword: string;

@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FilteringOptions from '../../commons/FilteringOptions';
-import DropDown from '../../commons/DropDown';
+import FilteringOptions from '../../common/FilteringOptions';
+import DropDown from '../../common/DropDown';
 import 'react-quill/dist/quill.snow.css';
 import {
   StyledContainer,
@@ -13,9 +13,9 @@ import {
   StyledButton,
 } from '../../../styles/styled-components/PostsStyle';
 import PositionInput from './PositionInput';
-import alertModal from '../../commons/alertModal';
+import alertModal from '../../common/alertModal';
 import axios from 'axios';
-import ReactQuillEditor from '../../commons/ReactQuillEditor';
+import ReactQuillEditor from '../../common/ReactQuillEditor';
 
 function SubmitPage() {
   const [boardCategory, setBoardCategory] = React.useState('카테고리');

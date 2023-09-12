@@ -9,11 +9,11 @@ import SearchMyApplicationPost from '../components/myPages/SearchMyPost/SearchMy
 import MyApplicatedTeamPost from '../components/myPages/SearchMyPost/MyApplicatedTeamPost';
 import { useSelector } from 'react-redux';
 import { isLogInSelector } from '../redux/modules/auth/authSelectors';
-import alertModal from '../components/commons/alertModal';
+import alertModal from '../components/common/alertModal';
 import MyPageHome from '../components/myPages/MyPageHome';
 import MyPageProfileLayout from '../components/myPages/MyPageInfo/MyPageProfileLayout';
 import { userSelector } from '../redux/modules/auth/authSelectors';
-import MyPageLayout from '../components/templates/MyPageLayout';
+import MyPageLayout from '../components/template/MyPageLayout';
 
 export type FormDataType = {
   user_id: string;

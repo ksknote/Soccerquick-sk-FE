@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ImageIcon from '../../../assets/icon/ImageIcon.svg';
-import alertModal from '../../commons/alertModal';
+import alertModal from '../../common/alertModal';
 
 interface ThumbnailPropsType {
   setImageFile: React.Dispatch<React.SetStateAction<File | undefined>>;

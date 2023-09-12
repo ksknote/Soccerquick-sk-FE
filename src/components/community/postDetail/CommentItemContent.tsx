@@ -11,7 +11,7 @@ import { fetchCommunityPost } from '../../../redux/modules/community/actions';
 import { Button } from '../../../styles/styled-components/CommonStyle';
 import { Comment } from '../../../styles/styled-components/CommentStyle';
 import { CommentType } from '../../../types/CommunityType';
-import alertModal from '../../commons/alertModal';
+import alertModal from '../../common/alertModal';
 import ImageIcon from '../../../assets/icon/ImageIcon.svg';
 import uploadImage from '../../../utils/uploadImage';
 import { useNavigate } from 'react-router-dom';

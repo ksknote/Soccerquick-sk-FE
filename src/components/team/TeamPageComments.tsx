@@ -14,7 +14,7 @@ import ballIcon from '../../assets/icon/soccerball.svg';
 import checkIcon from '../../assets/icon/check_white.svg';
 import commentIcon from '../../assets/icon/comment.svg';
 import { SubmitApplicant, CommentProps } from '../../types/TeamPageType';
-import alertModal from '../commons/alertModal';
+import alertModal from '../common/alertModal';
 
 function Comment(props: CommentProps) {
   const { data, user } = props;

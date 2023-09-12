@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Post } from '../../../styles/styled-components/PostsStyle';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
-import HtmlParser from '../../commons/HtmlParser';
+import HtmlParser from '../../common/HtmlParser';
 import { useSelector } from 'react-redux';
 import {
   isLogInSelector,
@@ -13,7 +13,7 @@ import { RootState } from '../../../redux/store';
 import chevronIcon from '../../../assets/icon/chevron_green.svg';
 import ballIcon from '../../../assets/icon/soccerball.svg';
 import axios from 'axios';
-import alertModal from '../../commons/alertModal';
+import alertModal from '../../common/alertModal';
 
 function CommunityPostContents() {
   // 글 작성자인지 확인하기 위한 데이터

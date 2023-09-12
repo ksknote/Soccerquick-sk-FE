@@ -5,7 +5,7 @@ import chevronIcon from '../../../assets/icon/chevron_down.svg';
 import checkIcon from '../../../assets/icon/check.svg';
 import deleteIcon from '../../../assets/icon/delete.svg';
 import logo from '../../../assets/icon/exampleImg.svg';
-import alertModal from '../../commons/alertModal';
+import alertModal from '../../common/alertModal';
 
 interface GroundComparisonProps {
   checkedArray: DomDataType[];

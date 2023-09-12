@@ -1,6 +1,6 @@
 import react from 'react';
 import styled from 'styled-components';
-import alertModal from '../../commons/alertModal';
+import alertModal from '../../common/alertModal';
 import { FormDataType } from '../../../pages/MyPage';
 
 type MyProfileProps = {

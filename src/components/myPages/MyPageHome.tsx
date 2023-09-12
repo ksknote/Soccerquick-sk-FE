@@ -5,7 +5,7 @@ import axios from 'axios';
 import { AUTH_ACTIONS } from '../../redux/modules/auth/authSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { isLogInSelector } from '../../redux/modules/auth/authSelectors';
-import alertModal from '../commons/alertModal';
+import alertModal from '../common/alertModal';
 import reviewIcon from '../../assets/icon/myPageCategory/reviewIconBlack.svg';
 import uniformIcon from '../../assets/icon/myPageCategory/uniformIcon.svg';
 import logoutIcon from '../../assets/icon/myPageCategory/logoutIcon.svg';

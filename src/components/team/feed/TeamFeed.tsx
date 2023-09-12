@@ -1,5 +1,5 @@
 import React from 'react';
-import FilteringOptions from '../../commons/FilteringOptions';
+import FilteringOptions from '../../common/FilteringOptions';
 import { StyledHeader } from '../Styles/ViewsStyle';
 import { DataProps, FindMemberFilter } from '../../../types/TeamPageType';
 import axios from 'axios';

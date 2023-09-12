@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SearchData from '../components/fieldList/SearchData';
-import HeaderCategory from '../components/commons/HeaderCategory';
+import HeaderCategory from '../components/common/HeaderCategory';
 import GroundComparison from '../components/fieldList/fieldsComparison/GroundComparison';
 import ComparisonData from '../components/fieldList/fieldsComparison/ComparisonData';
 import FieldMap from '../components/fieldList/map/FieldMap';

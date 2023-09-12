@@ -5,12 +5,12 @@ import { RootState } from '../../../redux/store';
 import { isLogInSelector } from '../../../redux/modules/auth/authSelectors';
 import axios from 'axios';
 import styled from 'styled-components';
-import ReactQuillEditor from '../../commons/ReactQuillEditor';
-import DropDown from '../../commons/DropDown';
+import ReactQuillEditor from '../../common/ReactQuillEditor';
+import DropDown from '../../common/DropDown';
 import HashTags from './HashTags';
 import Thumbnail from './Thumbnail';
 import { Button } from '../../../styles/styled-components/CommonStyle';
-import alertModal from '../../commons/alertModal';
+import alertModal from '../../common/alertModal';
 
 const subjectList = [
   '주제를 선택해주세요.',

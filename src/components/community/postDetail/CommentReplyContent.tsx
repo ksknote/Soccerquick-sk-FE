@@ -8,7 +8,7 @@ import { fetchCommunityPost } from '../../../redux/modules/community/actions';
 import { Button } from '../../../styles/styled-components/CommonStyle';
 import { Comment } from '../../../styles/styled-components/CommentStyle';
 import { ReplyType } from '../../../types/CommunityType';
-import alertModal from '../../commons/alertModal';
+import alertModal from '../../common/alertModal';
 import ImageIcon from '../../../assets/icon/ImageIcon.svg';
 import uploadImage from '../../../utils/uploadImage';
 

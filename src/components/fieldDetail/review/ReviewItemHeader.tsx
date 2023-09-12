@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { isLogInSelector } from '../../../redux/modules/auth/authSelectors';
 import { ReviewDataType } from '../../../types/ReviewType';
-import LikeButton from '../../commons/LikeButton';
+import LikeButton from '../../common/LikeButton';
 import { Comment } from '../../../styles/styled-components/CommentStyle';
 function ReviewItemHeader({ reviewItem }: { reviewItem: ReviewDataType }) {
   const isLogin = useSelector(isLogInSelector);

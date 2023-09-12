@@ -1,9 +1,9 @@
 import React from 'react';
-import DropDown from '../../commons/DropDown';
-import FILTERING_OPTIONS from '../../commons/FilteringOptions';
+import DropDown from '../../common/DropDown';
+import FILTERING_OPTIONS from '../../common/FilteringOptions';
 import axios from 'axios';
 import { SumbitModalProps } from '../../../types/TeamPageType';
-import alertModal from '../../commons/alertModal';
+import alertModal from '../../common/alertModal';
 import {
   Modal,
   ModalPage,

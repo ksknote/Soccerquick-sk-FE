@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import DropDown from '../../commons/DropDown';
+import DropDown from '../../common/DropDown';
 import resetIcon from '../../../assets/icon/reset_black.svg';
 import {
   StyledTotalNumber,
@@ -21,7 +21,7 @@ import { Button } from '../../../styles/styled-components/CommonStyle';
 import { useSelector } from 'react-redux';
 import { isLogInSelector } from '../../../redux/modules/auth/authSelectors';
 import MyPagination from '../../myPages/MyPagination';
-import EmptyBox from '../../commons/EmptyBox';
+import EmptyBox from '../../common/EmptyBox';
 import CheckPositionStatus from './CheckPostionStatus';
 
 function TeamList(props: BoardProps) {

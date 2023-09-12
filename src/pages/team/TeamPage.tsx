@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseLayout from '../../components/templates/BaseLayout';
+import BaseLayout from '../../components/template/BaseLayout';
 import { Routes, Route } from 'react-router-dom';
 import FindingMember from '../../components/team/feed/TeamFeed';
 import ViewPage from '../../components/team/postDetail/TeamDetail';

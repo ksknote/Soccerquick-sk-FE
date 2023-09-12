@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import UserDetailModal from './UserDetailModal';
-import DropDown from '../commons/DropDown';
-import FilterlingOptions from '../commons/FilteringOptions';
+import DropDown from '../common/DropDown';
+import FilterlingOptions from '../common/FilteringOptions';
 import {
   UserManageContainer,
   UserManageContainerTable,

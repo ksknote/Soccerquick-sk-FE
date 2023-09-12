@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { PostType } from '../../../types/CommunityType';
 import commentIcon from '../../../assets/icon/comment_green.svg';
 import likeIcon from '../../../assets/icon/like_green.svg';
-import Skeleton, { Shining } from '../../commons/Skeleton';
+import Skeleton, { Shining } from '../../common/Skeleton';
 import { Cell } from '../../../styles/styled-components/CommonStyle';
 
 interface PostCardPropsType {

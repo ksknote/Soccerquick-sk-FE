@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../Header';
-import HeaderCategory from '../commons/HeaderCategory';
+import HeaderCategory from '../common/HeaderCategory';
 import Footer from '../Footer';
 import { Wrapper } from '../../styles/styled-components/CommonStyle';
 

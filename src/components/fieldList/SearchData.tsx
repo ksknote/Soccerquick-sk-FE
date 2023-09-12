@@ -6,7 +6,7 @@ import GroundListSkeleton from './FieldListSkeleton';
 import MyPagination from '../myPages/MyPagination';
 import checkIcon from '../../assets/icon/check.svg';
 import { DomDataType } from '../../pages/SearchPage';
-import alertModal from '../commons/alertModal';
+import alertModal from '../common/alertModal';
 import { Cell } from '../../styles/styled-components/CommonStyle';
 import FieldListSkeleton from './FieldListSkeleton';
 // import { checkHandler } from './GroundComparison';
@@ -353,7 +353,6 @@ const StyledAddressTd = styled.td`
   }
   @media (min-width: 1024px) {
     font-size: 1.6rem;
-
   }
 `;
 

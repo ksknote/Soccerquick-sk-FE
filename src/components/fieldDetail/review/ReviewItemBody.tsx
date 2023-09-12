@@ -8,7 +8,7 @@ import {
   userSelector,
 } from '../../../redux/modules/auth/authSelectors';
 import uploadImage from '../../../utils/uploadImage';
-import alertModal from '../../commons/alertModal';
+import alertModal from '../../common/alertModal';
 import ImageIcon from '../../../assets/icon/ImageIcon.svg';
 import { Comment } from '../../../styles/styled-components/CommentStyle';
 import { Button } from '../../../styles/styled-components/CommonStyle';

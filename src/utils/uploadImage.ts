@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import alertModal from '../components/commons/alertModal';
+import alertModal from '../components/common/alertModal';
 
 async function uploadImage(image: File | undefined) {
   if (!image) return;

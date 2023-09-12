@@ -17,7 +17,7 @@ import {
   Author,
   AcceptedDespcription,
 } from '../../team/Styles/ViewsStyle';
-import EmptyBox from '../../commons/EmptyBox';
+import EmptyBox from '../../common/EmptyBox';
 import CheckPositionStatus from '../../team/feed/CheckPostionStatus';
 
 function SearchMyApplicationPost({

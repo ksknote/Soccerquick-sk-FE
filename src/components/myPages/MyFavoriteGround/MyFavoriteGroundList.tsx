@@ -9,8 +9,8 @@ import { ProvidedElementList } from '../../fieldList/SearchData';
 import MyPagination from '../MyPagination';
 import MobileHeader from '../../MobileHeader';
 import MyPageHeader from '../MyPageHeader';
-import EmptyBox from '../../commons/EmptyBox';
-import alertModal from '../../commons/alertModal';
+import EmptyBox from '../../common/EmptyBox';
+import alertModal from '../../common/alertModal';
 import { FormDataType } from '../../../pages/MyPage';
 
 function MyFavoriteGroundList() {

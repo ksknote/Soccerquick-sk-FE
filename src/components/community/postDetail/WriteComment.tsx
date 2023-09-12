@@ -11,7 +11,7 @@ import {
 } from '../../../styles/styled-components/CommonStyle';
 import { Comment } from '../../../styles/styled-components/CommentStyle';
 import ImageIcon from '../../../assets/icon/ImageIcon.svg';
-import alertModal from '../../commons/alertModal';
+import alertModal from '../../common/alertModal';
 import uploadImage from '../../../utils/uploadImage';
 
 function WriteComment() {

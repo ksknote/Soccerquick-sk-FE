@@ -11,7 +11,7 @@ import GroundDetail from './pages/groundDetail';
 import Admin from './pages/admin/MainPage';
 import { MyPage } from './pages/MyPage';
 import MyPageHome from './components/myPages/MyPageHome';
-import MobileCategory from './components/commons/MobileCategory';
+import MobileCategory from './components/common/MobileCategory';
 // Redux 공부를 위한 추가 Store
 import { store, persistor } from './redux/store';
 import Auth from './pages/auth/Auth';

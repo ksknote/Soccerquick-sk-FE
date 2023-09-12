@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { AUTH_ACTIONS } from '../../../redux/modules/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSelector } from '../../../redux/modules/auth/authSelectors';
-import alertModal from '../../commons/alertModal';
+import alertModal from '../../common/alertModal';
 
 type MyPageInfoProps = {
   userData: FormDataType;

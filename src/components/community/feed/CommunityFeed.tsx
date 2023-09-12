@@ -8,7 +8,7 @@ import { PostType } from '../../../types/CommunityType';
 import CommunitySearch from './CommunitySearch';
 import CommunityPostList from './CommunityPostList';
 import CommunityFeedSorter from './CommunityFeedSorter';
-import Loading from '../../commons/Loading';
+import Loading from '../../common/Loading';
 import debounce from '../../../utils/debounce';
 
 export enum SortEnum {

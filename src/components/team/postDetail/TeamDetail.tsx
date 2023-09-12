@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import 'react-quill/dist/quill.snow.css';
-import HtmlParser from '../../commons/HtmlParser';
+import HtmlParser from '../../common/HtmlParser';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../../../redux/modules/team/actions';
 import { RootState, AppDispatch } from '../../../redux/store';
@@ -19,7 +19,7 @@ import ballIcon from '../../../assets/icon/soccerball.svg';
 import playerIcon from '../../../assets/icon/player.svg';
 import goalKeeperIcon from '../../../assets/icon/goalkeeper.svg';
 import axios from 'axios';
-import alertModal from '../../commons/alertModal';
+import alertModal from '../../common/alertModal';
 
 function DetailPage() {
   // 글 작성자인지 확인하기 위한 데이터

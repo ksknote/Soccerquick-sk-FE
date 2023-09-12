@@ -14,9 +14,9 @@ import Review from '../components/fieldDetail/review/Review';
 import starIcon from '../assets/icon/star.svg';
 import starFilledIcon from '../assets/icon/star_filled.svg';
 import homeIcon from '../assets/icon/home.svg';
-import alertModal from '../components/commons/alertModal';
+import alertModal from '../components/common/alertModal';
 import MobileHeader from '../components/MobileHeader';
-import BaseLayout from '../components/templates/BaseLayout';
+import BaseLayout from '../components/template/BaseLayout';
 
 const GroundDetail = () => {
   const [groundData, setGroundData] = useState<DomDataType>();

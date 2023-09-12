@@ -5,7 +5,7 @@ import { RootState } from '../../../redux/store';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import PositionInput from './PositionInput';
-import alertModal from '../../commons/alertModal';
+import alertModal from '../../common/alertModal';
 import axios from 'axios';
 import {
   StyledContainer,

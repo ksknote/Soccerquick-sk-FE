@@ -18,7 +18,7 @@ import {
 } from '../../team/Styles/ViewsStyle';
 import { GroupPost } from '../../../pages/MyPage';
 import MyPageHeader from '../MyPageHeader';
-import EmptyBox from '../../commons/EmptyBox';
+import EmptyBox from '../../common/EmptyBox';
 import MemberListModal from '../../team/postDetail/MemberListModal';
 import CheckPositionStatus from '../../team/feed/CheckPostionStatus';
 

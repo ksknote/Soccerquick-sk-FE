@@ -18,14 +18,8 @@ function CommunityPostDetail() {
 
   return (
     <>
-      <div>
-        <CommunityPostContents />
-        <CommunityPostComment />
-      </div>
-      <div>
-        <div></div>
-        <ul></ul>
-      </div>
+      <CommunityPostContents />
+      <CommunityPostComment />
     </>
   );
 }

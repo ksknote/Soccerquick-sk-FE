@@ -2,14 +2,14 @@ import { useState, FormEvent } from 'react';
 import { AUTH_ACTIONS } from '../../redux/modules/auth/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
-import alertModal from '../commons/alertModal';
+import alertModal from '../common/alertModal';
 
 import {
   Modal,
   ModalForm,
   ModalInput,
   ModalSubmitButton,
-} from '../commons/AuthComponents';
+} from '../common/AuthComponents';
 import axios from 'axios';
 import styled from 'styled-components';
 

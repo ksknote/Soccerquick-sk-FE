@@ -7,7 +7,7 @@ import {
   userSelector,
 } from '../../../redux/modules/auth/authSelectors';
 import ImageIcon from '../../../assets/icon/ImageIcon.svg';
-import alertModal from '../../commons/alertModal';
+import alertModal from '../../common/alertModal';
 import uploadImage from '../../../utils/uploadImage';
 import axios from 'axios';
 import { Comment } from '../../../styles/styled-components/CommentStyle';

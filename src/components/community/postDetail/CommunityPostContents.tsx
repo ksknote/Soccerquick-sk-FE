@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Post } from '../../../styles/styled-components/PostsStyle';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
 import HtmlParser from '../../common/HtmlParser';
 import { useSelector } from 'react-redux';
@@ -17,6 +17,8 @@ import likeIcon from '../../../assets/icon/like_red.svg';
 import shareIcon from '../../../assets/icon/share.svg';
 import axios from 'axios';
 import alertModal from '../../common/alertModal';
+import ShareModal from '../../fieldDetail/ShareModal';
+import stripHTML from '../../../utils/stripHTML';
 
 function CommunityPostContents() {
   // 글 작성자인지 확인하기 위한 데이터
@@ -28,6 +30,7 @@ function CommunityPostContents() {
   const navigate = useNavigate();
   const isAuthor = userData?.user_id === postData?.userId;
   const isAdmin = userData?.role === 'admin' || userData?.role === 'manager';
+  const [showShareModal, setShowShareModal] = useState(false);
 
   const config = {
     headers: {
@@ -81,7 +84,7 @@ function CommunityPostContents() {
                   <SideBarButton>
                     <img src={spaceLikeIcon} alt="" />
                   </SideBarButton>
-                  <SideBarButton>
+                  <SideBarButton onClick={() => setShowShareModal(true)}>
                     <img src={shareIcon} alt="" />
                     <p>공유</p>
                   </SideBarButton>
@@ -136,6 +139,14 @@ function CommunityPostContents() {
               <button onClick={deletePostHandler}>삭제</button>
             )}
           </Post.AuthorButtonContainer>
+          {showShareModal && (
+            <ShareModal
+              setShowShareModal={setShowShareModal}
+              title={postData.title}
+              description={stripHTML(postData.description)}
+              imageUrl={postData.thumbnail}
+            />
+          )}
         </>
       )}
     </Post.Wrapper>

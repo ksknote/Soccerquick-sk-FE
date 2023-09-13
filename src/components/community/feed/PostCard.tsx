@@ -6,6 +6,7 @@ import commentIcon from '../../../assets/icon/comment_green.svg';
 import likeIcon from '../../../assets/icon/like_green.svg';
 import Skeleton, { Shining } from '../../common/Skeleton';
 import { Cell } from '../../../styles/styled-components/CommonStyle';
+import stripHTML from '../../../utils/stripHTML';
 
 interface PostCardPropsType {
   post: PostType;
@@ -14,13 +15,6 @@ interface PostCardPropsType {
 
 function PostCard({ post, index }: PostCardPropsType) {
   const navigate = useNavigate();
-
-  //본문 미리보기를 위해 html string에서 순수 문자열만 추출
-  function stripHTML(htmlString: string) {
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = htmlString;
-    return tempDiv.textContent || tempDiv.innerText || '';
-  }
 
   return (
     <Post

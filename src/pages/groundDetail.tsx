@@ -220,7 +220,9 @@ const GroundDetail = () => {
       {showShareModal && groundData && (
         <ShareModal
           setShowShareModal={setShowShareModal}
-          groundData={groundData}
+          title={`[싸커퀵] ${groundData.title}`}
+          description={groundData.address.area}
+          imageUrl={groundData.stadiums[0].images[0].image}
         />
       )}
     </BaseLayout>

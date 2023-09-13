@@ -149,7 +149,7 @@ const ModalMask = styled.div`
 
 const StyledModalContainer = styled.div`
   background-color: white;
-  width: 70rem;
+  width: 90%;
   height: 32.5rem;
   z-index: 999;
   display: flex;
@@ -161,8 +161,13 @@ const StyledModalContainer = styled.div`
   left: 0;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  padding: 2rem 4rem 4rem 4rem;
+  padding: 2rem;
   margin: auto auto;
+  @media (min-width: 768px) {
+    width: 70rem;
+    height: 32.5rem;
+    padding: 2rem 4rem 4rem 4rem;
+  }
 `;
 
 const StyledModalHeader = styled.div`
@@ -199,27 +204,50 @@ const StyledShareButtons = styled.div`
       font-size: 1.6rem;
     }
   }
+  @media (max-width: 768px) {
+    button {
+      svg {
+        width: 3.5rem;
+        height: 3.5rem;
+      }
+      span {
+        font-size: 1.2rem;
+      }
+    }
+  }
 `;
 
 const StyledUrlBox = styled.div`
-  height: 6rem;
+  min-height: 6rem;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   border: 0.2rem solid #e6e6e6;
   border-radius: 1.5rem;
-  padding: 0 1rem 0 2rem;
+  padding: 1rem 1rem 1rem 2rem;
   button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 7rem;
-    height: 4rem;
+    height: 3rem;
     background: var(--color--green);
     color: white;
     border-radius: 2rem;
-    line-height: 3rem;
   }
   p {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     padding-bottom: 0.4rem;
+  }
+  @media (min-width: 768px) {
+    flex-direction: row;
+    button {
+      height: 4rem;
+    }
+    p {
+      font-size: 1.6rem;
+    }
   }
 `;
 
@@ -227,7 +255,10 @@ const KakaoShareButton = styled.button`
   background: transparent;
   padding: 0;
   img {
-    width: 48px;
+    width: 3.5rem;
     border-radius: 100%;
+    @media (min-width: 768px) {
+      width: 4.8rem;
+    }
   }
 `;

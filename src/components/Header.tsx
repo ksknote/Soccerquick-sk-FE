@@ -5,11 +5,11 @@ import MypageIcon from '../assets/icon/mypage.svg';
 import SoccerquickLogo from '../assets/icon/soccerquick-logo.png';
 import { MyPageMenu } from './common/MyPageMenu';
 import { useSelector } from 'react-redux';
-import { isLogInSelector } from '../redux/modules/auth/authSelectors';
+import { isLoginSelector } from '../redux/modules/auth/selector';
 
 const Header = () => {
   const navigate = useNavigate();
-  const isLogin = useSelector(isLogInSelector);
+  const isLogin = useSelector(isLoginSelector);
 
   return (
     <HeaderContainer>

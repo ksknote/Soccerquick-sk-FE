@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import axios from 'axios';
 import {
   userSelector,
-  isLogInSelector,
-} from '../../../redux/modules/auth/authSelectors';
+  isLoginSelector,
+} from '../../../redux/modules/auth/selector';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../../redux/store';
 import { fetchCommunityPost } from '../../../redux/modules/community/actions';
@@ -23,7 +23,7 @@ interface CommentContentPropsType {
 function CommentItemContent({ comment }: CommentContentPropsType) {
   const dispatch = useDispatch<AppDispatch>();
   const userData = useSelector(userSelector);
-  const isLogin = useSelector(isLogInSelector);
+  const isLogin = useSelector(isLoginSelector);
   const post_id = useSelector(
     (state: RootState) => state.communityPost.post_id
   );

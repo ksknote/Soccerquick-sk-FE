@@ -8,11 +8,10 @@ import MyTeamPost from '../components/myPages/SearchMyPost/MyTeamPost';
 import SearchMyApplicationPost from '../components/myPages/SearchMyPost/SearchMyApplicationPost';
 import MyApplicatedTeamPost from '../components/myPages/SearchMyPost/MyApplicatedTeamPost';
 import { useSelector } from 'react-redux';
-import { isLogInSelector } from '../redux/modules/auth/authSelectors';
+import { isLoginSelector, userSelector } from '../redux/modules/auth/selector';
 import alertModal from '../components/common/alertModal';
 import MyPageHome from '../components/myPages/MyPageHome';
 import MyPageProfileLayout from '../components/myPages/MyPageInfo/MyPageProfileLayout';
-import { userSelector } from '../redux/modules/auth/authSelectors';
 import MyPageLayout from '../components/template/MyPageLayout';
 
 export type FormDataType = {
@@ -62,7 +61,7 @@ export function MyPage() {
     gender: '',
     favoritePlaygrounds: [],
   });
-  const isLogIn = useSelector(isLogInSelector);
+  const isLogIn = useSelector(isLoginSelector);
   const [groupList, setGroupList] = useState<GroupPost[]>([]);
   const user = useSelector(userSelector);
   const filteredMyTeamPosts = groupList.filter(

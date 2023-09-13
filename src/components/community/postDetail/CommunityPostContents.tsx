@@ -6,9 +6,9 @@ import 'react-quill/dist/quill.snow.css';
 import HtmlParser from '../../common/HtmlParser';
 import { useSelector } from 'react-redux';
 import {
-  isLogInSelector,
+  isLoginSelector,
   userSelector,
-} from '../../../redux/modules/auth/authSelectors';
+} from '../../../redux/modules/auth/selector';
 import { RootState } from '../../../redux/store';
 import chevronIcon from '../../../assets/icon/chevron_green.svg';
 import ballIcon from '../../../assets/icon/soccerball.svg';
@@ -26,7 +26,7 @@ function CommunityPostContents() {
     (state: RootState) => state.communityPost.postData?.post
   );
   const userData = useSelector(userSelector);
-  const isLogin = useSelector(isLogInSelector);
+  const isLogin = useSelector(isLoginSelector);
   const navigate = useNavigate();
   const isAuthor = userData?.user_id === postData?.userId;
   const isAdmin = userData?.role === 'admin' || userData?.role === 'manager';

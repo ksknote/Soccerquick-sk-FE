@@ -2,15 +2,15 @@ import react, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import axios from 'axios';
-import { AUTH_ACTIONS } from '../../redux/modules/auth/authSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import { isLogInSelector } from '../../redux/modules/auth/authSelectors';
+import { isLoginSelector } from '../../redux/modules/auth/selector';
 import alertModal from '../common/alertModal';
 import reviewIcon from '../../assets/icon/myPageCategory/reviewIconBlack.svg';
 import uniformIcon from '../../assets/icon/myPageCategory/uniformIcon.svg';
 import logoutIcon from '../../assets/icon/myPageCategory/logoutIcon.svg';
 import { FormDataType } from '../../pages/MyPage';
-
+import { AppDispatch } from '../../redux/store';
+import { logOut } from '../../redux/modules/auth/actions';
 interface MyPageProps {
   userData: FormDataType;
   myPost: number;
@@ -18,9 +18,9 @@ interface MyPageProps {
 }
 
 function MyPage({ userData, myPost, registeredTeam }: MyPageProps) {
-  const isLogIn = useSelector(isLogInSelector);
+  const isLogIn = useSelector(isLoginSelector);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     if (!isLogIn) {
@@ -36,7 +36,7 @@ function MyPage({ userData, myPost, registeredTeam }: MyPageProps) {
     }
   };
   const handleAlertConfirm = async () => {
-    dispatch(AUTH_ACTIONS.logout());
+    dispatch(logOut());
 
     // logout
     await axios

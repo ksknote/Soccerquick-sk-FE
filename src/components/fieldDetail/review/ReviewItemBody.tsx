@@ -4,9 +4,9 @@ import { ReviewItemPropsType } from '../../../types/ReviewType';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import {
-  isLogInSelector,
+  isLoginSelector,
   userSelector,
-} from '../../../redux/modules/auth/authSelectors';
+} from '../../../redux/modules/auth/selector';
 import uploadImage from '../../../utils/uploadImage';
 import alertModal from '../../common/alertModal';
 import ImageIcon from '../../../assets/icon/ImageIcon.svg';
@@ -21,7 +21,7 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
   const [isImageChanged, setIsImageChanged] = useState(false);
 
   const [editReview, setEditReview] = useState<string>('');
-  const isLogin = useSelector(isLogInSelector);
+  const isLogin = useSelector(isLoginSelector);
   const userData = useSelector(userSelector);
   const userName = userData?.name || '';
   const config = { withCredentials: true };

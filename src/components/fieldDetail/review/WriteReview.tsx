@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { WriteReviewPropsType } from '../../../types/ReviewType';
 import {
-  isLogInSelector,
+  isLoginSelector,
   userSelector,
-} from '../../../redux/modules/auth/authSelectors';
+} from '../../../redux/modules/auth/selector';
 import ImageIcon from '../../../assets/icon/ImageIcon.svg';
 import alertModal from '../../common/alertModal';
 import uploadImage from '../../../utils/uploadImage';
@@ -17,7 +17,7 @@ import {
 } from '../../../styles/styled-components/CommonStyle';
 
 function WriteReview({ setReviewData, domId }: WriteReviewPropsType) {
-  const isLogin = useSelector(isLogInSelector);
+  const isLogin = useSelector(isLoginSelector);
   const userData = useSelector(userSelector);
   const userId = userData?.user_id;
   const [newReview, setNewReview] = useState<string>('');

@@ -1,19 +1,21 @@
-import { useState, FormEvent } from 'react';
-import { AUTH_ACTIONS } from '../../redux/modules/auth/authSlice';
+import { useState, FormEvent, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { AppDispatch } from '../../redux/store';
 import alertModal from '../common/alertModal';
-
+import { login } from '../../redux/modules/auth/actions';
 import {
   Modal,
   ModalForm,
   ModalInput,
   ModalSubmitButton,
 } from '../common/AuthComponents';
-import axios from 'axios';
 import styled from 'styled-components';
-
-const postLoginUrl = `${process.env.REACT_APP_API_URL}/auths/login`;
+import {
+  isLoginSelector,
+  loginErrorSelector,
+} from '../../redux/modules/auth/selector';
 
 // User type
 type UserProps = {
@@ -33,10 +35,12 @@ function Login({ handleIsLogin }: LoginProps) {
     password: '',
   });
   const [loginError, setLoginError] = useState<string>('');
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
+  const isLogin = useSelector(isLoginSelector);
+  const loginErr = useSelector(loginErrorSelector);
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -64,36 +68,49 @@ function Login({ handleIsLogin }: LoginProps) {
     checkUsers(data);
   };
 
-  const checkUsers = (data: { user_id: string; password: string }) => {
-    axios
-      .post(postLoginUrl, data, { withCredentials: true })
-      .then((res) => {
-        return res.data.data;
-      })
-      .then((userData) => {
-        console.log(userData);
-        const user = {
-          user_id: userData.user_id,
-          name: userData.name,
-          nickname: userData.nick_name,
-          profile: userData.profile,
-          role: userData.role,
-          applicant_status: userData.applicant_status,
-        };
+  // const checkUsers = (data: { user_id: string; password: string }) => {
+  //   axios
+  //     .post(postLoginUrl, data, { withCredentials: true })
+  //     .then((res) => {
+  //       return res.data.data;
+  //     })
+  //     .then((userData) => {
+  //       console.log(userData);
+  //       const user = {
+  //         user_id: userData.user_id,
+  //         name: userData.name,
+  //         nickname: userData.nick_name,
+  //         profile: userData.profile,
+  //         role: userData.role,
+  //         applicant_status: userData.applicant_status,
+  //       };
 
-        dispatch(
-          AUTH_ACTIONS.login({
-            user,
-          })
-        );
-        setLoginError('');
-        navigate('/');
-        alertModal('로그인 되었습니다.', 'success');
-      })
-      .catch((err) => {
-        setLoginError('존재하지 않는 계정입니다.');
-      });
+  //       dispatch(
+  //         AUTH_ACTIONS.login({
+  //           user,
+  //         })
+  //       );
+  //       setLoginError('');
+  //       navigate('/');
+  //       alertModal('로그인 되었습니다.', 'success');
+  //     })
+  //     .catch((err) => {
+  //       setLoginError('존재하지 않는 계정입니다.');
+  //     });
+  // };
+
+  const checkUsers = async (data: { user_id: string; password: string }) => {
+    dispatch(login(data));
   };
+
+  useEffect(() => {
+    if (isLogin) {
+      navigate('/');
+      alertModal('로그인 되었습니다.', 'success');
+    } else if (loginErr) {
+      setLoginError(loginErr);
+    }
+  }, [isLogin, loginErr]);
 
   return (
     <Modal onClick={handleIsLogin}>

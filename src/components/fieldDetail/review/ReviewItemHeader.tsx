@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { isLogInSelector } from '../../../redux/modules/auth/authSelectors';
+import { isLoginSelector } from '../../../redux/modules/auth/selector';
 import { ReviewDataType } from '../../../types/ReviewType';
 import LikeButton from '../../common/LikeButton';
 import { Comment } from '../../../styles/styled-components/CommentStyle';
 function ReviewItemHeader({ reviewItem }: { reviewItem: ReviewDataType }) {
-  const isLogin = useSelector(isLogInSelector);
+  const isLogin = useSelector(isLoginSelector);
   const { user_icon, user_name, createdAt, likedreviews, review_id } =
     reviewItem;
 

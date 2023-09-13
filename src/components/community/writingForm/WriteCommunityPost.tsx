@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { isLogInSelector } from '../../../redux/modules/auth/authSelectors';
+import { isLoginSelector } from '../../../redux/modules/auth/selector';
 import axios from 'axios';
 import styled from 'styled-components';
 import ReactQuillEditor from '../../common/ReactQuillEditor';
@@ -31,7 +31,7 @@ interface PostDataType {
 
 function WriteCommunityPost() {
   const navigate = useNavigate();
-  const isLogin = useSelector(isLogInSelector);
+  const isLogin = useSelector(isLoginSelector);
   const [imageFile, setImageFile] = useState<File>();
   const [imageUrl, setImageUrl] = useState('');
   const [subject, setSubject] = useState('');

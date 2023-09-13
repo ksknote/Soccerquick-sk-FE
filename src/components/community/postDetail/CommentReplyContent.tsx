@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../../redux/store';
-import { userSelector } from '../../../redux/modules/auth/authSelectors';
+import { userSelector } from '../../../redux/modules/auth/selector';
 import { fetchCommunityPost } from '../../../redux/modules/community/actions';
 import { Button } from '../../../styles/styled-components/CommonStyle';
 import { Comment } from '../../../styles/styled-components/CommentStyle';

@@ -7,11 +7,11 @@ import fieldIcon from '../../assets/icon/mobileCateogry/fieldIcon.svg';
 import teamIcon from '../../assets/icon/mobileCateogry/teamIcon.svg';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { isLogInSelector } from '../../redux/modules/auth/authSelectors';
+import { isLoginSelector } from '../../redux/modules/auth/selector';
 
 function MobileCategory() {
   const navigate = useNavigate();
-  const isLogin = useSelector(isLogInSelector);
+  const isLogin = useSelector(isLoginSelector);
 
   const handleUserTab = () => {
     if (isLogin) {

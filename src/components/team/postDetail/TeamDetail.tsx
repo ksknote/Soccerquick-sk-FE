@@ -9,9 +9,9 @@ import { RootState, AppDispatch } from '../../../redux/store';
 import MemberListModal from './MemberListModal';
 import { Post } from '../../../styles/styled-components/PostsStyle';
 import {
-  isLogInSelector,
   userSelector,
-} from '../../../redux/modules/auth/authSelectors';
+  isLoginSelector,
+} from '../../../redux/modules/auth/selector';
 import RegisterModal from './RegisterModal';
 import TeamPageComments from '../TeamPageComments';
 import chevronIcon from '../../../assets/icon/chevron_green.svg';
@@ -24,7 +24,7 @@ import alertModal from '../../common/alertModal';
 function DetailPage() {
   // 글 작성자인지 확인하기 위한 데이터
   const userData = useSelector(userSelector);
-  const isLogin = useSelector(isLogInSelector);
+  const isLogin = useSelector(isLoginSelector);
   // 이전페이지로 돌아가는 명령을 내리기 위한 nav
   const navigate = useNavigate();
   const [showModal, setShowModal] = React.useState(false);
@@ -232,7 +232,7 @@ function DetailPage() {
                 목록으로
               </button>
               {isLogin &&
-                userData?.nickname !== data.author &&
+                userData?.nick_name !== data.author &&
                 userData?.applicant_status !== '모집 불가능' && (
                   <button
                     onClick={() => {

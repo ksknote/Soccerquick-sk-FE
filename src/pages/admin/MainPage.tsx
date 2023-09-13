@@ -12,7 +12,7 @@ import {
   MainButton,
   UserButton,
 } from './AdminPageStyle';
-import { userSelector } from '../../redux/modules/auth/authSelectors';
+import { userSelector } from '../../redux/modules/auth/selector';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 

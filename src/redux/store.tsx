@@ -3,7 +3,6 @@ import { persistStore } from 'redux-persist';
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { persistedReducer } from './modules/rootReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
-
 const store = createStore(
   persistedReducer,
   composeWithDevTools(applyMiddleware(thunk))

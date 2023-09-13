@@ -5,9 +5,10 @@ import { FormDataType } from '../../../pages/MyPage';
 import { MyPageInput } from './MyPageInput';
 import { checkNewPassword } from '../checkPassword';
 import { useNavigate } from 'react-router-dom';
-import { AUTH_ACTIONS } from '../../../redux/modules/auth/authSlice';
+import { logOut } from '../../../redux/modules/auth/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { userSelector } from '../../../redux/modules/auth/authSelectors';
+import { AppDispatch } from '../../../redux/store';
+import { userSelector } from '../../../redux/modules/auth/selector';
 import alertModal from '../../common/alertModal';
 
 type MyPageInfoProps = {
@@ -42,7 +43,7 @@ export function MyPageInfo({
     passwordFormMsg: '',
   });
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const userInfo = useSelector(userSelector);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -102,20 +103,6 @@ export function MyPageInfo({
       const response = await axios.patch(url, formData, config);
       alertModal(response.data.message, 'text');
 
-      if (selectedImage && userInfo) {
-        const userProfile = URL.createObjectURL(selectedImage);
-
-        const user = {
-          user_id: userInfo.user_id,
-          name: userInfo.name,
-          nickname: userInfo.nickname,
-          profile: userProfile,
-          role: userInfo.role,
-          applicant_status: userInfo.applicant_status,
-        };
-        dispatch(AUTH_ACTIONS.updateUser({ user }));
-      }
-
       setErrorMsg({
         formMsg: '',
         passwordFormMsg: '',
@@ -156,7 +143,7 @@ export function MyPageInfo({
   };
 
   const handleAlertWithDrawalConfirm = async (oldPassword: String) => {
-    dispatch(AUTH_ACTIONS.logout());
+    dispatch(logOut());
     const headers = {
       withCredentials: true,
     };

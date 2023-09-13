@@ -1,12 +1,21 @@
 import { combineReducers } from 'redux';
 import teamPostReducer from './team/reducer';
 import communityPostReducer from './community/reducer';
-import authSlice from './auth/authSlice';
+import authReducer from './auth/reducer';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { AuthStateType } from './auth/types';
+import { CommunityPostStateType } from './community/types';
+import { TeamDataType } from './team/reducer';
+
+export type RootState = {
+  auth: AuthStateType;
+  teamPost: TeamDataType;
+  communityPost: CommunityPostStateType;
+};
 
 const rootReducer = combineReducers({
-  auth: authSlice,
+  auth: authReducer,
   teamPost: teamPostReducer,
   communityPost: communityPostReducer,
 });

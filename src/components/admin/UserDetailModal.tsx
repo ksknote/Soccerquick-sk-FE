@@ -14,8 +14,8 @@ import {
 } from '../../pages/admin/AdminPageStyle';
 import alertModal from '../common/alertModal';
 import { DedatilModalProps } from '../../types/AdminPageType';
-import { userSelector } from '../../redux/modules/auth/authSelectors';
 import { useSelector } from 'react-redux';
+import { userSelector } from '../../redux/modules/auth/selector';
 
 function DetailModal(props: DedatilModalProps) {
   const {

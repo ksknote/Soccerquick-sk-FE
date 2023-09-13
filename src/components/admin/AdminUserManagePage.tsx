@@ -13,9 +13,9 @@ import {
 } from '../../pages/admin/AdminPageStyle';
 import { UserData } from '../../types/AdminPageType';
 import MyPagination from '../myPages/MyPagination';
-import { userSelector } from '../../redux/modules/auth/authSelectors';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { userSelector } from '../../redux/modules/auth/selector';
 
 function AdminUserManager() {
   const userData = useSelector(userSelector);

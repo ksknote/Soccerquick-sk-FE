@@ -3,7 +3,7 @@ import { StyledInfoContainer, StyledInfoBox, StyledTitle } from './MyPageInfo';
 import { StyledInputBox, StyledInfoInput, StyledButton } from './MyPageInput';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { userSelector } from '../../../redux/modules/auth/authSelectors';
+import { userSelector } from '../../../redux/modules/auth/selector';
 import styled from 'styled-components';
 
 type MyPageCheckPasswordProps = {

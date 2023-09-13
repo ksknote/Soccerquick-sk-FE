@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { isLogInSelector } from '../../../redux/modules/auth/authSelectors';
+import { isLoginSelector } from '../../../redux/modules/auth/selector';
 import { DomDataType } from '../../../pages/SearchPage';
 import { ProvidedElementList } from '../../fieldList/SearchData';
 import MyPagination from '../MyPagination';
@@ -14,7 +14,7 @@ import alertModal from '../../common/alertModal';
 import { FormDataType } from '../../../pages/MyPage';
 
 function MyFavoriteGroundList() {
-  const isLogIn = useSelector(isLogInSelector);
+  const isLogIn = useSelector(isLoginSelector);
   const [formData, setFormData] = useState<FormDataType>({
     user_id: '',
     name: '',

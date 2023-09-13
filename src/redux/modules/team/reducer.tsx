@@ -1,12 +1,12 @@
 import React from 'react';
 import { fetchDataActionTypes } from './types';
 
-interface DataState {
+export interface TeamDataType {
   data: string | null;
   loading: boolean;
   error: string | null;
 }
-const initialState: DataState = {
+const initialState: TeamDataType = {
   data: null,
   loading: false,
   error: null,

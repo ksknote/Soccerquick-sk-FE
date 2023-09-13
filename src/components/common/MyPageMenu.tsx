@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { AUTH_ACTIONS } from '../../redux/modules/auth/authSlice';
+import { AppDispatch } from '../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { userSelector } from '../../redux/modules/auth/authSelectors';
+import { userSelector } from '../../redux/modules/auth/selector';
+import { logOut } from '../../redux/modules/auth/actions';
 import alertModal from './alertModal';
 import axios from 'axios';
 
 export function MyPageMenu() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const user = useSelector(userSelector);
   const handleLoginOutClick = async (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ export function MyPageMenu() {
     }
   };
   const handleAlertConfirm = async () => {
-    dispatch(AUTH_ACTIONS.logout());
+    dispatch(logOut());
 
     // logout
     await axios
@@ -37,12 +38,12 @@ export function MyPageMenu() {
           <StyledProfileImg type="image" src={user?.profile} alt="profile" />
         </StyledImgWrapper>
         <StyledProfileInfo
-          title={user ? user.nickname : '미로그인'}
+          title={user ? user.nick_name : '미로그인'}
           onClick={() => {
             navigate('/mypage');
           }}
         >
-          {user ? `${user.nickname}님` : '미로그인'}
+          {user ? `${user.nick_name}님` : '미로그인'}
         </StyledProfileInfo>
       </StyledMenuProfile>
       <StyledMenuItem onClick={handleLoginOutClick}>로그아웃</StyledMenuItem>

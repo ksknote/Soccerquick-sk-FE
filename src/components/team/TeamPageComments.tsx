@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { userSelector } from '../../redux/modules/auth/authSelectors';
+import { userSelector } from '../../redux/modules/auth/selector';
 import {
   BoxContainer,
   Button,

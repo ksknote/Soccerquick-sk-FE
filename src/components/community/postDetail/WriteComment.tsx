@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../../redux/store';
 import { fetchCommunityPost } from '../../../redux/modules/community/actions';
-import { isLogInSelector } from '../../../redux/modules/auth/authSelectors';
+import { isLoginSelector } from '../../../redux/modules/auth/selector';
 import {
   BoxContainer,
   Button,
@@ -17,7 +17,7 @@ import uploadImage from '../../../utils/uploadImage';
 function WriteComment() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const isLogin = useSelector(isLogInSelector);
+  const isLogin = useSelector(isLoginSelector);
   const post_id = useSelector(
     (state: RootState) => state.communityPost.post_id
   );

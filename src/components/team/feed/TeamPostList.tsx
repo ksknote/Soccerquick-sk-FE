@@ -19,14 +19,14 @@ import {
 import { BoardProps } from '../../../types/TeamPageType';
 import { Button } from '../../../styles/styled-components/CommonStyle';
 import { useSelector } from 'react-redux';
-import { isLogInSelector } from '../../../redux/modules/auth/authSelectors';
+import { isLoginSelector } from '../../../redux/modules/auth/selector';
 import MyPagination from '../../myPages/MyPagination';
 import EmptyBox from '../../common/EmptyBox';
 import CheckPositionStatus from './CheckPostionStatus';
 
 function TeamList(props: BoardProps) {
   const navigate = useNavigate();
-  const isLogin = useSelector(isLogInSelector);
+  const isLogin = useSelector(isLoginSelector);
   const {
     dropdownList,
     handleReset,

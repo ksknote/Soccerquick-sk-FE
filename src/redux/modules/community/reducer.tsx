@@ -1,13 +1,13 @@
 import React from 'react';
 import {
-  StateType,
+  CommunityPostStateType,
   CommunityPostReducerType,
   FETCH_COMMUNITY_POST_REQUEST,
   FETCH_COMMUNITY_POST_FAILURE,
   FETCH_COMMUNITY_POST_SUCCESS,
 } from './types';
 
-const initialState: StateType = {
+const initialState: CommunityPostStateType = {
   post_id: '',
   postData: null,
   loading: false,

@@ -3,6 +3,9 @@ import {
   FETCH_COMMUNITY_POST_REQUEST,
   FETCH_COMMUNITY_POST_SUCCESS,
   FETCH_COMMUNITY_POST_FAILURE,
+  FETCH_COMMUNITY_HOT_POST_REQUEST,
+  FETCH_COMMUNITY_HOT_POST_SUCCESS,
+  FETCH_COMMUNITY_HOT_POST_FAILURE,
 } from './types';
 import { PostWithCommentsType } from '../../../types/CommunityType';
 import axios from 'axios';
@@ -44,6 +47,45 @@ export const fetchCommunityPostSuccess = (
 export const fetchCommunityPostFailure = (errorMessage: string) => {
   return {
     type: FETCH_COMMUNITY_POST_FAILURE,
+    payload: errorMessage,
+  };
+};
+
+export const fetchCommunityHotPost = (): AppThunk<Promise<void>> => {
+  return async (dispatch) => {
+    dispatch(fetchCommunityHotPostRequest());
+    try {
+      const url = `${process.env.REACT_APP_API_URL}/communities?keyword=null&sort=Comment&page=1&itemsPerPage=5`;
+      const config = {
+        withCredentials: true,
+      };
+      const response = await axios.get(url, config);
+      const postData = response.data.data;
+      dispatch(fetchCommunityHotPostSuccess(postData));
+    } catch (error: any) {
+      const errorMessage = error.response.data.message;
+      dispatch(fetchCommunityHotPostFailure(errorMessage));
+      console.log(error);
+    }
+  };
+};
+
+export const fetchCommunityHotPostRequest = () => ({
+  type: FETCH_COMMUNITY_HOT_POST_REQUEST,
+});
+
+export const fetchCommunityHotPostSuccess = (
+  postData: PostWithCommentsType
+) => {
+  return {
+    type: FETCH_COMMUNITY_HOT_POST_SUCCESS,
+    payload: { postData },
+  };
+};
+
+export const fetchCommunityHotPostFailure = (errorMessage: string) => {
+  return {
+    type: FETCH_COMMUNITY_HOT_POST_FAILURE,
     payload: errorMessage,
   };
 };

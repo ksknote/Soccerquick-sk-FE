@@ -16,34 +16,27 @@ import {
 
 interface ShareModalProps {
   setShowShareModal: React.Dispatch<React.SetStateAction<boolean>>;
-  groundData: DomDataType;
+  title: string;
+  description: string;
+  imageUrl?: string;
 }
 
 const ShareModal: React.FC<ShareModalProps> = ({
   setShowShareModal,
-  groundData,
+  title,
+  description,
+  imageUrl,
 }) => {
   const { Kakao } = window;
   const currentUrl = window.location.href;
 
-  const clipUrl = () => {
-    // window.navigator.clipboard
-    //   .writeText(
-    //     `http://kdt-sw-4-team02.elicecoding.com/ground/${groundData.dom_id}`
-    //   )
-    //   .then(() => {
-    //     alertModal('링크가 복사되었습니다.', 'success');
-    //   });
-    var textarea = document.createElement('textarea');
-
-    document.body.appendChild(textarea);
-    textarea.value = `http://kdt-sw-4-team02.elicecoding.com/ground/${groundData.dom_id}`;
-    textarea.select();
-    document.execCommand('copy');
-
-    document.body.removeChild(textarea);
-
-    alertModal('링크가 복사되었습니다.', 'success');
+  const clipUrl = async () => {
+    try {
+      await navigator.clipboard.writeText(currentUrl);
+      alertModal('링크가 복사되었습니다.', 'success');
+    } catch (error) {
+      alertModal('복사에 실패했습니다.', 'error');
+    }
   };
 
   useEffect(() => {
@@ -56,21 +49,17 @@ const ShareModal: React.FC<ShareModalProps> = ({
     Kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
-        title: `[싸커퀵] ${groundData.title}`,
-        description: `${groundData.address.area}`,
-        imageUrl: `${groundData.stadiums[0].images[0].image}`,
+        title: title,
+        description: description,
+        imageUrl: imageUrl,
         link: {
           mobileWebUrl: currentUrl,
           webUrl: currentUrl,
         },
       },
-      social: {
-        likeCount: groundData.usersFavorites.length,
-        commentCount: groundData.reviews.length,
-      },
       buttons: [
         {
-          title: '풋살장 보러가기',
+          title: '글 보러가기',
           link: {
             mobileWebUrl: currentUrl,
             webUrl: currentUrl,

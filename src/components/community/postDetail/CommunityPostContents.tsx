@@ -105,7 +105,7 @@ function CommunityPostContents() {
             {postData.hashTags.length > 0 && (
               <HashTags>
                 {postData.hashTags.map((hashTag) => (
-                  <HashTag>{hashTag}</HashTag>
+                  <HashTag key={hashTag}>{hashTag}</HashTag>
                 ))}
               </HashTags>
             )}

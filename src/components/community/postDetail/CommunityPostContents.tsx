@@ -12,6 +12,9 @@ import {
 import { RootState } from '../../../redux/store';
 import chevronIcon from '../../../assets/icon/chevron_green.svg';
 import ballIcon from '../../../assets/icon/soccerball.svg';
+import spaceLikeIcon from '../../../assets/icon/like_space.svg';
+import likeIcon from '../../../assets/icon/like_red.svg';
+import shareIcon from '../../../assets/icon/share.svg';
 import axios from 'axios';
 import alertModal from '../../common/alertModal';
 
@@ -72,6 +75,19 @@ function CommunityPostContents() {
                 커뮤니티
               </div>
             </Post.BoardName>
+            <SideBarWrapper>
+              <div>
+                <SideBar>
+                  <SideBarButton>
+                    <img src={spaceLikeIcon} alt="" />
+                  </SideBarButton>
+                  <SideBarButton>
+                    <img src={shareIcon} alt="" />
+                    <p>공유</p>
+                  </SideBarButton>
+                </SideBar>
+              </div>
+            </SideBarWrapper>
             <Post.Header>
               <Post.Title>
                 <Subject>{postData.subject}</Subject>
@@ -171,5 +187,45 @@ const HashTag = styled.span`
   @media (min-width: 1024px) {
     font-size: 1.4rem;
     padding: 0.5rem 1rem;
+  }
+`;
+
+const SideBarWrapper = styled.div`
+  position: relative;
+  margin-top: 2rem;
+  > div {
+    position: absolute;
+    left: 100%;
+  }
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const SideBar = styled.div`
+  position: fixed;
+  top: 20rem;
+  margin-left: 5rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const SideBarButton = styled.button`
+  width: 8rem;
+  display: flex;
+  padding: 1rem;
+  background: transparent;
+  box-shadow: 0 3px 8px 0 rgba(33, 37, 41, 0.05);
+  border: 0.1rem solid #e9ecef;
+  border-radius: 1rem;
+  color: #1b1c1d;
+  font-size: 1.4rem;
+  img {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.8rem;
   }
 `;

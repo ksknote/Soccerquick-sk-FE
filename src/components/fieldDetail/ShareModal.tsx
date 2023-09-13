@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { DomDataType } from '../../pages/SearchPage';
 import kakaoIcon from '../../assets/icon/kakao.svg';
 import alertModal from '../common/alertModal';
 import {
@@ -42,7 +41,7 @@ const ShareModal: React.FC<ShareModalProps> = ({
   useEffect(() => {
     Kakao.cleanup();
     Kakao.init('645f79cb4394b294ac16f03290460379');
-    console.log(Kakao.isInitialized());
+    // console.log(Kakao.isInitialized());
   }, []);
 
   const shareKaKaoHandler = () => {

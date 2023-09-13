@@ -31,6 +31,7 @@ function CommunityPostContents() {
   const isAuthor = userData?.user_id === postData?.userId;
   const isAdmin = userData?.role === 'admin' || userData?.role === 'manager';
   const [showShareModal, setShowShareModal] = useState(false);
+  //  const isFavorite =
 
   const config = {
     headers: {
@@ -63,6 +64,17 @@ function CommunityPostContents() {
     }
   };
 
+  const clickLikeHanlder = () => {
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/communities/like`,
+        { postId: postData?.post_id },
+        config
+      )
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
+  };
+
   return (
     <Post.Wrapper>
       {postData && (
@@ -81,11 +93,12 @@ function CommunityPostContents() {
             <SideBarWrapper>
               <div>
                 <SideBar>
-                  <SideBarButton>
-                    <img src={spaceLikeIcon} alt="" />
+                  <SideBarButton onClick={clickLikeHanlder}>
+                    <img src={spaceLikeIcon} alt="좋아요" />
+                    <p>{postData.like.length}</p>
                   </SideBarButton>
                   <SideBarButton onClick={() => setShowShareModal(true)}>
-                    <img src={shareIcon} alt="" />
+                    <img src={shareIcon} alt="공유" />
                     <p>공유</p>
                   </SideBarButton>
                 </SideBar>

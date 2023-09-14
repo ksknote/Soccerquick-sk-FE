@@ -154,9 +154,8 @@ function WriteTeamPost() {
     if (isEditMode) editPost(data);
     else submitPost(data);
   };
-  console.log(playerCurrent, playerNeed, gkCurrent, gkNeed);
+
   const editPost = (data: any) => {
-    console.log(data);
     const url = `${process.env.REACT_APP_API_URL}/groups/${teamData.group_id}/info`;
     const config = {
       withCredentials: true,
@@ -200,6 +199,7 @@ function WriteTeamPost() {
 
   return (
     <Wrapper>
+      <Guide>⚽ 자유롭게 팀원 모집 게시글을 작성해보세요 ⚽</Guide>
       <Title>
         <input
           type="text"
@@ -214,7 +214,7 @@ function WriteTeamPost() {
           handleEditorChange={setContentsHandler}
         />
       </EditorWrapper>
-      <ContianerHeader>
+      <div>
         <RowSectionDiv>
           <SectionTitle>지역</SectionTitle>
           <RegionSelect
@@ -244,7 +244,17 @@ function WriteTeamPost() {
             />
           </SectionDiv>
         </Position>
-      </ContianerHeader>
+      </div>
+      <GuideWrapper>
+        <Guide>
+          <p>⚽ 팀원 모집 꿀팁 ⚽</p>
+          <ul>
+            <li>[모집글 - 조회] 탭에서 팀원 명단을 확인할 수 있습니다.</li>
+            <li>수락한 후에는 팀원에게 먼저 연락하여 인사를 건네보세요!</li>
+            <li>가입이 수락된 팀원에게는 회원님의 연락처가 제공됩니다.</li>
+          </ul>
+        </Guide>
+      </GuideWrapper>
       <FooterButtons>
         {isTemporarilySaved && (
           <Button.WhiteBig onClick={getSavedFormHandler}>
@@ -269,7 +279,33 @@ const Wrapper = styled.div`
   margin: auto;
 `;
 
-const ContianerHeader = styled.div``;
+const Guide = styled.div`
+  background: #f8fafc;
+  padding: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border: 0.1rem solid rgb(203 213 225);
+  border-radius: 1rem;
+  ul {
+    padding-top: 0.5rem;
+  }
+  li {
+    color: #2f2f2f;
+    font-weight: 400;
+    list-style: circle;
+    list-style-position: inside;
+    :not(:last-child) {
+      padding-bottom: 0.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    font-size: 1.4rem;
+  }
+`;
+
+const GuideWrapper = styled.div`
+  padding: 3rem 0;
+`;
 
 const SectionDiv = styled.div`
   display: flex;
@@ -299,8 +335,7 @@ const SectionTitle = styled.p`
 const Title = styled.div`
   background: #f2f2f273;
   border-bottom: 0.1rem solid #e7e9ea;
-  margin: 0 1rem;
-  padding: 1rem;
+  padding: 2rem 1rem;
   input {
     width: 100%;
     height: 100%;

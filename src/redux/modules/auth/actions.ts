@@ -1,5 +1,11 @@
 import { AppThunk } from '../../store';
-import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT, UDATE } from './types';
+import {
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  UPDATE_SUCCESS,
+  UPDATE_FAILURE,
+  LOGOUT,
+} from './types';
 import axios from 'axios';
 import { UserDataType } from './types';
 
@@ -34,6 +40,39 @@ const loginSuccess = (userData: UserDataType) => {
 const loginFailure = (errorMessage: string) => {
   return {
     type: LOGIN_FAILURE,
+    payload: errorMessage,
+  };
+};
+
+export const updateUserData = (): AppThunk<Promise<void>> => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/users/`,
+        {
+          withCredentials: true,
+        }
+      );
+      const userData = response.data.data;
+      dispatch(updateSuccess(userData));
+    } catch (error: any) {
+      const errorMessage = error.response.data.message;
+      dispatch(updateFailure(errorMessage));
+      console.log(error);
+    }
+  };
+};
+
+const updateSuccess = (userData: UserDataType) => {
+  return {
+    type: UPDATE_SUCCESS,
+    payload: userData,
+  };
+};
+
+const updateFailure = (errorMessage: string) => {
+  return {
+    type: UPDATE_FAILURE,
     payload: errorMessage,
   };
 };

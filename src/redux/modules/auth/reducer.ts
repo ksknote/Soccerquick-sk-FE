@@ -1,5 +1,11 @@
 import { AuthReducerType, initialState } from './types';
-import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT, UDATE } from './types';
+import {
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  UPDATE_SUCCESS,
+  UPDATE_FAILURE,
+  LOGOUT,
+} from './types';
 
 const authReducer: AuthReducerType = (state = initialState, action) => {
   switch (action.type) {
@@ -13,6 +19,19 @@ const authReducer: AuthReducerType = (state = initialState, action) => {
     case LOGIN_FAILURE:
       return {
         ...state,
+        error: action.payload,
+      };
+    case UPDATE_SUCCESS:
+      return {
+        ...state,
+        isLogIn: true,
+        user: action.payload,
+        error: null,
+      };
+    case UPDATE_FAILURE:
+      return {
+        ...state,
+        isLogIn: false,
         error: action.payload,
       };
     case LOGOUT:

@@ -287,7 +287,7 @@ const Guide = styled.div`
   border: 0.1rem solid rgb(203 213 225);
   border-radius: 1rem;
   ul {
-    padding-top: 0.5rem;
+    padding-top: 0.8rem;
   }
   li {
     color: #2f2f2f;
@@ -300,6 +300,9 @@ const Guide = styled.div`
   }
   @media (min-width: 1024px) {
     font-size: 1.4rem;
+    li {
+      font-size: 1.3rem;
+    }
   }
 `;
 

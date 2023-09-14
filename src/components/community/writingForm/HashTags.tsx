@@ -118,6 +118,7 @@ const Tag = styled.div`
   border-radius: 0.9rem;
   padding: 0.2rem 0.8rem;
   margin: 0 0.5rem 1rem 0;
+  cursor: pointer;
 `;
 
 const HashTagInput = styled.input`

@@ -44,18 +44,21 @@ export default RegionSelect;
 const Wrapper = styled.div`
   display: flex;
   gap: 1rem;
+  align-items: center;
 `;
 
 const Select = styled.select`
-  border: 1px solid rgb(221, 221, 221);
+  width: 100%;
+  min-width: 14rem;
+  max-width: 20rem;
+  height: 3.4rem;
+  border: 0.1rem solid #e7e9ea;
+  border-radius: 1rem;
+  border-radius: 1rem;
   font-size: 1.3rem;
   padding: 0 1rem;
-  height: 3.4rem;
-  width: 15rem;
-  @media (min-width: 1024px) {
-    font-size: 1.6rem;
-  }
 
+  //reset
   margin: 0;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -71,13 +74,17 @@ const Select = styled.select`
     calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
   background-size: 5px 5px, 5px 5px, 1px 1.5em;
   background-repeat: no-repeat;
-
   :focus {
     outline: 0;
   }
-
   :-moz-focusring {
     color: transparent;
     text-shadow: 0 0 0 #000;
+  }
+
+  @media (min-width: 1024px) {
+    min-width: 20rem;
+    height: 4rem;
+    font-size: 1.6rem;
   }
 `;

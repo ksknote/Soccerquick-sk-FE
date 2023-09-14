@@ -217,7 +217,7 @@ function WriteCommunityPost() {
   };
 
   return (
-    <>
+    <Wrapper>
       <SectionDiv>
         <Title>
           <input
@@ -274,17 +274,22 @@ function WriteCommunityPost() {
           {isEditMode ? '수정 완료' : '작성 완료'}
         </Button.GreenBig>
       </FooterButtons>
-    </>
+    </Wrapper>
   );
 }
 
 export default WriteCommunityPost;
 
+const Wrapper = styled.div`
+  max-width: 90rem;
+  margin: auto;
+`;
+
 const ContianerHeader = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   @media (min-width: 1024px) {
-    grid-template-columns: 0.7fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 `;
 
@@ -327,7 +332,9 @@ const Title = styled.div`
       font-size: 2rem;
 
       ::placeholder {
-        font-size: 2rem;
+        font-size: 2.5rem;
+        font-weight: 500;
+        color: #adb5bd;
       }
     }
   }

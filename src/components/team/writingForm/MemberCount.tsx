@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-function MemberCount() {
-  const [fieldPlayerCount, setFieldPlayerCount] = useState(0);
-  const [GoalKeeperCount, setGoalKeeperCount] = useState(0);
+interface MemberCountPropsType {
+  fieldPlayerCount: number;
+  setFieldPlayerCount: React.Dispatch<React.SetStateAction<number>>;
+  GoalKeeperCount: number;
+  setGoalKeeperCount: React.Dispatch<React.SetStateAction<number>>;
+}
+
+function MemberCount({
+  fieldPlayerCount,
+  setFieldPlayerCount,
+  GoalKeeperCount,
+  setGoalKeeperCount,
+}: MemberCountPropsType) {
   return (
     <Wrapper>
       <PositionSection>

@@ -2,10 +2,18 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { regionData } from '../../utils/region_list';
 
-function RegionSelect() {
-  const [selectedRegion, setSelectedRegion] = useState('');
-  const [selectedCity, setSelectedCity] = useState('');
-
+interface RegionSelectPropsType {
+  selectedRegion: string;
+  setSelectedRegion: React.Dispatch<React.SetStateAction<string>>;
+  selectedCity: string;
+  setSelectedCity: React.Dispatch<React.SetStateAction<string>>;
+}
+function RegionSelect({
+  selectedRegion,
+  setSelectedRegion,
+  selectedCity,
+  setSelectedCity,
+}: RegionSelectPropsType) {
   const selectRegionHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedRegion(event.target.value);
   };

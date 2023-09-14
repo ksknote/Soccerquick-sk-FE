@@ -45,9 +45,6 @@ const FILTERING_OPTIONS = {
     random_matched: ['랜덤매칭', '허용', '비허용'],
     gender: ['성별', '남', '여', '상관없음'],
   },
-  submit: {
-    category: ['카테고리', '팀원 구해요', '팀 구해요'],
-  },
 };
 
 export default FILTERING_OPTIONS;

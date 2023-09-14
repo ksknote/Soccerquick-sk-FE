@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { isLoginSelector } from '../../../redux/modules/auth/selector';
@@ -30,6 +30,7 @@ interface PostDataType {
 }
 
 function WriteCommunityPost() {
+  const location = useLocation();
   const navigate = useNavigate();
   const isLogin = useSelector(isLoginSelector);
   const [imageFile, setImageFile] = useState<File>();
@@ -39,13 +40,14 @@ function WriteCommunityPost() {
   const [hashTags, setHashTags] = useState<string[]>([]);
   const [editorContents, setEditorContents] = useState('');
   const [isTemporarilySaved, setIsTemporarilySaved] = useState(false);
+  const isEditMode = location.pathname.split('/').pop() !== 'submit';
   const postData = useSelector(
     (state: RootState) => state.communityPost.postData?.post
   );
-  const isEditMode = postData !== undefined;
+  // const isEditMode = postData !== undefined;
 
   useEffect(() => {
-    if (!isEditMode) return;
+    if (!isEditMode || !postData) return;
     const { thumbnail, subject, title, hashTags, description } = postData;
     setImageUrl(thumbnail);
     setSubject(subject);
@@ -155,7 +157,7 @@ function WriteCommunityPost() {
     let thumbnail;
     if (imageFile) {
       thumbnail = await uploadImage(imageFile);
-    } else if (!(isEditMode && imageUrl === postData.thumbnail)) {
+    } else if (!(isEditMode && imageUrl === postData?.thumbnail)) {
       thumbnail = imageUrl;
     }
     let selectedSubject = subject === '주제를 선택해주세요' ? '' : subject;

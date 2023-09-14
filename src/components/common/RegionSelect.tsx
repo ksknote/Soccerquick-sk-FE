@@ -24,7 +24,11 @@ function RegionSelect({
 
   return (
     <Wrapper>
-      <Select onChange={(e) => selectRegionHandler(e)} value={selectedRegion}>
+      <Select
+        onChange={(e) => selectRegionHandler(e)}
+        value={selectedRegion}
+        short={true}
+      >
         <option value="">선택하세요</option>
         {Object.keys(regionData).map((regionKey) => (
           <option key={regionKey} value={regionKey}>
@@ -55,9 +59,9 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Select = styled.select`
+const Select = styled.select<{ short?: boolean }>`
   width: 100%;
-  min-width: 14rem;
+  min-width: ${({ short }) => (short ? '10rem' : '14rem')};
   max-width: 20rem;
   height: 3.4rem;
   border: 0.1rem solid #e7e9ea;

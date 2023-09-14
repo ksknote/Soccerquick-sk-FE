@@ -1,6 +1,6 @@
 import react from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GroupPost } from '../../../pages/MyPage';
+import { TeamDataType } from '../../../types/TeamPageType';
 import MyPageHeader from '../MyPageHeader';
 import MobileHeader from '../../MobileHeader';
 import {
@@ -23,7 +23,7 @@ import CheckPositionStatus from '../../team/feed/CheckPostionStatus';
 function SearchMyApplicationPost({
   filteredItems,
 }: {
-  filteredItems: GroupPost[];
+  filteredItems: TeamDataType[];
 }) {
   const navigate = useNavigate();
   const handleCopy = async (phoneNumber: string) => {
@@ -62,7 +62,7 @@ function SearchMyApplicationPost({
                       navigate(`./${team.group_id}`, { state: { data: team } })
                     }
                   >
-                    <span>{team.location}</span>
+                    <span>{team.region + ' ' + team.city}</span>
                     {team.title}
                   </ContentTitle>
                   <Position>

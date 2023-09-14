@@ -1,7 +1,7 @@
 import React from 'react';
 import FilteringOptions from '../../common/FilteringOptions';
 import { StyledHeader } from '../Styles/ViewsStyle';
-import { DataProps, FindMemberFilter } from '../../../types/TeamPageType';
+import { TeamDataType, FindMemberFilter } from '../../../types/TeamPageType';
 import axios from 'axios';
 import TeamList from './TeamPostList';
 
@@ -21,24 +21,13 @@ function TeamFeed() {
   }
 
   //새로고침할때 팀모집 관련 데이터를 가져오고 정렬하는 부분
-  const [data, setData] = React.useState<DataProps[]>([]);
+  const [data, setData] = React.useState<TeamDataType[]>([]);
 
   React.useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/groups`)
       .then((res) => {
-        const formattedData = res.data.data.map((item: DataProps) => {
-          return {
-            ...item,
-            author: item.leader_name,
-            gk: item.gk_current_count,
-            gkNeed: item.gk_count,
-            player: item.player_current_count,
-            playerNeed: item.player_count,
-            area: item.location,
-          };
-        });
-        setData(formattedData);
+        setData(res.data.data);
       })
       .catch((error) => {
         setData([]);

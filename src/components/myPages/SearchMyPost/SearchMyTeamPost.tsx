@@ -16,13 +16,17 @@ import {
   Author,
   TeamMemberList,
 } from '../../team/Styles/ViewsStyle';
-import { GroupPost } from '../../../pages/MyPage';
+import { TeamDataType } from '../../../types/TeamPageType';
 import MyPageHeader from '../MyPageHeader';
 import EmptyBox from '../../common/EmptyBox';
 import MemberListModal from '../../team/postDetail/MemberListModal';
 import CheckPositionStatus from '../../team/feed/CheckPostionStatus';
 
-function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
+function SearchMyTeamPost({
+  filteredItems,
+}: {
+  filteredItems: TeamDataType[];
+}) {
   const [acceptModal, setAcceptModal] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const data = useSelector((state: RootState) => state.teamPost.data);
@@ -56,7 +60,7 @@ function SearchMyTeamPost({ filteredItems }: { filteredItems: GroupPost[] }) {
                       navigate(`./${team.group_id}`, { state: { data: team } })
                     }
                   >
-                    <span>{team.location}</span>
+                    <span>{team.region + ' ' + team.city}</span>
                     <p>{team.title}</p>
                   </ContentTitle>
                   <Position>

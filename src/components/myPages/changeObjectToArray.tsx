@@ -1,13 +1,13 @@
-import { GroupPost } from '../../pages/MyPage';
+import { TeamDataType } from '../../types/TeamPageType';
 import { DomReviewType, ReviewPost } from './SearchMyPost/SearchMyReviewPost';
 
-export const changeGroupObjectToArray = (item: GroupPost): Array<string> => {
+export const changeGroupObjectToArray = (item: TeamDataType): Array<string> => {
   return [
     'teamPage',
     item.leader_name,
     `${item.title}`,
     `[${item.applicant.length}]`,
-    item.location,
+    item.region,
     item.status,
     `${item.player_current_count}/${item.player_count}`,
     `${item.gk_current_count}/${item.gk_count}`,
@@ -16,14 +16,14 @@ export const changeGroupObjectToArray = (item: GroupPost): Array<string> => {
 };
 
 export const changeMyApplicantObjectToArray = (
-  item: GroupPost
+  item: TeamDataType
 ): Array<string> => {
   return [
     'teamPage',
     item.leader_name,
     `${item.title}`,
     `[${item.applicant.length}]`,
-    item.location,
+    item.region,
     item.accept.length === 1 ? '수락됨' : '신청중',
     `${item.player_current_count}/${item.player_count}`,
     `${item.gk_current_count}/${item.gk_count}`,

@@ -13,6 +13,7 @@ import alertModal from '../components/common/alertModal';
 import MyPageHome from '../components/myPages/MyPageHome';
 import MyPageProfileLayout from '../components/myPages/MyPageInfo/MyPageProfileLayout';
 import MyPageLayout from '../components/template/MyPageLayout';
+import { TeamDataType } from '../types/TeamPageType';
 
 export type FormDataType = {
   user_id: string;
@@ -33,23 +34,6 @@ type Accept = {
   name: string;
 };
 
-export type GroupPost = {
-  group_id: string;
-  leader_name: string;
-  leader_phone_number: string;
-  title: string;
-  location: string;
-  status: string;
-  gk_count: number;
-  player_count: number;
-  gk_current_count: number;
-  player_current_count: number;
-  applicant: Array<Applicant>;
-  accept: Array<Accept>;
-  createdAt: string;
-  updatedAt: string;
-};
-
 export function MyPage() {
   const [formData, setFormData] = useState<FormDataType>({
     user_id: '',
@@ -62,16 +46,16 @@ export function MyPage() {
     favoritePlaygrounds: [],
   });
   const isLogIn = useSelector(isLoginSelector);
-  const [groupList, setGroupList] = useState<GroupPost[]>([]);
+  const [groupList, setGroupList] = useState<TeamDataType[]>([]);
   const user = useSelector(userSelector);
   const filteredMyTeamPosts = groupList.filter(
-    (item: GroupPost) => item.leader_name === user?.name
+    (item: TeamDataType) => item.leader_name === user?.name
   );
   // .map((item: GroupPost) => changeGroupObjectToArray(item));
   const navigate = useNavigate();
 
   const filteredRegistedTeamPosts = groupList.reduce(
-    (acc: Array<GroupPost>, group: GroupPost) => {
+    (acc: Array<TeamDataType>, group: TeamDataType) => {
       const filteredApplicants = group.applicant?.filter(
         (applicant) => applicant.name === user?.name
       );
@@ -80,7 +64,7 @@ export function MyPage() {
       );
 
       if (filteredApplicants && filteredApplicants.length > 0) {
-        const filteredGroup: GroupPost = {
+        const filteredGroup: TeamDataType = {
           ...group,
           applicant: filteredApplicants,
         };
@@ -90,7 +74,7 @@ export function MyPage() {
         fillterdAcceptedApplicants &&
         fillterdAcceptedApplicants.length > 0
       ) {
-        const filteredGroup: GroupPost = {
+        const filteredGroup: TeamDataType = {
           ...group,
           accept: fillterdAcceptedApplicants,
         };

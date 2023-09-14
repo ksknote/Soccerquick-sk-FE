@@ -61,9 +61,6 @@ function WriteCommunityPost() {
   };
 
   useEffect(() => {
-    if (!isEditMode) return;
-  }, []);
-  useEffect(() => {
     let prevForm = localStorage.getItem('temporarilySavedCommunityPost');
     if (prevForm) setIsTemporarilySaved(true);
   }, []);

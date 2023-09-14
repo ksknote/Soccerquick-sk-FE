@@ -1,12 +1,13 @@
 import React from 'react';
 import { fetchDataActionTypes } from './types';
+import { TeamDataType } from '../../../types/TeamPageType';
 
-export interface TeamDataType {
-  data: string | null;
+export interface TeamStateType {
+  data: TeamDataType | null;
   loading: boolean;
   error: string | null;
 }
-const initialState: TeamDataType = {
+const initialState: TeamStateType = {
   data: null,
   loading: false,
   error: null,

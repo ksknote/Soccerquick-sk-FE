@@ -33,7 +33,7 @@ function EditPage() {
     category = '팀 구해요';
   }
   const [title, setTitle] = React.useState(data.title);
-  const [area, setArea] = React.useState(data.location);
+  const [area, setArea] = React.useState(data.region);
   const [player, setPlayer] = React.useState(data.player_current_count);
   const [playerNeed, setPlayerNeed] = React.useState(data.player_count);
   const [gk, setGk] = React.useState(data.gk_current_count);

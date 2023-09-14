@@ -81,10 +81,10 @@ function TeamList(props: BoardProps) {
                     <RecruitStatus status={item.status}>
                       {item.status}
                     </RecruitStatus>
-                    <Author>모집자: {item.author}</Author>
+                    <Author>모집자: {item.leader_name}</Author>
                   </ContentHeader>
                   <ContentTitle>
-                    <span>{item.area}</span>
+                    <span>{item.region + ' ' + item.city}</span>
                     <p>{item.title}</p>
                   </ContentTitle>
                   <Position>

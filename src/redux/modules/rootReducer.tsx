@@ -6,11 +6,11 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { AuthStateType } from './auth/types';
 import { CommunityPostStateType } from './community/types';
-import { TeamDataType } from './team/reducer';
+import { TeamStateType } from './team/reducer';
 
 export type RootState = {
   auth: AuthStateType;
-  teamPost: TeamDataType;
+  teamPost: TeamStateType;
   communityPost: CommunityPostStateType;
 };
 

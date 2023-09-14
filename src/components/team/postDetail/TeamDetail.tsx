@@ -113,7 +113,7 @@ function DetailPage() {
                     alt="BallIcon"
                   />
                 </Post.ImgDiv>
-                <p>{data.author}</p>
+                <p>{data.leader_name}</p>
                 <Post.PostDate>
                   {new Date(data.createdAt).toLocaleDateString('ko-KR', {
                     year: 'numeric',
@@ -127,7 +127,7 @@ function DetailPage() {
               <StyledSubTitle>모집 정보</StyledSubTitle>
               <StyledDetailLocationLi>
                 <StyledDetailLabel>활동 지역</StyledDetailLabel>
-                <p>{data.area}</p>
+                <p>{data.region + ' ' + data.city}</p>
               </StyledDetailLocationLi>
               <div>
                 <StyledDetailLabel>모집 현황</StyledDetailLabel>
@@ -139,20 +139,23 @@ function DetailPage() {
                     <StyledPositionName>
                       <div>필드플레이어</div>
                       <div>
-                        {data.playerNeed - data.player > 0
-                          ? `${data.playerNeed - data.player}자리 남았어요!`
+                        {data.player_count - data.player_current_count > 0
+                          ? `${
+                              data.player_count - data.player_current_count
+                            }자리 남았어요!`
                           : '마감되었어요.'}
                       </div>
                     </StyledPositionName>
                     <StyledPositionDetails>
                       <StyledPositionDetail>
                         <p>
-                          현재<span>{data.player}</span>명 모집 완료
+                          현재<span>{data.player_current_count}</span>명 모집
+                          완료
                         </p>
                       </StyledPositionDetail>
                       <StyledPositionDetail>
                         <p>
-                          총<span> {data.playerNeed}</span>명 모집 예정
+                          총<span> {data.player_count}</span>명 모집 예정
                         </p>
                       </StyledPositionDetail>
                     </StyledPositionDetails>
@@ -164,20 +167,22 @@ function DetailPage() {
                     <StyledPositionName>
                       <div>골키퍼</div>
                       <div>
-                        {data.gk_count - data.gk > 0
-                          ? `${data.gkNeed - data.gk}자리 남았어요!`
+                        {data.gk_count - data.gk_current_count > 0
+                          ? `${
+                              data.gk_count - data.gk_current_count
+                            }자리 남았어요!`
                           : '마감되었어요.'}
                       </div>
                     </StyledPositionName>
                     <StyledPositionDetails>
                       <StyledPositionDetail color="green">
                         <p>
-                          현재<span>{data.gk}</span>명 모집 완료
+                          현재<span>{data.gk_current_count}</span>명 모집 완료
                         </p>
                       </StyledPositionDetail>
                       <StyledPositionDetail color="green">
                         <p>
-                          총<span> {data.gkNeed}</span>명 모집 예정
+                          총<span> {data.gk_count}</span>명 모집 예정
                         </p>
                       </StyledPositionDetail>
                     </StyledPositionDetails>
@@ -191,17 +196,17 @@ function DetailPage() {
               <HtmlParser data={data.contents} />
             </div>
             <Post.AuthorButtonContainer>
-              {userData?.name === data.author && (
+              {userData?.name === data.leader_name && (
                 <Link to={`/teampage/edit/${url}`}>
                   <button>수정</button>
                 </Link>
               )}
-              {(userData?.name === data.author ||
+              {(userData?.name === data.leader_name ||
                 userData?.role === 'admin' ||
                 userData?.role === 'manager') && (
                 <button onClick={deletePostHandler}>삭제</button>
               )}
-              {(userData?.name === data.author ||
+              {(userData?.name === data.leader_name ||
                 userData?.role === 'admin' ||
                 userData?.role === 'manager') && (
                 <button
@@ -218,7 +223,10 @@ function DetailPage() {
             <StyledCommentsDiv>
               {/* applicant가 있으면 Comment 컴포넌트를 불러온다. */}
               {data.applicant?.length > 0 && (
-                <TeamPageComments data={data.applicant} user={data.author} />
+                <TeamPageComments
+                  data={data.applicant}
+                  user={data.leader_name}
+                />
               )}
             </StyledCommentsDiv>
           </div>
@@ -232,7 +240,7 @@ function DetailPage() {
                 목록으로
               </button>
               {isLogin &&
-                userData?.nick_name !== data.author &&
+                userData?.nick_name !== data.leader_name &&
                 userData?.applicant_status !== '모집 불가능' && (
                   <button
                     onClick={() => {
@@ -253,8 +261,8 @@ function DetailPage() {
               <MemberListModal
                 setAcceptModal={setAcceptModal}
                 accept={data.accept}
-                total={data.playerNeed + data.gkNeed}
-                now={data.player + data.gk}
+                total={data.player_count + data.gk_count}
+                now={data.player_current_count + data.gk_current_count}
               />
             )}
           </div>

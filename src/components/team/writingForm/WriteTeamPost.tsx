@@ -10,7 +10,7 @@ import { Button } from '../../../styles/styled-components/CommonStyle';
 import alertModal from '../../common/alertModal';
 import RegionSelect from '../../common/RegionSelect';
 import MemberCount from './MemberCount';
-
+import { TeamDataType } from '../../../types/TeamPageType';
 interface PostDataType {
   title: string;
   description: string;
@@ -24,35 +24,48 @@ function WriteTeamPost() {
   const location = useLocation();
   const navigate = useNavigate();
   const isLogin = useSelector(isLoginSelector);
-  const [imageFile, setImageFile] = useState<File>();
-  const [imageUrl, setImageUrl] = useState('');
-  const [subject, setSubject] = useState('');
+  //팀 post 데이터 필드
   const [title, setTitle] = useState('');
-  const [hashTags, setHashTags] = useState<string[]>([]);
   const [editorContents, setEditorContents] = useState('');
+  const [selectedRegion, setSelectedRegion] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
+  const [playerCurrent, setPlayerCurrent] = useState(0);
+  const [playerNeed, setPlayerNeed] = useState(0);
+  const [gkCurrent, setGkCurrent] = useState(0);
+  const [gkNeed, setGkNeed] = useState(0);
+
   const [isTemporarilySaved, setIsTemporarilySaved] = useState(false);
   const isEditMode = location.pathname.split('/').pop() !== 'submit';
-  const postData = useSelector(
-    (state: RootState) => state.communityPost.postData?.post
+  const teamData: TeamDataType = useSelector(
+    (state: RootState) => state.teamPost.data
   );
 
-  //   useEffect(() => {
-  //     if (!isEditMode || !postData) return;
-  //     const { thumbnail, subject, title, hashTags, description } = postData;
-  //     setImageUrl(thumbnail);
-  //     setSubject(subject);
-  //     setTitle(title);
-  //     setHashTags(hashTags);
-  //     setEditorContents(description);
-  //   }, [isEditMode]);
+  useEffect(() => {
+    if (!isEditMode || !teamData) return;
+    const {
+      title,
+      contents,
+      region,
+      city,
+      gk_count,
+      gk_current_count,
+      player_count,
+      player_current_count,
+    } = teamData;
+    setTitle(title);
+    setEditorContents(contents);
+    setSelectedRegion(region);
+    setSelectedCity(city);
+    setPlayerCurrent(player_current_count);
+    setPlayerNeed(player_count - player_current_count);
+    setGkCurrent(gk_current_count);
+    setGkNeed(gk_count - gk_current_count);
+  }, [isEditMode]);
 
   const setContentsHandler: (value: string) => void = (value) => {
     setEditorContents(value);
   };
 
-  useEffect(() => {
-    if (!isEditMode) return;
-  }, []);
   useEffect(() => {
     let prevForm = localStorage.getItem('temporarilySavedTeamPost');
     if (prevForm) setIsTemporarilySaved(true);
@@ -68,11 +81,14 @@ function WriteTeamPost() {
     if (isEmpty) return;
 
     const form = {
-      thumbnail: imageUrl,
-      subject,
-      hashTags,
       title,
       editorContents,
+      selectedRegion,
+      selectedCity,
+      playerCurrent,
+      playerNeed,
+      gkCurrent,
+      gkNeed,
     };
     localStorage.setItem('temporarilySavedTeamPost', JSON.stringify(form));
     setIsTemporarilySaved(true);
@@ -82,6 +98,9 @@ function WriteTeamPost() {
   const checkEmpty = () => {
     if (title.length === 0 || editorContents.length === 0) {
       alertModal('제목과 본문을 작성해주세요.', 'warning');
+      return true;
+    } else if (playerNeed === 0 && gkNeed === 0) {
+      alertModal('모집 인원을 입력해주세요', 'warning');
       return true;
     }
     return false;
@@ -93,13 +112,7 @@ function WriteTeamPost() {
       alertModal('임시 저장된 포스팅이 없습니다.', 'text');
       return;
     }
-    if (
-      imageFile ||
-      subject.length > 0 ||
-      hashTags.length > 0 ||
-      title.length > 0 ||
-      editorContents.length > 0
-    ) {
+    if (title.length > 0 || editorContents.length > 0) {
       const confirm = await alertModal(
         '작성 중인 내용이 지워집니다. 임시 저장 포스팅을 불러오시겠습니까?',
         'submit'
@@ -108,12 +121,14 @@ function WriteTeamPost() {
     }
 
     const parsedFormData = JSON.parse(prevForm);
-    setImageFile(undefined);
-    setImageUrl(parsedFormData.thumbnail);
-    setSubject(parsedFormData.subject);
     setTitle(parsedFormData.title);
-    setHashTags([...parsedFormData.hashTags]);
     setEditorContents(parsedFormData.editorContents);
+    setSelectedRegion(parsedFormData.selectedRegion);
+    setSelectedCity(parsedFormData.selectedCity);
+    setPlayerCurrent(parsedFormData.playerCurrent);
+    setPlayerNeed(parsedFormData.playerNeed);
+    setGkCurrent(parsedFormData.gkCurrent);
+    setGkNeed(parsedFormData.gkNeed);
     setIsTemporarilySaved(false);
   };
 
@@ -124,21 +139,25 @@ function WriteTeamPost() {
     }
     if (!checkEmpty) return;
 
-    let selectedSubject = subject === '주제를 선택해주세요' ? '' : subject;
     const data = {
       title,
-      description: editorContents,
-      subject: selectedSubject,
-      hashTags,
-      notice: '일반 게시글',
+      contents: editorContents,
+      category: '팀원 구해요',
+      region: selectedRegion,
+      city: selectedCity,
+      player_current_count: playerCurrent.toString(),
+      player_count: (playerCurrent + playerNeed).toString(),
+      gk_current_count: gkCurrent.toString(),
+      gk_count: (gkCurrent + gkNeed).toString(),
     };
 
     if (isEditMode) editPost(data);
     else submitPost(data);
   };
-
+  console.log(playerCurrent, playerNeed, gkCurrent, gkNeed);
   const editPost = (data: any) => {
-    const url = `${process.env.REACT_APP_API_URL}/communities/${postData?.post_id}`;
+    console.log(data);
+    const url = `${process.env.REACT_APP_API_URL}/groups/${teamData.group_id}/info`;
     const config = {
       withCredentials: true,
     };
@@ -146,11 +165,11 @@ function WriteTeamPost() {
       .patch(url, data, config)
       .then((res) => {
         alertModal('게시물이 수정되었습니다.', 'success');
-        navigate(`/community/${postData?.post_id}`);
+        navigate(`/teampage/${teamData.group_id}`);
       })
       .catch((e) => {
         if (e.response.data.statusCode === 500) {
-          alertModal('댓글 수정에 실패했습니다.', 'error');
+          alertModal('게시글 수정에 실패했습니다.', 'error');
         } else {
           alertModal(e.response.data.message, 'warning');
         }
@@ -159,7 +178,7 @@ function WriteTeamPost() {
   };
 
   const submitPost = (data: any) => {
-    const url = `${process.env.REACT_APP_API_URL}/communities`;
+    const url = `${process.env.REACT_APP_API_URL}/groups`;
     const config = {
       withCredentials: true,
     };
@@ -167,7 +186,7 @@ function WriteTeamPost() {
       .post(url, data, config)
       .then((res) => {
         alertModal('게시물이 등록되었습니다.', 'success');
-        navigate('/community');
+        navigate('/teampage');
       })
       .catch((e) => {
         if (e.response.data.statusCode === 500) {
@@ -198,16 +217,31 @@ function WriteTeamPost() {
       <ContianerHeader>
         <RowSectionDiv>
           <SectionTitle>지역</SectionTitle>
-          <RegionSelect />
+          <RegionSelect
+            selectedRegion={selectedRegion}
+            setSelectedRegion={setSelectedRegion}
+            selectedCity={selectedCity}
+            setSelectedCity={setSelectedCity}
+          />
         </RowSectionDiv>
         <Position>
           <SectionDiv>
             <SectionTitle>현재 인원</SectionTitle>
-            <MemberCount />
+            <MemberCount
+              fieldPlayerCount={playerCurrent}
+              setFieldPlayerCount={setPlayerCurrent}
+              GoalKeeperCount={gkCurrent}
+              setGoalKeeperCount={setGkCurrent}
+            />
           </SectionDiv>
           <SectionDiv>
             <SectionTitle>모집 인원</SectionTitle>
-            <MemberCount />
+            <MemberCount
+              fieldPlayerCount={playerNeed}
+              setFieldPlayerCount={setPlayerNeed}
+              GoalKeeperCount={gkNeed}
+              setGoalKeeperCount={setGkNeed}
+            />
           </SectionDiv>
         </Position>
       </ContianerHeader>

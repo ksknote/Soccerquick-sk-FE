@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Post } from '../../../styles/styled-components/PostsStyle';
 import { useNavigate, Link } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
 import HtmlParser from '../../common/HtmlParser';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   isLoginSelector,
   userSelector,
 } from '../../../redux/modules/auth/selector';
-import { RootState } from '../../../redux/store';
+import { RootState, AppDispatch } from '../../../redux/store';
+import { updateUserData } from '../../../redux/modules/auth/actions';
 import chevronIcon from '../../../assets/icon/chevron_green.svg';
 import ballIcon from '../../../assets/icon/soccerball.svg';
 import spaceLikeIcon from '../../../assets/icon/like_space.svg';
@@ -19,19 +20,20 @@ import axios from 'axios';
 import alertModal from '../../common/alertModal';
 import ShareModal from '../../fieldDetail/ShareModal';
 import stripHTML from '../../../utils/stripHTML';
+import { fetchCommunityPost } from '../../../redux/modules/community/actions';
 
 function CommunityPostContents() {
-  // 글 작성자인지 확인하기 위한 데이터
+  const dispatch = useDispatch<AppDispatch>();
+  const isLogin = useSelector(isLoginSelector);
   const postData = useSelector(
     (state: RootState) => state.communityPost.postData?.post
   );
   const userData = useSelector(userSelector);
-  const isLogin = useSelector(isLoginSelector);
   const navigate = useNavigate();
   const isAuthor = userData?.user_id === postData?.userId;
   const isAdmin = userData?.role === 'admin' || userData?.role === 'manager';
   const [showShareModal, setShowShareModal] = useState(false);
-  //  const isFavorite =
+  const isLike = postData && userData?.likePosts.includes(postData?.post_id);
 
   const config = {
     headers: {
@@ -64,15 +66,27 @@ function CommunityPostContents() {
     }
   };
 
-  const clickLikeHanlder = () => {
-    axios
-      .post(
-        `${process.env.REACT_APP_API_URL}/communities/like`,
-        { postId: postData?.post_id },
-        config
-      )
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
+  const clickLikeHanlder = async () => {
+    if (!isLogin) {
+      const confirm = await alertModal(
+        '로그인이 필요합니다. 로그인 하시겠습니까?',
+        'submit'
+      );
+      if (confirm) navigate('/auth');
+    } else {
+      axios
+        .post(
+          `${process.env.REACT_APP_API_URL}/communities/like`,
+          { postId: postData?.post_id },
+          config
+        )
+        .then((res) => {
+          console.log(res);
+          dispatch(updateUserData());
+          dispatch(fetchCommunityPost(postData?.post_id));
+        })
+        .catch((e) => console.log(e));
+    }
   };
 
   return (
@@ -94,7 +108,7 @@ function CommunityPostContents() {
               <div>
                 <SideBar>
                   <SideBarButton onClick={clickLikeHanlder}>
-                    <img src={spaceLikeIcon} alt="좋아요" />
+                    <img src={isLike ? likeIcon : spaceLikeIcon} alt="좋아요" />
                     <p>{postData.like.length}</p>
                   </SideBarButton>
                   <SideBarButton onClick={() => setShowShareModal(true)}>

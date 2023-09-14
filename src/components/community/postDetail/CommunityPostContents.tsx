@@ -156,6 +156,16 @@ function CommunityPostContents() {
               </HashTags>
             )}
           </PostBody>
+          <MobileButtonBar>
+            <SideBarButton onClick={clickLikeHanlder}>
+              <img src={isLike ? likeIcon : spaceLikeIcon} alt="좋아요" />
+              <p>{postData.like.length}</p>
+            </SideBarButton>
+            <SideBarButton onClick={() => setShowShareModal(true)}>
+              <img src={shareIcon} alt="공유" />
+              <p>공유</p>
+            </SideBarButton>
+          </MobileButtonBar>
           <Post.AuthorButtonContainer>
             {isAuthor && (
               <Link to={`/community/edit/${postData.post_id}`}>
@@ -217,11 +227,11 @@ const HashTag = styled.span`
   padding: 0.3rem 0.8rem;
   margin-bottom: 0.875rem;
   margin-right: 0.875rem;
-  border: 0.1rem solid #eeeeee;
-  border-radius: 2rem;
+  background-color: #eff3fa;
+  border-radius: 0.4rem;
   font-size: 1.2rem;
-  font-weight: 500;
-  color: #5aaf5a;
+  font-weight: 400;
+  color: #3e4042;
   @media (min-width: 1024px) {
     font-size: 1.4rem;
     padding: 0.5rem 1rem;
@@ -251,19 +261,40 @@ const SideBar = styled.div`
   gap: 1rem;
 `;
 
-const SideBarButton = styled.button`
-  width: 8rem;
+const MobileButtonBar = styled.div`
+  width: 100%;
   display: flex;
-  padding: 1rem;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  @media (min-width: 1024px) {
+    display: none;
+  }
+`;
+
+const SideBarButton = styled.button`
+  min-width: 7rem;
+  display: flex;
+  padding: 0.7rem;
   background: transparent;
   box-shadow: 0 3px 8px 0 rgba(33, 37, 41, 0.05);
   border: 0.1rem solid #e9ecef;
   border-radius: 1rem;
   color: #1b1c1d;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   img {
     width: 2rem;
     height: 2rem;
-    margin-right: 0.8rem;
+    margin-right: 0.2rem;
+  }
+  p {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+  @media (min-width: 1024px) {
+    width: 8rem;
+    padding: 1rem;
+    font-size: 1.4rem;
   }
 `;

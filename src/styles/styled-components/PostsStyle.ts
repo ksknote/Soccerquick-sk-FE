@@ -129,7 +129,7 @@ export const Post = {
     }
     @media (min-width: 1024px) {
       button {
-        font-size: 1.7rem;
+        font-size: 1.5rem;
       }
       margin: 2rem auto;
     }

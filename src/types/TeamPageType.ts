@@ -1,33 +1,32 @@
 export interface Applicant {
   id: string;
+  name: string;
+  phone_number: string;
+  gender: string;
   position: string;
   level: string;
   contents: string;
+  status: string;
 }
 
-export interface DataProps {
-  group_id?: string;
-  area: string;
-  author: string;
-  body: string;
-  gender: string;
-  num: number;
-  position?: string;
-  skill?: string;
-  status: string;
+export interface TeamDataType {
+  group_id: string;
   title: string;
-  gk: number;
-  gkNeed: number;
-  player: number;
-  playerNeed: number;
-  location: string;
+  leader_id: string;
+  leader_name: string;
+  leader_phone_number: string;
+  contents: string;
+  region: string;
+  city: string;
+  status: string;
   gk_count: number;
   gk_current_count: number;
   player_count: number;
   player_current_count: number;
   random_matched?: string;
-  applicant?: Applicant[];
-  [key: string]: string | number | undefined | Applicant[];
+  applicant: Applicant[];
+  accept: Accept[];
+  [key: string]: string | number | undefined | Applicant[] | Accept[];
 }
 
 // export interface filteredData {
@@ -68,10 +67,10 @@ export interface DropdownList {
 export interface BoardProps {
   dropdownList: DropdownList[];
   handleReset: () => void;
-  filteredData: DataProps[];
+  filteredData: TeamDataType[];
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
-  currentData: DataProps[];
+  currentData: TeamDataType[];
   // setCurrentData: React.Dispatch<React.SetStateAction<DataProps[]>>;
   totalPage: number;
 }

@@ -127,6 +127,7 @@ export const StyledButton = styled.button`
   padding: 0rem 2rem;
   border-radius: 1rem;
   color: white;
+  font-weight: 500;
   background: var(--color--green);
   :first-child {
     background: white;

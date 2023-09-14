@@ -143,7 +143,7 @@ export const StyledBody = styled.div`
   height: 31rem;
   display: flex;
   justify-content: center;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 `;
 export const StyledGridDiv = styled.div<{ column: number }>`
   display: grid;
@@ -193,7 +193,7 @@ export const StyledNameDiv = styled.div<{ name: string }>`
   margin: 0rem 1rem;
   color: ${({ name }) => (name === '모집 중...' ? 'lightgrey' : 'black')};
   @media (min-width: 1024px) {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 `;
 
@@ -208,7 +208,7 @@ export const StyledContent = styled.div`
     span {
       font-weight: 400;
     }
-    font-size: 1.7rem;
+    font-size: 1.5rem;
   }
 `;
 

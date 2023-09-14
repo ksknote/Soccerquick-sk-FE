@@ -365,7 +365,7 @@ const ReplyTextArea = styled.div`
   @media (min-width: 1024px) {
     min-height: 10rem;
     textarea {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
     }
   }
 `;

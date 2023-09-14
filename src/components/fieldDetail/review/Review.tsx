@@ -56,8 +56,7 @@ const Header = styled.div`
   }
   @media (min-width: 1024px) {
     > h2 {
-      font-size: 2.2rem;
-      font-weight: 700;
+      font-size: 2rem;
     }
     > span {
       font-size: 1.4rem;

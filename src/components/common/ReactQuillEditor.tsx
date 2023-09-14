@@ -133,7 +133,7 @@ const Wrapper = styled.div`
     @media (min-width: 1024px) {
       height: 40rem;
       .ql-container {
-        font-size: 1.7rem;
+        font-size: 1.6rem;
       }
     }
   }

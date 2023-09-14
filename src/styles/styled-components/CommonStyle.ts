@@ -75,16 +75,16 @@ const SmallButton = styled.button`
   background-color: var(--color--green);
   color: white;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 500;
   img {
     width: 1.5rem;
     vertical-align: middle;
     padding: 0 0.3rem 0.2rem 0;
   }
   @media (min-width: 1024px) {
-    width: 11rem;
-    height: 4.5rem;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
+    padding: 0.6rem 1.3rem;
+
     img {
       width: 2rem;
     }

@@ -372,9 +372,9 @@ const Source = styled.div`
   }
   @media (min-width: 1024px) {
     width: 100%;
-    height: 8rem;
-    font-size: 2rem;
-    font-weight: 700;
+    height: 7rem;
+    font-size: 1.6rem;
+    font-weight: 600;
     line-height: 7.5rem;
   }
 `;
@@ -402,8 +402,7 @@ const ContentsTitle = styled.div`
   }
   @media (min-width: 1024px) {
     > h2 {
-      font-size: 2.2rem;
-      font-weight: 700;
+      font-size: 2rem;
       margin: 0.6rem 0;
     }
     > p {
@@ -424,7 +423,6 @@ const ProvidedItems = styled.div`
       border: 0.1rem solid #eeeeee;
       border-radius: 2rem;
       font-size: 1.1rem;
-      font-weight: 500;
 
       :nth-child(3n + 1) {
         color: #7a6fce;
@@ -453,10 +451,9 @@ const ProvidedItems = styled.div`
   @media (min-width: 768px) {
     > ul li {
       height: 4rem;
-      padding: 0.7rem 1.7rem;
+      padding: 0.5rem 1.2rem;
       margin-right: 1.2rem;
-      font-size: 1.5rem;
-      font-weight: 500;
+      font-size: 1.4rem;
     }
     > p {
       height: 2.7rem;
@@ -480,13 +477,12 @@ const GroundAddressDetail = styled.div`
   font-size: 1.3rem;
   p:nth-child(2) {
     margin-left: 2rem;
-    color: #727f88;
-    font-weight: 500;
+    color: #8a8e91;
     text-decoration: underline;
     cursor: pointer;
   }
   @media (min-width: 1024px) {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     p:nth-child(2) {
       margin-left: 2rem;
     }

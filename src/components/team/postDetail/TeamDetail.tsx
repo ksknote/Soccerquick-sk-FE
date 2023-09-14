@@ -286,7 +286,7 @@ export const StyledDetailDiv = styled.div`
   padding: 1rem 0;
 
   @media (min-width: 1024px) {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     padding: 2rem 0;
   }
 `;
@@ -367,9 +367,9 @@ export const StyledPositionName = styled.div`
     font-weight: 500;
   }
   @media (min-width: 1024px) {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     div:last-child {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
     }
   }
 `;
@@ -398,7 +398,7 @@ export const StyledPositionDetail = styled.div<{ color?: string }>`
   }
   @media (min-width: 1024px) {
     p {
-      font-size: 1.7rem;
+      font-size: 1.6rem;
       span {
         font-size: 2rem;
         padding: 0 0.4rem;
@@ -437,7 +437,7 @@ export const StyledFooter = styled.div`
     button {
       width: 11rem;
       height: 4.5rem;
-      font-size: 1.7rem;
+      font-size: 1.6rem;
     }
   }
 `;

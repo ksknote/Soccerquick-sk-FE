@@ -270,7 +270,7 @@ const StyledLabelTr = styled.tr`
     }
   }
   @media (min-width: 1024px) {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 `;
 
@@ -368,7 +368,7 @@ const StyledMainTd = styled.td`
     width: 69%;
   }
   @media (min-width: 1024px) {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 `;
 

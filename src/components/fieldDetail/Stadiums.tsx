@@ -166,7 +166,7 @@ const StadiumDetail = styled.div`
     grid-template-columns: 1fr 30rem;
 
     h2 {
-      font-size: 2rem;
+      font-size: 1.8rem;
     }
   }
 `;
@@ -209,7 +209,6 @@ const StadiumDetailFacility = styled.div`
   @media (min-width: 1024px) {
     div {
       font-size: 1.6rem;
-      font-weight: 600;
 
       img {
         width: 4rem;

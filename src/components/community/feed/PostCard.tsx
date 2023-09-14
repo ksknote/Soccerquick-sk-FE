@@ -197,7 +197,7 @@ const PostContents = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1.5rem 1.5rem 2rem 1.5rem;
-  gap: 1.8rem;
+  gap: 1.6rem;
 `;
 
 const PostTitle = styled.p`

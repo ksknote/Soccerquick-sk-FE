@@ -18,10 +18,10 @@ export const Comment = {
       margin-right: 0.4rem;
     }
     @media (min-width: 1024px) {
-      font-size: 2.2rem;
+      font-size: 1.8rem;
       padding: 1rem 0;
       img {
-        width: 4.3rem;
+        width: 4rem;
       }
     }
   `,
@@ -67,7 +67,7 @@ export const Comment = {
     font-size: 1.3rem;
     font-weight: 500;
     @media (min-width: 1024px) {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
     }
   `,
 
@@ -98,7 +98,7 @@ export const Comment = {
   Contents: styled.div`
     font-size: 1.3rem;
     @media (min-width: 1024px) {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
     }
   `,
 
@@ -113,9 +113,9 @@ export const Comment = {
       outline: none;
     }
     @media (min-width: 1024px) {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       ::placeholder {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
       }
     }
   `,
@@ -146,7 +146,7 @@ export const Comment = {
     color: gray;
     padding: 0 0.3rem;
     @media (min-width: 1024px) {
-      font-size: 1.7rem;
+      font-size: 1.5rem;
     }
   `,
 

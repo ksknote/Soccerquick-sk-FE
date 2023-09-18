@@ -63,7 +63,7 @@ const Wrapper = styled.div`
   color: #2c2c2c;
   padding-top: 1rem;
   @media (min-width: 1024px) {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     padding-top: 2rem;
   }
 `;

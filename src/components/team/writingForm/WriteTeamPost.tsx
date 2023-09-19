@@ -40,6 +40,7 @@ function WriteTeamPost() {
     (state: RootState) => state.teamPost.data
   );
 
+  //수정모드라면 기존 데이터 불러오기
   useEffect(() => {
     if (!isEditMode || !teamData) return;
     const {
@@ -99,6 +100,9 @@ function WriteTeamPost() {
     if (title.length === 0 || editorContents.length === 0) {
       alertModal('제목과 본문을 작성해주세요.', 'warning');
       return true;
+    } else if (!selectedRegion || !selectedCity) {
+      alertModal('지역을 선택해주세요.', 'warning');
+      return true;
     } else if (playerNeed === 0 && gkNeed === 0) {
       alertModal('모집 인원을 입력해주세요', 'warning');
       return true;
@@ -137,7 +141,9 @@ function WriteTeamPost() {
       alertModal('로그인이 필요한 서비스입니다.', 'warning');
       return;
     }
-    if (!checkEmpty) return;
+
+    const isEmpty = checkEmpty();
+    if (isEmpty) return;
 
     const data = {
       title,
@@ -313,7 +319,7 @@ const GuideWrapper = styled.div`
 const SectionDiv = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
+  padding: 1.5rem 0;
   border-bottom: 0.1rem solid #e7e9ea;
   @media (min-width: 1024px) {
     padding: 2rem;

@@ -105,3 +105,24 @@ export const Button = {
     filter: drop-shadow(0 0 0.1rem grey);
   `,
 };
+
+export const MobileWriteButton = styled.div`
+  position: fixed;
+  bottom: 12rem;
+  right: 2.5rem;
+  width: 5.5rem;
+  height: 5.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background-color: var(--color--green);
+  filter: drop-shadow(rgb(165, 179, 178) 0px 0px 0.5rem);
+  img {
+    width: 3rem;
+    height: 3rem;
+  }
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;

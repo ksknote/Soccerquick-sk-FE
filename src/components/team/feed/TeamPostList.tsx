@@ -12,22 +12,14 @@ import {
   Position,
   Author,
 } from '../Styles/ViewsStyle';
-import { Button } from '../../../styles/styled-components/CommonStyle';
-import { useSelector } from 'react-redux';
-import { isLoginSelector } from '../../../redux/modules/auth/selector';
 import MyPagination from '../../myPages/MyPagination';
 import EmptyBox from '../../common/EmptyBox';
 import CheckPositionStatus from './CheckPostionStatus';
 import { TeamDataType, FilteringOptionType } from '../../../types/TeamPageType';
 import axios from 'axios';
 import TeamPostFilter from './TeamPostFilter';
-import styled from 'styled-components';
-import pencilIcon from '../../../assets/icon/pencil_white.svg';
 
 function TeamList() {
-  const navigate = useNavigate();
-  const isLogin = useSelector(isLoginSelector);
-
   const [teamData, setTeamData] = useState<TeamDataType[]>([]);
   const [filteredData, setFilteredData] = React.useState(teamData);
   const [filteringOption, setFilteringOption] = useState<FilteringOptionType>({
@@ -73,15 +65,6 @@ function TeamList() {
 
   return (
     <div>
-      {isLogin && (
-        <PcWriteButton
-          onClick={() => {
-            navigate('/teampage/submit');
-          }}
-        >
-          글 작성하기
-        </PcWriteButton>
-      )}
       <OptionContainer>
         <StyledTotalNumber>
           총&nbsp; <b>{filteredData.length}</b>건
@@ -124,42 +107,8 @@ function TeamList() {
           )}
         </TeamRecruitContainer>
       </TeamPageBody>
-      <MobileWriteButton
-        onClick={() => {
-          navigate('/teampage/submit');
-        }}
-      >
-        <img src={pencilIcon} alt="새 글 작성" />
-      </MobileWriteButton>
     </div>
   );
 }
 
 export default TeamList;
-
-const PcWriteButton = styled(Button.GreenBig)`
-  @media (max-width: 767.9px) {
-    display: none;
-  }
-`;
-
-const MobileWriteButton = styled.div`
-  position: fixed;
-  bottom: 12rem;
-  right: 2.5rem;
-  width: 5.5rem;
-  height: 5.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100%;
-  background-color: var(--color--green);
-  filter: drop-shadow(rgb(165, 179, 178) 0px 0px 0.5rem);
-  img {
-    width: 3rem;
-    height: 3rem;
-  }
-  @media (min-width: 768px) {
-    display: none;
-  }
-`;

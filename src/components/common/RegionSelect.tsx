@@ -16,6 +16,7 @@ function RegionSelect({
 }: RegionSelectPropsType) {
   const selectRegionHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedRegion(event.target.value);
+    setSelectedCity('');
   };
 
   const selectCityHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -29,7 +30,7 @@ function RegionSelect({
         value={selectedRegion}
         short={true}
       >
-        <option value="">선택하세요</option>
+        <option value="">활동 지역</option>
         {Object.keys(regionData).map((regionKey) => (
           <option key={regionKey} value={regionKey}>
             {regionKey}
@@ -39,7 +40,7 @@ function RegionSelect({
 
       {selectedRegion && (
         <Select onChange={(e) => selectCityHandler(e)} value={selectedCity}>
-          <option value="">선택하세요</option>
+          <option value="전체">전체</option>
           {regionData[selectedRegion].map((city) => (
             <option key={city} value={city}>
               {city}
@@ -59,16 +60,15 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Select = styled.select<{ short?: boolean }>`
-  width: 100%;
-  min-width: ${({ short }) => (short ? '10rem' : '14rem')};
+export const Select = styled.select<{ short?: boolean }>`
+  /* min-width: ${({ short }) => (short ? '11.5rem' : '14rem')}; */
   max-width: 20rem;
   height: 3.4rem;
   border: 0.1rem solid #e7e9ea;
   border-radius: 1rem;
   border-radius: 1rem;
   font-size: 1.3rem;
-  padding: 0 1rem;
+  padding: 0 4.5rem 0 1rem;
 
   //reset
   margin: 0;
@@ -95,7 +95,7 @@ const Select = styled.select<{ short?: boolean }>`
   }
 
   @media (min-width: 1024px) {
-    min-width: 20rem;
+    padding-right: 7rem;
     height: 4rem;
     font-size: 1.6rem;
   }

@@ -83,6 +83,7 @@ export const StyledLabelTr = styled.tr`
 `;
 
 export const TeamPageOption = styled.div`
+  width: 100%;
   display: flex;
   margin: 10px 0;
 `;
@@ -237,6 +238,9 @@ export const OptionContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-top: 2rem;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const TeamRecruitContainer = styled.div`

@@ -29,50 +29,10 @@ export interface TeamDataType {
   [key: string]: string | number | undefined | Applicant[] | Accept[];
 }
 
-// export interface filteredData {
-//   group_id?: string;
-//   area: string;
-//   author: string;
-//   body: string;
-//   gender: string;
-//   num: number;
-//   position?: string;
-//   skill?: string;
-//   status: string;
-//   title: string;
-//   gk: number;
-//   gkNeed: number;
-//   player: number;
-//   playerNeed: number;
-//   location: string;
-//   gk_count: number;
-//   gk_current_count: number;
-//   player_count: number;
-//   player_current_count: number;
-//   random_matched?: string;
-//   applicant?: Applicant[];
-//   [key: string]: string | number | undefined | Applicant[];
-// }
-
-export interface FindMemberFilter {
-  status: string | null;
-  area: string | null;
-}
 export interface DropdownList {
   option: string[];
   state: string;
   setState: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export interface BoardProps {
-  dropdownList: DropdownList[];
-  handleReset: () => void;
-  filteredData: TeamDataType[];
-  currentPage: number;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
-  currentData: TeamDataType[];
-  // setCurrentData: React.Dispatch<React.SetStateAction<DataProps[]>>;
-  totalPage: number;
 }
 
 export interface FindPageProps {

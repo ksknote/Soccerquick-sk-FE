@@ -56,12 +56,12 @@ export default RegionSelect;
 
 const Wrapper = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   align-items: center;
 `;
 
 export const Select = styled.select<{ short?: boolean }>`
-  /* min-width: ${({ short }) => (short ? '11.5rem' : '14rem')}; */
+  width: fit-content;
   max-width: 20rem;
   height: 3.4rem;
   border: 0.1rem solid #e7e9ea;

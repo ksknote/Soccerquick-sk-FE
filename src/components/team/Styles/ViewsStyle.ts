@@ -41,6 +41,7 @@ export const Teampage = styled.div`
 export const StyledTotalNumber = styled.p`
   font-size: 1.5rem;
   color: #5e5d5d;
+  padding-left: 1rem;
   @media (min-width: 1024px) {
     font-size: 1.8rem;
   }
@@ -80,49 +81,6 @@ export const StyledLabelTr = styled.tr`
     font-size: 1.8rem;
     font-weight: 500;
   }
-`;
-
-export const TeamPageOption = styled.div`
-  width: 100%;
-  display: flex;
-  margin: 10px 0;
-`;
-
-export const StyledResetButton = styled.button`
-  background-color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #333;
-  border: 1px solid #ddd;
-  border-radius: 1rem;
-  font-size: 1.6rem;
-  @media (min-width: 1024px) {
-    padding: 0 1.8rem;
-  }
-
-  img {
-    width: 2rem;
-    @media (min-width: 1024px) {
-      width: 2.4rem;
-      margin-right: 0.5rem;
-    }
-  }
-  p {
-    display: none;
-    @media (min-width: 1024px) {
-      display: inline-block;
-    }
-  }
-`;
-
-export const StyledTr = styled.tr`
-  height: 8rem;
-  margin: 1rem 1rem;
-  padding: 2rem 1rem;
-  font-size: 1.6rem;
-
-  border-bottom: 0.1rem solid #dddddd;
 `;
 
 export const StyledTitle = styled.p`
@@ -240,6 +198,7 @@ export const OptionContainer = styled.div`
   padding-top: 2rem;
   @media (max-width: 768px) {
     flex-direction: column;
+    align-items: flex-start;
   }
 `;
 

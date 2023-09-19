@@ -35,6 +35,10 @@ export interface DropdownList {
   setState: React.Dispatch<React.SetStateAction<string>>;
 }
 
+export type FilteringOptionType = {
+  [key: string]: string | null;
+};
+
 export interface FindPageProps {
   findingTeam: boolean;
   findingMember: boolean;

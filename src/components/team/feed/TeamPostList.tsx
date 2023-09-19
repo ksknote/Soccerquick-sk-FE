@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import DropDown from '../../common/DropDown';
-import resetIcon from '../../../assets/icon/reset_black.svg';
 import {
   StyledTotalNumber,
   TeamPageBody,
-  TeamPageOption,
-  StyledResetButton,
   OptionContainer,
   TeamRecruitContainer,
   TeamRecruitLi,
@@ -22,47 +18,30 @@ import { isLoginSelector } from '../../../redux/modules/auth/selector';
 import MyPagination from '../../myPages/MyPagination';
 import EmptyBox from '../../common/EmptyBox';
 import CheckPositionStatus from './CheckPostionStatus';
-import { TeamDataType } from '../../../types/TeamPageType';
+import { TeamDataType, FilteringOptionType } from '../../../types/TeamPageType';
 import axios from 'axios';
-import RegionSelect from '../../common/RegionSelect';
-import { Select } from '../../common/RegionSelect';
-
-type filteringOptionType = {
-  [key: string]: string | null;
-};
+import TeamPostFilter from './TeamPostFilter';
 
 function TeamList() {
   const navigate = useNavigate();
   const isLogin = useSelector(isLoginSelector);
 
   const [teamData, setTeamData] = useState<TeamDataType[]>([]);
-  const [status, setStatus] = useState('');
-  const [selectedRegion, setSelectedRegion] = useState('');
-  const [selectedCity, setSelectedCity] = useState('');
-
-  const [filteringOption, setFilteringOption] = useState<filteringOptionType>({
+  const [filteredData, setFilteredData] = React.useState(teamData);
+  const [filteringOption, setFilteringOption] = useState<FilteringOptionType>({
     status: null,
     region: null,
     city: null,
   });
 
-  useEffect(() => {
-    setFilteringOption((prev) => {
-      const newFilteringOption = {
-        ...prev,
-        status: status,
-        region: selectedRegion,
-        city: selectedCity,
-      };
-      return newFilteringOption;
-    });
-  }, [status, selectedRegion, selectedCity]);
-
-  function handleReset() {
-    setStatus('');
-    setSelectedCity('');
-    setSelectedRegion('');
-  }
+  // 페이지네이션 구현 부분
+  const [currentPage, setCurrentPage] = React.useState(1); // 현재 페이지 상태
+  // const [currentData, setCurrentData] = React.useState<DataProps[]>([]); // 초기 데이터
+  const [totalPage, setTotalPage] = React.useState(0);
+  const [itemsPerPage, setItemsPerPage] = React.useState(8);
+  const lastIndexOfData = currentPage * itemsPerPage;
+  const firstIndexOfData = lastIndexOfData - itemsPerPage;
+  const currentData = filteredData.slice(firstIndexOfData, lastIndexOfData);
 
   React.useEffect(() => {
     axios
@@ -75,25 +54,10 @@ function TeamList() {
       });
   }, []);
 
-  // 필터링 된 데이터를 관리하는 상태
-  const [filteredData, setFilteredData] = React.useState(teamData);
-  // 페이지네이션 구현 부분
-  const [currentPage, setCurrentPage] = React.useState(1); // 현재 페이지 상태
-  // const [currentData, setCurrentData] = React.useState<DataProps[]>([]); // 초기 데이터
-  const [totalPage, setTotalPage] = React.useState(0);
-
-  const [itemsPerPage, setItemsPerPage] = React.useState(8);
-  const lastIndexOfData = currentPage * itemsPerPage;
-  const firstIndexOfData = lastIndexOfData - itemsPerPage;
-  const currentData = filteredData.slice(firstIndexOfData, lastIndexOfData);
-
-  const statusOption = ['모집중', '모집완료'];
-
   useEffect(() => {
     const newFilteredData = teamData.filter((team) => {
       const optionKeys = Object.keys(filteringOption);
       for (let key of optionKeys) {
-        console.log(team[key], filteringOption[key]);
         if (!filteringOption[key]) continue;
         if (filteringOption[key] === '전체') continue;
         if (team[key] !== filteringOption[key]) {
@@ -120,35 +84,7 @@ function TeamList() {
         <StyledTotalNumber>
           총&nbsp; <b>{filteredData.length}</b>건
         </StyledTotalNumber>
-        <TeamPageOption>
-          {/* {dropdownList.map((list, idx) => (
-            <DropDown
-              key={idx}
-              list={list.option}
-              selected={list.state}
-              setSelected={list.setState}
-            />
-          ))} */}
-          <Select onChange={(e) => setStatus(e.target.value)} value={status}>
-            <option value="">모집 상태</option>
-            {statusOption.map((status) => (
-              <option key={status} value={status}>
-                {status}
-              </option>
-            ))}
-          </Select>
-          <RegionSelect
-            selectedRegion={selectedRegion}
-            setSelectedRegion={setSelectedRegion}
-            selectedCity={selectedCity}
-            setSelectedCity={setSelectedCity}
-          />
-
-          <StyledResetButton onClick={handleReset}>
-            <img src={resetIcon} alt="" />
-            <p>초기화</p>
-          </StyledResetButton>
-        </TeamPageOption>
+        <TeamPostFilter setFilteringOption={setFilteringOption} />
       </OptionContainer>
       <TeamPageBody>
         <TeamRecruitContainer>

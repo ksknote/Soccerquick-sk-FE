@@ -9,11 +9,13 @@ export const MyTeamPostWrapper = styled.div`
 // FindingMember
 
 export const StyledHeader = styled.div`
-  padding-left: 1rem;
   h1 {
     font-size: 2rem;
     margin: 0;
-    @media (min-width: 1024px) {
+  }
+  @media (min-width: 1024px) {
+    padding-left: 1rem;
+    h1 {
       font-size: 3rem;
     }
   }
@@ -41,7 +43,7 @@ export const Teampage = styled.div`
 export const StyledTotalNumber = styled.p`
   font-size: 1.5rem;
   color: #5e5d5d;
-  padding-left: 1rem;
+  padding: 0 1rem;
   @media (min-width: 1024px) {
     font-size: 1.8rem;
   }
@@ -197,8 +199,9 @@ export const OptionContainer = styled.div`
   align-items: center;
   padding-top: 2rem;
   @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
+    padding: 0%;
+    align-items: flex-end;
+    flex-direction: row-reverse;
   }
 `;
 

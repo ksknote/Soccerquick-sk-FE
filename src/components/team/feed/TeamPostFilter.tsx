@@ -67,6 +67,7 @@ const TeamPageOption = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
+    margin: 0;
   }
 `;
 

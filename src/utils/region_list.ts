@@ -1,5 +1,5 @@
 type RegionDataType = {
-  [key: string]: string[]; // key는 문자열이고 값은 문자열 배열인 객체
+  [key: string]: string[];
 };
 
 export const regionData: RegionDataType = {

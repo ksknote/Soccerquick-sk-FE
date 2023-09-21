@@ -23,10 +23,16 @@ export interface TeamDataType {
   gk_current_count: number;
   player_count: number;
   player_current_count: number;
+  recruitment_count: {
+    gk_count: number;
+    gk_current_count: number;
+    player_count: number;
+    player_current_count: number;
+  };
   random_matched?: string;
   applicant: Applicant[];
   accept: Accept[];
-  [key: string]: string | number | undefined | Applicant[] | Accept[];
+  // [key: string]: string | number | undefined | Applicant[] | Accept[];
 }
 
 export interface DropdownList {

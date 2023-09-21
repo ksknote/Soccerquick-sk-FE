@@ -29,7 +29,7 @@ function SearchMyTeamPost({
 }) {
   const [acceptModal, setAcceptModal] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
-  const data = useSelector((state: RootState) => state.teamPost.data);
+  const teamData = useSelector((state: RootState) => state.teamPost.data);
   const navigate = useNavigate();
 
   const handleTeamDetailClick = (groupId: string) => {
@@ -65,17 +65,19 @@ function SearchMyTeamPost({
                   </ContentTitle>
                   <Position>
                     {CheckPositionStatus(
-                      team.gk_current_count,
-                      team.gk_count,
-                      team.player_current_count,
-                      team.player_count
+                      team.recruitment_count.gk_current_count,
+                      team.recruitment_count.gk_count,
+                      team.recruitment_count.player_current_count,
+                      team.recruitment_count.player_count
                     )}
                   </Position>
                   <TeamMemberList
                     onClick={() => handleTeamDetailClick(team.group_id)}
                   >
                     팀원 명단 (
-                    {team.player_current_count + team.gk_current_count}명)
+                    {team.recruitment_count.player_current_count +
+                      team.recruitment_count.gk_current_count}
+                    명)
                   </TeamMemberList>
                 </TeamRecruitLi>
               ))
@@ -88,9 +90,9 @@ function SearchMyTeamPost({
       {acceptModal && (
         <MemberListModal
           setAcceptModal={setAcceptModal}
-          accept={data.accept}
-          total={data.playerNeed + data.gkNeed}
-          now={data.player + data.gk}
+          accept={teamData.accept}
+          total={teamData.player_count + teamData.gk_count}
+          now={teamData.player_current_count + teamData.gk_current_count}
         />
       )}
     </>

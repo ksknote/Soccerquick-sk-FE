@@ -49,9 +49,8 @@ export function MyPage() {
   const [groupList, setGroupList] = useState<TeamDataType[]>([]);
   const user = useSelector(userSelector);
   const filteredMyTeamPosts = groupList.filter(
-    (item: TeamDataType) => item.leader_name === user?.name
+    (item: TeamDataType) => item.leader.leader_name === user?.name
   );
-  // .map((item: GroupPost) => changeGroupObjectToArray(item));
   const navigate = useNavigate();
 
   const filteredRegistedTeamPosts = groupList.reduce(

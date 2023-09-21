@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import useIntersect from '../../../utils/useIntersect';
-import {
-  Button,
-  MobileWriteButton,
-} from '../../../styles/styled-components/CommonStyle';
-import pencilIcon from '../../../assets/icon/pencil_white.svg';
 import { PostType } from '../../../types/CommunityType';
 import CommunitySearch from './CommunitySearch';
 import CommunityPostList from './CommunityPostList';
 import CommunityFeedSorter from './CommunityFeedSorter';
+import WritePostButton from '../../common/WritePostButton';
 import Loading from '../../common/Loading';
 import debounce from '../../../utils/debounce';
 
@@ -21,7 +16,6 @@ export enum SortEnum {
 }
 
 function CommunityPostFeed() {
-  const navigate = useNavigate();
   const [postData, setPostData] = useState<PostType[]>([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -78,9 +72,7 @@ function CommunityPostFeed() {
       />
       <Nav>
         <CommunityFeedSorter sortType={sortType} setSortType={setSortType} />
-        <PcWriteButton onClick={() => navigate('./submit')}>
-          새 글 작성
-        </PcWriteButton>
+        <WritePostButton />
       </Nav>
       <CommunityPostList
         postData={postData}
@@ -89,13 +81,7 @@ function CommunityPostFeed() {
       />
       {isLoading && <Loading />}
       <Target ref={targetRef} isFetchingEnded={isFetchingEnded}></Target>
-      <MobileWriteButton
-        onClick={() => {
-          navigate('./submit');
-        }}
-      >
-        <img src={pencilIcon} alt="새 글 작성" />
-      </MobileWriteButton>
+      <WritePostButton type="mobile" />
     </>
   );
 }
@@ -112,10 +98,4 @@ const Nav = styled.nav`
 const Target = styled.div<{ isFetchingEnded: boolean }>`
   display: ${({ isFetchingEnded }) => isFetchingEnded && 'none'};
   height: 3rem;
-`;
-
-const PcWriteButton = styled(Button.GreenBig)`
-  @media (max-width: 767.9px) {
-    display: none;
-  }
 `;

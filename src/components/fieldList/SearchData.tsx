@@ -127,72 +127,64 @@ function FindingGround(props: FindingGroundProps) {
       <SearchFilter setFilterOption={setFilterOption} />
       <Searchpage>
         <SearchPageBody>
-          <table>
-            <StyledThead>
-              <StyledLabelTr>
-                {!isLoading ? (
-                  <>
-                    <th></th>
-                    <th>지역</th>
-                    <th>경기장</th>
-                    <th>상세조회</th>
-                  </>
-                ) : (
-                  <></>
-                )}
-              </StyledLabelTr>
-            </StyledThead>
-
+          <StyledLabel>
             {!isLoading ? (
-              <tbody>
-                {currentData.map((item, idx) => (
-                  <StyledTr key={item.title + idx}>
-                    <StyledCheckboxTd>
-                      <input
-                        type="checkbox"
-                        id={item.title}
-                        checked={checkedArray.some(
-                          (data) => data.title === item.title
-                        )}
-                        onChange={(e) => checkHandler(e, item)}
-                      />
-                      <label htmlFor={item.title}></label>
-                    </StyledCheckboxTd>
-                    <StyledAddressTd>{item.address.area}</StyledAddressTd>
-                    <StyledMainTd>
-                      <StyledAddress>{item.address.area}</StyledAddress>
-                      <p onClick={(e) => clickDomHandler(item.dom_id)}>
-                        {item.title}
-                      </p>
-                      <StyledCellContainer>
-                        {Object.keys(ProvidedElementList).map(
-                          (provided) =>
-                            item[provided] && (
-                              <StyledFieldCell key={provided} data={provided}>
-                                {ProvidedElementList[provided]}
-                              </StyledFieldCell>
-                            )
-                        )}
-                      </StyledCellContainer>
-                    </StyledMainTd>
-
-                    <td>
-                      <StyledButton
-                        onClick={(e) => clickDomHandler(item.dom_id)}
-                      >
-                        조회
-                      </StyledButton>
-                    </td>
-                  </StyledTr>
-                ))}
-              </tbody>
+              <>
+                <div>지역</div>
+                <div>경기장</div>
+                <div>상세조회</div>
+              </>
             ) : (
-              Array.from({ length: 10 }).map((_, index) => (
-                <FieldListSkeleton key={index} />
-              ))
+              <></>
             )}
-          </table>
-          <div style={{ height: '100%', width: '100%' }}> </div>
+          </StyledLabel>
+
+          {!isLoading ? (
+            <>
+              {currentData.map((item, idx) => (
+                <FieldItem key={item.title + idx}>
+                  <Checkbox>
+                    <input
+                      type="checkbox"
+                      id={item.title}
+                      checked={checkedArray.some(
+                        (data) => data.title === item.title
+                      )}
+                      onChange={(e) => checkHandler(e, item)}
+                    />
+                    <label htmlFor={item.title}></label>
+                  </Checkbox>
+                  <Address>{item.address.area}</Address>
+                  <Title>
+                    <MoblieAddress>{item.address.area}</MoblieAddress>
+                    <p onClick={(e) => clickDomHandler(item.dom_id)}>
+                      {item.title}
+                    </p>
+                    <StyledCellContainer>
+                      {Object.keys(ProvidedElementList).map(
+                        (provided) =>
+                          item[provided] && (
+                            <StyledFieldCell key={provided} data={provided}>
+                              {ProvidedElementList[provided]}
+                            </StyledFieldCell>
+                          )
+                      )}
+                    </StyledCellContainer>
+                  </Title>
+
+                  <Button>
+                    <button onClick={(e) => clickDomHandler(item.dom_id)}>
+                      조회
+                    </button>
+                  </Button>
+                </FieldItem>
+              ))}
+            </>
+          ) : (
+            Array.from({ length: 10 }).map((_, index) => (
+              <FieldListSkeleton key={index} />
+            ))
+          )}
         </SearchPageBody>
         {isMobile || (
           <MyPagination
@@ -229,48 +221,141 @@ const Searchpage = styled.div`
 
 const SearchPageBody = styled.div`
   display: flex;
-  justify-content: space-between;
   width: 100%;
   min-height: 100rem;
   margin-bottom: 3rem;
   flex-direction: column;
-  table {
-    width: 100%;
-  }
-  tr {
-    justify-content: space-between;
-    align-items: center;
-  }
-  td {
+`;
+
+const StyledLabel = styled.div`
+  display: grid;
+  grid-template-columns: 1.5fr 3fr 1.3fr;
+  height: 6rem;
+  background-color: #fafafa;
+  border-bottom: 1px solid #d5d5d5ae;
+  box-shadow: 0px 5px 5px -5px #cbc9c9d5;
+  font-size: 1.5rem;
+  font-weight: 500;
+  div {
+    display: flex;
     justify-content: center;
     align-items: center;
   }
-`;
-
-const StyledThead = styled.thead`
+  @media (min-width: 1024px) {
+    font-size: 1.6rem;
+  }
   @media (max-width: 768px) {
     display: none;
   }
 `;
 
-const StyledLabelTr = styled.tr`
-  height: 6rem;
-  padding-bottom: 1rem;
-  background-color: #fafafa;
-  border-bottom: 1px solid #d5d5d5ae;
-  box-shadow: 0px 5px 5px -5px #cbc9c9d5;
-  font-size: 1.5rem;
-  th {
-    :last-child {
-      padding-right: 2rem;
+const FieldItem = styled.div`
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  height: 11rem;
+  width: 100%;
+  padding: 2rem 1rem;
+  font-size: 1.6rem;
+  border-bottom: 0.1rem solid #dddddd;
+
+  @media (min-width: 1024px) {
+    height: 10rem;
+  }
+  @media (min-width: 768px) {
+    grid-template-columns: 0.5fr 1.3fr 6fr 2fr;
+    gap: 1rem;
+  }
+`;
+
+const Checkbox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  input {
+    display: none;
+    + label {
+      display: inline-block;
+      width: 2rem;
+      height: 2rem;
+      border: 0.15rem solid var(--color--darkgreen);
+      border-radius: 0.5rem;
+      cursor: pointer;
+      @media (max-width: 768px) {
+        width: 1.6rem;
+        height: 1.6rem;
+        border: 0.1rem solid var(--color--darkgreen);
+        border-radius: 0.3rem;
+      }
     }
-    :nth-child(2) {
-      text-align: start;
-      padding-left: 4.5rem;
+    :checked + label {
+      background-image: url(${checkIcon});
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
+  }
+`;
+
+const Address = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding-left: 0.2rem;
+  @media (max-width: 768px) {
+    display: none;
   }
   @media (min-width: 1024px) {
     font-size: 1.6rem;
+  }
+`;
+
+const Title = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 1.5rem;
+  font-size: 1.6rem;
+  p {
+    cursor: pointer;
+  }
+  @media (min-width: 768px) {
+    padding-left: 1rem;
+  }
+  @media (min-width: 1024px) {
+    font-size: 1.6rem;
+  }
+`;
+
+const MoblieAddress = styled.div`
+  font-size: 1.3rem;
+  color: #696767;
+  font-weight: 500;
+  padding-bottom: 0.5rem;
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+
+const Button = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  button {
+    display: table-cell;
+    width: 10rem;
+    height: 3.8rem;
+    border-radius: 0.7rem;
+    background-color: var(--color--green);
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-right: 2rem;
+  }
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
@@ -295,105 +380,6 @@ const StyledFieldCell = styled(Cell)<{ data: string }>`
   @media (min-width: 1024px) {
     font-size: 1.4rem;
     margin-right: 1.2rem;
-  }
-`;
-
-const StyledTr = styled.tr`
-  height: 11rem;
-  padding: 2rem 1rem;
-  font-size: 1.6rem;
-  border-bottom: 0.1rem solid #dddddd;
-  @media (min-width: 1024px) {
-    height: 10rem;
-  }
-`;
-
-const StyledCheckboxTd = styled.td`
-  padding-left: 3rem;
-  input {
-    display: none;
-
-    + label {
-      display: inline-block;
-      width: 2rem;
-      height: 2rem;
-      border: 0.15rem solid var(--color--darkgreen);
-      border-radius: 0.5rem;
-      cursor: pointer;
-      @media (max-width: 768px) {
-        width: 1.6rem;
-        height: 1.6rem;
-        border: 0.1rem solid var(--color--darkgreen);
-        border-radius: 0.3rem;
-      }
-    }
-    :checked + label {
-      background-image: url(${checkIcon});
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-  }
-  @media (max-width: 768px) {
-    width: 1rem;
-    padding-left: 1.5rem;
-  }
-`;
-
-const StyledAddressTd = styled.td`
-  display: none;
-
-  @media (min-width: 768px) {
-    display: table-cell;
-    width: 13%;
-    font-size: 1.4rem;
-    font-weight: 500;
-    text-align: center;
-    padding-left: 0.2rem;
-  }
-  @media (min-width: 1024px) {
-    font-size: 1.6rem;
-  }
-`;
-
-const StyledMainTd = styled.td`
-  width: 100%;
-  padding-left: 1.5rem;
-  font-size: 1.6rem;
-  p {
-    cursor: pointer;
-  }
-  @media (min-width: 768px) {
-    padding-left: 1rem;
-    width: 69%;
-  }
-  @media (min-width: 1024px) {
-    font-size: 1.6rem;
-  }
-`;
-
-const StyledAddress = styled.div`
-  font-size: 1.3rem;
-  color: #696767;
-  font-weight: 500;
-  padding-bottom: 0.5rem;
-  @media (min-width: 768px) {
-    display: none;
-  }
-`;
-
-const StyledButton = styled.button`
-  display: none;
-  @media (min-width: 768px) {
-    display: table-cell;
-    width: 10rem;
-    height: 3.8rem;
-    border-radius: 0.7rem;
-    background-color: var(--color--green);
-    color: white;
-    font-size: 1.4rem;
-    font-weight: 500;
-    margin-right: 2rem;
   }
 `;
 

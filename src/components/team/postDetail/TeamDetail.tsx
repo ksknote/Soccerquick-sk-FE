@@ -79,8 +79,6 @@ function DetailPage() {
     }
   };
 
-  console.log(data);
-
   return (
     <>
       {!data ? (

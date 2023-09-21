@@ -74,7 +74,11 @@ function TeamFeed() {
         </StyledTotalNumber>
         <TeamPostFilter setFilteringOption={setFilteringOption} />
       </OptionContainer>
-      <TeamList filteredData={postData} />
+      <TeamList
+        postData={postData}
+        isLoading={isLoading}
+        isFetchingEnded={isFetchingEnded}
+      />
       {isLoading && <Loading />}
       <Target ref={targetRef} isFetchingEnded={isFetchingEnded}></Target>
       <WritePostButton type="mobile" />

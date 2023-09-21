@@ -13,7 +13,7 @@ import {
   isLoginSelector,
 } from '../../../redux/modules/auth/selector';
 import RegisterModal from './RegisterModal';
-import TeamPageComments from '../TeamPageComments';
+import TeamPageComments from './TeamPageComments';
 import chevronIcon from '../../../assets/icon/chevron_green.svg';
 import ballIcon from '../../../assets/icon/soccerball.svg';
 import playerIcon from '../../../assets/icon/player.svg';

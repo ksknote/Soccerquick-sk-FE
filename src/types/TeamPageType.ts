@@ -15,6 +15,11 @@ export interface TeamDataType {
   leader_id: string;
   leader_name: string;
   leader_phone_number: string;
+  leader: {
+    leader_id: string;
+    leader_name: string;
+    leader_phone_number: string;
+  };
   contents: string;
   region: string;
   city: string;

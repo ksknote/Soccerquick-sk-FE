@@ -3,18 +3,18 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { userSelector } from '../../redux/modules/auth/selector';
+import { userSelector } from '../../../redux/modules/auth/selector';
 import {
   BoxContainer,
   Button,
-} from '../../styles/styled-components/CommonStyle';
-import { Comment as CommentStyle } from '../../styles/styled-components/CommentStyle';
-import { Team } from '../../styles/styled-components/TeamStyle';
-import ballIcon from '../../assets/icon/soccerball.svg';
-import checkIcon from '../../assets/icon/check_white.svg';
-import commentIcon from '../../assets/icon/comment.svg';
-import { SubmitApplicant, CommentProps } from '../../types/TeamPageType';
-import alertModal from '../common/alertModal';
+} from '../../../styles/styled-components/CommonStyle';
+import { Comment as CommentStyle } from '../../../styles/styled-components/CommentStyle';
+import { Team } from '../../../styles/styled-components/TeamStyle';
+import ballIcon from '../../../assets/icon/soccerball.svg';
+import checkIcon from '../../../assets/icon/check_white.svg';
+import commentIcon from '../../../assets/icon/comment.svg';
+import { SubmitApplicant, CommentProps } from '../../../types/TeamPageType';
+import alertModal from '../../common/alertModal';
 
 function Comment(props: CommentProps) {
   const { data, user } = props;

@@ -217,8 +217,8 @@ export const TeamRecruitContainer = styled.div`
   }
 `;
 
-export const TeamRecruitLi = styled.div`
-  display: flex;
+export const TeamRecruitLi = styled.div<{ unvisible?: boolean }>`
+  display: ${({ unvisible }) => (unvisible ? 'none' : 'flex')};
   flex-direction: column;
   height: 100%;
   min-height: 16rem;

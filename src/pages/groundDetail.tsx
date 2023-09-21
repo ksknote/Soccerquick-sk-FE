@@ -9,7 +9,7 @@ import Stadiums from '../components/fieldDetail/Stadiums';
 import GroundImageModal from '../components/fieldDetail/GroundImageModal';
 import ShareModal from '../components/fieldDetail/ShareModal';
 import OneMarkerMap from '../components/fieldDetail/OneMarkerMap';
-import ScrollToTarget from '../components/scrollToTarget';
+import ScrollToTarget from '../utils/scrollToTarget';
 import Review from '../components/fieldDetail/review/Review';
 import starIcon from '../assets/icon/star.svg';
 import starFilledIcon from '../assets/icon/star_filled.svg';

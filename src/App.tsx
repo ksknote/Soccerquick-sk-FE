@@ -1,7 +1,6 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-// import { store, persistor } from './store/store';
+import { store, persistor } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import './App.css';
 import MainPage from './pages/Main';
@@ -12,10 +11,9 @@ import Admin from './pages/admin/MainPage';
 import { MyPage } from './pages/MyPage';
 import MyPageHome from './components/myPages/MyPageHome';
 import MobileCategory from './components/common/MobileCategory';
-// Redux 공부를 위한 추가 Store
-import { store, persistor } from './redux/store';
 import Auth from './pages/auth/Auth';
 import Community from './pages/community/Community';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -32,6 +30,7 @@ function App() {
             <Route path="/ground/:dom_id" element={<GroundDetail />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/community/*" element={<Community />} />
+            <Route path="/*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </PersistGate>

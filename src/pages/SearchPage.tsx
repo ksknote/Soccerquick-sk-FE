@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SearchData from '../components/fieldList/SearchData';
 import HeaderCategory from '../components/common/HeaderCategory';
-import GroundComparison from '../components/fieldList/fieldsComparison/GroundComparison';
+import FieldComparison from '../components/fieldList/fieldsComparison/FieldComparison';
 import ComparisonData from '../components/fieldList/fieldsComparison/ComparisonData';
 import FieldMap from '../components/fieldList/map/FieldMap';
 import axios from 'axios';
@@ -112,7 +112,7 @@ function SearchPage() {
         />
       </StyledBody>
       {showComparisonModal && (
-        <GroundComparison
+        <FieldComparison
           checkedArray={checkedArray}
           setCheckedArray={setCheckedArray}
           checkedInModal={checkedInModal}

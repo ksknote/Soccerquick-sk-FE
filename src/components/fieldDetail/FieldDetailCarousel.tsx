@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { DomDataType } from '../../pages/SearchPage';
 
-const GroundDetailCarousel: React.FC<{ stadiums: DomDataType['stadiums'] }> = ({
+const FieldDetailCarousel: React.FC<{ stadiums: DomDataType['stadiums'] }> = ({
   stadiums,
 }) => {
   const [stadiumImages, setStadiumImages] = useState<
@@ -45,7 +45,7 @@ const GroundDetailCarousel: React.FC<{ stadiums: DomDataType['stadiums'] }> = ({
   );
 };
 
-export default GroundDetailCarousel;
+export default FieldDetailCarousel;
 
 const Wrap = styled.div`
   padding-bottom: 5rem;

@@ -31,7 +31,7 @@ const Stadiums: React.FC<StadiumsProps> = ({
                     setImgModalIndex(idx);
                   }}
                 >
-                  <GroundImage src={stadium.images[0].image} alt="stadiumImg" />
+                  <FieldImage src={stadium.images[0].image} alt="stadiumImg" />
                   <LargeIcon>
                     <img src={largeIcon} alt="largeIcon" />
                   </LargeIcon>
@@ -95,7 +95,7 @@ const StadiumImage = styled.div`
   margin: auto;
 `;
 
-const GroundImage = styled.img`
+const FieldImage = styled.img`
   width: 10rem;
   height: 7rem;
   margin-right: 2rem;

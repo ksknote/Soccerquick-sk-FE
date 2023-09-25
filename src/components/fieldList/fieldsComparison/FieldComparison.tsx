@@ -7,7 +7,7 @@ import deleteIcon from '../../../assets/icon/delete.svg';
 import logo from '../../../assets/icon/logo/logo_icon.png';
 import alertModal from '../../common/alertModal';
 
-interface GroundComparisonProps {
+interface FieldComparisonProps {
   checkedArray: DomDataType[];
   setCheckedArray: React.Dispatch<React.SetStateAction<DomDataType[]>>;
   checkedInModal: string[];
@@ -15,7 +15,7 @@ interface GroundComparisonProps {
   setShowComparisonData: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const GroundComparison: React.FC<GroundComparisonProps> = ({
+const FieldComparison: React.FC<FieldComparisonProps> = ({
   checkedArray,
   setCheckedArray,
   checkedInModal,
@@ -146,7 +146,7 @@ const GroundComparison: React.FC<GroundComparisonProps> = ({
     </StyledContainer>
   );
 };
-export default GroundComparison;
+export default FieldComparison;
 
 const StyledContainer = styled.div`
   width: 100%;

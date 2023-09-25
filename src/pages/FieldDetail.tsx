@@ -4,9 +4,9 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { DomDataType } from './SearchPage';
 import { ProvidedElementList } from '../components/fieldList/SearchData';
-import GroundDetailCarousel from '../components/fieldDetail/groundDetailCarousel';
+import FieldDetailCarousel from '../components/fieldDetail/FieldDetailCarousel';
 import Stadiums from '../components/fieldDetail/Stadiums';
-import GroundImageModal from '../components/fieldDetail/GroundImageModal';
+import FieldImageModal from '../components/fieldDetail/FieldImageModal';
 import ShareModal from '../components/fieldDetail/ShareModal';
 import OneMarkerMap from '../components/fieldDetail/OneMarkerMap';
 import ScrollToTarget from '../utils/scrollToTarget';
@@ -18,8 +18,8 @@ import alertModal from '../components/common/alertModal';
 import MobileHeader from '../components/MobileHeader';
 import BaseLayout from '../components/template/BaseLayout';
 
-const GroundDetail = () => {
-  const [groundData, setGroundData] = useState<DomDataType>();
+const FieldDetail = () => {
+  const [groundData, setFieldData] = useState<DomDataType>();
   const [reviewData, setReviewData] = useState<[]>([]);
   const [showImgModal, setShowImgModal] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
@@ -35,7 +35,7 @@ const GroundDetail = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/doms/${dom_id}`, config)
       .then((res: any) => {
-        setGroundData(res.data.data);
+        setFieldData(res.data.data);
         setReviewData(res.data.data.reviews);
       })
       .catch((e: any) => console.log(e));
@@ -45,8 +45,8 @@ const GroundDetail = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/users`, config)
       .then((res: any) => {
-        const favoriteGrounds = res.data.data.favoritePlaygrounds;
-        if (favoriteGrounds.includes(dom_id)) {
+        const favoriteFields = res.data.data.favoritePlaygrounds;
+        if (favoriteFields.includes(dom_id)) {
           setIsFavorite(true);
         }
       })
@@ -112,12 +112,12 @@ const GroundDetail = () => {
     <BaseLayout>
       <MobileHeader title={groundData ? groundData.title : '풋살 경기장'} />
       {groundData && (
-        <GroundDetailContainer>
+        <FieldDetailContainer>
           <div className="slider">
-            {<GroundDetailCarousel stadiums={groundData.stadiums} />}
+            {<FieldDetailCarousel stadiums={groundData.stadiums} />}
           </div>
-          <GroundDetailHeader>
-            <GroundDetailHeaderContent>
+          <FieldDetailHeader>
+            <FieldDetailHeaderContent>
               <p>{groundData.address.area}</p>
               <h2>{groundData.title}</h2>
               <HeaderAddress>
@@ -127,8 +127,8 @@ const GroundDetail = () => {
                 </p>
                 <p onClick={() => ScrollToTarget('mapElement')}>지도보기</p>
               </HeaderAddress>
-            </GroundDetailHeaderContent>
-            <GroundDetailHeaderBtn>
+            </FieldDetailHeaderContent>
+            <FieldDetailHeaderBtn>
               <button>
                 <a href={groundData && groundData.url}>
                   <img src={homeIcon} alt="" />
@@ -144,8 +144,8 @@ const GroundDetail = () => {
                 찜
               </button>
               <button onClick={() => setShowShareModal(true)}>공유하기</button>
-            </GroundDetailHeaderBtn>
-          </GroundDetailHeader>
+            </FieldDetailHeaderBtn>
+          </FieldDetailHeader>
           <Source>
             이 구장 정보는 <span>{groundData && groundData.source}</span>에서
             제공됩니다.
@@ -198,20 +198,20 @@ const GroundDetail = () => {
             <div>
               <OneMarkerMap address={groundData.address.fullAddress} />
             </div>
-            <GroundAddressDetail>
+            <FieldAddressDetail>
               <p>{groundData && groundData.address.fullAddress}</p>
               <p onClick={() => clipUrl()}>주소 복사</p>
-            </GroundAddressDetail>
+            </FieldAddressDetail>
           </ContentsBox>
           <ContentsBox>
             {dom_id && reviewData && (
               <Review dom_id={dom_id} review={reviewData} />
             )}
           </ContentsBox>
-        </GroundDetailContainer>
+        </FieldDetailContainer>
       )}
       {showImgModal && groundData && (
-        <GroundImageModal
+        <FieldImageModal
           stadiums={groundData.stadiums}
           setShowImgModal={setShowImgModal}
           ImgModalIndex={ImgModalIndex}
@@ -229,9 +229,9 @@ const GroundDetail = () => {
   );
 };
 
-export default GroundDetail;
+export default FieldDetail;
 
-const GroundDetailContainer = styled.div`
+const FieldDetailContainer = styled.div`
   width: 100%;
   max-width: 120rem;
   margin: 0 auto 7rem auto;
@@ -241,14 +241,14 @@ const GroundDetailContainer = styled.div`
   }
 `;
 
-const GroundDetailHeader = styled.div`
+const FieldDetailHeader = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 4rem;
 `;
 
-const GroundDetailHeaderContent = styled.div`
+const FieldDetailHeaderContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -303,7 +303,7 @@ const HeaderAddress = styled.div`
   }
 `;
 
-const GroundDetailHeaderBtn = styled.div`
+const FieldDetailHeaderBtn = styled.div`
   display: flex;
   justify-content: space-between;
   button {
@@ -472,7 +472,7 @@ const NonProvidedItems = styled.ul`
   }
 `;
 
-const GroundAddressDetail = styled.div`
+const FieldAddressDetail = styled.div`
   display: flex;
   font-size: 1.3rem;
   p:nth-child(2) {

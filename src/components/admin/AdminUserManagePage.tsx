@@ -12,7 +12,7 @@ import {
   StyledTd,
 } from '../../pages/admin/AdminPageStyle';
 import { UserData } from '../../types/AdminPageType';
-import MyPagination from '../myPages/MyPagination';
+import MyPagination from '../myPage/MyPagination';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { userSelector } from '../../redux/modules/auth/selector';

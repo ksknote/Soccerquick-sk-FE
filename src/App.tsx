@@ -6,10 +6,10 @@ import './App.css';
 import MainPage from './pages/Main';
 import TeamPage from './pages/team/TeamPage';
 import SearchPage from './pages/SearchPage';
-import GroundDetail from './pages/groundDetail';
+import FieldDetail from './pages/FieldDetail';
 import Admin from './pages/admin/MainPage';
 import { MyPage } from './pages/MyPage';
-import MyPageHome from './components/myPages/MyPageHome';
+import MyPageHome from './components/myPage/MyPageHome';
 import MobileCategory from './components/common/MobileCategory';
 import Auth from './pages/auth/Auth';
 import Community from './pages/community/Community';
@@ -27,7 +27,7 @@ function App() {
             <Route path="/admin/*" element={<Admin />} />
             <Route path="/mypage/*" element={<MyPage />} />
             <Route path="/teampage/*" element={<TeamPage />} />
-            <Route path="/ground/:dom_id" element={<GroundDetail />} />
+            <Route path="/ground/:dom_id" element={<FieldDetail />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/community/*" element={<Community />} />
             <Route path="/*" element={<NotFound />} />

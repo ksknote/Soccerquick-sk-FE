@@ -28,7 +28,7 @@ function MyPagination({
   // 현 url 체크
   const location = useLocation();
   const currentPath = location.pathname;
-  const isGround =
+  const isField =
     currentPath.includes('ground') || currentPath.includes('teampage');
 
   useEffect(() => {
@@ -53,12 +53,12 @@ function MyPagination({
   const handlePrevClick = () => {
     setCurrentPage((prev) => {
       if (prev - 1 > 0) {
-        if (isGround) {
+        if (isField) {
           handleSearchParams((prev - 2) * itemsPerPage);
         }
         return prev - 1;
       } else {
-        if (isGround) {
+        if (isField) {
           handleSearchParams(0);
         }
 
@@ -70,13 +70,13 @@ function MyPagination({
   const handleNextClick = () => {
     setCurrentPage((prev) => {
       if (prev + 1 < pages) {
-        if (isGround) {
+        if (isField) {
           handleSearchParams(prev * itemsPerPage);
         }
 
         return prev + 1;
       } else {
-        if (isGround) {
+        if (isField) {
           handleSearchParams((pages - 1) * itemsPerPage);
         }
 
@@ -87,7 +87,7 @@ function MyPagination({
 
   const handlePageNumberClick = (number: number) => {
     setCurrentPage(number);
-    if (isGround) {
+    if (isField) {
       handleSearchParams((number - 1) * itemsPerPage);
     }
   };
@@ -98,7 +98,7 @@ function MyPagination({
         <StyledLi
           onClick={() => {
             setCurrentPage(1);
-            if (isGround) {
+            if (isField) {
               handleSearchParams(0);
             }
           }}
@@ -129,7 +129,7 @@ function MyPagination({
         <StyledLi
           onClick={() => {
             setCurrentPage(pages);
-            if (isGround) {
+            if (isField) {
               handleSearchParams((pages - 1) * itemsPerPage);
             }
           }}

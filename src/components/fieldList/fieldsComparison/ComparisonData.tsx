@@ -39,18 +39,18 @@ const ComparisonData: React.FC<ComparsionDataProps> = ({
             <StyledModalBody>
               <StyledGridContainer>
                 <StyledGridLabel>
-                  <StyledGroundContent image>이미지</StyledGroundContent>
-                  <StyledGroundContent>구장명</StyledGroundContent>
-                  <StyledGroundContent short>위치</StyledGroundContent>
-                  <StyledGroundContent>상세주소</StyledGroundContent>
-                  <StyledGroundContent long>보유시설</StyledGroundContent>
-                  <StyledGroundContent long>제공항목</StyledGroundContent>
+                  <StyledFieldContent image>이미지</StyledFieldContent>
+                  <StyledFieldContent>구장명</StyledFieldContent>
+                  <StyledFieldContent short>위치</StyledFieldContent>
+                  <StyledFieldContent>상세주소</StyledFieldContent>
+                  <StyledFieldContent long>보유시설</StyledFieldContent>
+                  <StyledFieldContent long>제공항목</StyledFieldContent>
                 </StyledGridLabel>
                 <StyledGridItems checkedInModal={checkedInModal}>
                   {comparisonData &&
                     comparisonData.map((item) => (
                       <StyledGridItem key={item.title}>
-                        <StyledGroundContent image>
+                        <StyledFieldContent image>
                           {item.stadiums[0].images[0] ? (
                             <img
                               src={item.stadiums[0].images[0].image}
@@ -61,22 +61,22 @@ const ComparisonData: React.FC<ComparsionDataProps> = ({
                               <img src={logo} alt="logo" />
                             </ExampleImage>
                           )}
-                        </StyledGroundContent>
-                        <StyledGroundContent bold>
+                        </StyledFieldContent>
+                        <StyledFieldContent bold>
                           <p>{item.title}</p>
-                        </StyledGroundContent>
-                        <StyledGroundContent short>
+                        </StyledFieldContent>
+                        <StyledFieldContent short>
                           <p>{item.address.area}</p>
-                        </StyledGroundContent>
-                        <StyledGroundContent>
+                        </StyledFieldContent>
+                        <StyledFieldContent>
                           <p>{item.address.fullAddress}</p>
-                        </StyledGroundContent>
-                        <StyledGroundContent long>
+                        </StyledFieldContent>
+                        <StyledFieldContent long>
                           {item.stadiums.map((stadium) => (
                             <span>{stadium.name}</span>
                           ))}
-                        </StyledGroundContent>
-                        <StyledGroundContent long>
+                        </StyledFieldContent>
+                        <StyledFieldContent long>
                           {Object.keys(ProvidedElementList).map(
                             (provided) =>
                               item[provided] && (
@@ -85,7 +85,7 @@ const ComparisonData: React.FC<ComparsionDataProps> = ({
                                 </span>
                               )
                           )}
-                        </StyledGroundContent>
+                        </StyledFieldContent>
                       </StyledGridItem>
                     ))}
                 </StyledGridItems>
@@ -197,7 +197,7 @@ const StyledGridItem = styled.div`
   }
 `;
 
-const StyledGroundContent = styled.div<{
+const StyledFieldContent = styled.div<{
   image?: boolean;
   long?: boolean;
   short?: boolean;

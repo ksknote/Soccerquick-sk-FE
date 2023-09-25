@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import SearchFilter from './SearchFilter';
-import GroundListSkeleton from './FieldListSkeleton';
-import MyPagination from '../myPages/MyPagination';
+import FieldListSkeleton from './FieldListSkeleton';
+import MyPagination from '../myPage/MyPagination';
 import checkIcon from '../../assets/icon/check.svg';
 import { DomDataType } from '../../pages/SearchPage';
 import alertModal from '../common/alertModal';
 import { Cell } from '../../styles/styled-components/CommonStyle';
-import FieldListSkeleton from './FieldListSkeleton';
-// import { checkHandler } from './GroundComparison';
 
-type FindingGroundProps = {
+type FindingFieldProps = {
   checkedArray: DomDataType[];
   setCheckedArray: React.Dispatch<React.SetStateAction<DomDataType[]>>;
   setCheckedInModal: React.Dispatch<React.SetStateAction<string[]>>;
@@ -43,7 +41,7 @@ export const ProvidedElementList: ProvidedElementListType = {
 };
 
 // SoccerQuick/Frontend/src/Pages/SearchPage.tsx 75번째 줄에서 연결됨
-function FindingGround(props: FindingGroundProps) {
+function FindingField(props: FindingFieldProps) {
   const navigate = useNavigate();
   const checkedArray = props.checkedArray;
   const setCheckedArray = props.setCheckedArray;
@@ -199,7 +197,7 @@ function FindingGround(props: FindingGroundProps) {
   );
 }
 
-export default FindingGround;
+export default FindingField;
 
 const SearchContainer = styled.div`
   position: relative;

@@ -1,17 +1,17 @@
 import react, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router';
 import axios from 'axios';
-import MyFavoriteGroundList from '../components/myPages/MyFavoriteGround/MyFavoriteGroundList';
-import SearchMyReviewPost from '../components/myPages/SearchMyPost/SearchMyReviewPost';
-import SearchMyTeamPost from '../components/myPages/SearchMyPost/SearchMyTeamPost';
-import MyTeamPost from '../components/myPages/SearchMyPost/MyTeamPost';
-import SearchMyApplicationPost from '../components/myPages/SearchMyPost/SearchMyApplicationPost';
-import MyApplicatedTeamPost from '../components/myPages/SearchMyPost/MyApplicatedTeamPost';
+import MyFavoriteFieldList from '../components/myPage/MyFavoriteField/MyFavoriteFieldList';
+import SearchMyReviewPost from '../components/myPage/SearchMyPost/SearchMyReviewPost';
+import SearchMyTeamPost from '../components/myPage/SearchMyPost/SearchMyTeamPost';
+import MyTeamPost from '../components/myPage/SearchMyPost/MyTeamPost';
+import SearchMyApplicationPost from '../components/myPage/SearchMyPost/SearchMyApplicationPost';
+import MyApplicatedTeamPost from '../components/myPage/SearchMyPost/MyApplicatedTeamPost';
 import { useSelector } from 'react-redux';
 import { isLoginSelector, userSelector } from '../redux/modules/auth/selector';
 import alertModal from '../components/common/alertModal';
-import MyPageHome from '../components/myPages/MyPageHome';
-import MyPageProfileLayout from '../components/myPages/MyPageInfo/MyPageProfileLayout';
+import MyPageHome from '../components/myPage/MyPageHome';
+import MyPageProfileLayout from '../components/myPage/MyPageInfo/MyPageProfileLayout';
 import MyPageLayout from '../components/template/MyPageLayout';
 import { TeamDataType } from '../types/TeamPageType';
 
@@ -139,7 +139,7 @@ export function MyPage() {
               />
             }
           />
-          <Route path="/favorite" element={<MyFavoriteGroundList />} />
+          <Route path="/favorite" element={<MyFavoriteFieldList />} />
           <Route
             path="/myTeamList"
             element={<SearchMyTeamPost filteredItems={filteredMyTeamPosts} />}

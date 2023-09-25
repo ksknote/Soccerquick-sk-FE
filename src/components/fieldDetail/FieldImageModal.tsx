@@ -8,7 +8,7 @@ interface StadiumsProps {
   ImgModalIndex: number;
 }
 
-const GroundImageModal: React.FC<StadiumsProps> = ({
+const FieldImageModal: React.FC<StadiumsProps> = ({
   stadiums,
   setShowImgModal,
   ImgModalIndex,
@@ -35,7 +35,7 @@ const GroundImageModal: React.FC<StadiumsProps> = ({
   );
 };
 
-export default GroundImageModal;
+export default FieldImageModal;
 
 const ImgModal = styled.div`
   position: fixed;

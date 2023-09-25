@@ -13,7 +13,7 @@ import EmptyBox from '../../common/EmptyBox';
 import alertModal from '../../common/alertModal';
 import { FormDataType } from '../../../pages/MyPage';
 
-function MyFavoriteGroundList() {
+function MyFavoriteFieldList() {
   const isLogIn = useSelector(isLoginSelector);
   const [formData, setFormData] = useState<FormDataType>({
     user_id: '',
@@ -150,7 +150,7 @@ function MyFavoriteGroundList() {
   );
 }
 
-export default MyFavoriteGroundList;
+export default MyFavoriteFieldList;
 
 const getColorBydata = (data: string) => {
   if (data === 'shoes') {

@@ -71,6 +71,8 @@ const FieldMap: React.FC<FieldMapType> = ({
     const mapOptions: naver.maps.MapOptions = {
       center: center,
       zoom: 12,
+      minZoom: 11,
+      maxZoom: 19,
       zoomControl: true,
       zoomControlOptions: {
         style: naver.maps.ZoomControlStyle.SMALL,

@@ -81,7 +81,7 @@ const Wrapper = styled.div`
     width: 100%;
     height: 20rem;
     @media (min-width: 768px) {
-      height: 30rem;
+      height: 33rem;
     }
   }
 `;
@@ -94,7 +94,7 @@ const SlideBg = styled.div<{ bgColor: string }>`
   height: 20rem;
   cursor: pointer;
   @media (min-width: 768px) {
-    height: 30rem;
+    height: 33rem;
   }
 `;
 
@@ -116,7 +116,7 @@ const IndexContainer = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
-  bottom: 1.5rem;
+  bottom: 2.5rem;
   background-color: #8080807d;
   color: white;
   font-size: 1.5rem;
@@ -125,7 +125,6 @@ const IndexContainer = styled.div`
   z-index: 40;
   div {
     font-size: 1.7rem;
-
     padding: 0 1rem;
   }
   @media (max-width: 768px) {

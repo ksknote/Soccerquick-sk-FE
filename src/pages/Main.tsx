@@ -8,218 +8,227 @@ import Avatar4 from '../assets/icon/avatar4.png';
 import Avatar5 from '../assets/icon/avatar5.png';
 import BaseLayout from '../components/template/BaseLayout';
 import { BodyWrapper } from '../styles/styled-components/CommonStyle';
-
+import Carousel from '../components/main/Carousel';
+import Header from '../components/Header';
+import HeaderCategory from '../components/common/HeaderCategory';
+import Footer from '../components/Footer';
+import { Wrapper } from '../styles/styled-components/CommonStyle';
 export default function Main() {
   const navigate = useNavigate();
   const clickBtnHandler = (searchValue: string) => {
     navigate(`/ground?q=${searchValue}&start=0`);
   };
   return (
-    <BaseLayout>
-      <BodyWrapper>
-        <StyledImageContainer>
+    <>
+      <Header />
+      <HeaderCategory />
+      <Carousel />
+      {/* <StyledImageContainer>
           <StyledImage src="Images/footy.png" alt="메인이미지" />
           <StyledImageContents>
-            <StyledImageText>
-              <p className="big-text">Play Football</p>
-              <p className="small-text">언제나 당신이 원하는 곳에서!</p>
-            </StyledImageText>
-            <MainSearch />
+          <StyledImageText>
+          <p className="big-text">Play Football</p>
+          <p className="small-text">언제나 당신이 원하는 곳에서!</p>
+          </StyledImageText>
           </StyledImageContents>
-        </StyledImageContainer>
-        <StyledListContainer>
-          <StyledFieldList>
-            <StyledListTitleContainer>
-              <span>
-                <span className="emoji">🥅</span>
-                <h2 className="field-list-header-text"> 경기장 리스트</h2>
-              </span>
-              <span
-                className="viewAll"
-                onClick={() => {
-                  navigate('/ground');
-                }}
-              >
-                전체보기
-                <img src="/Images/viewAll.png" alt="viewAll" />
-              </span>
-            </StyledListTitleContainer>
-            <div className="field-list">
-              <div className="field-list-text">
-                <span className="field-list-text-title">🏙️ in 서울</span>
+        </StyledImageContainer> */}
+      <Wrapper>
+        <BodyWrapper>
+          <MainSearch />
+          <StyledListContainer>
+            <StyledFieldList>
+              <StyledListTitleContainer>
+                <span>
+                  <span className="emoji">🥅</span>
+                  <h2 className="field-list-header-text"> 경기장 리스트</h2>
+                </span>
                 <span
-                  className="field-list-text-content"
+                  className="viewAll"
                   onClick={() => {
-                    clickBtnHandler('서울');
+                    navigate('/ground');
                   }}
                 >
-                  서울 풋살 경기장 모아보기
+                  전체보기
+                  <img src="/Images/viewAll.png" alt="viewAll" />
                 </span>
-                <span>
-                  <img
-                    className="move-to-list-page"
-                    src="Images/cramp.png"
-                    alt="cramp"
-                  />
-                </span>
+              </StyledListTitleContainer>
+              <div className="field-list">
+                <div className="field-list-text">
+                  <span className="field-list-text-title">🏙️ in 서울</span>
+                  <span
+                    className="field-list-text-content"
+                    onClick={() => {
+                      clickBtnHandler('서울');
+                    }}
+                  >
+                    서울 풋살 경기장 모아보기
+                  </span>
+                  <span>
+                    <img
+                      className="move-to-list-page"
+                      src="Images/cramp.png"
+                      alt="cramp"
+                    />
+                  </span>
+                </div>
+                <div className="field-list-text">
+                  <span className="field-list-text-title">🛬 in 인천</span>
+                  <span
+                    className="field-list-text-content"
+                    onClick={() => {
+                      clickBtnHandler('인천');
+                    }}
+                  >
+                    인천 풋살 경기장 모아보기
+                  </span>
+                  <span>
+                    <img
+                      className="move-to-list-page"
+                      src="Images/cramp.png"
+                      alt="cramp"
+                    />
+                  </span>
+                </div>
+                <div className="field-list-text">
+                  <span className="field-list-text-title">👩🏻‍🔬 in 대전</span>
+                  <span
+                    className="field-list-text-content"
+                    onClick={() => {
+                      clickBtnHandler('대전');
+                    }}
+                  >
+                    대전 풋살 경기장 모아보기
+                  </span>
+                  <span>
+                    <img
+                      className="move-to-list-page"
+                      src="Images/cramp.png"
+                      alt="cramp"
+                    />
+                  </span>
+                </div>
+                <div className="field-list-text">
+                  <span className="field-list-text-title">🍎 in 대구</span>
+                  <span
+                    className="field-list-text-content"
+                    onClick={() => {
+                      clickBtnHandler('대구');
+                    }}
+                  >
+                    대구 풋살 경기장 모아보기
+                  </span>
+                  <span>
+                    <img
+                      className="move-to-list-page"
+                      src="Images/cramp.png"
+                      alt="cramp"
+                    />
+                  </span>
+                </div>
+                <div className="field-list-text">
+                  <span className="field-list-text-title">🚢 in 부산</span>
+                  <span
+                    className="field-list-text-content"
+                    onClick={() => {
+                      clickBtnHandler('부산');
+                    }}
+                  >
+                    부산 풋살 경기장 모아보기
+                  </span>
+                  <span>
+                    <img
+                      className="move-to-list-page"
+                      src="Images/cramp.png"
+                      alt="cramp"
+                    />
+                  </span>
+                </div>
+                <div className="field-list-text">
+                  <span className="field-list-text-title">🌊 in 제주</span>
+                  <span
+                    className="field-list-text-content"
+                    onClick={() => {
+                      clickBtnHandler('제주');
+                    }}
+                  >
+                    제주 풋살 경기장 모아보기
+                  </span>
+                  <span>
+                    <img
+                      className="move-to-list-page"
+                      src="Images/cramp.png"
+                      alt="cramp"
+                    />
+                  </span>
+                </div>
               </div>
-              <div className="field-list-text">
-                <span className="field-list-text-title">🛬 in 인천</span>
+            </StyledFieldList>
+            <StyledReviewList>
+              <StyledListTitleContainer>
+                <span>
+                  <span className="emoji">👀&nbsp;</span>
+                  <h2 className="review-list-header-text">싸커퀵 풋살 후기</h2>
+                </span>
                 <span
-                  className="field-list-text-content"
+                  className="viewAll"
                   onClick={() => {
-                    clickBtnHandler('인천');
+                    navigate('/review');
                   }}
                 >
-                  인천 풋살 경기장 모아보기
+                  전체보기
+                  <img src="/Images/viewAll.png" alt="viewAll" />
                 </span>
-                <span>
-                  <img
-                    className="move-to-list-page"
-                    src="Images/cramp.png"
-                    alt="cramp"
-                  />
-                </span>
+              </StyledListTitleContainer>
+              <div>
+                <p className="review-list-subheader-text">
+                  구장 후기가 궁금해! 플랫폼 후기도 궁금해!
+                </p>
+                <p className="review-list-sub-subheader-text">
+                  싸커퀵커들의 실제 후기를 들어보세요.
+                </p>
               </div>
-              <div className="field-list-text">
-                <span className="field-list-text-title">👩🏻‍🔬 in 대전</span>
-                <span
-                  className="field-list-text-content"
-                  onClick={() => {
-                    clickBtnHandler('대전');
-                  }}
-                >
-                  대전 풋살 경기장 모아보기
-                </span>
-                <span>
-                  <img
-                    className="move-to-list-page"
-                    src="Images/cramp.png"
-                    alt="cramp"
-                  />
-                </span>
+              <div className="review-list-examples">
+                <div className="review-list-example">
+                  <span>
+                    <img src={Avatar1} alt="avatar" />
+                  </span>
+                  <span className="review-list-examples-text">
+                    주차가 가능한가요?
+                  </span>
+                </div>
+                <div className="review-list-example">
+                  <span>
+                    <img src={Avatar5} alt="avatar" className="small" />
+                  </span>
+                  <span className="review-list-examples-text">
+                    플랩풋볼 권성경 매니저님 너무 친절하셨어요!
+                  </span>
+                </div>
               </div>
-              <div className="field-list-text">
-                <span className="field-list-text-title">🍎 in 대구</span>
-                <span
-                  className="field-list-text-content"
-                  onClick={() => {
-                    clickBtnHandler('대구');
-                  }}
-                >
-                  대구 풋살 경기장 모아보기
-                </span>
-                <span>
-                  <img
-                    className="move-to-list-page"
-                    src="Images/cramp.png"
-                    alt="cramp"
-                  />
-                </span>
+              <div className="review-list-examples">
+                <div className="review-list-example">
+                  <span>
+                    <img src={Avatar3} alt="avatar" />
+                  </span>
+                  <span className="review-list-examples-text">
+                    풋살장 주변에 샤워 시설이 있나요? <br />
+                    찝찝해요~~
+                  </span>
+                </div>
+                <div className="review-list-example">
+                  <span>
+                    <img src={Avatar4} alt="avatar" className="big" />
+                  </span>
+                  <span className="review-list-examples-text">
+                    풋살화 대여가 가능한가요?
+                  </span>
+                </div>
               </div>
-              <div className="field-list-text">
-                <span className="field-list-text-title">🚢 in 부산</span>
-                <span
-                  className="field-list-text-content"
-                  onClick={() => {
-                    clickBtnHandler('부산');
-                  }}
-                >
-                  부산 풋살 경기장 모아보기
-                </span>
-                <span>
-                  <img
-                    className="move-to-list-page"
-                    src="Images/cramp.png"
-                    alt="cramp"
-                  />
-                </span>
-              </div>
-              <div className="field-list-text">
-                <span className="field-list-text-title">🌊 in 제주</span>
-                <span
-                  className="field-list-text-content"
-                  onClick={() => {
-                    clickBtnHandler('제주');
-                  }}
-                >
-                  제주 풋살 경기장 모아보기
-                </span>
-                <span>
-                  <img
-                    className="move-to-list-page"
-                    src="Images/cramp.png"
-                    alt="cramp"
-                  />
-                </span>
-              </div>
-            </div>
-          </StyledFieldList>
-          <StyledReviewList>
-            <StyledListTitleContainer>
-              <span>
-                <span className="emoji">👀&nbsp;</span>
-                <h2 className="review-list-header-text">싸커퀵 풋살 후기</h2>
-              </span>
-              <span
-                className="viewAll"
-                onClick={() => {
-                  navigate('/review');
-                }}
-              >
-                전체보기
-                <img src="/Images/viewAll.png" alt="viewAll" />
-              </span>
-            </StyledListTitleContainer>
-            <div>
-              <p className="review-list-subheader-text">
-                구장 후기가 궁금해! 플랫폼 후기도 궁금해!
-              </p>
-              <p className="review-list-sub-subheader-text">
-                싸커퀵커들의 실제 후기를 들어보세요.
-              </p>
-            </div>
-            <div className="review-list-examples">
-              <div className="review-list-example">
-                <span>
-                  <img src={Avatar1} alt="avatar" />
-                </span>
-                <span className="review-list-examples-text">
-                  주차가 가능한가요?
-                </span>
-              </div>
-              <div className="review-list-example">
-                <span>
-                  <img src={Avatar5} alt="avatar" className="small" />
-                </span>
-                <span className="review-list-examples-text">
-                  플랩풋볼 권성경 매니저님 너무 친절하셨어요!
-                </span>
-              </div>
-            </div>
-            <div className="review-list-examples">
-              <div className="review-list-example">
-                <span>
-                  <img src={Avatar3} alt="avatar" />
-                </span>
-                <span className="review-list-examples-text">
-                  풋살장 주변에 샤워 시설이 있나요? <br />
-                  찝찝해요~~
-                </span>
-              </div>
-              <div className="review-list-example">
-                <span>
-                  <img src={Avatar4} alt="avatar" className="big" />
-                </span>
-                <span className="review-list-examples-text">
-                  풋살화 대여가 가능한가요?
-                </span>
-              </div>
-            </div>
-          </StyledReviewList>
-        </StyledListContainer>
-      </BodyWrapper>
-    </BaseLayout>
+            </StyledReviewList>
+          </StyledListContainer>
+        </BodyWrapper>
+      </Wrapper>
+    </>
   );
 }
 

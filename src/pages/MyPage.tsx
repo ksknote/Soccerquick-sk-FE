@@ -26,14 +26,6 @@ export type FormDataType = {
   favoritePlaygrounds: string[];
 };
 
-type Applicant = {
-  name: string;
-};
-
-type Accept = {
-  name: string;
-};
-
 export function MyPage() {
   const [formData, setFormData] = useState<FormDataType>({
     user_id: '',

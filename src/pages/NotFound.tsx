@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './../assets/icon/soccerquick-logo.png';
+import logo from './../assets/icon/logo/logo_icon.png';
 import styled from 'styled-components';
 import notFountImg from './../assets/image/404.jpeg';
 import { Button } from '../styles/styled-components/CommonStyle';
@@ -57,9 +57,11 @@ const Header = styled.div`
   display: flex;
   justify-content: center;
   img {
-    width: 15rem;
+    width: 5rem;
+    height: 5rem;
     @media (min-width: 768px) {
-      width: 20rem;
+      width: 10rem;
+      height: 10rem;
     }
   }
 `;

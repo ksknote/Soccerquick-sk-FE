@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import chevronIcon from '../../../assets/icon/chevron_down.svg';
 import checkIcon from '../../../assets/icon/check.svg';
 import deleteIcon from '../../../assets/icon/delete.svg';
-import logo from '../../../assets/icon/exampleImg.svg';
+import logo from '../../../assets/icon/logo/logo_icon.png';
 import alertModal from '../../common/alertModal';
 
 interface GroundComparisonProps {
@@ -85,7 +85,9 @@ const GroundComparison: React.FC<GroundComparisonProps> = ({
                       alt="domImage"
                     />
                   ) : (
-                    <img src={logo} alt="logo" />
+                    <ExampleImage>
+                      <img src={logo} alt="logo" />
+                    </ExampleImage>
                   )}
                   <StyledItemTitle>
                     <p>{item.address.area}</p>
@@ -201,6 +203,25 @@ const StyledItemsLi = styled.li`
     height: 8rem;
   }
 `;
+
+const ExampleImage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 14rem;
+  height: 8rem;
+  background-color: #efefef;
+  img {
+    width: 4rem;
+    height: 4rem;
+  }
+  @media (min-width: 1024px) {
+    img {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+`;
 const StyledItemTitle = styled.div`
   height: 10rem;
   padding: 1rem 0.3rem 1.2rem 0.3rem;
@@ -260,7 +281,6 @@ const StyleCheckbox = styled.input`
 
 const StyledSideContainer = styled.div`
   width: 16%;
-  hegiht: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

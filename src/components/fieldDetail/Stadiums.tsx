@@ -5,7 +5,7 @@ import largeIcon from '../../assets/icon/large.svg';
 import groundIcon from '../../assets/icon/ground.svg';
 import flagIcon from '../../assets/icon/flag.svg';
 import grassIcon from '../../assets/icon/grass.svg';
-import logo from '../../assets/icon/exampleImg.svg';
+import logo from '../../assets/icon/logo/logo_icon.png';
 
 interface StadiumsProps {
   stadiumsData: DomDataType['stadiums'];
@@ -37,7 +37,9 @@ const Stadiums: React.FC<StadiumsProps> = ({
                   </LargeIcon>
                 </div>
               ) : (
-                <GroundImage src={logo} alt="stadiumImg" />
+                <ExampleImage>
+                  <img src={logo} alt="stadiumImg" />
+                </ExampleImage>
               )}
             </StadiumImage>
             <StadiumDetail>
@@ -98,7 +100,6 @@ const GroundImage = styled.img`
   height: 7rem;
   margin-right: 2rem;
   border-radius: 0.5rem;
-
   @media (min-width: 768px) {
     width: 16rem;
     height: 11rem;
@@ -107,6 +108,35 @@ const GroundImage = styled.img`
   @media (min-width: 1024px) {
     width: 19rem;
     height: 12rem;
+  }
+`;
+
+const ExampleImage = styled.div`
+  width: 10rem;
+  height: 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #efefef;
+  margin-right: 2rem;
+  border-radius: 0.5rem;
+  img {
+    width: 4rem;
+    height: 4rem;
+  }
+  @media (min-width: 768px) {
+    width: 16rem;
+    height: 11rem;
+    border-radius: 1rem;
+  }
+  @media (min-width: 1024px) {
+    width: 19rem;
+    height: 12rem;
+
+    img {
+      width: 5rem;
+      height: 5rem;
+    }
   }
 `;
 const LargeIcon = styled.div`

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import MypageIcon from '../assets/icon/mypage.svg';
-import SoccerquickLogo from '../assets/icon/soccerquick-logo.png';
+import SoccerquickLogo from '../assets/icon/logo/logo_icon_text.png';
 import { MyPageMenu } from './common/MyPageMenu';
 import { useSelector } from 'react-redux';
 import { isLoginSelector } from '../redux/modules/auth/selector';
@@ -52,13 +52,10 @@ const HeaderContainer = styled.div`
 
 const LogoMain = styled.div`
   img {
-    width: 9rem;
+    width: 35%;
+    height: 35%;
     vertical-align: middle;
     cursor: pointer;
-    @media (min-width: 1024px) {
-      width: 13rem;
-      height: 6rem;
-    }
   }
 `;
 
@@ -68,7 +65,6 @@ const HeaderMenu = styled.div`
   justify-content: space-between;
   margin-top: 1.1rem;
   img {
-    width: 2.5rem;
     height: 100%;
     margin-right: 0.2rem;
   }

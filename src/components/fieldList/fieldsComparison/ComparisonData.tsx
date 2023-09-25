@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { DomDataType } from '../../../pages/SearchPage';
 import { ProvidedElementList } from '../../fieldList/SearchData';
-import logo from '../../../assets/icon/exampleImg.svg';
+import logo from '../../../assets/icon/logo/logo_icon.png';
 
 interface ComparsionDataProps {
   checkedArray: DomDataType[];
@@ -57,7 +57,9 @@ const ComparisonData: React.FC<ComparsionDataProps> = ({
                               alt="DomImage"
                             />
                           ) : (
-                            <img src={logo} alt="logo" />
+                            <ExampleImage>
+                              <img src={logo} alt="logo" />
+                            </ExampleImage>
                           )}
                         </StyledGroundContent>
                         <StyledGroundContent bold>
@@ -219,5 +221,25 @@ const StyledGroundContent = styled.div<{
   > img {
     height: 100%;
     border-radius: 1rem;
+  }
+`;
+
+const ExampleImage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 90%;
+  border-radius: 1rem;
+  background-color: #efefef;
+  img {
+    width: 4rem;
+    height: 4rem;
+  }
+  @media (min-width: 1024px) {
+    img {
+      width: 5rem;
+      height: 5rem;
+    }
   }
 `;

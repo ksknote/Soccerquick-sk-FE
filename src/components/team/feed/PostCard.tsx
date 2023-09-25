@@ -17,11 +17,11 @@ interface PostCardPropsType {
   index: number;
 }
 
-function PostCard({ post, index }: PostCardPropsType) {
+function PostCard({ post }: PostCardPropsType) {
   const navigate = useNavigate();
 
   return (
-    <TeamRecruitLi onClick={() => navigate(`./${post.group_id}`)}>
+    <TeamRecruitLi onClick={() => navigate(`/teampage/${post.group_id}`)}>
       <ContentHeader>
         <RecruitStatus status={post.status}>{post.status}</RecruitStatus>
         <Author>모집자: {post.leader.leader_name}</Author>

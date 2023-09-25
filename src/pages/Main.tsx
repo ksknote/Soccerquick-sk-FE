@@ -12,6 +12,7 @@ import Header from '../components/Header';
 import HeaderCategory from '../components/common/HeaderCategory';
 import Footer from '../components/Footer';
 import { Wrapper } from '../styles/styled-components/CommonStyle';
+import NewTeamPosts from '../components/main/NewTeamPosts';
 export default function Main() {
   const navigate = useNavigate();
   const clickBtnHandler = (searchValue: string) => {
@@ -25,6 +26,7 @@ export default function Main() {
       <Wrapper>
         <BodyWrapper>
           <MainSearch />
+          <NewTeamPosts />
           <StyledListContainer>
             <StyledFieldList>
               <StyledListTitleContainer>

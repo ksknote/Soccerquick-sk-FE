@@ -10,7 +10,7 @@ function Carousel() {
   const sliderRef = useRef(null);
   const navigate = useNavigate();
   const settings = {
-    dots: true,
+    dots: false,
     arrows: false,
     infinite: true,
     speed: 500,
@@ -45,7 +45,7 @@ function Carousel() {
             <SliderContent>
               <IndexContainer>
                 <div onClick={previous}>❮</div>
-                {index}/{carouselContents.length}
+                {index + 1} / {carouselContents.length}
                 <div onClick={next}>❯</div>
               </IndexContainer>
               <SliderText onClick={() => clickSlideHandler(slide)}>
@@ -84,11 +84,6 @@ const Wrapper = styled.div`
       height: 30rem;
     }
   }
-  button {
-    @media (max-width: 1023.9px) {
-      display: none !important;
-    }
-  }
 `;
 
 const SlideBg = styled.div<{ bgColor: string }>`
@@ -124,11 +119,13 @@ const IndexContainer = styled.div`
   bottom: 1.5rem;
   background-color: #8080807d;
   color: white;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   padding: 0.2rem 0;
   border-radius: 2rem;
   z-index: 40;
   div {
+    font-size: 1.7rem;
+
     padding: 0 1rem;
   }
   @media (max-width: 768px) {
@@ -171,9 +168,12 @@ const Title = styled.h1<{ color: string }>`
   margin: 0.5rem 0;
   @media (min-width: 768px) {
     font-size: 2.6rem;
+    line-height: 3.5rem;
+
     margin: 1rem 0;
   }
   @media (min-width: 1024px) {
+    line-height: 4rem;
     font-size: 3.2rem;
   }
 `;

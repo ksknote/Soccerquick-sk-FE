@@ -6,7 +6,6 @@ import Avatar1 from '../assets/icon/avatar1.png';
 import Avatar3 from '../assets/icon/avatar3.png';
 import Avatar4 from '../assets/icon/avatar4.png';
 import Avatar5 from '../assets/icon/avatar5.png';
-import BaseLayout from '../components/template/BaseLayout';
 import { BodyWrapper } from '../styles/styled-components/CommonStyle';
 import Carousel from '../components/main/Carousel';
 import Header from '../components/Header';
@@ -23,15 +22,6 @@ export default function Main() {
       <Header />
       <HeaderCategory />
       <Carousel />
-      {/* <StyledImageContainer>
-          <StyledImage src="Images/footy.png" alt="메인이미지" />
-          <StyledImageContents>
-          <StyledImageText>
-          <p className="big-text">Play Football</p>
-          <p className="small-text">언제나 당신이 원하는 곳에서!</p>
-          </StyledImageText>
-          </StyledImageContents>
-        </StyledImageContainer> */}
       <Wrapper>
         <BodyWrapper>
           <MainSearch />
@@ -228,65 +218,10 @@ export default function Main() {
           </StyledListContainer>
         </BodyWrapper>
       </Wrapper>
+      <Footer />
     </>
   );
 }
-
-const StyledImageContainer = styled.div`
-  width: 100%;
-  height: 10rem;
-  padding: 0 1rem;
-  @media (min-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    background-color: #f2f5f7;
-    justify-content: center;
-    align-items: center;
-    height: 45rem; /* 화면 높이의 특정 비율로 설정 */
-    position: relative;
-  }
-`;
-
-const StyledImage = styled.img`
-  display: none;
-  @media (min-width: 768px) {
-    display: block;
-    width: 100%;
-    height: 45rem;
-    position: absolute;
-    top: 0;
-  }
-`;
-
-const StyledImageContents = styled.div`
-  @media (min-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    position: absolute;
-    top: 25%;
-    left: 5%;
-    width: 40%;
-  }
-`;
-
-const StyledImageText = styled.h1`
-  color: white;
-  .big-text {
-    font-weight: 800;
-    font-size: 4.5rem;
-    font-style: italic;
-  }
-
-  .small-text {
-    font-size: 1.8rem;
-    font-weight: lighter;
-    margin-bottom: 2rem;
-  }
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
 
 const StyledListContainer = styled.div`
   display: flex;

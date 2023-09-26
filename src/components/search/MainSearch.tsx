@@ -45,20 +45,28 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2.5rem;
+  gap: 2rem;
   padding: 2rem;
   > p {
-    font-size: 2.2rem;
+    font-size: 1.7rem;
     font-weight: 500;
+    color: #383636;
+  }
+  @media (min-width: 768px) {
+    gap: 2.5rem;
+    > p {
+      font-size: 2.2rem;
+    }
   }
 `;
 const FeildSearchBar = styled.div`
-  width: 50rem;
-  height: 5rem;
+  width: 30rem;
+  height: 4.5rem;
   background-color: white;
   border-radius: 10rem;
   padding: 0.8rem;
   display: inline-block;
+  filter: drop-shadow(0 0 0.2rem grey);
   input {
     color: #3e5463;
     border: none;
@@ -66,9 +74,9 @@ const FeildSearchBar = styled.div`
     width: 85%;
     height: 100%;
     padding-left: 2rem;
-    font-size: 1.5rem;
+    font-size: 1.36rem;
     ::placeholder {
-      font-size: 1.5rem;
+      font-size: 1.36rem;
     }
   }
   img {
@@ -79,5 +87,14 @@ const FeildSearchBar = styled.div`
     transform: translateY(-50%);
     cursor: pointer;
   }
-  filter: drop-shadow(0 0 0.2rem grey);
+  @media (min-width: 768px) {
+    width: 50rem;
+    height: 5rem;
+    input {
+      font-size: 1.5rem;
+      ::placeholder {
+        font-size: 1.5rem;
+      }
+    }
+  }
 `;

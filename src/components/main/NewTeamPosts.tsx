@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import { TeamDataType } from '../../types/TeamPageType';
 import PostCard, { PostCardSkeleton } from '../team/feed/PostCard';
 
 function NewTeamPosts() {
+  const navigate = useNavigate();
   const [postData, setPostData] = useState<TeamDataType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -60,7 +62,7 @@ function NewTeamPosts() {
       <ButtonContainer>
         <SectionHeader>최신 팀원 모집 글</SectionHeader>
         <div>
-          <p>전체보기</p>
+          <p onClick={() => navigate('/teampage')}>전체보기</p>
           <ChevronButtons>
             <ChevronButton
               direction="left"
@@ -71,7 +73,7 @@ function NewTeamPosts() {
             </ChevronButton>
             <ChevronButton
               direction="right"
-              activated={currentIndex < slideLength}
+              activated={currentIndex + 1 < slideLength}
               onClick={clickNextHandler}
             >
               ❯
@@ -110,7 +112,7 @@ const CarouselWrapper = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 0 1rem 1rem 1rem;
+  padding: 0 2rem 1rem 1rem;
   > div {
     display: flex;
     align-items: center;

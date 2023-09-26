@@ -122,6 +122,7 @@ const Post = styled.li<{ visible: boolean }>`
   border-radius: 2rem;
   font-size: 1.3rem;
   cursor: pointer;
+  margin: 0.5rem;
   @media (min-width: 1024px) {
     min-height: 17rem;
     font-size: 1.5rem;

@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import MainSearch from '../components/search/MainSearch';
 import { BodyWrapper } from '../styles/styled-components/CommonStyle';
@@ -9,10 +8,11 @@ import Footer from '../components/Footer';
 import { Wrapper } from '../styles/styled-components/CommonStyle';
 import NewTeamPosts from '../components/main/NewTeamPosts';
 import HotCommunityPosts from '../components/main/HotCommunityPosts';
-
+import MobileHeader from '../components/main/MobileHeader';
 export default function Main() {
   return (
     <>
+      <MobileHeader />
       <Header />
       <HeaderCategory />
       <Carousel />

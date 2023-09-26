@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import axios from 'axios';
 import { TeamDataType } from '../../types/TeamPageType';
 import PostCard, { PostCardSkeleton } from '../team/feed/PostCard';
-import styled from 'styled-components';
 
 function NewTeamPosts() {
   const [postData, setPostData] = useState<TeamDataType[]>([]);
@@ -24,8 +24,7 @@ function NewTeamPosts() {
     axios
       .get(url, config)
       .then((res) => {
-        let newPosts = res.data.data;
-        setPostData((prev) => [...prev, ...newPosts]);
+        setPostData(res.data.data);
         setIsLoading(false);
       })
       .catch((e) => console.error(e));
@@ -37,21 +36,15 @@ function NewTeamPosts() {
 
   const clickPrevHandler = () => {
     setCurrentIndex((prev) => {
-      if (prev === 0) {
-        return prev;
-      } else {
-        return prev - 1;
-      }
+      if (prev === 0) return prev;
+      return prev - 1;
     });
   };
 
   const clickNextHandler = () => {
     setCurrentIndex((prev) => {
-      if (prev === slideLength - 1) {
-        return prev;
-      } else {
-        return prev + 1;
-      }
+      if (prev === slideLength - 1) return prev;
+      return prev + 1;
     });
   };
 
@@ -70,12 +63,14 @@ function NewTeamPosts() {
           <p>전체보기</p>
           <ChevronButtons>
             <ChevronButton
+              direction="left"
               activated={currentIndex > 0}
               onClick={clickPrevHandler}
             >
               ❮
             </ChevronButton>
             <ChevronButton
+              direction="right"
               activated={currentIndex < slideLength}
               onClick={clickNextHandler}
             >
@@ -141,12 +136,27 @@ const ChevronButtons = styled.div`
   cursor: pointer;
 `;
 
-const ChevronButton = styled.div<{ activated: boolean }>`
+const ChevronButton = styled.div<{ activated: boolean; direction: string }>`
   padding: 0 0.8rem;
   font-size: 1.7rem;
+  background-color: white;
+  border-top-left-radius: ${({ direction }) =>
+    direction === 'left' && '0.3rem'};
+  border-bottom-left-radius: ${({ direction }) =>
+    direction === 'left' && '0.3rem'};
+  border-top-right-radius: ${({ direction }) =>
+    direction === 'right' && '0.3rem'};
+  border-bottom-right-radius: ${({ direction }) =>
+    direction === 'right' && '0.3rem'};
   color: ${({ activated }) => (activated ? '#989898' : 'lightgray')};
   :first-child {
     border-right: 0.1rem solid lightgray;
+  }
+  :hover {
+    background-color: #f2f3f7;
+  }
+  :active {
+    background-color: #e1e1e1;
   }
 `;
 

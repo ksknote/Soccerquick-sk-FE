@@ -170,9 +170,15 @@ const PostList = styled.ul<{ translateValue: string }>`
   gap: 1rem;
   > li {
     flex-shrink: 0;
-    width: calc(33.5% - 20px);
+    width: calc(50% - 20px);
     min-height: 17rem;
+    @media (min-width: 768px) {
+      width: calc(50% - 20px);
+    }
     @media (min-width: 1024px) {
+      width: calc(33.5% - 20px);
+    }
+    @media (min-width: 1440px) {
       width: calc(25% - 20px);
     }
   }

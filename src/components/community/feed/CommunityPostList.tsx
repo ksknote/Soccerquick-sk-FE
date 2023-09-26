@@ -48,8 +48,7 @@ const PostList = styled.ul`
   grid-row-gap: 2rem;
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
-    grid-row-gap: 3rem;
-    grid-column-gap: 3rem;
+    grid-column-gap: 1rem;
     margin: 0;
   }
   @media (min-width: 1024px) {

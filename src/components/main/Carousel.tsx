@@ -24,8 +24,8 @@ function Carousel() {
     fade: true,
   };
 
-  const clickSlideHandler = (slide: any) => {
-    navigate(slide.link);
+  const clickSlideHandler = (url: string) => {
+    navigate(url);
   };
 
   const next = () => {
@@ -48,7 +48,7 @@ function Carousel() {
                 {index + 1} / {carouselContents.length}
                 <div onClick={next}>❯</div>
               </IndexContainer>
-              <SliderText onClick={() => clickSlideHandler(slide)}>
+              <SliderText onClick={() => clickSlideHandler(slide.link)}>
                 <Tag bgColor={slide.tagBgColor} color={slide.tagColor}>
                   {slide.tag}
                 </Tag>
@@ -63,7 +63,7 @@ function Carousel() {
                   {slide.description2}
                 </Description>
               </SliderText>
-              <ImageDiv onClick={() => clickSlideHandler(slide)}>
+              <ImageDiv>
                 <img src={slide.image} alt={slide.title1 + slide.title2} />
               </ImageDiv>
             </SliderContent>

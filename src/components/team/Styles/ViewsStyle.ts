@@ -209,7 +209,7 @@ export const TeamRecruitContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-row-gap: 2rem;
-  grid-column-gap: 3rem;
+  grid-column-gap: 2rem;
   margin-top: 1.5rem;
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
@@ -224,6 +224,7 @@ export const TeamRecruitLi = styled.div<{ unvisible?: boolean }>`
   min-height: 16rem;
   box-sizing: border-box;
   padding: 1.5rem;
+  margin: 0.5rem;
   gap: 1.5rem;
   background: white;
   filter: drop-shadow(rgb(211, 211, 211) 0px 0px 0.3rem);

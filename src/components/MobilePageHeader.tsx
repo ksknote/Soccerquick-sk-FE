@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import chevron from '../assets/icon/chevron_grey.svg';
-function MobileHeader({ title }: { title: string }) {
+function MobilePageHeader({ title }: { title: string }) {
   const navigate = useNavigate();
   return (
     <Title>
@@ -14,7 +14,7 @@ function MobileHeader({ title }: { title: string }) {
   );
 }
 
-export default MobileHeader;
+export default MobilePageHeader;
 
 const Title = styled.div`
   padding: 1.5rem 2rem;

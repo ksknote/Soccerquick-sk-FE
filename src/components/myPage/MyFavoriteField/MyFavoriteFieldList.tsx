@@ -7,7 +7,7 @@ import { isLoginSelector } from '../../../redux/modules/auth/selector';
 import { DomDataType } from '../../../pages/SearchPage';
 import { ProvidedElementList } from '../../fieldList/SearchData';
 import MyPagination from '../MyPagination';
-import MobileHeader from '../../MobileHeader';
+import MobileHeader from '../../MobilePageHeader';
 import MyPageHeader from '../MyPageHeader';
 import EmptyBox from '../../common/EmptyBox';
 import alertModal from '../../common/alertModal';

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../../redux/store';
 import { fetchData } from '../../../redux/modules/team/actions';
-import MobileHeader from '../../MobileHeader';
+import MobileHeader from '../../MobilePageHeader';
 import {
   BodyContainer,
   TeamPageBody,

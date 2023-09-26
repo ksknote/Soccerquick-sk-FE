@@ -46,13 +46,14 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  padding: 2rem;
+  padding-top: 1rem;
   > p {
     font-size: 1.7rem;
     font-weight: 500;
     color: #383636;
   }
   @media (min-width: 768px) {
+    padding: 2.5rem 0;
     gap: 2.5rem;
     > p {
       font-size: 2.2rem;
@@ -66,7 +67,7 @@ const FeildSearchBar = styled.div`
   border-radius: 10rem;
   padding: 0.8rem;
   display: inline-block;
-  filter: drop-shadow(0 0 0.2rem grey);
+  filter: drop-shadow(0 0 0.2rem #30b210);
   input {
     color: #3e5463;
     border: none;

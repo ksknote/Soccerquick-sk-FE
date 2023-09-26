@@ -128,7 +128,13 @@ const IndexContainer = styled.div`
     padding: 0 1rem;
   }
   @media (max-width: 768px) {
-    display: none;
+    top: 1rem;
+    bottom: auto;
+    padding: 0.1rem 1rem;
+    font-size: 1.3rem;
+    div {
+      display: none;
+    }
   }
 `;
 

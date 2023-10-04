@@ -67,7 +67,7 @@ const FeildSearchBar = styled.div`
   border-radius: 10rem;
   padding: 0.8rem;
   display: inline-block;
-  filter: drop-shadow(0 0 0.2rem #30b210);
+  filter: drop-shadow(0 0 0.2rem #bbb6b6);
   input {
     color: #3e5463;
     border: none;

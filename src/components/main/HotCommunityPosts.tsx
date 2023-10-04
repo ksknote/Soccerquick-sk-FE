@@ -58,28 +58,31 @@ function HotCommunityPosts() {
 
   return (
     <CarouselWrapper>
-      <ButtonContainer>
-        <SectionHeader>인기 커뮤니티 게시글</SectionHeader>
-        <div>
-          <p onClick={() => navigate('/community')}>전체보기</p>
-          <ChevronButtons>
-            <ChevronButton
-              direction="left"
-              activated={currentIndex > 0}
-              onClick={clickPrevHandler}
-            >
-              ❮
-            </ChevronButton>
-            <ChevronButton
-              direction="right"
-              activated={currentIndex + 1 < slideLength}
-              onClick={clickNextHandler}
-            >
-              ❯
-            </ChevronButton>
-          </ChevronButtons>
-        </div>
-      </ButtonContainer>
+      <CarouselHeader>
+        <h2>인기 커뮤니티 게시글</h2>
+        <p>싸커퀵의 인기 커뮤니티 게시글을 확인해보세요!</p>
+        <ButtonContainer>
+          <div>
+            <p onClick={() => navigate('/community')}>전체보기</p>
+            <ChevronButtons>
+              <ChevronButton
+                direction="left"
+                activated={currentIndex > 0}
+                onClick={clickPrevHandler}
+              >
+                ❮
+              </ChevronButton>
+              <ChevronButton
+                direction="right"
+                activated={currentIndex + 1 < slideLength}
+                onClick={clickNextHandler}
+              >
+                ❯
+              </ChevronButton>
+            </ChevronButtons>
+          </div>
+        </ButtonContainer>
+      </CarouselHeader>
       <PostList translateValue={translateValue}>
         {postData &&
           postData.map((post: PostType, index: number) => (
@@ -109,26 +112,35 @@ const CarouselWrapper = styled.div`
   overflow: hidden;
 `;
 
+const CarouselHeader = styled.div`
+  padding: 2rem;
+  h2 {
+    font-size: 2.1rem;
+    font-weight: 500;
+    color: #383636;
+    margin: 0;
+    padding-bottom: 0.7rem;
+  }
+  p {
+    color: #9a9a9a;
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding: 0 2rem 1rem 1rem;
+  justify-content: flex-end;
   > div {
     display: flex;
     align-items: center;
     gap: 1rem;
-    > p {
-      font-size: 1.5rem;
-      color: #606060;
-      cursor: pointer;
-    }
   }
-`;
-
-const SectionHeader = styled.h2`
-  font-size: 2.1rem;
-  font-weight: 500;
-  color: #383636;
+  p {
+    font-size: 1.5rem;
+    color: #606060;
+    cursor: pointer;
+  }
 `;
 
 const ChevronButtons = styled.div`

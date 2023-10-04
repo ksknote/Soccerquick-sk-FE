@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import SearchFilter from './SearchFilter';
+import { FieldDataType } from '../../types/FieldType';
+import SearchFilter from './FieldFilter';
 import FieldListSkeleton from './FieldListSkeleton';
 import MyPagination from '../myPage/MyPagination';
 import checkIcon from '../../assets/icon/check.svg';
-import { DomDataType } from '../../pages/SearchPage';
 import alertModal from '../common/alertModal';
 import { Cell } from '../../styles/styled-components/CommonStyle';
 
-type FindingFieldProps = {
-  checkedArray: DomDataType[];
-  setCheckedArray: React.Dispatch<React.SetStateAction<DomDataType[]>>;
+interface FindingFieldProps {
+  checkedArray: FieldDataType[];
+  setCheckedArray: React.Dispatch<React.SetStateAction<FieldDataType[]>>;
   setCheckedInModal: React.Dispatch<React.SetStateAction<string[]>>;
-  sortedDomData: DomDataType[];
-  setSortedDomData: React.Dispatch<React.SetStateAction<DomDataType[]>>;
+  sortedDomData: FieldDataType[];
+  setSortedDomData: React.Dispatch<React.SetStateAction<FieldDataType[]>>;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
 type ProvidedElementListType = {
   [key: string]: string;
@@ -40,8 +40,7 @@ export const ProvidedElementList: ProvidedElementListType = {
   toilet: '남녀 구분 화장실',
 };
 
-// SoccerQuick/Frontend/src/Pages/SearchPage.tsx 75번째 줄에서 연결됨
-function FindingField(props: FindingFieldProps) {
+function FieldList(props: FindingFieldProps) {
   const navigate = useNavigate();
   const checkedArray = props.checkedArray;
   const setCheckedArray = props.setCheckedArray;
@@ -50,13 +49,11 @@ function FindingField(props: FindingFieldProps) {
   const isLoading = props.isLoading;
   const setIsLoading = props.setIsLoading;
 
-  // Left Bar에서 설정한 필터링 옵션이 담기는 상태.
-  // SoccerQuick/Frontend/src/Components/fieldList/Contents/SearchFilter.tsx Line12의 useEffect로 정의됨
   const [filterOption, setFilterOption] = useState<ItemType[]>([]);
 
   // 정렬 조건이 변할 때 페이지에 보여줄 데이터를 필터링 하는 부분
   const [filteredData, setFilteredData] =
-    useState<DomDataType[]>(sortedDomData);
+    useState<FieldDataType[]>(sortedDomData);
 
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -70,7 +67,7 @@ function FindingField(props: FindingFieldProps) {
 
   const checkHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
-    value: DomDataType
+    value: FieldDataType
   ) => {
     if (e.target.checked) {
       if (checkedArray.length >= 5) {
@@ -197,7 +194,7 @@ function FindingField(props: FindingFieldProps) {
   );
 }
 
-export default FindingField;
+export default FieldList;
 
 const SearchContainer = styled.div`
   position: relative;

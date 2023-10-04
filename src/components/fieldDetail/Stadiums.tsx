@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { DomDataType } from '../../pages/SearchPage';
+import { FieldDataType } from '../../types/FieldType';
 import largeIcon from '../../assets/icon/large.svg';
 import groundIcon from '../../assets/icon/ground.svg';
 import flagIcon from '../../assets/icon/flag.svg';
@@ -8,7 +8,7 @@ import grassIcon from '../../assets/icon/grass.svg';
 import logo from '../../assets/icon/logo/logo_icon.png';
 
 interface StadiumsProps {
-  stadiumsData: DomDataType['stadiums'];
+  stadiumsData: FieldDataType['stadiums'];
   setShowImgModal: React.Dispatch<React.SetStateAction<boolean>>;
   setImgModalIndex: React.Dispatch<React.SetStateAction<number>>;
 }

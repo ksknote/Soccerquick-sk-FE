@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { DomDataType } from '../../pages/SearchPage';
+import { FieldDataType } from '../../types/FieldType';
 
-const FieldDetailCarousel: React.FC<{ stadiums: DomDataType['stadiums'] }> = ({
-  stadiums,
-}) => {
+const FieldDetailCarousel: React.FC<{
+  stadiums: FieldDataType['stadiums'];
+}> = ({ stadiums }) => {
   const [stadiumImages, setStadiumImages] = useState<
-    DomDataType['stadiums'][0]['images']
+    FieldDataType['stadiums'][0]['images']
   >(stadiums[0].images);
 
   useEffect(() => {

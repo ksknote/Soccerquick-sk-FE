@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { DomDataType } from '../../../pages/SearchPage';
 import styled from 'styled-components';
+import { FieldDataType } from '../../../types/FieldType';
 import chevronIcon from '../../../assets/icon/chevron_down.svg';
 import checkIcon from '../../../assets/icon/check.svg';
 import deleteIcon from '../../../assets/icon/delete.svg';
@@ -8,8 +8,8 @@ import logo from '../../../assets/icon/logo/logo_icon.png';
 import alertModal from '../../common/alertModal';
 
 interface FieldComparisonProps {
-  checkedArray: DomDataType[];
-  setCheckedArray: React.Dispatch<React.SetStateAction<DomDataType[]>>;
+  checkedArray: FieldDataType[];
+  setCheckedArray: React.Dispatch<React.SetStateAction<FieldDataType[]>>;
   checkedInModal: string[];
   setCheckedInModal: React.Dispatch<React.SetStateAction<string[]>>;
   setShowComparisonData: React.Dispatch<React.SetStateAction<boolean>>;

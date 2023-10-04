@@ -24,7 +24,7 @@ interface FilterProps {
   setFilterOption: React.Dispatch<React.SetStateAction<ItemType[]>>;
 }
 
-function SearchFilter(props: FilterProps) {
+function FieldFilter(props: FilterProps) {
   const { setFilterOption } = props;
 
   // 상태관리 개선
@@ -78,7 +78,7 @@ function SearchFilter(props: FilterProps) {
   );
 }
 
-export default SearchFilter;
+export default FieldFilter;
 
 // Left Bar
 const SearchPageOption = styled.div`

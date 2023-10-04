@@ -1,66 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import axios from 'axios';
 import styled from 'styled-components';
+import { FieldDataType } from '../types/FieldType';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import SearchData from '../components/fieldList/SearchData';
+import SearchData from '../components/fieldList/FieldList';
 import HeaderCategory from '../components/common/HeaderCategory';
 import FieldComparison from '../components/fieldList/fieldsComparison/FieldComparison';
 import ComparisonData from '../components/fieldList/fieldsComparison/ComparisonData';
 import FieldMap from '../components/fieldList/map/FieldMap';
-import axios from 'axios';
 
-export interface DomDataType {
-  [key: string]: string | number | boolean | [] | {};
-  address: { area: string; fullAddress: string };
-  ball: boolean;
-  beverage: boolean;
-  bibs: boolean;
-  dom_id: string;
-  lat: number;
-  lng: number;
-  parking: boolean;
-  parking_fee: string;
-  parking_free: boolean;
-  partnership: boolean;
-  shoes: boolean;
-  shower: boolean;
-  source: string;
-  stadiums: {
-    id: number;
-    info: string;
-    inout_door: string;
-    inout_door_nm: string;
-    name: string;
-    size_x: number;
-    size_y: number;
-    stadium_type: string;
-    stadium_type_nm: string;
-    _id: string;
-    images: {
-      id: number;
-      image: string;
-    }[];
-  }[];
-  title: string;
-  toilet: boolean;
-  url: string;
-  usersFavorites: [];
-  wear: string;
-  _id: number;
-  reviews: [];
-}
-
-function SearchPage() {
+function FieldList() {
   const [showComparisonModal, setShowComparisonModal] = useState(false);
-  const [checkedArray, setCheckedArray] = useState<DomDataType[]>([]);
+  const [checkedArray, setCheckedArray] = useState<FieldDataType[]>([]);
   const [checkedInModal, setCheckedInModal] = useState<string[]>([]);
   const [showComparisonData, setShowComparisonData] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState('');
-  const [totalDomData, setTotalDomData] = useState<DomDataType[]>([]);
-  const [sortedDomData, setSortedDomData] = useState<DomDataType[]>([]);
+  const [totalDomData, setTotalDomData] = useState<FieldDataType[]>([]);
+  const [sortedDomData, setSortedDomData] = useState<FieldDataType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-
   const [seachParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
@@ -132,7 +91,7 @@ function SearchPage() {
   );
 }
 
-export default SearchPage;
+export default FieldList;
 
 const StyledBody = styled.div`
   justify-content: center;

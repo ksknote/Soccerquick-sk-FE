@@ -3,9 +3,9 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { FieldDataType } from '../../../types/FieldType';
 import { isLoginSelector } from '../../../redux/modules/auth/selector';
-import { DomDataType } from '../../../pages/SearchPage';
-import { ProvidedElementList } from '../../fieldList/SearchData';
+import { ProvidedElementList } from '../../fieldList/FieldList';
 import MyPagination from '../MyPagination';
 import MobileHeader from '../../MobilePageHeader';
 import MyPageHeader from '../MyPageHeader';
@@ -26,7 +26,7 @@ function MyFavoriteFieldList() {
     favoritePlaygrounds: [],
   });
   const [favoritePlaygrounds, setFavoritePlaygrounds] = useState<string[]>([]);
-  const [filteredData, setFilteredData] = useState<DomDataType[]>([]);
+  const [filteredData, setFilteredData] = useState<FieldDataType[]>([]);
 
   // pagination
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -63,7 +63,7 @@ function MyFavoriteFieldList() {
   }, [favoritePlaygrounds]);
 
   const getDomData = async () => {
-    const domarray: Array<DomDataType> = [];
+    const domarray: Array<FieldDataType> = [];
     for (let i = 0; i < favoritePlaygrounds.length; i++) {
       await axios
         .get(

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { DomDataType } from '../../../pages/SearchPage';
-import { ProvidedElementList } from '../../fieldList/SearchData';
+import { FieldDataType } from '../../../types/FieldType';
+import { ProvidedElementList } from '../FieldList';
 import logo from '../../../assets/icon/logo/logo_icon.png';
 
 interface ComparsionDataProps {
-  checkedArray: DomDataType[];
+  checkedArray: FieldDataType[];
   checkedInModal: string[];
   setShowComparisonData: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -15,7 +15,7 @@ const ComparisonData: React.FC<ComparsionDataProps> = ({
   checkedInModal,
   setShowComparisonData,
 }) => {
-  const [comparisonData, setComparisonData] = useState<DomDataType[]>([]);
+  const [comparisonData, setComparisonData] = useState<FieldDataType[]>([]);
 
   useEffect(() => {
     const newComparisonData = [...checkedArray].filter((item) =>

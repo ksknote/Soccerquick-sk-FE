@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { DomDataType } from '../../pages/SearchPage';
+import { FieldDataType } from '../../types/FieldType';
 
 interface StadiumsProps {
-  stadiums: DomDataType['stadiums'];
+  stadiums: FieldDataType['stadiums'];
   setShowImgModal: React.Dispatch<React.SetStateAction<boolean>>;
   ImgModalIndex: number;
 }

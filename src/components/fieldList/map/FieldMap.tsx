@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { FieldDataType } from '../../../types/FieldType';
 import ResetIcon from '../../../assets/icon/reset_white.svg';
 import CustomMapMarker from './CustomMapMarker';
-import { DomDataType } from '../../../pages/SearchPage';
 import alertModal from '../../common/alertModal';
 import FeildSearch from '../../search/FieldSearch';
 
 interface FieldMapType {
   searchKeyword: string;
-  totalDomData: DomDataType[];
-  setSortedDomData: React.Dispatch<React.SetStateAction<DomDataType[]>>;
+  totalDomData: FieldDataType[];
+  setSortedDomData: React.Dispatch<React.SetStateAction<FieldDataType[]>>;
 }
 
 const FieldMap: React.FC<FieldMapType> = ({

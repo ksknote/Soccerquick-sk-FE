@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import { DomDataType } from './SearchPage';
-import { ProvidedElementList } from '../components/fieldList/SearchData';
+import { FieldDataType } from '../types/FieldType';
+import { ProvidedElementList } from '../components/fieldList/FieldList';
 import FieldDetailCarousel from '../components/fieldDetail/FieldDetailCarousel';
 import Stadiums from '../components/fieldDetail/Stadiums';
 import FieldImageModal from '../components/fieldDetail/FieldImageModal';
@@ -19,7 +19,7 @@ import MobileHeader from '../components/MobilePageHeader';
 import BaseLayout from '../components/template/BaseLayout';
 
 const FieldDetail = () => {
-  const [groundData, setFieldData] = useState<DomDataType>();
+  const [groundData, setFieldData] = useState<FieldDataType>();
   const [reviewData, setReviewData] = useState<[]>([]);
   const [showImgModal, setShowImgModal] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);

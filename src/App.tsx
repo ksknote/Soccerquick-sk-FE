@@ -5,7 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import './App.css';
 import MainPage from './pages/Main';
 import TeamPage from './pages/team/TeamPage';
-import SearchPage from './pages/SearchPage';
+import SearchPage from './pages/FieldList';
 import FieldDetail from './pages/FieldDetail';
 import Admin from './pages/admin/MainPage';
 import { MyPage } from './pages/MyPage';

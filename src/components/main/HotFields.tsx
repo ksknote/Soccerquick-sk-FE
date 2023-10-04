@@ -1,40 +1,42 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { PostType } from '../../types/CommunityType';
+import { FieldDataType } from '../../types/FieldType';
+import HotFieldsPosts from './HotFieldsPostCard';
 import { PostCarousel } from '../../styles/styled-components/PostCarouselStyle';
-import PostCard, { PostCardSkeleton } from '../community/feed/PostCard';
+import { useNavigate } from 'react-router-dom';
 
-function HotCommunityPosts() {
+function HotFields() {
   const navigate = useNavigate();
-  const [postData, setPostData] = useState<PostType[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [hotFieldData, setHotFieldData] = useState<FieldDataType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [translateValue, setTranslateValue] = useState<string>(
     `translateX(${currentIndex * -100}%)`
   );
-  const slideLength = Math.floor(postData.length / 4);
-
-  const fetchData = () => {
-    setIsLoading(true);
-
-    const url = `${process.env.REACT_APP_API_URL}/communities?keyword=&sort=Comment&page=1&itemsPerPage=12`;
-    const config = {
-      withCredentials: true,
-    };
-    axios
-      .get(url, config)
-      .then((res) => {
-        setPostData(res.data.data);
-        setIsLoading(false);
-      })
-      .catch((e) => console.error(e));
-  };
+  const slideLength = Math.floor(hotFieldData.length / 4);
 
   useEffect(() => {
-    fetchData();
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/doms`, {
+        withCredentials: true,
+      })
+      .then((res: any) => {
+        const data = sortByPopularity(res.data.data);
+        setHotFieldData(data);
+      })
+      .catch((e: any) => console.log(e));
   }, []);
+
+  const sortByPopularity = (data: FieldDataType[]) => {
+    const sortedData = data.sort((a, b) => {
+      const popularityA = b.reviews.length + b.usersFavorites.length;
+      const popularityB = a.reviews.length + b.usersFavorites.length;
+      return popularityA - popularityB;
+    });
+    const slicedData = sortedData.slice(0, 8);
+    return slicedData;
+  };
 
   const clickPrevHandler = () => {
     setCurrentIndex((prev) => {
@@ -54,14 +56,11 @@ function HotCommunityPosts() {
     setTranslateValue(() => `translateX(${currentIndex * -100}%)`);
   }, [currentIndex]);
 
-  if (postData.length === 0 && !isLoading)
-    return <PostCarousel.Wrapper>게시글이 없습니다.</PostCarousel.Wrapper>;
-
   return (
     <PostCarousel.CarouselWrapper>
       <PostCarousel.CarouselHeader>
-        <h2>인기 커뮤니티 게시글</h2>
-        <p>싸커퀵의 인기 커뮤니티 게시글을 확인해보세요!</p>
+        <h2>인기 풋살 경기장</h2>
+        <p>싸커퀵에서 인기 풋살 경기장과 리뷰를 확인해보세요!</p>
         <PostCarousel.ButtonContainer>
           <div>
             <p onClick={() => navigate('/community')}>전체보기</p>
@@ -85,20 +84,15 @@ function HotCommunityPosts() {
         </PostCarousel.ButtonContainer>
       </PostCarousel.CarouselHeader>
       <PostList translateValue={translateValue}>
-        {postData &&
-          postData.map((post: PostType, index: number) => (
-            <PostCard post={post} index={index} key={post.post_id} />
-          ))}
-        {isLoading &&
-          Array.from({ length: 8 }).map((_, index) => (
-            <PostCardSkeleton key={index} />
-          ))}
+        {hotFieldData?.map((fieldata) => (
+          <HotFieldsPosts key={fieldata._id} fieldata={fieldata} />
+        ))}
       </PostList>
     </PostCarousel.CarouselWrapper>
   );
 }
 
-export default HotCommunityPosts;
+export default HotFields;
 
 const PostList = styled.ul<{ translateValue: string }>`
   display: flex;

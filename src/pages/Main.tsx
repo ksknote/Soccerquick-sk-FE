@@ -10,6 +10,8 @@ import { Wrapper } from '../styles/styled-components/CommonStyle';
 import HotFields from '../components/main/HotFields';
 import NewTeamPosts from '../components/main/NewTeamPosts';
 import HotCommunityPosts from '../components/main/HotCommunityPosts';
+import FieldListByRegion from '../components/main/FieldListByRegion';
+
 export default function Main() {
   return (
     <>
@@ -20,9 +22,10 @@ export default function Main() {
       <Wrapper>
         <MainBodyWrapper>
           <MainSearch />
+          <FieldListByRegion />
           <HotFields />
-          <HotCommunityPosts />
           <NewTeamPosts />
+          <HotCommunityPosts />
         </MainBodyWrapper>
       </Wrapper>
       <Footer />

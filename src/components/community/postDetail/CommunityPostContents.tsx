@@ -68,10 +68,7 @@ function CommunityPostContents() {
 
   const clickLikeHanlder = async () => {
     if (!isLogin) {
-      const confirm = await alertModal(
-        '로그인이 필요합니다. 로그인 하시겠습니까?',
-        'submit'
-      );
+      const confirm = await alertModal('로그인 하시겠습니까?', 'submit');
       if (confirm) navigate('/auth');
     } else {
       axios

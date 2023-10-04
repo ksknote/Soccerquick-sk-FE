@@ -18,7 +18,9 @@ function PostCard({ post, index }: PostCardPropsType) {
 
   return (
     <Post
-      onClick={() => navigate(`./${post.post_id}`, { state: { data: post } })}
+      onClick={() =>
+        navigate(`./community/${post.post_id}`, { state: { data: post } })
+      }
       visible={true}
     >
       <PostImage>

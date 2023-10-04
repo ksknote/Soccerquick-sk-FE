@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { PostType } from '../../types/CommunityType';
 import { PostCarousel } from '../../styles/styled-components/PostCarouselStyle';
-import PostCard, { PostCardSkeleton } from '../community/feed/PostCard';
+import HotCommunityPostCard, { PostCardSkeleton } from './HotCommunityPostCard';
 
 function HotCommunityPosts() {
   const navigate = useNavigate();
@@ -87,7 +87,11 @@ function HotCommunityPosts() {
       <PostList translateValue={translateValue}>
         {postData &&
           postData.map((post: PostType, index: number) => (
-            <PostCard post={post} index={index} key={post.post_id} />
+            <HotCommunityPostCard
+              post={post}
+              index={index}
+              key={post.post_id}
+            />
           ))}
         {isLoading &&
           Array.from({ length: 8 }).map((_, index) => (
@@ -118,6 +122,13 @@ const PostList = styled.ul<{ translateValue: string }>`
     }
     @media (min-width: 1440px) {
       width: calc(25% - 20px);
+    }
+  }
+  @media (max-width: 768px) {
+    overflow-x: auto;
+    width: 100%;
+    > li {
+      width: 20rem;
     }
   }
 `;

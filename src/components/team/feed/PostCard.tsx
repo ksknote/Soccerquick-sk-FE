@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   TeamRecruitLi,
+  LiHeader,
   ContentHeader,
   RecruitStatus,
   ContentTitle,
@@ -11,6 +12,7 @@ import {
 import Skeleton from '../../common/Skeleton';
 import CheckPositionStatus from './CheckPostionStatus';
 import { TeamDataType } from '../../../types/TeamPageType';
+import styled from 'styled-components';
 
 interface PostCardPropsType {
   post: TeamDataType;
@@ -22,14 +24,16 @@ function PostCard({ post }: PostCardPropsType) {
 
   return (
     <TeamRecruitLi onClick={() => navigate(`/teampage/${post.group_id}`)}>
-      <ContentHeader>
-        <RecruitStatus status={post.status}>{post.status}</RecruitStatus>
-        <Author>모집자: {post.leader.leader_name}</Author>
-      </ContentHeader>
-      <ContentTitle>
-        <span>{post.region + ' ' + post.city}</span>
-        <p>{post.title}</p>
-      </ContentTitle>
+      <LiHeader>
+        <ContentHeader>
+          <RecruitStatus status={post.status}>{post.status}</RecruitStatus>
+          <Author>모집자: {post.leader.leader_name}</Author>
+        </ContentHeader>
+        <ContentTitle>
+          <span>{post.region + ' ' + post.city}</span>
+          <p>{post.title}</p>
+        </ContentTitle>
+      </LiHeader>
       <Position>
         {CheckPositionStatus(
           post.recruitment_count.gk_current_count,

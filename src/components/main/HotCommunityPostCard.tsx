@@ -1,21 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { PostType } from '../../../types/CommunityType';
-import commentIcon from '../../../assets/icon/comment_green.svg';
-import likeIcon from '../../../assets/icon/like_green.svg';
-import Skeleton, { Shining } from '../../common/Skeleton';
-import { Cell } from '../../../styles/styled-components/CommonStyle';
-import stripHTML from '../../../utils/stripHTML';
+import { PostType } from '../../types/CommunityType';
+import commentIcon from '../../assets/icon/comment_green.svg';
+import likeIcon from '../../assets/icon/like_green.svg';
+import Skeleton, { Shining } from '../common/Skeleton';
+import { Cell } from '../../styles/styled-components/CommonStyle';
+import stripHTML from '../../utils/stripHTML';
 
 interface PostCardPropsType {
   post: PostType;
   index: number;
 }
 
-function PostCard({ post, index }: PostCardPropsType) {
+function HotCommunityPostCard({ post, index }: PostCardPropsType) {
   const navigate = useNavigate();
-
   return (
     <Post
       onClick={() =>
@@ -72,6 +71,8 @@ function PostCard({ post, index }: PostCardPropsType) {
   );
 }
 
+export default HotCommunityPostCard;
+
 export function PostCardSkeleton() {
   const [isSkeletonVisible, setIsSkeletonVisible] = useState(false);
 
@@ -110,8 +111,6 @@ export function PostCardSkeleton() {
     </Post>
   );
 }
-
-export default PostCard;
 
 const Post = styled.li<{ visible: boolean }>`
   display: ${({ visible }) => (visible ? 'flex' : 'none')};
@@ -200,15 +199,18 @@ const PostContents = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1.5rem 1.5rem 2rem 1.5rem;
-  gap: 1.6rem;
+
+  @media (min-width: 768px) {
+    gap: 1.6rem;
+  }
 `;
 
 const PostTitle = styled.p`
   display: block;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 500;
   line-height: 1.3;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -217,12 +219,16 @@ const PostTitle = styled.p`
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+  @media (min-width: 768px) {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
 `;
-const PostDescription = styled.div`
-  height: 6rem;
-  font-size: 1.4rem;
-  color: #464646;
 
+const PostDescription = styled.div`
+  font-size: 1.3rem;
+  color: #464646;
+  height: 4rem;
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
@@ -230,23 +236,36 @@ const PostDescription = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  @media (min-width: 768px) {
+    height: 6rem;
+    font-size: 1.4rem;
+  }
 `;
 
 const PostSubFooter = styled.div`
   display: flex;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    padding: 0.8rem 0;
+  }
 `;
 
 const PostSubject = styled(Cell)<{ data: string }>`
   font-size: 1.2rem;
   color: ${({ data }) => getColorBydata(data)};
   background-color: ${({ data }) => getBackgroundColorBydata(data)};
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const PostDate = styled.p`
   line-height: 2rem;
   color: gray;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
+  @media (min-width: 768px) {
+    font-size: 1.3rem;
+  }
 `;
 
 const PostFooter = styled.div`
@@ -257,8 +276,11 @@ const PostFooter = styled.div`
 const AuthorInfo = styled.div`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.7rem;
   font-size: 1.3rem;
+  @media (min-width: 768px) {
+    gap: 1rem;
+  }
 `;
 
 const AuthorProfileLayout = styled.div`
@@ -290,11 +312,11 @@ const LikenComment = styled.div`
     display: flex;
     height: 100%;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.2rem;
     color: gray;
     img {
-      height: 2.5rem;
-      width: 2.5rem;
+      height: 2rem;
+      width: 2rem;
     }
 
     :first-child {

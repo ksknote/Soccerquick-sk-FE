@@ -14,7 +14,7 @@ function HotFieldsPostCard({ fieldata }: HotFieldsPostCard) {
   const thumbnail = fieldata.stadiums[0].images[0].image;
   return (
     <Post
-      onClick={() => navigate(`./fieldata/${fieldata.dom_id}`)}
+      onClick={() => navigate(`./ground/${fieldata.dom_id}`)}
       visible={true}
     >
       <PostImage>
@@ -22,8 +22,8 @@ function HotFieldsPostCard({ fieldata }: HotFieldsPostCard) {
       </PostImage>
       <PostContents>
         <div>
-          <PostTitle>{fieldata.title}</PostTitle>
           <PostDescription>{fieldata.address.area}</PostDescription>
+          <PostTitle>{fieldata.title}</PostTitle>
         </div>
 
         <PostFooter>
@@ -64,7 +64,7 @@ const Post = styled.li<{ visible: boolean }>`
 `;
 
 const PostImage = styled.div`
-  padding-top: 70%;
+  padding-top: 60%;
   width: 100%;
   position: relative;
   img {
@@ -87,25 +87,10 @@ const PostContents = styled.div`
   gap: 1.6rem;
 `;
 
-const PostTitle = styled.p`
-  display: block;
-  font-size: 1.6rem;
-  font-weight: 500;
-  line-height: 1.3;
-  margin-bottom: 1rem;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-`;
 const PostDescription = styled.div`
-  height: 6rem;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: #464646;
+  margin-bottom: 0.5rem;
 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -114,6 +99,27 @@ const PostDescription = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  @media (min-width: 768px) {
+    font-size: 1.4rem;
+  }
+`;
+
+const PostTitle = styled.p`
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.3;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  @media (min-width: 768px) {
+    font-size: 1.6rem;
+  }
 `;
 
 const PostFooter = styled.div`

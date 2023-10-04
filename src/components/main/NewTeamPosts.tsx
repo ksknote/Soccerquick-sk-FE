@@ -109,9 +109,15 @@ const PostList = styled.div<{ translateValue: string }>`
   > div {
     flex-shrink: 0;
     width: calc(100% - 20px);
-    min-height: 17rem;
     @media (min-width: 768px) {
       width: calc(50% - 20px);
+    }
+  }
+  @media (max-width: 768px) {
+    overflow-x: auto;
+    width: 100%;
+    > div {
+      width: 30rem;
     }
   }
 `;

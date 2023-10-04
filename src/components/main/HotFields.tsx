@@ -63,7 +63,7 @@ function HotFields() {
         <p>싸커퀵에서 인기 풋살 경기장과 리뷰를 확인해보세요!</p>
         <PostCarousel.ButtonContainer>
           <div>
-            <p onClick={() => navigate('/community')}>전체보기</p>
+            <p onClick={() => navigate('/ground')}>전체보기</p>
             <PostCarousel.ChevronButtons>
               <PostCarousel.ChevronButton
                 direction="left"
@@ -102,7 +102,6 @@ const PostList = styled.ul<{ translateValue: string }>`
   gap: 1rem;
   > li {
     flex-shrink: 0;
-    width: calc(50% - 20px);
     min-height: 17rem;
     @media (min-width: 768px) {
       width: calc(50% - 20px);
@@ -112,6 +111,13 @@ const PostList = styled.ul<{ translateValue: string }>`
     }
     @media (min-width: 1440px) {
       width: calc(25% - 20px);
+    }
+  }
+  @media (max-width: 768px) {
+    overflow-x: auto;
+    width: 100%;
+    > li {
+      width: 20rem;
     }
   }
 `;

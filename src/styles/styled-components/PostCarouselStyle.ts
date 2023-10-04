@@ -28,6 +28,17 @@ export const PostCarousel = {
       font-size: 1.3rem;
       font-weight: 500;
     }
+    @media (max-width: 768px) {
+      padding: 1.5rem 1rem;
+
+      h2 {
+        font-size: 1.8rem;
+        padding-bottom: 0.5rem;
+      }
+      p {
+        font-size: 1.2rem;
+      }
+    }
   `,
 
   ButtonContainer: styled.div`
@@ -40,8 +51,13 @@ export const PostCarousel = {
     }
     p {
       font-size: 1.5rem;
-      color: #606060;
+      color: #848484;
       cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      p {
+        font-size: 1.3rem;
+      }
     }
   `,
 
@@ -50,6 +66,9 @@ export const PostCarousel = {
     border: 0.1rem solid lightgray;
     border-radius: 0.5rem;
     cursor: pointer;
+    @media (max-width: 768px) {
+      display: none;
+    }
   `,
 
   ChevronButton: styled.div<{ activated: boolean; direction: string }>`

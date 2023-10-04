@@ -220,12 +220,10 @@ export const TeamRecruitContainer = styled.div`
 export const TeamRecruitLi = styled.div<{ unvisible?: boolean }>`
   display: ${({ unvisible }) => (unvisible ? 'none' : 'flex')};
   flex-direction: column;
-  height: 100%;
-  min-height: 16rem;
   box-sizing: border-box;
-  padding: 1.5rem;
+  padding: 2rem;
   margin: 0.5rem;
-  gap: 1.5rem;
+  justify-content: space-between;
   background: white;
   filter: drop-shadow(rgb(211, 211, 211) 0px 0px 0.3rem);
   border-radius: 2rem;
@@ -234,7 +232,15 @@ export const TeamRecruitLi = styled.div<{ unvisible?: boolean }>`
   @media (min-width: 1024px) {
     min-height: 17rem;
     font-size: 1.5rem;
+    padding: 2rem;
   }
+`;
+
+export const LiHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 1.5rem;
 `;
 
 export const ContentHeader = styled.div`
@@ -261,7 +267,7 @@ export const RecruitStatus = styled(Status)<{ status: string }>`
 
 export const ContentTitle = styled.div`
   display: flex;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   span {
     color: #6e6e6e;
     font-weight: 500;
@@ -272,6 +278,9 @@ export const ContentTitle = styled.div`
       color: #b1b1b1;
       margin: 0 0.5rem;
     }
+  }
+  @media (min-width: 768px) {
+    font-size: 1.6rem;
   }
   @media (min-width: 1024px) {
     font-size: 1.8rem;

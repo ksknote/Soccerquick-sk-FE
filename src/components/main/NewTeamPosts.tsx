@@ -86,13 +86,13 @@ function NewTeamPosts() {
         </PostCarousel.ButtonContainer>
       </PostCarousel.CarouselHeader>
       <PostList translateValue={translateValue}>
-        {postData.map((post: TeamDataType, index: number) => (
-          <PostCard post={post} index={index} key={post.group_id} />
-        ))}
-        {isLoading &&
-          Array.from({ length: 4 }).map((_, index) => (
-            <PostCardSkeleton key={index} />
-          ))}
+        {postData
+          ? postData.map((post: TeamDataType, index: number) => (
+              <PostCard post={post} index={index} key={post.group_id} />
+            ))
+          : Array.from({ length: 4 }).map((_, index) => (
+              <PostCardSkeleton visible={true} key={`key${index}`} />
+            ))}
       </PostList>
     </PostCarousel.CarouselWrapper>
   );

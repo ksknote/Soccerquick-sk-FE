@@ -20,7 +20,6 @@ function HotCommunityPostCard({ post, index }: PostCardPropsType) {
       onClick={() =>
         navigate(`/community/${post.post_id}`, { state: { data: post } })
       }
-      visible={true}
     >
       <PostImage>
         {post.thumbnail ? (
@@ -74,20 +73,10 @@ function HotCommunityPostCard({ post, index }: PostCardPropsType) {
 export default HotCommunityPostCard;
 
 export function PostCardSkeleton() {
-  const [isSkeletonVisible, setIsSkeletonVisible] = useState(false);
-
-  //깜빡임 방지
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setIsSkeletonVisible(true);
-    }, 200);
-    return () => clearTimeout(timeoutId);
-  }, []);
-
   return (
-    <Post visible={isSkeletonVisible}>
+    <Post>
       <PostImage>
-        <SkeletonCover visible={isSkeletonVisible}></SkeletonCover>
+        <SkeletonCover></SkeletonCover>
       </PostImage>
       <PostContents>
         <div>
@@ -96,14 +85,12 @@ export function PostCardSkeleton() {
             <Skeleton width="80%" />
           </PostDescription>
         </div>
-        <PostDate>
+        <PostDateSkeleton>
           <Skeleton width="50%" />
-        </PostDate>
+        </PostDateSkeleton>
         <PostFooter>
           <AuthorInfo>
-            <AuthorProfileSkeleton
-              visible={isSkeletonVisible}
-            ></AuthorProfileSkeleton>
+            <AuthorProfileSkeleton></AuthorProfileSkeleton>
             <Skeleton width="7rem" />
           </AuthorInfo>
         </PostFooter>
@@ -112,8 +99,8 @@ export function PostCardSkeleton() {
   );
 }
 
-const Post = styled.li<{ visible: boolean }>`
-  display: ${({ visible }) => (visible ? 'flex' : 'none')};
+const Post = styled.li`
+  display: flex;
   flex-direction: column;
   height: 100%;
   min-height: 16rem;
@@ -160,7 +147,7 @@ const PostCover = styled.div`
   padding: 2rem;
 `;
 
-const SkeletonCover = styled(Shining)<{ visible: boolean }>`
+const SkeletonCover = styled(Shining)`
   position: absolute;
   top: 0px;
   left: 0px;
@@ -171,7 +158,6 @@ const SkeletonCover = styled(Shining)<{ visible: boolean }>`
   border-top-right-radius: 2rem;
   border-bottom: 0.1rem solid #e6e6e6;
   padding: 2rem;
-  background: ${({ visible }) => !visible && 'white'};
 `;
 
 const CustomCover = styled(PostCover)<{ index: number }>`
@@ -268,6 +254,12 @@ const PostDate = styled.p`
   }
 `;
 
+const PostDateSkeleton = styled(PostDate)`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
 const PostFooter = styled.div`
   display: flex;
   justify-content: space-between;
@@ -300,10 +292,8 @@ const AuthorProfile = styled(AuthorProfileLayout)`
   }
 `;
 
-const AuthorProfileSkeleton = styled(AuthorProfileLayout)<{ visible: boolean }>`
+const AuthorProfileSkeleton = styled(AuthorProfileLayout)`
   background: var(--color--skeleton);
-  background: ${({ visible }) =>
-    visible ? 'var(--color--skeleton)' : 'white'};
 `;
 
 const LikenComment = styled.div`

@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { FieldDataType } from '../../types/FieldType';
 import commentIcon from '../../assets/icon/comment_green.svg';
 import likeIcon from '../../assets/icon/like_green.svg';
+import { Shining } from '../common/Skeleton';
+import Skeleton from '../common/Skeleton';
 
 interface HotFieldsPostCard {
   fieldata: FieldDataType;
@@ -13,10 +15,7 @@ function HotFieldsPostCard({ fieldata }: HotFieldsPostCard) {
   const navigate = useNavigate();
   const thumbnail = fieldata.stadiums[0].images[0].image;
   return (
-    <Post
-      onClick={() => navigate(`./ground/${fieldata.dom_id}`)}
-      visible={true}
-    >
+    <Post onClick={() => navigate(`./ground/${fieldata.dom_id}`)}>
       <PostImage>
         {thumbnail ? <img src={thumbnail} alt="" /> : <div>힝!</div>}
       </PostImage>
@@ -45,8 +44,28 @@ function HotFieldsPostCard({ fieldata }: HotFieldsPostCard) {
 
 export default HotFieldsPostCard;
 
-const Post = styled.li<{ visible: boolean }>`
-  display: ${({ visible }) => (visible ? 'flex' : 'none')};
+export function PostCardSkeleton() {
+  return (
+    <Post>
+      <PostImage>
+        <SkeletonCover></SkeletonCover>
+      </PostImage>
+      <PostContents>
+        <div>
+          <Skeleton width="100%" height="2rem" margin="0 0 1rem 0" />
+          <PostDescription>
+            <Skeleton width="80%" />
+          </PostDescription>
+        </div>
+
+        <Skeleton width="50%" />
+      </PostContents>
+    </Post>
+  );
+}
+
+const Post = styled.li`
+  display: flex;
   flex-direction: column;
   height: 100%;
   min-height: 16rem;
@@ -78,6 +97,19 @@ const PostImage = styled.div`
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
   }
+`;
+
+const SkeletonCover = styled(Shining)`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  border-bottom: 0.1rem solid #e6e6e6;
+  padding: 2rem;
 `;
 
 const PostContents = styled.div`

@@ -85,18 +85,17 @@ function HotCommunityPosts() {
         </PostCarousel.ButtonContainer>
       </PostCarousel.CarouselHeader>
       <PostList translateValue={translateValue}>
-        {postData &&
-          postData.map((post: PostType, index: number) => (
-            <HotCommunityPostCard
-              post={post}
-              index={index}
-              key={post.post_id}
-            />
-          ))}
-        {isLoading &&
-          Array.from({ length: 8 }).map((_, index) => (
-            <PostCardSkeleton key={index} />
-          ))}
+        {postData
+          ? postData.map((post: PostType, index: number) => (
+              <HotCommunityPostCard
+                post={post}
+                index={index}
+                key={post.post_id}
+              />
+            ))
+          : Array.from({ length: 8 }).map((_, index) => (
+              <PostCardSkeleton key={index} />
+            ))}
       </PostList>
     </PostCarousel.CarouselWrapper>
   );

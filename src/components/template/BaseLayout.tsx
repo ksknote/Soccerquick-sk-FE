@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from '../Header';
+import Header from '../common/Header';
 import HeaderCategory from '../common/HeaderCategory';
-import Footer from '../Footer';
+import Footer from '../common/Footer';
 import { Wrapper } from '../../styles/styled-components/CommonStyle';
 
 interface BaseLayoutProps {

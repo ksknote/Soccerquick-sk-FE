@@ -15,7 +15,7 @@ import starIcon from '../assets/icon/star.svg';
 import starFilledIcon from '../assets/icon/star_filled.svg';
 import homeIcon from '../assets/icon/home.svg';
 import alertModal from '../components/common/alertModal';
-import MobileHeader from '../components/MobilePageHeader';
+import MobileHeader from '../components/common/MobilePageHeader';
 import BaseLayout from '../components/template/BaseLayout';
 
 const FieldDetail = () => {

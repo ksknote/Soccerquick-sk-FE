@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import MypageIcon from '../assets/icon/mypage.svg';
-import SoccerquickLogo from '../assets/icon/logo/logo_icon_text.png';
-import { MyPageMenu } from './common/MyPageMenu';
+import MypageIcon from '../../assets/icon/mypage.svg';
+import SoccerquickLogo from '../../assets/icon/logo/logo_icon_text.png';
+import { MyPageMenu } from './MyPageMenu';
 import { useSelector } from 'react-redux';
-import { isLoginSelector } from '../redux/modules/auth/selector';
+import { isLoginSelector } from '../../redux/modules/auth/selector';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -17,18 +17,16 @@ const Header = () => {
           <img src={SoccerquickLogo} alt="SoccerQuick" />
         </div>
       </LogoMain>
-      <HeaderMenu>
-        <HeaderMyPage>
-          {isLogin ? (
-            <MyPageMenu />
-          ) : (
-            <HeaderLoginButton onClick={() => navigate('/auth')}>
-              <img src={MypageIcon} alt="my" />
-              <div>로그인</div>
-            </HeaderLoginButton>
-          )}
-        </HeaderMyPage>
-      </HeaderMenu>
+      <HeaderMyPage>
+        {isLogin ? (
+          <MyPageMenu />
+        ) : (
+          <HeaderLoginButton onClick={() => navigate('/auth')}>
+            <img src={MypageIcon} alt="my" />
+            <div>로그인</div>
+          </HeaderLoginButton>
+        )}
+      </HeaderMyPage>
     </HeaderContainer>
   );
 };
@@ -40,7 +38,6 @@ const HeaderContainer = styled.div`
   padding: 0 2rem;
   height: 7rem;
   margin: 1.4rem auto;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -51,14 +48,12 @@ const HeaderContainer = styled.div`
 
 const LogoMain = styled.div`
   img {
-    width: 35%;
-    height: 35%;
+    width: 20rem;
     vertical-align: middle;
     cursor: pointer;
   }
 `;
-
-const HeaderMenu = styled.div`
+const HeaderMyPage = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -67,9 +62,6 @@ const HeaderMenu = styled.div`
     height: 100%;
     margin-right: 0.2rem;
   }
-`;
-
-const HeaderMyPage = styled.div`
   @media (max-width: 768px) {
     display: none;
   }

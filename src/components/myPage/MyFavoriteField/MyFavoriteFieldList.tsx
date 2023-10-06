@@ -7,7 +7,7 @@ import { FieldDataType } from '../../../types/FieldType';
 import { isLoginSelector } from '../../../redux/modules/auth/selector';
 import { ProvidedElementList } from '../../fieldList/FieldList';
 import MyPagination from '../MyPagination';
-import MobileHeader from '../../MobilePageHeader';
+import MobileHeader from '../../common/MobilePageHeader';
 import MyPageHeader from '../MyPageHeader';
 import EmptyBox from '../../common/EmptyBox';
 import alertModal from '../../common/alertModal';

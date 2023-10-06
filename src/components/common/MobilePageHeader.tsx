@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import chevron from '../../assets/icon/chevron_grey.svg';
 
-import chevron from '../assets/icon/chevron_grey.svg';
 function MobilePageHeader({ title }: { title: string }) {
   const navigate = useNavigate();
   return (

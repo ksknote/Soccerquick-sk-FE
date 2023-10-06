@@ -2,7 +2,7 @@ import react from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TeamDataType } from '../../../types/TeamPageType';
 import MyPageHeader from '../MyPageHeader';
-import MobileHeader from '../../MobilePageHeader';
+import MobileHeader from '../../common/MobilePageHeader';
 import {
   BodyContainer,
   TeamPageBody,

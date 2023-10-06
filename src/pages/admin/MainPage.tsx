@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import Header from '../../components/common/Header';
+import Footer from '../../components/common/Footer';
 import AdminMainPage from '../../components/admin/AdminMainPage';
 import AdminUserManager from '../../components/admin/AdminUserManagePage';
 import { Routes, Route, Link } from 'react-router-dom';

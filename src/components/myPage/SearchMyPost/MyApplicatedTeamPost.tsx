@@ -1,6 +1,6 @@
 import React from 'react';
 import ViewPage from '../../team/postDetail/TeamDetail';
-import MobileHeader from '../../MobilePageHeader';
+import MobileHeader from '../../common/MobilePageHeader';
 import MyPageHeader from '../MyPageHeader';
 import { MyTeamPostWrapper } from '../../team/Styles/ViewsStyle';
 

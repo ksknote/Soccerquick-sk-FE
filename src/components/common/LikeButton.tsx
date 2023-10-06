@@ -30,7 +30,7 @@ export default function LikeButton(props: LikeButtonProps) {
       .get(`${process.env.REACT_APP_API_URL}/reviews/${reviewId}`, config)
       .then((res) => {
         const userId = res.data.data.user_id;
-        const usersLikes = res.data.data.userslikes.map(
+        const usersLikes = res.data.data.likedreviews.map(
           (user: User) => user._id
         );
         res.status === 200 && usersLikes.includes(userId) && setIsClicked(true);

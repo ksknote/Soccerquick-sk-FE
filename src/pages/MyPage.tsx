@@ -105,7 +105,7 @@ export function MyPage() {
         return res.data.data;
       })
       .catch((err) => console.log(err));
-    setFormData((prev) => userInfo);
+    setFormData(userInfo);
   };
 
   return (

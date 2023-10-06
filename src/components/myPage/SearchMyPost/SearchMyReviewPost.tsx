@@ -10,19 +10,21 @@ import { BoxContainer } from '../../../styles/styled-components/CommonStyle';
 import ReviewItemHeader from '../../fieldDetail/review/ReviewItemHeader';
 import ReviewItemBody from '../../fieldDetail/review/ReviewItemBody';
 import styled from 'styled-components';
+import ReviewHeader from './ReviewHeader';
+
+const config = {
+  withCredentials: true,
+};
 
 function SearchMyReviewPost() {
   const [reviewData, setReviewData] = useState<ReviewDataType[]>([]);
   const user = useSelector(userSelector);
-  console.log(user);
+
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/reviews`, {
-        withCredentials: true,
-      })
+      .get(`${process.env.REACT_APP_API_URL}/reviews`, config)
       .then((res) => {
         const reviews = res.data.data;
-        console.log(reviews);
         filterMyReview(reviews);
       })
       .catch((err) => console.log(err));
@@ -32,6 +34,7 @@ function SearchMyReviewPost() {
     const myReviews = reviewData.filter(
       (review) => review.user_name === user?.name
     );
+
     setReviewData(myReviews);
   };
 
@@ -46,6 +49,7 @@ function SearchMyReviewPost() {
         {reviewData &&
           reviewData.map((review, index) => (
             <BoxContainer key={index}>
+              <ReviewHeader dom_id={review.ground_id} />
               <ReviewItemHeader reviewItem={review} />
               <ReviewItemBody
                 reviewItem={review}

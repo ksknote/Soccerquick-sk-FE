@@ -32,7 +32,9 @@ function FieldListByRegion() {
     <>
       <ListContainer>
         {regions.map((region) => (
-          <ListItem onClick={() => clickBtnHandler(region)}>#{region}</ListItem>
+          <ListItem key={region} onClick={() => clickBtnHandler(region)}>
+            #{region}
+          </ListItem>
         ))}
       </ListContainer>
     </>

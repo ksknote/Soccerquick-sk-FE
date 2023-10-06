@@ -239,7 +239,7 @@ export const TeamRecruitLi = styled.div<{ unvisible?: boolean }>`
 export const LiHeader = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   padding-bottom: 1.5rem;
 `;
 
@@ -337,6 +337,7 @@ export const TeamMemberList = styled.button`
   font-size: 1.3rem;
   font-weight: 500;
   color: green;
+  margin-top: 1.5rem;
   @media (min-width: 1024px) {
     font-size: 1.5rem;
   }
@@ -360,6 +361,7 @@ export const AcceptedDespcription = styled.div`
   color: #403a3a;
   padding: 1rem;
   border-radius: 1rem;
+  margin-top: 1.5rem;
   span {
     color: green;
     text-decoration: underline;

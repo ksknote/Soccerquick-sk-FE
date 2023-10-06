@@ -1,61 +1,71 @@
 import { useState, useEffect } from 'react';
-import MyPostTable from './MyPostTable';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { userSelector } from '../../../redux/modules/auth/selector';
-import { changeReviewObjectToArray } from '../changeObjectToArray';
-
-export type DomReviewType = {
-  address: { area: string; fullAddress: string };
-  dom_id: string;
-  title: string;
-  reviews: Array<ReviewPost>;
-};
-
-export type ReviewPost = {
-  review_id: string;
-  contents: string;
-  ground_id: string;
-  createdAt: string;
-  user_name: string;
-  likedreviews: Array<string>;
-};
+import { ReviewDataType } from '../../../types/ReviewType';
+import MyPageHeader from '../MyPageHeader';
+import MobileHeader from '../../common/MobilePageHeader';
+import EmptyBox from '../../common/EmptyBox';
+import { BoxContainer } from '../../../styles/styled-components/CommonStyle';
+import ReviewItemHeader from '../../fieldDetail/review/ReviewItemHeader';
+import ReviewItemBody from '../../fieldDetail/review/ReviewItemBody';
+import styled from 'styled-components';
 
 function SearchMyReviewPost() {
-  const [reviewList, setReviewList] = useState<DomReviewType[]>([]);
-  const properties = ['작성자', '코멘트', '구장', '지역', '좋아요'];
+  const [reviewData, setReviewData] = useState<ReviewDataType[]>([]);
   const user = useSelector(userSelector);
-
-  const filteredItems = reviewList
-    .map((domInfo: DomReviewType) => {
-      const reviews = domInfo.reviews.filter(
-        (item: ReviewPost) => item.user_name === user?.name
-      );
-      if (reviews.length === 1) {
-        const myReview = reviews[0];
-        return changeReviewObjectToArray(domInfo, myReview);
-      }
-      return null;
-    })
-    .filter(Boolean);
-
+  console.log(user);
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/doms`, {
+      .get(`${process.env.REACT_APP_API_URL}/reviews`, {
         withCredentials: true,
       })
-      .then((res) => res.data.data)
-      .then((result) => setReviewList(result))
+      .then((res) => {
+        const reviews = res.data.data;
+        console.log(reviews);
+        filterMyReview(reviews);
+      })
       .catch((err) => console.log(err));
   }, []);
 
+  const filterMyReview = (reviewData: ReviewDataType[]) => {
+    const myReviews = reviewData.filter(
+      (review) => review.user_name === user?.name
+    );
+    setReviewData(myReviews);
+  };
+
   return (
-    <MyPostTable
-      title="내 리뷰 글"
-      properties={properties}
-      data={filteredItems}
-    />
+    <>
+      <MyPageHeader
+        title="나의 경기장 리뷰"
+        totalItemsCount={reviewData.length}
+      />
+      <MobileHeader title="나의 경기장 리뷰" />
+      <BodyWrapper>
+        {reviewData &&
+          reviewData.map((review, index) => (
+            <BoxContainer key={index}>
+              <ReviewItemHeader reviewItem={review} />
+              <ReviewItemBody
+                reviewItem={review}
+                reviewData={reviewData}
+                setReviewData={setReviewData}
+                domId={review.dom_id}
+                index={index}
+              />
+            </BoxContainer>
+          ))}
+      </BodyWrapper>
+    </>
   );
 }
 
 export default SearchMyReviewPost;
+
+const BodyWrapper = styled.div`
+  padding: 1rem;
+  width: 100%;
+  max-width: 80rem;
+  margin: auto;
+`;

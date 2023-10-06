@@ -10,6 +10,7 @@ import {
   TeamRecruitContainer,
   TeamRecruitLi,
   ContentHeader,
+  LiHeader,
   RecruitStatus,
   ContentTitle,
   Position,
@@ -49,20 +50,24 @@ function SearchMyTeamPost({
             {filteredItems.length > 0 ? (
               filteredItems.map((team, idx) => (
                 <TeamRecruitLi key={team.group_id}>
-                  <ContentHeader>
-                    <RecruitStatus status={team.status}>
-                      {team.status}
-                    </RecruitStatus>
-                    <Author>모집자: {team.leader_name}</Author>
-                  </ContentHeader>
-                  <ContentTitle
-                    onClick={() =>
-                      navigate(`./${team.group_id}`, { state: { data: team } })
-                    }
-                  >
-                    <span>{team.region + ' ' + team.city}</span>
-                    <p>{team.title}</p>
-                  </ContentTitle>
+                  <LiHeader>
+                    <ContentHeader>
+                      <RecruitStatus status={team.status}>
+                        {team.status}
+                      </RecruitStatus>
+                      <Author>모집자: {team.leader.leader_name}</Author>
+                    </ContentHeader>
+                    <ContentTitle
+                      onClick={() =>
+                        navigate(`./${team.group_id}`, {
+                          state: { data: team },
+                        })
+                      }
+                    >
+                      <span>{team.region + ' ' + team.city}</span>
+                      <p>{team.title}</p>
+                    </ContentTitle>
+                  </LiHeader>
                   <Position>
                     {CheckPositionStatus(
                       team.recruitment_count.gk_current_count,

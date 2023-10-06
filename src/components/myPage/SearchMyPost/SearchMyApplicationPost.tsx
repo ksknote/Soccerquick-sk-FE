@@ -8,6 +8,7 @@ import {
   TeamPageBody,
   TeamRecruitContainer,
   TeamRecruitLi,
+  LiHeader,
   ContentHeader,
   StatusContainer,
   RecruitStatus,
@@ -29,7 +30,6 @@ function SearchMyApplicationPost({
   const handleCopy = async (phoneNumber: string) => {
     try {
       await navigator.clipboard.writeText(phoneNumber);
-
       alert('복사 성공!');
     } catch (error) {
       alert('복사 실패!');
@@ -46,25 +46,29 @@ function SearchMyApplicationPost({
             {filteredItems.length > 0 ? (
               filteredItems.map((team, idx) => (
                 <TeamRecruitLi key={team.group_id}>
-                  <ContentHeader>
-                    <StatusContainer>
-                      <RecruitStatus status={team.status}>
-                        {team.status}
-                      </RecruitStatus>
-                      <AcceptStatus status={team.accept.length}>
-                        {team.accept.length === 1 ? '수락됨' : '신청 중'}
-                      </AcceptStatus>
-                    </StatusContainer>
-                    <Author>모집자: {team.leader_name}</Author>
-                  </ContentHeader>
-                  <ContentTitle
-                    onClick={() =>
-                      navigate(`./${team.group_id}`, { state: { data: team } })
-                    }
-                  >
-                    <span>{team.region + ' ' + team.city}</span>
-                    {team.title}
-                  </ContentTitle>
+                  <LiHeader>
+                    <ContentHeader>
+                      <StatusContainer>
+                        <RecruitStatus status={team.status}>
+                          {team.status}
+                        </RecruitStatus>
+                        <AcceptStatus status={team.accept.length}>
+                          {team.accept.length === 1 ? '수락됨' : '신청 중'}
+                        </AcceptStatus>
+                      </StatusContainer>
+                      <Author>모집자: {team.leader.leader_name}</Author>
+                    </ContentHeader>
+                    <ContentTitle
+                      onClick={() =>
+                        navigate(`./${team.group_id}`, {
+                          state: { data: team },
+                        })
+                      }
+                    >
+                      <span>{team.region + ' ' + team.city}</span>
+                      {team.title}
+                    </ContentTitle>
+                  </LiHeader>
                   <Position>
                     {CheckPositionStatus(
                       team.gk_current_count,
@@ -78,8 +82,8 @@ function SearchMyApplicationPost({
                       ⚽ 팀에 합류되었습니다! ⚽ <br />
                       <br />
                       아직 팀 리더에게 연락이 오지 않았다면, 아래 연락처로
-                      메시지를 보내보세요. <br />팀 리더 {team.leader_name}님의
-                      연락처는{' '}
+                      메시지를 보내보세요. <br />팀 리더{' '}
+                      {team.leader.leader_name}님의 연락처는{' '}
                       <span
                         onClick={() => handleCopy(team.leader_phone_number)}
                       >

@@ -1,10 +1,12 @@
 //data type
 export interface ReviewDataType {
-  user_name?: string;
-  user_icon?: string;
-  review_id?: string;
-  contents?: string;
-  createdAt?: string;
+  dom_id: string;
+  ground_id: string;
+  user_name: string;
+  user_icon: string;
+  review_id: string;
+  contents: string;
+  createdAt: string;
   likedreviews: string[];
   image: string;
 }

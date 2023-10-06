@@ -33,7 +33,7 @@ function TeamFeed() {
     () => {
       fetchData();
     },
-    { threshold: 0, rootMargin: '200px' }
+    { threshold: 0, rootMargin: '500px' }
   );
 
   //상수

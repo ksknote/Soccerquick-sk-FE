@@ -36,5 +36,5 @@ export default function Main() {
 const MainBodyWrapper = styled(BodyWrapper)`
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 5rem;
 `;

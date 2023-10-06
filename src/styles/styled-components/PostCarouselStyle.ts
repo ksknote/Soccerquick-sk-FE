@@ -15,7 +15,7 @@ export const PostCarousel = {
   `,
 
   CarouselHeader: styled.div`
-    padding: 2rem;
+    padding: 1rem 2rem;
     h2 {
       font-size: 2.1rem;
       font-weight: 500;

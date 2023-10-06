@@ -22,7 +22,7 @@ export const Wrapper = styled.div`
 export const BodyWrapper = styled(Wrapper)`
   padding: 2rem;
   @media (min-width: 768px) {
-    padding: 1rem 2rem;
+    padding: 1rem 2rem 7rem 2rem;
   }
 `;
 

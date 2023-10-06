@@ -44,7 +44,7 @@ const ListContainer = styled.ul`
   max-width: 50rem;
   margin: auto;
   @media (min-width: 768px) {
-    margin-top: -3rem;
+    margin-top: -5rem;
   }
 `;
 

@@ -46,9 +46,7 @@ function FieldList() {
   return (
     <>
       <Header />
-
       <HeaderCategory />
-
       <StyledBody>
         {searchKeyword && (
           <FieldMap

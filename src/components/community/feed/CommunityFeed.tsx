@@ -41,7 +41,7 @@ function CommunityPostFeed() {
     () => {
       fetchData();
     },
-    { threshold: 0, rootMargin: '200px' }
+    { threshold: 0, rootMargin: '500px' }
   );
 
   const fetchData = () => {

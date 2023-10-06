@@ -2,6 +2,25 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+const regions = [
+  '서울',
+  '성남',
+  '인천',
+  '부산',
+  '대전',
+  '대구',
+  '울산',
+  '광주',
+  '세종',
+  '강원',
+  '충북',
+  '충남',
+  '전북',
+  '전남',
+  '경북',
+  '경남',
+];
+
 function FieldListByRegion() {
   const navigate = useNavigate();
 
@@ -12,22 +31,9 @@ function FieldListByRegion() {
   return (
     <>
       <ListContainer>
-        <ListItem onClick={() => clickBtnHandler('서울')}>#서울</ListItem>
-        <ListItem onClick={() => clickBtnHandler('성남')}>#성남</ListItem>
-        <ListItem onClick={() => clickBtnHandler('인천')}>#인천</ListItem>
-        <ListItem onClick={() => clickBtnHandler('부산')}>#부산</ListItem>
-        <ListItem onClick={() => clickBtnHandler('대전')}>#대전</ListItem>
-        <ListItem onClick={() => clickBtnHandler('대구')}>#대구</ListItem>
-        <ListItem onClick={() => clickBtnHandler('울산')}>#울산</ListItem>
-        <ListItem onClick={() => clickBtnHandler('광주')}>#광주</ListItem>
-        <ListItem onClick={() => clickBtnHandler('세종')}>#세종</ListItem>
-        <ListItem onClick={() => clickBtnHandler('강원')}>#강원</ListItem>
-        <ListItem onClick={() => clickBtnHandler('충북')}>#충북</ListItem>
-        <ListItem onClick={() => clickBtnHandler('충남')}>#충남</ListItem>
-        <ListItem onClick={() => clickBtnHandler('전북')}>#전북</ListItem>
-        <ListItem onClick={() => clickBtnHandler('전남')}>#전남</ListItem>
-        <ListItem onClick={() => clickBtnHandler('경북')}>#경북</ListItem>
-        <ListItem onClick={() => clickBtnHandler('경남')}>#경남</ListItem>
+        {regions.map((region) => (
+          <ListItem onClick={() => clickBtnHandler(region)}>#{region}</ListItem>
+        ))}
       </ListContainer>
     </>
   );

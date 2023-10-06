@@ -14,6 +14,7 @@ interface HotFieldsPostCard {
 function HotFieldsPostCard({ fieldata }: HotFieldsPostCard) {
   const navigate = useNavigate();
   const thumbnail = fieldata.stadiums[0].images[0].image;
+
   return (
     <Post onClick={() => navigate(`./ground/${fieldata.dom_id}`)}>
       <PostImage>

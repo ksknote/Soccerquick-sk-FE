@@ -85,7 +85,7 @@ function HotCommunityPosts() {
         </PostCarousel.ButtonContainer>
       </PostCarousel.CarouselHeader>
       <PostList translateValue={translateValue}>
-        {postData
+        {!isLoading
           ? postData.map((post: PostType, index: number) => (
               <HotCommunityPostCard
                 post={post}

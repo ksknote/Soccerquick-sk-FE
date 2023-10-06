@@ -86,7 +86,7 @@ function NewTeamPosts() {
         </PostCarousel.ButtonContainer>
       </PostCarousel.CarouselHeader>
       <PostList translateValue={translateValue}>
-        {postData
+        {!isLoading
           ? postData.map((post: TeamDataType, index: number) => (
               <PostCard post={post} index={index} key={post.group_id} />
             ))

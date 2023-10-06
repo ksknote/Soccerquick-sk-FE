@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { FieldDataType } from '../../types/FieldType';
-import HotFieldsPosts from './HotFieldsPostCard';
+import HotFieldsPosts, { PostCardSkeleton } from './HotFieldsPostCard';
 import { PostCarousel } from '../../styles/styled-components/PostCarouselStyle';
 import { useNavigate } from 'react-router-dom';
 
 function HotFields() {
   const navigate = useNavigate();
   const [hotFieldData, setHotFieldData] = useState<FieldDataType[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [translateValue, setTranslateValue] = useState<string>(
     `translateX(${currentIndex * -100}%)`
@@ -17,6 +17,7 @@ function HotFields() {
   const slideLength = Math.floor(hotFieldData.length / 4);
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get(`${process.env.REACT_APP_API_URL}/doms`, {
         withCredentials: true,
@@ -24,6 +25,7 @@ function HotFields() {
       .then((res: any) => {
         const data = sortByPopularity(res.data.data);
         setHotFieldData(data);
+        setIsLoading(false);
       })
       .catch((e: any) => console.log(e));
   }, []);
@@ -84,9 +86,13 @@ function HotFields() {
         </PostCarousel.ButtonContainer>
       </PostCarousel.CarouselHeader>
       <PostList translateValue={translateValue}>
-        {hotFieldData?.map((fieldata) => (
-          <HotFieldsPosts key={fieldata._id} fieldata={fieldata} />
-        ))}
+        {!isLoading
+          ? hotFieldData.map((fieldata) => (
+              <HotFieldsPosts key={fieldata._id} fieldata={fieldata} />
+            ))
+          : Array.from({ length: 8 }).map((_, index) => (
+              <PostCardSkeleton key={index} />
+            ))}
       </PostList>
     </PostCarousel.CarouselWrapper>
   );

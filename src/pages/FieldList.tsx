@@ -19,7 +19,7 @@ function FieldList() {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [totalDomData, setTotalDomData] = useState<FieldDataType[]>([]);
   const [sortedDomData, setSortedDomData] = useState<FieldDataType[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [seachParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
@@ -33,16 +33,13 @@ function FieldList() {
   }, [checkedArray]);
 
   useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
     axios
       .get(`${process.env.REACT_APP_API_URL}/doms`, {
         withCredentials: true,
       })
       .then((res: any) => {
         setTotalDomData(res.data.data);
+        setIsLoading(false);
       })
       .catch((e: any) => console.log(e));
   }, []);

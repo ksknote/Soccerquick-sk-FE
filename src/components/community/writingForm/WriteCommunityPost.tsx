@@ -339,6 +339,7 @@ const Title = styled.div`
 const EditorWrapper = styled.div`
   width: 100%;
   height: 38rem;
+  border: 0.1rem solid #e7e9ea;
   @media (min-width: 1024px) {
     height: 45rem;
   }

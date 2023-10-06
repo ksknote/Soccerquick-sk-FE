@@ -46,7 +46,7 @@ function PostCard({ post }: PostCardPropsType) {
   );
 }
 
-export function PostCardSkeleton({ visible }: { visible: boolean }) {
+export function PostCardSkeleton({ visible }: { visible?: boolean }) {
   const [isSkeletonVisible, setIsSkeletonVisible] = useState(visible || false);
 
   //깜빡임 방지

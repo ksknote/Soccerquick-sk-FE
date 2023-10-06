@@ -26,7 +26,7 @@ function TeamList({
           ))}
         {isLoading &&
           Array.from({ length: 8 }).map((_, index) => (
-            <PostCardSkeleton visible={true} key={index} />
+            <PostCardSkeleton key={index} />
           ))}
       </TeamRecruitContainer>
     </TeamPageBody>

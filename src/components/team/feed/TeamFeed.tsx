@@ -36,11 +36,14 @@ function TeamFeed() {
     { threshold: 0, rootMargin: '200px' }
   );
 
+  //상수
+  const ITEM_PER_PAGE = 8;
+
   const fetchData = () => {
     if (isFetchingEnded) return;
     setIsLoading(true);
 
-    const url = `${process.env.REACT_APP_API_URL}/groups?status=${filteringOption.status}&region=${filteringOption.region}&city=${filteringOption.city}&page=${page}&itemsPerPage=8`;
+    const url = `${process.env.REACT_APP_API_URL}/groups?status=${filteringOption.status}&region=${filteringOption.region}&city=${filteringOption.city}&page=${page}&itemsPerPage=${ITEM_PER_PAGE}`;
 
     const config = {
       withCredentials: true,
@@ -52,10 +55,15 @@ function TeamFeed() {
         let newPosts = res.data.data;
         if (res.status === 204) {
           setIsFetchingEnded(true);
+          setIsLoading(false);
+          return;
+        }
+        if (newPosts.length < ITEM_PER_PAGE) {
+          setIsFetchingEnded(true);
         } else {
           setPage((prev) => prev + 1);
-          setPostData((prev) => [...prev, ...newPosts]);
         }
+        setPostData((prev) => [...prev, ...newPosts]);
         setIsLoading(false);
       })
       .catch((e) => console.error(e));

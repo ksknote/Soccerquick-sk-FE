@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import axios from 'axios';
+import {
+  userSelector,
+  isLoginSelector,
+} from '../../redux/modules/auth/selector';
+import { useSelector } from 'react-redux';
 
 interface LikeButtonProps {
   likedreviews: string[];
   reviewId?: string;
-  isLogin?: boolean;
 }
 
-interface User {
+interface LikedUser {
   _id: string; // Replace 'string' with the actual type of _id
+  user_id: string;
   // Other properties of the user object
 }
 
@@ -19,21 +24,20 @@ const config = {
 
 export default function LikeButton(props: LikeButtonProps) {
   const [isClicked, setIsClicked] = useState(false);
-  const [likesCount, setLikesCount] = useState(
-    props.likedreviews ? props.likedreviews.length : 0
-  );
+  const [likesCount, setLikesCount] = useState(0);
   const reviewId = props.reviewId;
-  const isLogin = props.isLogin;
+  const isLogin = useSelector(isLoginSelector);
+  const userData = useSelector(userSelector);
+  const userId = userData?.user_id;
 
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/reviews/${reviewId}`, config)
       .then((res) => {
-        const userId = res.data.data.user_id;
-        const usersLikes = res.data.data.likedreviews.map(
-          (user: User) => user._id
-        );
-        res.status === 200 && usersLikes.includes(userId) && setIsClicked(true);
+        const likedArray = res.data.data.likedreviews;
+        const usersLikes = likedArray.map((user: LikedUser) => user.user_id);
+        if (usersLikes.includes(userId)) setIsClicked(true);
+        setLikesCount(likedArray.length);
       })
       .catch((e) => {
         console.log(e);

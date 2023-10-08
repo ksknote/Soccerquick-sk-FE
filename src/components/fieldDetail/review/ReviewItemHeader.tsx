@@ -1,12 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { isLoginSelector } from '../../../redux/modules/auth/selector';
 import { ReviewDataType } from '../../../types/ReviewType';
 import LikeButton from '../../common/LikeButton';
 import { Comment } from '../../../styles/styled-components/CommentStyle';
 function ReviewItemHeader({ reviewItem }: { reviewItem: ReviewDataType }) {
-  const isLogin = useSelector(isLoginSelector);
   const { user_icon, user_name, createdAt, likedreviews, review_id } =
     reviewItem;
 
@@ -29,57 +26,10 @@ function ReviewItemHeader({ reviewItem }: { reviewItem: ReviewDataType }) {
         </div>
       </Comment.UserInfo>
       <span className="likes">
-        <LikeButton
-          likedreviews={likedreviews}
-          reviewId={review_id}
-          isLogin={isLogin}
-        />
+        <LikeButton likedreviews={likedreviews} reviewId={review_id} />
       </span>
     </Comment.AuthorDiv>
   );
 }
 
 export default ReviewItemHeader;
-
-const ReviewHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const UserInfo = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 2rem;
-  img {
-    width: 4rem;
-    height: 4rem;
-    margin-right: 1rem;
-    border-radius: 5rem;
-    object-fit: cover;
-    @media (min-width: 1024px) {
-      width: 5rem;
-      height: 5rem;
-    }
-  }
-`;
-
-const UserDetail = styled.div`
-  p {
-    font-size: 1.3rem;
-    font-weight: 500;
-    :last-child {
-      font-size: 1.1rem;
-      font-weight: 400;
-    }
-  }
-  @media (min-width: 1024px) {
-    p {
-      font-size: 1.7rem;
-      :last-child {
-        font-size: 1.3rem;
-      }
-    }
-  }
-`;

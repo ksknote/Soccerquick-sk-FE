@@ -1,6 +1,4 @@
-import React from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { userSelector } from '../../../redux/modules/auth/selector';
@@ -117,12 +115,14 @@ function Comment(props: CommentProps) {
               </Team.Level>
             </Team.DetailDiv>
             {userData?.name === user && (
-              <Button.WhiteSmall>
-                <button onClick={() => rejectMember(applicant.id)}>거절</button>
-                <button onClick={() => acceptMember(applicant.id)}>
-                  <img src={checkIcon} alt="" /> 수락
-                </button>
-              </Button.WhiteSmall>
+              <Team.ButtonContainer>
+                <Button.WhiteSmall onClick={() => rejectMember(applicant.id)}>
+                  거절
+                </Button.WhiteSmall>
+                <Button.GreenSmall onClick={() => acceptMember(applicant.id)}>
+                  <img src={checkIcon} alt="수락 체크" /> 수락
+                </Button.GreenSmall>
+              </Team.ButtonContainer>
             )}
           </BoxContainer>
         ))}

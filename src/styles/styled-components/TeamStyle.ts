@@ -62,6 +62,14 @@ export const Team = {
     color: ${({ level }) => getColorBySkill(level)};
     background-color: ${({ level }) => getBackgroundColorBySkill(level)};
   `,
+
+  ButtonContainer: styled.div`
+    display: flex;
+    justify-content: flex-end;
+    button:first-child {
+      margin-right: 0.5rem;
+    }
+  `,
 };
 
 const getColorByPosition = (data: string) => {

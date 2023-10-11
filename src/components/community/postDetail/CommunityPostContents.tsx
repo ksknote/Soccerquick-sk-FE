@@ -218,6 +218,7 @@ const HashTags = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding-bottom: 0.7rem;
 `;
 
 const HashTag = styled.span`

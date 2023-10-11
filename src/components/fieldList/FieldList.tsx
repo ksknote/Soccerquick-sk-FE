@@ -119,21 +119,9 @@ function FieldList(props: FindingFieldProps) {
 
   return (
     <SearchContainer style={{ width: '100%' }}>
-      <SearchFilter setFilterOption={setFilterOption} />
       <Searchpage>
         <SearchPageBody>
-          <StyledLabel>
-            {!isLoading ? (
-              <>
-                <div>지역</div>
-                <div>경기장</div>
-                <div>상세조회</div>
-              </>
-            ) : (
-              <></>
-            )}
-          </StyledLabel>
-
+          <SearchFilter setFilterOption={setFilterOption} />
           {!isLoading ? (
             <>
               {currentData.map((item, idx) => (
@@ -217,9 +205,11 @@ const Searchpage = styled.div`
 const SearchPageBody = styled.div`
   display: flex;
   width: 100%;
-  min-height: 100rem;
   margin-bottom: 3rem;
   flex-direction: column;
+  @media (min-width: 768px) {
+    /* min-height: 100rem; */
+  }
 `;
 
 const StyledLabel = styled.div`

@@ -413,17 +413,16 @@ const ContentsTitle = styled.div`
 
 const ProvidedItems = styled.div`
   > ul {
-    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     li {
-      display: inline;
-      height: 4rem;
-      line-height: 4rem;
       padding: 0.4rem 1rem;
       margin-right: 1.2rem;
+      margin-bottom: 0.875rem;
       border: 0.1rem solid #eeeeee;
       border-radius: 2rem;
       font-size: 1.1rem;
-
       :nth-child(3n + 1) {
         color: #7a6fce;
         background-color: #f3f1ff;
@@ -450,7 +449,6 @@ const ProvidedItems = styled.div`
   }
   @media (min-width: 768px) {
     > ul li {
-      height: 4rem;
       padding: 0.5rem 1.2rem;
       margin-right: 1.2rem;
       font-size: 1.4rem;

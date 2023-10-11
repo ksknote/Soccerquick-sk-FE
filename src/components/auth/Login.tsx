@@ -68,37 +68,6 @@ function Login({ handleIsLogin }: LoginProps) {
     checkUsers(data);
   };
 
-  // const checkUsers = (data: { user_id: string; password: string }) => {
-  //   axios
-  //     .post(postLoginUrl, data, { withCredentials: true })
-  //     .then((res) => {
-  //       return res.data.data;
-  //     })
-  //     .then((userData) => {
-  //       console.log(userData);
-  //       const user = {
-  //         user_id: userData.user_id,
-  //         name: userData.name,
-  //         nickname: userData.nick_name,
-  //         profile: userData.profile,
-  //         role: userData.role,
-  //         applicant_status: userData.applicant_status,
-  //       };
-
-  //       dispatch(
-  //         AUTH_ACTIONS.login({
-  //           user,
-  //         })
-  //       );
-  //       setLoginError('');
-  //       navigate('/');
-  //       alertModal('로그인 되었습니다.', 'success');
-  //     })
-  //     .catch((err) => {
-  //       setLoginError('존재하지 않는 계정입니다.');
-  //     });
-  // };
-
   const checkUsers = async (data: { user_id: string; password: string }) => {
     dispatch(login(data));
   };

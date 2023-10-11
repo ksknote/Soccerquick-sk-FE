@@ -12,7 +12,6 @@ export interface Applicant {
 export interface TeamDataType {
   group_id: string;
   title: string;
-  leader_phone_number: string;
   leader: {
     leader_id: string;
     leader_name: string;

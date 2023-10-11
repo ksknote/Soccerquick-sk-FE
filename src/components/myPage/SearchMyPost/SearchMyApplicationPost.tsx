@@ -71,10 +71,10 @@ function SearchMyApplicationPost({
                   </LiHeader>
                   <Position>
                     {CheckPositionStatus(
-                      team.gk_current_count,
-                      team.gk_count,
-                      team.player_current_count,
-                      team.player_count
+                      team.recruitment_count.gk_current_count,
+                      team.recruitment_count.gk_count,
+                      team.recruitment_count.player_current_count,
+                      team.recruitment_count.player_count
                     )}
                   </Position>
                   {team.accept.length === 1 ? (
@@ -85,9 +85,11 @@ function SearchMyApplicationPost({
                       메시지를 보내보세요. <br />팀 리더{' '}
                       {team.leader.leader_name}님의 연락처는{' '}
                       <span
-                        onClick={() => handleCopy(team.leader_phone_number)}
+                        onClick={() =>
+                          handleCopy(team.leader.leader_phone_number)
+                        }
                       >
-                        {team.leader_phone_number}
+                        {team.leader.leader_phone_number}
                       </span>
                       입니다.
                       <br />

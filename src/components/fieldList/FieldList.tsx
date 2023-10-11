@@ -246,7 +246,7 @@ const StyledLabel = styled.div`
 
 const FieldItem = styled.div`
   display: grid;
-  grid-template-columns: 3rem 1fr;
+  grid-template-columns: 1fr;
   height: 11rem;
   width: 100%;
   padding: 2rem 1rem;
@@ -288,6 +288,9 @@ const Checkbox = styled.div`
       background-position: center;
       background-repeat: no-repeat;
     }
+  }
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 

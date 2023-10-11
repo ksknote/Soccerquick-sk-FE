@@ -23,7 +23,10 @@ const FieldComparison: React.FC<FieldComparisonProps> = ({
   setShowComparisonData,
 }) => {
   const [showModalContent, setShowModalContent] = useState(true);
-  const [isAllChecked, setIsAllChecked] = useState(false);
+  // const [isAllChecked, setIsAllChecked] = useState(true);
+  const isAllChecked = checkedArray.every((field) =>
+    checkedInModal.includes(field.title)
+  );
 
   const checkHandler = (checked: boolean, value: string) => {
     if (checked) {
@@ -56,9 +59,9 @@ const FieldComparison: React.FC<FieldComparisonProps> = ({
 
   const checkAllHandler = () => {
     if (isAllChecked) {
-      setCheckedInModal(() => checkedArray.map((item) => item.title));
-    } else {
       setCheckedInModal([]);
+    } else {
+      setCheckedInModal(() => checkedArray.map((item) => item.title));
     }
   };
 
@@ -118,14 +121,12 @@ const FieldComparison: React.FC<FieldComparisonProps> = ({
                   id="selectAll"
                   checked={isAllChecked}
                   onChange={() => {
-                    setIsAllChecked(!isAllChecked);
                     checkAllHandler();
                   }}
                 />
                 <label htmlFor="selectAll"></label>
                 <p
                   onClick={() => {
-                    setIsAllChecked(!isAllChecked);
                     checkAllHandler();
                   }}
                 >

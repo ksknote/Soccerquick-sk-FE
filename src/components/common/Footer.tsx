@@ -1,12 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import logo from '../../assets/icon/logo/logo_icon_text_white.svg';
 
 const Footer = () => {
   return (
     <FooterContainer>
       <FooterContent>
-        <FooterTitle>soccerquick.com</FooterTitle>
-        <p>싸커퀵에서 풋살을 한눈에</p>
+        <LogoImage src={logo} alt="싸커퀵 로고" />
+        <Description>
+          <span>싸커퀵에서 풋살을 한눈에!</span>
+          <br />
+          싸커퀵은 기술적인 학습을 목적으로 제작된 사이트이며 상업적인 용도로
+          사용되지 않습니다.
+        </Description>
         <StyledFooterList>
           <li>이용 약관</li>
           <li>개인정보 처리방침</li>
@@ -50,29 +56,24 @@ const FooterContent = styled.div`
   margin: 0 auto;
   padding: 3rem 2rem;
   color: white;
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: 300;
 
   p:not(:first-child):not(:last-child) {
     margin-bottom: 2.2rem;
   }
-  @media (min-width: 784px) {
-    font-size: 1.3rem;
-    padding: 5rem 2rem;
+`;
+
+const LogoImage = styled.img`
+  width: 18rem;
+  margin-bottom: 1rem;
+`;
+
+const Description = styled.p`
+  span {
+    font-weight: 500;
   }
 `;
-
-const FooterTitle = styled.p`
-  display: inline-block;
-  font-family: 'Roboto', 'Noto Sans KR', 'Spoqa Han Sans Neo';
-  font-style: italic;
-  font-weight: 600;
-  font-size: 2rem;
-  padding-bottom: 0.3rem;
-  margin-bottom: 1rem;
-  border-bottom: 0.3rem solid var(--color--green);
-`;
-
 const StyledFooterList = styled.ul`
   display: flex;
   line-height: 2rem;

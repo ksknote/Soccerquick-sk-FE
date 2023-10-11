@@ -145,14 +145,14 @@ function CommunityPostContents() {
               </Thumbnail>
             )}
             <HtmlParser data={postData.description} />
-            {postData.hashTags.length > 0 && (
-              <HashTags>
-                {postData.hashTags.map((hashTag) => (
-                  <HashTag key={hashTag}>{hashTag}</HashTag>
-                ))}
-              </HashTags>
-            )}
           </PostBody>
+          {postData.hashTags.length > 0 && (
+            <HashTags>
+              {postData.hashTags.map((hashTag) => (
+                <HashTag key={hashTag}>{hashTag}</HashTag>
+              ))}
+            </HashTags>
+          )}
           <MobileButtonBar>
             <SideBarButton onClick={clickLikeHanlder}>
               <img src={isLike ? likeIcon : spaceLikeIcon} alt="좋아요" />

@@ -30,8 +30,10 @@ function PostCard({ post }: PostCardPropsType) {
           <Author>모집자: {post.leader.leader_name}</Author>
         </ContentHeader>
         <ContentTitle>
-          <span>{post.region + ' ' + post.city}</span>
-          <p>{post.title}</p>
+          <p>
+            <span>{post.region + ' ' + post.city}</span>
+            {post.title}
+          </p>
         </ContentTitle>
       </LiHeader>
       <Position>

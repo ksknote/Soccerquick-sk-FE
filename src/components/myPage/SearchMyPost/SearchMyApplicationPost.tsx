@@ -65,8 +65,10 @@ function SearchMyApplicationPost({
                         })
                       }
                     >
-                      <span>{team.region + ' ' + team.city}</span>
-                      {team.title}
+                      <p>
+                        <span>{team.region + ' ' + team.city}</span>
+                        {team.title}
+                      </p>
                     </ContentTitle>
                   </LiHeader>
                   <Position>

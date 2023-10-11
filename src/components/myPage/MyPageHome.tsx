@@ -100,7 +100,7 @@ function MyPage({ userData, myPost, registeredTeam }: MyPageProps) {
             <span>
               <img src={reviewIcon} alt="" />
             </span>
-            <span>나의 리뷰</span>
+            <span>나의 경기장 리뷰</span>
           </li>
           <li onClick={handleLoginOutClick}>
             <span>

@@ -2,37 +2,37 @@
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 100;
-  src: url(fonts/NotoSansKR-Thin.otf) format('opentype');
+  src: url(../assets/fonts/NotoSansKR-Thin.otf) format('opentype');
 }
 @font-face {
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 300;
-  src: url(fonts/NotoSansKR-Light.otf) format('opentype');
+  src: url(../assets/fonts/NotoSansKR-Light.otf) format('opentype');
 }
 @font-face {
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 400;
-  src: url(fonts/NotoSansKR-Regular.otf) format('opentype');
+  src: url(../assets/fonts/NotoSansKR-Regular.otf) format('opentype');
 }
 @font-face {
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 500;
-  src: url(fonts/NotoSansKR-Medium.otf) format('opentype');
+  src: url(../assets/fonts/NotoSansKR-Medium.otf) format('opentype');
 }
 @font-face {
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 700;
-  src: url(fonts/NotoSansKR-Bold.otf) format('opentype');
+  src: url(../assets/fonts/NotoSansKR-Bold.otf) format('opentype');
 }
 @font-face {
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 900;
-  src: url(fonts/NotoSansKR-Black.otf) format('opentype');
+  src: url(../assets/fonts/NotoSansKR-Black.otf) format('opentype');
 }
 
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
@@ -146,12 +146,25 @@ input {
 }
 
 input::-ms-clear,
-input::-ms-reveal{
-	display:none;width:0;height:0;
+input::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
 }
 input::-webkit-search-decoration,
 input::-webkit-search-cancel-button,
 input::-webkit-search-results-button,
-input::-webkit-search-results-decoration{
-	display:none;
+input::-webkit-search-results-decoration {
+  display: none;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #fff inset;
+  -webkit-text-fill-color: #000;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
 }

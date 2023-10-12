@@ -1,12 +1,20 @@
 .swal2-html-container {
-  font-size: 1.9rem !important;
+  font-size: 1.4rem !important;
+  @media (min-width: 768px) {
+    font-size: 1.7rem !important;
+  }
 }
 .swal2-popup {
   padding: 2rem 0 !important;
 }
 
 .swal2-styled {
-  font-size: 1.6rem !important;
+  font-size: 1.4rem !important;
+  padding: 0.3rem 1.5rem;
+  @media (min-width: 768px) {
+    padding: 0.4rem 1.5rem;
+    font-size: 1.6rem !important;
+  }
 }
 
 .swal2-confirm {
@@ -27,11 +35,25 @@
   padding-top: 4rem !important;
 }
 .swal2-popup {
-  width: 50rem !important;
+  @media (min-width: 768px) {
+    width: 50rem !important;
+  }
 }
 .swal2-modal {
-  width: 40rem !important;
+  width: 25rem !important;
+
+  @media (min-width: 768px) {
+    width: 35rem !important;
+  }
 }
 .swal2-timer-progress-bar {
   background: rgb(137, 230, 137);
+}
+
+.swal2-title {
+  font-size: 1.4rem;
+  font-weight: 500;
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+  }
 }

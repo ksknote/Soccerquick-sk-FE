@@ -21,7 +21,7 @@ const FieldMap: React.FC<FieldMapType> = ({
   const { naver } = window;
   var map: naver.maps.Map;
   const navigate = useNavigate();
-  const mapElement = useRef<HTMLElement | null | any>(null);
+  const mapElement = useRef<HTMLDivElement | null>(null);
   const [newMap, setNewMap] = useState<naver.maps.Map | null>(null);
   const [AddressX, setAddressX] = useState<number>(0);
   const [AddressY, setAddressY] = useState<number>(0);

@@ -62,7 +62,7 @@
     ]
   },
   "devDependencies": {
-    "@types/navermaps": "^3.6.5",
+    "@types/navermaps": "^3.7.2",
     "@types/react-slick": "^0.23.10",
     "@types/redux-thunk": "^2.1.0",
     "@types/styled-components": "^5.1.26"

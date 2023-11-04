@@ -51,8 +51,9 @@ const ListContainer = styled.ul`
   width: 100%;
   max-width: 50rem;
   margin: auto;
+  padding: 3rem 2rem 0rem 2rem;
   @media (min-width: 768px) {
-    margin-top: -5rem;
+    padding: 1rem 0;
   }
 `;
 

@@ -46,7 +46,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  padding-top: 1rem;
+  padding: 2.5rem 2rem 0 2rem;
   > p {
     font-size: 1.7rem;
     font-weight: 500;

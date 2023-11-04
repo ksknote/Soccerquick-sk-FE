@@ -19,22 +19,26 @@ export default function Main() {
       <Header />
       <HeaderCategory />
       <Carousel />
-      <Wrapper>
-        <MainBodyWrapper>
+      <MainBodyWrapper>
+        <div>
           <MainSearch />
           <FieldListByRegion />
-          <HotFields />
-          <NewTeamPosts />
-          <HotCommunityPosts />
-        </MainBodyWrapper>
-      </Wrapper>
+        </div>
+        <HotFields />
+        <NewTeamPosts />
+        <HotCommunityPosts />
+      </MainBodyWrapper>
       <Footer />
     </>
   );
 }
 
-const MainBodyWrapper = styled(BodyWrapper)`
+const MainBodyWrapper = styled(Wrapper)`
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 4rem;
+  @media (min-width: 768px) {
+    padding: 1rem 2rem 7rem 2rem;
+    gap: 5rem;
+  }
 `;

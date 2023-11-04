@@ -109,6 +109,9 @@ const PostList = styled.ul<{ translateValue: string }>`
   transition: transform 0.5s ease-in-out;
   flex-wrap: nowrap;
   gap: 1rem;
+  ::-webkit-scrollbar {
+    display: none;
+  }
   > li {
     flex-shrink: 0;
     width: calc(50% - 20px);
@@ -126,6 +129,7 @@ const PostList = styled.ul<{ translateValue: string }>`
   @media (max-width: 768px) {
     overflow-x: auto;
     width: 100%;
+    padding: 0 2rem 3rem 2rem;
     > li {
       width: 20rem;
     }

@@ -106,6 +106,9 @@ const PostList = styled.div<{ translateValue: string }>`
   transition: transform 0.5s ease-in-out;
   flex-wrap: nowrap;
   gap: 1rem;
+  ::-webkit-scrollbar {
+    display: none;
+  }
   > div {
     flex-shrink: 0;
     width: calc(100% - 20px);
@@ -116,6 +119,7 @@ const PostList = styled.div<{ translateValue: string }>`
   @media (max-width: 768px) {
     overflow-x: auto;
     width: 100%;
+    padding: 0 2rem;
     > div {
       width: 30rem;
     }

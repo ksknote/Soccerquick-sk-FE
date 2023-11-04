@@ -29,7 +29,7 @@ export const PostCarousel = {
       font-weight: 500;
     }
     @media (max-width: 768px) {
-      padding: 1.5rem 1rem;
+      padding: 1rem 2rem;
 
       h2 {
         font-size: 1.8rem;

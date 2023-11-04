@@ -85,7 +85,7 @@ const FieldMap: React.FC<FieldMapType> = ({
     setNewMap(map);
     addMarkers();
     resetListHandler();
-  }, [AddressX, AddressY, totalDomData]);
+  }, [AddressX, AddressY, totalDomData, viewportWidth]);
 
   //구장 데이터 배열 순회하면서 마커 생성 진행!
   const addMarkers = () => {

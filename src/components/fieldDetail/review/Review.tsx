@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import WriteReview from './WriteReview';
 import ReviewItemHeader from './ReviewItemHeader';
@@ -8,20 +8,30 @@ import { BoxContainer } from '../../../styles/styled-components/CommonStyle';
 
 export default function Review({ review, dom_id }: ReviewProps) {
   const [reviewData, setReviewData] = useState<ReviewDataType[]>(review);
+  const [sortedData, setSortedData] = useState<ReviewDataType[]>();
+
+  useEffect(() => {
+    const newSortedData = [...reviewData].sort((a, b) => {
+      const dateA = new Date(a.createdAt).getTime();
+      const dateB = new Date(b.createdAt).getTime();
+      return dateB - dateA;
+    });
+    setSortedData(newSortedData);
+  }, [reviewData]);
+
   return (
     <Wrapper>
       <Header>
         <h2>📄 리뷰 목록</h2>
-        <span>좋아요 순</span>
       </Header>
       <WriteReview setReviewData={setReviewData} domId={dom_id} />
-      {reviewData &&
-        reviewData.map((item, index) => (
+      {sortedData &&
+        sortedData.map((item, index) => (
           <BoxContainer key={index}>
             <ReviewItemHeader reviewItem={item} />
             <ReviewItemBody
               reviewItem={item}
-              reviewData={reviewData}
+              reviewData={sortedData}
               setReviewData={setReviewData}
               domId={dom_id}
               index={index}

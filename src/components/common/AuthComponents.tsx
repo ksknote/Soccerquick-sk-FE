@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/icon/logo/logo_icon.png';
 
 // Modal
 export function Modal(props: {
@@ -16,11 +17,7 @@ export function Modal(props: {
 
   return (
     <ModalBox long={props.long}>
-      <Logo
-        src="/Images/soccerquick.png"
-        alt="logo"
-        onClick={() => navigate('/')}
-      />
+      <Logo src={logo} alt="logo" onClick={() => navigate('/')} />
       {props.children}
       <BottomLine />
       <ModalTextBox>
@@ -201,9 +198,8 @@ const ExitButton = styled.button`
 `;
 
 const Logo = styled.img`
-  width: 115px;
-  height: 60px;
-  margin-bottom: 15px;
+  width: 5rem;
+  margin-bottom: 2.5rem;
 `;
 
 const BottomLine = styled.div`
@@ -291,7 +287,7 @@ const StyledInput = styled.input<{ radius?: string }>`
   color: black;
 
   ::placeholder {
-    color: #eeeeee;
+    color: #d1d1d1;
   }
 `;
 
@@ -342,7 +338,7 @@ const TermBox = styled.div<{ term: boolean }>`
   font-weight: 400;
   font-size: 13px;
   line-height: 17px;
-  color: ${(props) => (props.term ? ' #727f88' : '#eeeeee')};
+  color: ${(props) => (props.term ? ' #727f88' : '#d1d1d1')};
 
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */

@@ -78,6 +78,7 @@ function ReviewItemBody(Props: ReviewItemPropsType) {
           setReviewData(newReviewData);
           setSelectedEditImage(undefined);
           setIsReviewEditable(false);
+          alertModal('리뷰가 수정되었습니다.', 'success');
         }
       })
       .catch((e) => {

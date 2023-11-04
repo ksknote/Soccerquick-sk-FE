@@ -64,6 +64,7 @@ function WriteComment() {
         setNewComment('');
         setSelectedImage(undefined);
         updatePost();
+        alertModal('댓글이 작성되었습니다.', 'success');
       })
       .catch((e) => {
         if (e.response.data.statusCode === 500) {

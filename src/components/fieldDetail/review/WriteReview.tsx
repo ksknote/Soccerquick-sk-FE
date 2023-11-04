@@ -57,6 +57,7 @@ function WriteReview({ setReviewData, domId }: WriteReviewPropsType) {
           .get(`${process.env.REACT_APP_API_URL}/doms/${domId}`, config)
           .then((res) => {
             setReviewData(res.data.data.reviews);
+            alertModal('리뷰가 작성되었습니다.', 'success');
           })
           .catch((e) => {
             if (e.response.data.statusCode === 500) {

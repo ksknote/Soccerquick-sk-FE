@@ -92,6 +92,7 @@ function CommentItemContent({ comment }: CommentContentPropsType) {
         setReplyContent('');
         setSelectedReplyImage(undefined);
         setIsImageChanged(false);
+        alertModal('답글이 작성되었습니다.', 'success');
       })
       .catch((e) => {
         if (e.response.data.statusCode === 500) {
@@ -182,12 +183,12 @@ function CommentItemContent({ comment }: CommentContentPropsType) {
     axios
       .patch(url, data, config)
       .then((res) => {
-        alertModal('댓글 수정 완료', 'success');
         updatePost();
         setIsCommentEditable(false);
         setEditComment('');
         setSelectedEditImage(undefined);
         setIsImageChanged(false);
+        alertModal('댓글이 수정되었습니다.', 'success');
       })
       .catch((e) => {
         if (e.response.data.statusCode === 500) {
@@ -256,8 +257,8 @@ function CommentItemContent({ comment }: CommentContentPropsType) {
       axios
         .delete(url, config)
         .then((res) => {
-          alertModal('삭제되었습니다.', 'success');
           updatePost();
+          alertModal('댓글이 삭제되었습니다.', 'success');
         })
         .catch((e) => {
           if (e.response.data.statusCode === 500) {

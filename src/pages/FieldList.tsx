@@ -89,8 +89,10 @@ function FieldList() {
 export default FieldList;
 
 const StyledBody = styled.div`
-  justify-content: center;
+  width: 100%;
   max-width: 120rem;
+  height: 100%;
+  min-height: 100vh;
   margin: auto;
   @media (min-width: 768px) {
     padding: 0 2rem;

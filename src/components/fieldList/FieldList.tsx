@@ -308,6 +308,13 @@ const Title = styled.div`
   font-size: 1.6rem;
   p {
     cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
   @media (min-width: 768px) {
     padding-left: 1rem;
@@ -348,6 +355,7 @@ const Button = styled.div`
 `;
 
 const StyledCellContainer = styled.div`
+  width: 100%;
   display: inline-block;
   height: 3rem;
   padding-top: 0.5rem;

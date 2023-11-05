@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import chevronIcon from '../../assets/icon/chevron_down.svg';
+import chevronIcon from '../../assets/icon/chevron_down.png';
 
 type Props = {
   list: string[];

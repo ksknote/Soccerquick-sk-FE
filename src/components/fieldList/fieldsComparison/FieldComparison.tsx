@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FieldDataType } from '../../../types/FieldType';
-import chevronIcon from '../../../assets/icon/chevron_down.svg';
-import checkIcon from '../../../assets/icon/check.svg';
-import deleteIcon from '../../../assets/icon/delete.svg';
+import chevronIcon from '../../../assets/icon/chevron_down.png';
+import checkIcon from '../../../assets/icon/check.png';
+import deleteIcon from '../../../assets/icon/delete.png';
 import logo from '../../../assets/icon/logo/logo_icon.png';
 import alertModal from '../../common/alertModal';
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import resetIcon from '../../../assets/icon/reset_black.svg';
+import resetIcon from '../../../assets/icon/reset_black.png';
 import RegionSelect from '../../common/RegionSelect';
 import { Select } from '../../common/RegionSelect';
 import styled from 'styled-components';

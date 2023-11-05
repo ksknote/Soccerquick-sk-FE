@@ -5,7 +5,7 @@ import { FieldDataType } from '../../types/FieldType';
 import SearchFilter from './FieldFilter';
 import FieldListSkeleton from './FieldListSkeleton';
 import MyPagination from '../myPage/MyPagination';
-import checkIcon from '../../assets/icon/check.svg';
+import checkIcon from '../../assets/icon/check.png';
 import alertModal from '../common/alertModal';
 import { Cell } from '../../styles/styled-components/CommonStyle';
 

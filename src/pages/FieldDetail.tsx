@@ -11,9 +11,9 @@ import ShareModal from '../components/fieldDetail/ShareModal';
 import OneMarkerMap from '../components/fieldDetail/OneMarkerMap';
 import ScrollToTarget from '../utils/scrollToTarget';
 import Review from '../components/fieldDetail/review/Review';
-import starIcon from '../assets/icon/star.svg';
+import starIcon from '../assets/icon/star.png';
 import starFilledIcon from '../assets/icon/star_filled.svg';
-import homeIcon from '../assets/icon/home.svg';
+import homeIcon from '../assets/icon/home.png';
 import alertModal from '../components/common/alertModal';
 import MobileHeader from '../components/common/MobilePageHeader';
 import BaseLayout from '../components/template/BaseLayout';
@@ -307,7 +307,7 @@ const FieldDetailHeaderBtn = styled.div`
   display: flex;
   justify-content: space-between;
   button {
-    width: 12.5rem;
+    width: 14rem;
     height: 3.7rem;
     color: white;
     font-size: 1.2rem;

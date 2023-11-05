@@ -9,7 +9,7 @@ import { Button } from '../../../styles/styled-components/CommonStyle';
 import { Comment } from '../../../styles/styled-components/CommentStyle';
 import { ReplyType } from '../../../types/CommunityType';
 import alertModal from '../../common/alertModal';
-import ImageIcon from '../../../assets/icon/ImageIcon.svg';
+import ImageIcon from '../../../assets/icon/ImageIcon.png';
 import uploadImage from '../../../utils/uploadImage';
 
 interface ReplyContentPropsType {

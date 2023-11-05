@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import commentIcon from '../../../assets/icon/comment.svg';
+import commentIcon from '../../../assets/icon/comment.png';
 import { Comment } from '../../../styles/styled-components/CommentStyle';
 import CommentList from './CommentList';
 import WriteComment from './WriteComment';

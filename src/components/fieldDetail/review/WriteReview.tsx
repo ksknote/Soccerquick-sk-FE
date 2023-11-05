@@ -6,7 +6,7 @@ import {
   isLoginSelector,
   userSelector,
 } from '../../../redux/modules/auth/selector';
-import ImageIcon from '../../../assets/icon/ImageIcon.svg';
+import ImageIcon from '../../../assets/icon/ImageIcon.png';
 import alertModal from '../../common/alertModal';
 import uploadImage from '../../../utils/uploadImage';
 import axios from 'axios';

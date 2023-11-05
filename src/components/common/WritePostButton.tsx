@@ -6,7 +6,7 @@ import {
   Button,
   MobileWriteButton,
 } from '../../styles/styled-components/CommonStyle';
-import pencilIcon from '../../assets/icon/pencil_white.svg';
+import pencilIcon from '../../assets/icon/pencil_white.png';
 
 function WritePostButton({ type }: { type?: string }) {
   const navigate = useNavigate();

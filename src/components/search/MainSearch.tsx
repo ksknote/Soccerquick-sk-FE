@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
-import SearchIcon from '../../assets/icon/search.svg';
+import SearchIcon from '../../assets/icon/search.png';
 
 const MainSearch = () => {
   const [searchValue, setSearchValue] = useState('');

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import MypageIcon from '../../assets/icon/mypage.svg';
+import MypageIcon from '../../assets/icon/mypage.png';
 import SoccerquickLogo from '../../assets/icon/logo/logo_icon_text.png';
 import { MyPageMenu } from './MyPageMenu';
 import { useSelector } from 'react-redux';

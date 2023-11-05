@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import resetIcon from '../../assets/icon/reset_black.svg';
+import resetIcon from '../../assets/icon/reset_black.png';
 
 interface ItemType {
   key: string;

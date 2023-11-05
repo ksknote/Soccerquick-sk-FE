@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ImageIcon from '../../../assets/icon/ImageIcon.svg';
+import ImageIcon from '../../../assets/icon/ImageIcon.png';
 import alertModal from '../../common/alertModal';
 
 interface ThumbnailPropsType {

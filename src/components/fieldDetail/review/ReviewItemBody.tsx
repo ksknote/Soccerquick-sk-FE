@@ -9,7 +9,7 @@ import {
 } from '../../../redux/modules/auth/selector';
 import uploadImage from '../../../utils/uploadImage';
 import alertModal from '../../common/alertModal';
-import ImageIcon from '../../../assets/icon/ImageIcon.svg';
+import ImageIcon from '../../../assets/icon/ImageIcon.png';
 import { Comment } from '../../../styles/styled-components/CommentStyle';
 import { Button } from '../../../styles/styled-components/CommonStyle';
 

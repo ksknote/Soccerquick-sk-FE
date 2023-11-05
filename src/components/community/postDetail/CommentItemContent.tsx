@@ -12,7 +12,7 @@ import { Button } from '../../../styles/styled-components/CommonStyle';
 import { Comment } from '../../../styles/styled-components/CommentStyle';
 import { CommentType } from '../../../types/CommunityType';
 import alertModal from '../../common/alertModal';
-import ImageIcon from '../../../assets/icon/ImageIcon.svg';
+import ImageIcon from '../../../assets/icon/ImageIcon.png';
 import uploadImage from '../../../utils/uploadImage';
 import { useNavigate } from 'react-router-dom';
 

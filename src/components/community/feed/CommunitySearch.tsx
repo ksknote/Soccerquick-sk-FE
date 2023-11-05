@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import searchIcon from '../../../assets/icon/search.svg';
+import searchIcon from '../../../assets/icon/search.png';
 
 type SearchPropsType = {
   keywordChageHandler: (e: any) => void;

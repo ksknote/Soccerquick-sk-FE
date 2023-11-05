@@ -11,11 +11,11 @@ import {
 } from '../../../redux/modules/auth/selector';
 import { RootState, AppDispatch } from '../../../redux/store';
 import { updateUserData } from '../../../redux/modules/auth/actions';
-import chevronIcon from '../../../assets/icon/chevron_green.svg';
+import chevronIcon from '../../../assets/icon/chevron_green.png';
 import ballIcon from '../../../assets/icon/soccerball.svg';
-import spaceLikeIcon from '../../../assets/icon/like_space.svg';
-import likeIcon from '../../../assets/icon/like_red.svg';
-import shareIcon from '../../../assets/icon/share.svg';
+import spaceLikeIcon from '../../../assets/icon/like_space.png';
+import likeIcon from '../../../assets/icon/like_red.png';
+import shareIcon from '../../../assets/icon/share.png';
 import axios from 'axios';
 import alertModal from '../../common/alertModal';
 import ShareModal from '../../fieldDetail/ShareModal';

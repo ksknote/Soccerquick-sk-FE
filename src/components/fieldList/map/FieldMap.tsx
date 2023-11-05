@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FieldDataType } from '../../../types/FieldType';
-import ResetIcon from '../../../assets/icon/reset_white.svg';
+import ResetIcon from '../../../assets/icon/reset_white.png';
 import CustomMapMarker from './CustomMapMarker';
 import alertModal from '../../common/alertModal';
 import FeildSearch from '../../search/FieldSearch';

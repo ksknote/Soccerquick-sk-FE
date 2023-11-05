@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FieldDataType } from '../../types/FieldType';
-import largeIcon from '../../assets/icon/large.svg';
-import groundIcon from '../../assets/icon/ground.svg';
-import flagIcon from '../../assets/icon/flag.svg';
-import grassIcon from '../../assets/icon/grass.svg';
+import largeIcon from '../../assets/icon/large.png';
+import groundIcon from '../../assets/icon/ground.png';
+import flagIcon from '../../assets/icon/flag.png';
+import grassIcon from '../../assets/icon/grass.png';
 import logo from '../../assets/icon/logo/logo_icon.png';
 
 interface StadiumsProps {

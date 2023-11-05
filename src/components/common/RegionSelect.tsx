@@ -69,6 +69,8 @@ export const Select = styled.select<{ short?: boolean }>`
   border-radius: 1rem;
   font-size: 1.3rem;
   padding: 0 4.5rem 0 1rem;
+  color: #000;
+  background-color: white;
 
   //reset
   margin: 0;

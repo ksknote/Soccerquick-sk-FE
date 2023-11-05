@@ -364,6 +364,7 @@ const StyledCellContainer = styled.div`
   color: #888888;
   @media (max-width: 767.9px) {
     padding-top: 1.5rem;
+    white-space: normal;
   }
   @media (min-width: 768px) {
     height: 3rem;

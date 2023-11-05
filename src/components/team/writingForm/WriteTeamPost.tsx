@@ -342,7 +342,7 @@ const SectionTitle = styled.p`
 `;
 
 const Title = styled.div`
-  background: #f2f2f273;
+  /* background: #f2f2f273; */
   border-bottom: 0.1rem solid #e7e9ea;
   padding: 2rem 1rem;
   input {
@@ -369,7 +369,7 @@ const Title = styled.div`
 `;
 const EditorWrapper = styled.div`
   width: 100%;
-  height: 38rem;
+  height: 40rem;
   border: 0.1rem solid #e7e9ea;
   border-top: none;
   @media (min-width: 1024px) {

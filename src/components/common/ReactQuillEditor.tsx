@@ -118,20 +118,23 @@ function WriteCommunityPost({
 export default WriteCommunityPost;
 
 const Wrapper = styled.div`
-  box-shadow: 0 3px 8px 0 rgba(33, 37, 41, 0.05);
-  /* border: 0.1rem solid #e7e9ea; */
-  border-radius: 1rem;
   .quill {
     width: 100%;
-    height: 30rem;
+    /* height: 30rem; */
     .ql-toolbar {
       border: none;
+      box-shadow: 0 3px 8px 0 rgba(33, 37, 41, 0.05);
     }
     .ql-container {
       border: none;
     }
+    .ql-editor {
+      height: 30rem;
+    }
     @media (min-width: 1024px) {
-      height: 40rem;
+      .ql-editor {
+        height: 40rem;
+      }
       .ql-container {
         font-size: 1.6rem;
       }

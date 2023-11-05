@@ -349,6 +349,7 @@ const FooterButtons = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 2rem;
   @media (min-width: 768px) {
     padding-bottom: 3rem;
   }

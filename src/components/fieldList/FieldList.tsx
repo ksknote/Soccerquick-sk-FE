@@ -237,18 +237,19 @@ const StyledLabel = styled.div`
 const FieldItem = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  height: 11rem;
   width: 100%;
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem;
   font-size: 1.6rem;
   border-bottom: 0.1rem solid #dddddd;
   overflow: hidden;
-  @media (min-width: 1024px) {
-    height: 10rem;
-  }
   @media (min-width: 768px) {
+    height: 11rem;
     grid-template-columns: 0.5fr 1.3fr 6fr 2fr;
     gap: 1rem;
+    padding: 2rem 1rem;
+  }
+  @media (min-width: 1024px) {
+    height: 10rem;
   }
 `;
 
@@ -357,19 +358,24 @@ const Button = styled.div`
 const StyledCellContainer = styled.div`
   width: 100%;
   display: inline-block;
-  height: 3rem;
   padding-top: 0.5rem;
   border-radius: 0.4rem;
   font-weight: 400;
   color: #888888;
-  line-height: 3rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
+  @media (max-width: 767.9px) {
+    padding-top: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    height: 3rem;
+    line-height: 3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
   @media (min-width: 1024px) {
     padding: 0;
     margin: 1.2rem 1rem 0rem 0;

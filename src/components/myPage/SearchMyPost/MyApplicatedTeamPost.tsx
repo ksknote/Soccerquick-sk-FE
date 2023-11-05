@@ -1,5 +1,5 @@
 import React from 'react';
-import ViewPage from '../../team/postDetail/TeamDetail';
+import TeamDetail from '../../team/postDetail/TeamDetail';
 import MobileHeader from '../../common/MobilePageHeader';
 import MyPageHeader from '../MyPageHeader';
 import { MyTeamPostWrapper } from '../../team/Styles/ViewsStyle';
@@ -10,7 +10,7 @@ function MyApplicatedTeamPost() {
       <MyPageHeader title="신청한 팀" />
       <MobileHeader title="신청한 팀" />
       <MyTeamPostWrapper>
-        <ViewPage />
+        <TeamDetail />
       </MyTeamPostWrapper>
     </>
   );

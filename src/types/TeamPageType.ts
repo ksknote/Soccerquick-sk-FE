@@ -80,6 +80,7 @@ export interface SubmitApplicant {
   position: string;
   level: string;
   contents: string;
+  profile: string;
 }
 
 export interface CommentProps {

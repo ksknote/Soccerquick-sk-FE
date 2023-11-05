@@ -21,7 +21,7 @@ import goalKeeperIcon from '../../../assets/icon/goalkeeper.svg';
 import axios from 'axios';
 import alertModal from '../../common/alertModal';
 
-function DetailPage() {
+function TeamDetail() {
   // 글 작성자인지 확인하기 위한 데이터
   const userData = useSelector(userSelector);
   const isLogin = useSelector(isLoginSelector);
@@ -35,7 +35,6 @@ function DetailPage() {
   const url = location.pathname.split('/').pop();
   const dispatch = useDispatch<AppDispatch>();
   const data = useSelector((state: RootState) => state.teamPost.data);
-  const [leaderProfile, setLeaderProfile] = useState('');
 
   React.useEffect(() => {
     dispatch(fetchData(url));
@@ -47,20 +46,6 @@ function DetailPage() {
     },
     withCredentials: true,
   };
-
-  useEffect(() => {
-    axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/groups/${data.group_id}/leader`,
-        config
-      )
-      .then((res) => {
-        setLeaderProfile(res.data.data.profile);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
   // 삭제 요청을 보내는 버튼
   const deletePostHandler = async () => {
@@ -107,7 +92,7 @@ function DetailPage() {
               <Post.AuthorDiv>
                 <Post.ImgDiv>
                   <img
-                    src={leaderProfile ? leaderProfile : ballIcon}
+                    src={data.profile ? data.profile : ballIcon}
                     alt="BallIcon"
                   />
                 </Post.ImgDiv>
@@ -270,7 +255,7 @@ function DetailPage() {
   );
 }
 
-export default DetailPage;
+export default TeamDetail;
 
 export const TeamPostHeader = styled(Post.Header)<{ status: string }>`
   span {

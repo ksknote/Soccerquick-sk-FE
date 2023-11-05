@@ -90,7 +90,10 @@ function Comment(props: CommentProps) {
             <CommentStyle.AuthorDiv>
               <CommentStyle.UserInfo>
                 <CommentStyle.ImgDiv>
-                  <img src={ballIcon} alt="BallIcon" />
+                  <img
+                    src={applicant.profile ? applicant.profile : ballIcon}
+                    alt="BallIcon"
+                  />
                 </CommentStyle.ImgDiv>
                 <CommentStyle.Author>{applicant.name}</CommentStyle.Author>
               </CommentStyle.UserInfo>

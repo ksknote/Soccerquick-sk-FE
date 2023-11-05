@@ -61,6 +61,7 @@ const Wrapper = styled.div`
   }
 `;
 const FeildSearchBar = styled.div`
+  position: relative;
   width: 30rem;
   height: 4.5rem;
   background-color: white;

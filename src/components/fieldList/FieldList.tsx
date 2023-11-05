@@ -242,7 +242,7 @@ const FieldItem = styled.div`
   padding: 2rem 1rem;
   font-size: 1.6rem;
   border-bottom: 0.1rem solid #dddddd;
-
+  overflow: hidden;
   @media (min-width: 1024px) {
     height: 10rem;
   }
@@ -364,6 +364,12 @@ const StyledCellContainer = styled.div`
   color: #888888;
   line-height: 3rem;
   overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
   @media (min-width: 1024px) {
     padding: 0;
     margin: 1.2rem 1rem 0rem 0;
@@ -373,6 +379,7 @@ const StyledCellContainer = styled.div`
 const StyledFieldCell = styled(Cell)<{ data: string }>`
   color: ${({ data }) => getColorBydata(data)};
   background-color: ${({ data }) => getBackgroundColorBydata(data)};
+
   @media (min-width: 1024px) {
     font-size: 1.4rem;
     margin-right: 1.2rem;

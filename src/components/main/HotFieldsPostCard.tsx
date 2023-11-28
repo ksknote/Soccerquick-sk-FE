@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FieldDataType } from '../../types/FieldType';
 import logo from '../../assets/icon/logo/logo_icon.png';
-import commentIcon from '../../assets/icon/comment_green.svg';
-import likeIcon from '../../assets/icon/like_green.svg';
+import commentIcon from '../../assets/icon/comment_green.png';
+import likeIcon from '../../assets/icon/like_green.png';
 import { Shining } from '../common/Skeleton';
 import Skeleton from '../common/Skeleton';
 

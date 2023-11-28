@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { userSelector } from '../../../redux/modules/auth/selector';
 import { ReviewDataType } from '../../../types/ReviewType';
 import MyPageHeader from '../MyPageHeader';
 import MobileHeader from '../../common/MobilePageHeader';
-import EmptyBox from '../../common/EmptyBox';
 import { BoxContainer } from '../../../styles/styled-components/CommonStyle';
 import ReviewItemHeader from '../../fieldDetail/review/ReviewItemHeader';
 import ReviewItemBody from '../../fieldDetail/review/ReviewItemBody';
@@ -30,13 +29,16 @@ function SearchMyReviewPost() {
       .catch((err) => console.log(err));
   }, []);
 
-  const filterMyReview = (reviewData: ReviewDataType[]) => {
-    const myReviews = reviewData.filter(
-      (review) => review.user_name === user?.name
-    );
+  const filterMyReview = useCallback(
+    (reviewData: ReviewDataType[]) => {
+      const myReviews = reviewData.filter(
+        (review) => review.user_name === user?.name
+      );
 
-    setReviewData(myReviews);
-  };
+      setReviewData(myReviews);
+    },
+    [user]
+  );
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import useIntersect from '../../../utils/useIntersect';
@@ -30,21 +30,7 @@ function CommunityPostFeed() {
     setSearchKeyword(e.target.value);
   };
 
-  useEffect(() => {
-    setPostData([]);
-    setPage(1);
-    setIsFetchingEnded(false);
-    debounce(fetchData, 300);
-  }, [searchKeyword, sortType]);
-
-  const targetRef = useIntersect(
-    () => {
-      fetchData();
-    },
-    { threshold: 0, rootMargin: '500px' }
-  );
-
-  const fetchData = () => {
+  const fetchData = useCallback(() => {
     if (isFetchingEnded) return;
     setIsLoading(true);
 
@@ -70,7 +56,22 @@ function CommunityPostFeed() {
         setIsLoading(false);
       })
       .catch((e) => console.error(e));
-  };
+  }, [isFetchingEnded, page, searchKeyword, sortType]);
+
+  useEffect(() => {
+    setPostData([]);
+    setPage(1);
+    setIsFetchingEnded(false);
+    debounce(fetchData, 300);
+    // eslint-disable-next-line
+  }, [searchKeyword, sortType]);
+
+  const targetRef = useIntersect(
+    () => {
+      fetchData();
+    },
+    { threshold: 0, rootMargin: '500px' }
+  );
 
   return (
     <>

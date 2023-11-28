@@ -21,6 +21,13 @@ import goalKeeperIcon from '../../../assets/icon/goalkeeper.svg';
 import axios from 'axios';
 import alertModal from '../../common/alertModal';
 
+const config = {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  withCredentials: true,
+};
+
 function DetailPage() {
   // 글 작성자인지 확인하기 위한 데이터
   const userData = useSelector(userSelector);
@@ -41,13 +48,6 @@ function DetailPage() {
     dispatch(fetchData(url));
   }, []);
 
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    withCredentials: true,
-  };
-
   useEffect(() => {
     axios
       .get(
@@ -60,7 +60,7 @@ function DetailPage() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [data.group_id]);
 
   // 삭제 요청을 보내는 버튼
   const deletePostHandler = async () => {

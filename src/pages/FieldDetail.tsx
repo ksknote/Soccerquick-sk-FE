@@ -18,6 +18,10 @@ import alertModal from '../components/common/alertModal';
 import MobileHeader from '../components/common/MobilePageHeader';
 import BaseLayout from '../components/template/BaseLayout';
 
+const config = {
+  withCredentials: true,
+};
+
 const FieldDetail = () => {
   const [groundData, setFieldData] = useState<FieldDataType>();
   const [reviewData, setReviewData] = useState<[]>([]);
@@ -27,10 +31,6 @@ const FieldDetail = () => {
   const [isFavorite, setIsFavorite] = useState(false);
   const { dom_id } = useParams();
 
-  const config = {
-    withCredentials: true,
-  };
-
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/doms/${dom_id}`, config)
@@ -39,7 +39,7 @@ const FieldDetail = () => {
         setReviewData(res.data.data.reviews);
       })
       .catch((e: any) => console.log(e));
-  }, []);
+  }, [dom_id]);
 
   useEffect(() => {
     axios
@@ -51,7 +51,7 @@ const FieldDetail = () => {
         }
       })
       .catch((e) => {});
-  }, []);
+  }, [dom_id]);
 
   const clickFavoriteHandler = () => {
     if (!isFavorite) {

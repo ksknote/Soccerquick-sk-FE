@@ -1,7 +1,7 @@
 import { useState, FormEvent, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AppDispatch } from '../../redux/store';
 import alertModal from '../common/alertModal';
 import { login } from '../../redux/modules/auth/actions';
@@ -37,8 +37,6 @@ function Login({ handleIsLogin }: LoginProps) {
   const [loginError, setLoginError] = useState<string>('');
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const location = useLocation();
-  const currentPath = location.pathname;
   const isLogin = useSelector(isLoginSelector);
   const loginErr = useSelector(loginErrorSelector);
 
@@ -79,6 +77,7 @@ function Login({ handleIsLogin }: LoginProps) {
     } else if (loginErr) {
       setLoginError(loginErr);
     }
+    // eslint-disable-next-line
   }, [isLogin, loginErr]);
 
   return (

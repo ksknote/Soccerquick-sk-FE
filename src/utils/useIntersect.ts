@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import debounce from './debounce';
 
 type IntersectHandler = () => void;
@@ -25,6 +25,7 @@ const useIntersect = (
   // Intersection Observer 설정
   useEffect(() => {
     if (!ref.current) return; //마운트 되었는지 확인
+    // eslint-disable-next-line
     observerRef.current = new IntersectionObserver(debouncedCallback, options);
     observerRef.current.observe(ref.current); //타겟 관찰
     return () => {

@@ -14,6 +14,7 @@
     "@xeger/quill-image-actions": "^0.7.1",
     "@xeger/quill-image-formats": "^0.7.1",
     "axios": "^1.4.0",
+    "env-cmd": "^10.1.0",
     "html-react-parser": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -38,7 +39,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build",
+    "build": "env-cmd -f .env.production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -9,7 +9,6 @@ import SearchPage from './pages/FieldList';
 import FieldDetail from './pages/FieldDetail';
 import Admin from './pages/admin/MainPage';
 import { MyPage } from './pages/MyPage';
-import MyPageHome from './components/myPage/MyPageHome';
 import MobileCategory from './components/common/MobileCategory';
 import Auth from './pages/auth/Auth';
 import Community from './pages/community/Community';

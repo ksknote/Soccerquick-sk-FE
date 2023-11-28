@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import TeamList from './TeamPostList';
 import { StyledHeader } from '../Styles/ViewsStyle';
@@ -39,7 +39,7 @@ function TeamFeed() {
   //상수
   const ITEM_PER_PAGE = 8;
 
-  const fetchData = () => {
+  const fetchData = useCallback(() => {
     if (isFetchingEnded) return;
     setIsLoading(true);
 
@@ -67,7 +67,7 @@ function TeamFeed() {
         setIsLoading(false);
       })
       .catch((e) => console.error(e));
-  };
+  }, [filteringOption, isFetchingEnded, page]);
 
   return (
     <div>

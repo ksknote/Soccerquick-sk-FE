@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/icon/logo/logo_icon.png';
@@ -11,9 +11,6 @@ export function Modal(props: {
   onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }) {
   const navigate = useNavigate();
-  const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-  };
 
   return (
     <ModalBox long={props.long}>
@@ -188,13 +185,6 @@ const ModalBox = styled.div<{ long?: boolean }>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const ExitButton = styled.button`
-  background-color: #fdfdfd;
-  border: none;
-  margin-left: auto;
-  margin-right: 15px;
 `;
 
 const Logo = styled.img`

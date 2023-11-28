@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FieldDataType } from '../../../types/FieldType';
@@ -131,9 +131,9 @@ const FieldMap: React.FC<FieldMapType> = ({
     }
   }, [newMap]);
 
-  const idleHandler = () => {
+  const idleHandler = useCallback(() => {
     updateMarkers(newMap, createMarkerList);
-  };
+  }, [newMap, createMarkerList]);
 
   const updateMarkers = (
     map: naver.maps.Map | null,
@@ -166,7 +166,7 @@ const FieldMap: React.FC<FieldMapType> = ({
     resetListHandler();
   }, [newMap]);
 
-  const resetListHandler = () => {
+  const resetListHandler = useCallback(() => {
     if (!newMap) return;
     const newArray = [...totalDomData].sort((a, b) => {
       const currentCenterLatLng = newMap.getCenter();
@@ -182,7 +182,7 @@ const FieldMap: React.FC<FieldMapType> = ({
     });
 
     setSortedDomData(newArray);
-  };
+  }, [newMap, naver.maps, totalDomData]);
 
   const markerClickHandler = (id: string) => {
     navigate(`/ground/${id}`);

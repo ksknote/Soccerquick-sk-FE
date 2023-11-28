@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
@@ -6,25 +6,14 @@ import { useSelector } from 'react-redux';
 import { FieldDataType } from '../../../types/FieldType';
 import { isLoginSelector } from '../../../redux/modules/auth/selector';
 import { ProvidedElementList } from '../../fieldList/FieldList';
-import MyPagination from '../MyPagination';
 import MobileHeader from '../../common/MobilePageHeader';
 import MyPageHeader from '../MyPageHeader';
 import EmptyBox from '../../common/EmptyBox';
 import alertModal from '../../common/alertModal';
-import { FormDataType } from '../../../pages/MyPage';
 
 function MyFavoriteFieldList() {
+  const navigate = useNavigate();
   const isLogIn = useSelector(isLoginSelector);
-  const [formData, setFormData] = useState<FormDataType>({
-    user_id: '',
-    name: '',
-    nick_name: '',
-    profile: '',
-    email: '',
-    phone_number: '',
-    gender: '',
-    favoritePlaygrounds: [],
-  });
   const [favoritePlaygrounds, setFavoritePlaygrounds] = useState<string[]>([]);
   const [filteredData, setFilteredData] = useState<FieldDataType[]>([]);
 
@@ -54,7 +43,6 @@ function MyFavoriteFieldList() {
         return res.data.data;
       })
       .catch((err) => console.log(err));
-    setFormData((prev) => userInfo);
     setFavoritePlaygrounds(userInfo.favoritePlaygrounds);
   };
 
@@ -62,7 +50,7 @@ function MyFavoriteFieldList() {
     getDomData();
   }, [favoritePlaygrounds]);
 
-  const getDomData = async () => {
+  const getDomData = useCallback(async () => {
     const domarray: Array<FieldDataType> = [];
     for (let i = 0; i < favoritePlaygrounds.length; i++) {
       await axios
@@ -80,9 +68,7 @@ function MyFavoriteFieldList() {
         .catch((err) => console.log(err));
     }
     setFilteredData(domarray);
-  };
-
-  const navigate = useNavigate();
+  }, [favoritePlaygrounds]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios from 'axios';
 import { useState, useEffect, FormEvent } from 'react';
 import styled from 'styled-components';
 import {
@@ -36,7 +36,6 @@ function Signup({ handleIsLogin }: SignupProps) {
   const [checkUserId, setCheckUserId] = useState<boolean>(false);
   const [checkPassword, setCheckPassword] = useState<boolean>(false);
 
-  const [userIdMsg, setUserIdMsg] = useState<string>('');
   const [passwordMsg, setPasswordMsg] = useState<string>('');
   const [responseMsg, setResponseMsg] = useState<string>('');
 
@@ -55,7 +54,6 @@ function Signup({ handleIsLogin }: SignupProps) {
   const handleUserIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setUserId(e.target.value);
-    setUserIdMsg('');
     setCheckUserId(false);
     setResponseMsg('');
   };
@@ -67,12 +65,10 @@ function Signup({ handleIsLogin }: SignupProps) {
       .then((res) => res.data)
       .then((result) => {
         setCheckUserId(true);
-        setUserIdMsg(() => result.message);
         alertModal(result.message, 'success');
       })
       .catch((err) => {
         setCheckUserId(false);
-        setUserIdMsg(err.response.data.message);
         alertModal(err.response.data.message, 'error');
       });
   };

@@ -1,5 +1,3 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {
   TeamPageBody,
@@ -24,7 +22,7 @@ function DetailModal(props: DedatilModalProps) {
     setShowManagementModal,
     modalData,
   } = props;
-  const navigate = useNavigate();
+
   const userData = useSelector(userSelector);
 
   // 헤더 및 쿠키 설정 부분

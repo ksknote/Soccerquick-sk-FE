@@ -11,14 +11,6 @@ import alertModal from '../../common/alertModal';
 import RegionSelect from '../../common/RegionSelect';
 import MemberCount from './MemberCount';
 import { TeamDataType } from '../../../types/TeamPageType';
-interface PostDataType {
-  title: string;
-  description: string;
-  thumbnail: string;
-  subject: string;
-  hashTags: string[];
-  notice: string;
-}
 
 function WriteTeamPost() {
   const location = useLocation();
@@ -61,7 +53,7 @@ function WriteTeamPost() {
     setPlayerNeed(player_count - player_current_count);
     setGkCurrent(gk_current_count);
     setGkNeed(gk_count - gk_current_count);
-  }, [isEditMode]);
+  }, [isEditMode, teamData]);
 
   const setContentsHandler: (value: string) => void = (value) => {
     setEditorContents(value);

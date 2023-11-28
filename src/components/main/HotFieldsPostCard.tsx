@@ -2,8 +2,9 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FieldDataType } from '../../types/FieldType';
-import commentIcon from '../../assets/icon/comment_green.png';
-import likeIcon from '../../assets/icon/like_green.png';
+import logo from '../../assets/icon/logo/logo_icon.png';
+import commentIcon from '../../assets/icon/comment_green.svg';
+import likeIcon from '../../assets/icon/like_green.svg';
 import { Shining } from '../common/Skeleton';
 import Skeleton from '../common/Skeleton';
 
@@ -13,13 +14,19 @@ interface HotFieldsPostCard {
 
 function HotFieldsPostCard({ fieldata }: HotFieldsPostCard) {
   const navigate = useNavigate();
-  const thumbnail = fieldata.stadiums[0].images[0].image;
+  const thumbnail = fieldata.stadiums[0]?.images[0]?.image;
 
   return (
     <Post onClick={() => navigate(`./ground/${fieldata.dom_id}`)}>
-      <PostImage>
-        {thumbnail ? <img src={thumbnail} alt="" /> : <div>힝!</div>}
-      </PostImage>
+      {thumbnail ? (
+        <PostImage>
+          <img src={thumbnail} alt="경기장 이미지" />
+        </PostImage>
+      ) : (
+        <ExampleImage>
+          <img src={logo} alt="경기장 이미지" />
+        </ExampleImage>
+      )}
       <PostContents>
         <div>
           <PostDescription>{fieldata.address.area}</PostDescription>
@@ -97,6 +104,26 @@ const PostImage = styled.div`
     object-fit: cover;
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
+  }
+`;
+
+const ExampleImage = styled(PostImage)`
+  width: 100%;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  background-color: #efefef;
+  img {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4rem;
+    height: 4rem;
+  }
+  @media (min-width: 1024px) {
+    img {
+      width: 5rem;
+      height: 5rem;
+    }
   }
 `;
 
